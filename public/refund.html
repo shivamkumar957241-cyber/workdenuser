@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Refund Policy – WorkDen</title>
+<link rel="icon" href="favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@700;800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+*{box-sizing:border-box;}
+body{font-family:'DM Sans','Segoe UI',sans-serif;margin:0;padding:0;color:#334155;background:#fff;-webkit-font-smoothing:antialiased;}
+.ld-nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(255,255,255,0.97);backdrop-filter:blur(20px);border-bottom:1px solid #e2e8f0;transition:box-shadow 0.3s;}
+.ld-nav-inner{max-width:1280px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:68px;}
+.ld-logo{display:flex;align-items:center;gap:10px;text-decoration:none;}
+.ld-logo span{font-family:Sora,sans-serif;font-size:1.2rem;font-weight:800;color:#0f172a;}
+.ld-logo img{height:36px;width:auto;}
+.ld-links{display:flex;align-items:center;gap:4px;list-style:none;margin:0;padding:0;}
+.ld-links a{text-decoration:none;font-size:0.875rem;font-weight:500;color:#334155;padding:8px 14px;border-radius:8px;transition:all 0.2s;}
+.ld-links a:hover{color:#1a56db;background:#eff6ff;}
+.ld-ctas{display:flex;gap:10px;align-items:center;}
+.ld-btn-ghost{display:inline-flex;align-items:center;gap:6px;padding:10px 22px;border-radius:10px;font-size:0.875rem;font-weight:600;text-decoration:none;background:transparent;border:2px solid #e2e8f0;color:#334155;transition:all 0.2s;}
+.ld-btn-ghost:hover{border-color:#1a56db;color:#1a56db;background:#eff6ff;}
+.ld-btn-primary{display:inline-flex;align-items:center;gap:6px;padding:10px 22px;border-radius:10px;font-size:0.875rem;font-weight:600;text-decoration:none;background:#1a56db;color:white;box-shadow:0 4px 14px rgba(26,86,219,0.3);transition:all 0.2s;}
+.ld-btn-primary:hover{background:#1240a8;}
+.ld-ham{display:none;background:none;border:none;cursor:pointer;padding:8px;color:#0f172a;font-size:1.4rem;}
+.ld-mob{display:flex;position:fixed;inset:0;z-index:9999;background:white;padding:80px 24px 40px;flex-direction:column;gap:8px;transform:translateX(100%);transition:transform 0.35s;overflow-y:auto;}
+.ld-mob a{display:block;text-decoration:none;font-size:1.05rem;font-weight:600;color:#0f172a;padding:14px 20px;border-radius:12px;background:#f8fafc;transition:all 0.2s;}
+.ld-mob a:hover{background:#eff6ff;color:#1a56db;}
+.ld-mob-ctas{display:flex;flex-direction:column;gap:10px;margin-top:16px;}
+.ld-mob-close{position:absolute;top:18px;right:20px;background:none;border:none;font-size:1.6rem;cursor:pointer;color:#0f172a;padding:8px;}
+/* Content wrapper */
+.legal-wrap{max-width:860px;margin:0 auto;padding:100px 24px 80px;}
+.legal-hero{background:linear-gradient(160deg,#f0f7ff,#fafbff);border-bottom:1px solid #e2e8f0;padding:80px 0 48px;text-align:center;margin-bottom:0;}
+.legal-hero-inner{max-width:700px;margin:0 auto;padding:0 24px;}
+.legal-hero h1{font-family:Sora,sans-serif;font-size:2rem;font-weight:800;color:#0f172a;margin-bottom:10px;}
+.legal-hero p{color:#475569;font-size:1rem;}
+.legal-body{max-width:860px;margin:0 auto;padding:60px 24px 80px;}
+.legal-body h2{font-size:1.15rem;font-weight:700;color:#0f172a;margin:32px 0 10px;}
+.legal-body h3{font-size:1rem;font-weight:700;color:#0f172a;margin:24px 0 8px;}
+.legal-body p,.legal-body li{font-size:0.9rem;color:#475569;line-height:1.8;margin-bottom:8px;}
+.legal-body ul,.legal-body ol{padding-left:20px;}
+.legal-body a{color:#1a56db;}
+.legal-box{background:#f0f7ff;border:1px solid #bfdbfe;border-radius:12px;padding:20px 24px;margin:20px 0;}
+.legal-box strong{color:#1a56db;}
+/* Footer */
+.ld-footer{background:#0f172a;color:#94a3b8;padding:48px 0 24px;margin-top:0;}
+.ld-footer-inner{max-width:1280px;margin:0 auto;padding:0 24px;}
+.ld-footer-bottom{display:flex;align-items:center;justify-content:space-between;padding-top:24px;border-top:1px solid rgba(255,255,255,0.08);font-size:0.8rem;color:rgba(255,255,255,0.3);flex-wrap:wrap;gap:8px;}
+@media(max-width:768px){.ld-links,.ld-ctas{display:none!important;}.ld-ham{display:flex!important;}}
+</style>
+</head>
+<body>
+<nav class="ld-nav" id="ldNav">
+  <div class="ld-nav-inner">
+    <a href="index.html" class="ld-logo"><img src="workden-logo.png" alt="WorkDen"><span>WorkDen</span></a>
+    <ul class="ld-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About Us</a></li>
+      <li><a href="projects.html">Projects</a></li>
+      <li><a href="demo-task.html">Demo Task</a></li>
+      <li><a href="testimonials.html">Testimonials</a></li>
+      <li><a href="blogs.html">Blogs</a></li>
+    </ul>
+    <div class="ld-ctas">
+      <a href="#" onclick="showVersionModal(event)" class="ld-btn-ghost">User Login</a>
+      <a href="https://workdenteam2.base44.app/" class="ld-btn-primary">Employee Login</a>
+    </div>
+    <button class="ld-ham" onclick="ldToggle()"><i class="fas fa-bars"></i></button>
+  </div>
+</nav>
+<div class="ld-mob" id="ldMob">
+  <button class="ld-mob-close" onclick="ldToggle()"><i class="fas fa-times"></i></button>
+  <a href="index.html">Home</a><a href="about.html">About Us</a><a href="projects.html">Projects</a>
+  <a href="demo-task.html">Demo Task</a><a href="testimonials.html">Testimonials</a><a href="blogs.html">Blogs</a>
+  <div class="ld-mob-ctas">
+    <a href="#" onclick="showVersionModal(event)" class="ld-btn-ghost">User Login</a>
+    <a href="https://workdenteam2.base44.app/" class="ld-btn-primary">Employee Login</a>
+  </div>
+</div>
+<script>
+function ldToggle(){const m=document.getElementById('ldMob');m.style.transform=m.style.transform==='translateX(0%)'?'translateX(100%)':'translateX(0%)';}
+window.addEventListener('scroll',()=>{const n=document.getElementById('ldNav');if(n)n.style.boxShadow=window.scrollY>20?'0 4px 24px rgba(0,0,0,0.1)':'none';});
+</script>
+<div class="legal-hero" style="margin-top:68px;">
+  <div class="legal-hero-inner">
+    <span style="display:inline-flex;align-items:center;gap:6px;font-size:0.75rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:#1a56db;background:#eff6ff;padding:6px 14px;border-radius:100px;border:1px solid #bfdbfe;margin-bottom:16px;"><i class="fas fa-file-alt"></i> Legal</span>
+    <h1>Refund Policy</h1>
+    <p>WorkDen – Verified Digital Task Platform | GSTIN: 10KEJPM6504N1Z7</p>
+  </div>
+</div>
+<div class="legal-body">
+
+
+<!-- ===== Header ===== -->
+
+
+
+
+
+
+<!-- ===== Main Content ===== -->
+<main class="flex-grow pt-24 pb-24 bg-gray-50">
+
+    <div class="max-w-4xl mx-auto px-4 sm:px-6">
+
+        <!-- Card -->
+        <div class="bg-white rounded-2xl shadow-xl border border-gray-200 p-8 sm:p-14 space-y-12">
+
+            <!-- Header -->
+            <div class="text-center space-y-4">
+
+                <div class="w-14 h-14 mx-auto rounded-xl 
+                            bg-blue-600 text-white 
+                            flex items-center justify-center">
+                    <i class="fas fa-undo-alt text-xl"></i>
+                </div>
+
+                <h1 class="text-3xl font-bold text-gray-900">
+                    Refund Policy
+                </h1>
+
+                <p class="text-gray-600 text-sm">
+                    Please read this policy carefully before making any payment.
+                </p>
+
+            </div>
+
+
+            <!-- Intro -->
+            <p class="text-gray-700 leading-7 text-center max-w-2xl mx-auto">
+                Welcome to <span class="font-semibold text-gray-900">WorkDen.online</span>. 
+                This policy outlines important information regarding payments and refund conditions.
+            </p>
+
+
+            <!-- Important Notice -->
+            <div class="bg-gray-100 border-l-4 border-blue-600 p-6 rounded-lg">
+
+                <h2 class="text-lg font-semibold text-gray-900 mb-3">
+                    1. General Refund Policy
+                </h2>
+
+                <p class="text-gray-800 leading-7">
+                    Payments made on WorkDen.online are generally non-refundable once portal access
+                    and onboarding services have been activated. Upon successful payment confirmation,
+                    access credentials are generated and shared with the user.
+                </p>
+
+                <p class="text-gray-800 leading-7 mt-3">
+                    Refunds will only be considered in cases of duplicate payment,
+                    verified technical failure, or if portal access is not provided
+                    within a reasonable time after successful payment.
+                </p>
+
+            </div>
+
+
+            <!-- Sections -->
+            <div class="space-y-10">
+
+                <div>
+                    <h2 class="text-lg font-semibold text-gray-900 mb-3">
+                        2. Digital Nature of Services
+                    </h2>
+                    <p class="text-gray-700 leading-7">
+                        WorkDen provides digital access to tasks, dashboards, onboarding materials,
+                        and platform features. As these services are delivered digitally and access
+                        is granted upon payment verification, they cannot typically be revoked
+                        once activated.
+                    </p>
+                </div>
+
+                <div>
+                    <h2 class="text-lg font-semibold text-gray-900 mb-3">
+                        3. User Responsibility
+                    </h2>
+                    <p class="text-gray-700 leading-7">
+                        Users are advised to carefully review all service details,
+                        eligibility requirements, and platform guidelines before making payment.
+                        By completing a transaction, you confirm that you understand and agree
+                        to this Refund Policy.
+                    </p>
+                </div>
+
+                <div>
+                    <h2 class="text-lg font-semibold text-gray-900 mb-3">
+                        4. Non-Refundable Situations
+                    </h2>
+
+                    <ul class="list-disc pl-6 text-gray-700 space-y-2 text-sm">
+                        <li>Change of mind after activation</li>
+                        <li>Inactivity after receiving portal access</li>
+                        <li>Lack of understanding of platform guidelines</li>
+                        <li>Dissatisfaction not related to technical failure</li>
+                        <li>Technical issues arising from the user's device or internet</li>
+                        <li>Personal reasons unrelated to service delivery</li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h2 class="text-lg font-semibold text-gray-900 mb-3">
+                        5. Chargeback & Dispute Policy
+                    </h2>
+                    <p class="text-gray-700 leading-7">
+                        In case of any payment dispute or chargeback, users are encouraged
+                        to contact support first for resolution. Initiating false or
+                        fraudulent disputes may result in account suspension and
+                        further review as per applicable policies.
+                    </p>
+                </div>
+
+                <div>
+                    <h2 class="text-lg font-semibold text-gray-900 mb-3">
+                        6. Agreement Confirmation
+                    </h2>
+                    <p class="text-gray-700 leading-7">
+                        By making payment on WorkDen.online, you acknowledge that you have read,
+                        understood, and agreed to this Refund Policy.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <!-- Contact -->
+            <div class="bg-gray-100 rounded-lg p-6 text-center">
+                <p class="text-sm text-gray-600">
+                    For any queries, contact
+                </p>
+                <p class="font-semibold text-gray-900 mt-1">
+                    support@workden.online
+                </p>
+            </div>
+
+        </div>
+
+    </div>
+
+</main>
+
+
+
+<!-- ===== Footer ===== -->
+
+
+
+
+
+
+</div>
+
+<footer class="ld-footer">
+  <div class="ld-footer-inner">
+    <div class="ld-footer-bottom">
+      <span>© 2026 WorkDen. All rights reserved. | GSTIN: 10KEJPM6504N1Z7 | MSME: UDYAM-KR-03-0640514</span>
+      <span>info@workden.online</span>
+    </div>
+  </div>
+</footer>
+
+<!-- VERSION SELECTOR MODAL -->
+<div id="verOverlay" onclick="closeVersionModal(event)" style="display:none;position:fixed;inset:0;z-index:9999;background:rgba(10,20,40,0.72);backdrop-filter:blur(4px);align-items:center;justify-content:center;">
+  <div style="background:white;border-radius:20px;padding:40px 32px 32px;max-width:440px;width:92%;box-shadow:0 24px 80px rgba(0,0,0,0.22);text-align:center;position:relative;">
+    <button onclick="document.getElementById('verOverlay').style.display='none'" style="position:absolute;top:14px;right:18px;background:#f1f5f9;border:none;cursor:pointer;width:32px;height:32px;border-radius:50%;font-size:1.1rem;color:#64748b;">✕</button>
+    <div style="display:inline-flex;align-items:center;gap:6px;background:#eff6ff;color:#1d4ed8;font-size:0.72rem;font-weight:700;text-transform:uppercase;padding:5px 12px;border-radius:20px;margin-bottom:14px;">Select Version</div>
+    <div style="font-size:1.35rem;font-weight:800;color:#0f172a;margin-bottom:8px;">Choose Your Login Portal</div>
+    <div style="font-size:0.9rem;color:#64748b;margin-bottom:28px;line-height:1.5;">WorkDen ke do version available hain. Apna version select karein.</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
+      <a href="https://workden-4.base44.app" target="_blank" style="border:2px solid #bfdbfe;border-radius:14px;padding:22px 16px 18px;text-decoration:none;display:flex;flex-direction:column;align-items:center;gap:8px;">
+        <div style="font-size:2rem;font-weight:900;color:#1d4ed8;">4.0</div>
+        <div style="font-size:0.8rem;font-weight:700;color:#475569;">WorkDen 4.0</div>
+        <div style="font-size:0.75rem;color:#94a3b8;">Latest version — upgraded features</div>
+        <div style="margin-top:6px;padding:7px 18px;border-radius:8px;font-size:0.8rem;font-weight:700;background:#1d4ed8;color:white;width:100%;box-sizing:border-box;">Login 4.0</div>
+      </a>
+      <a href="https://workden-3.base44.app" target="_blank" style="border:2px solid #ddd6fe;border-radius:14px;padding:22px 16px 18px;text-decoration:none;display:flex;flex-direction:column;align-items:center;gap:8px;">
+        <div style="font-size:2rem;font-weight:900;color:#7c3aed;">3.0</div>
+        <div style="font-size:0.8rem;font-weight:700;color:#475569;">WorkDen 3.0</div>
+        <div style="font-size:0.75rem;color:#94a3b8;">Previous version — stable interface</div>
+        <div style="margin-top:6px;padding:7px 18px;border-radius:8px;font-size:0.8rem;font-weight:700;background:#7c3aed;color:white;width:100%;box-sizing:border-box;">Login 3.0</div>
+      </a>
+    </div>
+  </div>
+</div>
+<script>
+function showVersionModal(e){if(e)e.preventDefault();document.getElementById("verOverlay").style.display="flex";}
+function closeVersionModal(e){if(e.target===document.getElementById("verOverlay"))document.getElementById("verOverlay").style.display="none";}
+</script>
+</body>
+</html>

@@ -1,0 +1,1904 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WorkDen – Demo Task System</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@700;800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+:root{--purple:#7C3AED;--purple-light:#A855F7;--purple-dark:#5B21B6;--green:#059669;--green-light:#10B981;--blue:#0891B2;--blue-light:#06B6D4;--teal:#0D9488;--orange:#EA580C;--red:#DC2626;--yellow:#D97706;--bg:#F1F5F9;--white:#FFF;--text:#1E293B;--text-muted:#64748B;--border:#E2E8F0;--shadow:0 4px 24px rgba(0,0,0,0.08);}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;-webkit-user-select:none;-moz-user-select:none;user-select:none;padding-top:64px;}
+input,textarea{-webkit-user-select:text;-moz-user-select:text;user-select:text;}
+#mainMenu{min-height:100vh;display:flex;flex-direction:column;}
+.menu-header{background:linear-gradient(135deg,var(--purple-dark),var(--purple),var(--purple-light));padding:36px 20px;text-align:center;position:relative;overflow:hidden;}
+.menu-header::before{content:'';position:absolute;top:-60px;right:-60px;width:240px;height:240px;border-radius:50%;background:rgba(255,255,255,0.07);}
+.menu-header::after{content:'';position:absolute;bottom:-70px;left:-40px;width:190px;height:190px;border-radius:50%;background:rgba(255,255,255,0.05);}
+.menu-header h1{color:#fff;font-size:1.9rem;font-weight:900;position:relative;}
+.menu-header p{color:rgba(255,255,255,0.8);margin-top:6px;font-size:0.95rem;position:relative;}
+.menu-badge{display:inline-block;background:rgba(255,255,255,0.2);color:#fff;padding:4px 16px;border-radius:20px;font-size:0.78rem;font-weight:700;margin-top:10px;border:1px solid rgba(255,255,255,0.3);position:relative;}
+.task-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:16px;padding:24px 20px;max-width:1100px;margin:0 auto;width:100%;}
+.task-card{background:#fff;border-radius:16px;overflow:hidden;box-shadow:var(--shadow);cursor:pointer;transition:transform 0.2s,box-shadow 0.2s;border:1px solid var(--border);}
+.task-card:hover{transform:translateY(-4px);box-shadow:0 12px 40px rgba(0,0,0,0.13);}
+.task-card-top{height:5px;width:100%;}
+.task-card-body{padding:20px;}
+.task-card-body h3{font-size:1.05rem;font-weight:800;margin-bottom:6px;}
+.task-card-body p{font-size:0.82rem;color:var(--text-muted);line-height:1.5;margin-bottom:16px;}
+.task-card-meta{display:flex;align-items:center;justify-content:space-between;}
+.task-num{width:42px;height:42px;border-radius:12px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:900;font-size:1.1rem;}
+.start-btn{display:flex;align-items:center;gap:6px;padding:10px 20px;border-radius:10px;border:none;color:#fff;font-weight:800;font-size:0.88rem;cursor:pointer;font-family:inherit;transition:opacity 0.15s;}
+.start-btn:hover{opacity:0.85;}
+#taskArea{display:none;min-height:calc(100vh - 80px);flex-direction:column;max-width:1150px;margin:40px auto;background:#ffffff;box-shadow:0 12px 40px rgba(15,23,42,0.06);border:1px solid var(--border);border-radius:16px;}
+.task-topbar{padding:14px 20px;display:flex;align-items:center;gap:14px;background:#fff;border-bottom:2px solid var(--border);position:sticky;top:0;z-index:100;}
+.back-btn{width:38px;height:38px;border-radius:10px;border:2px solid var(--border);background:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1.1rem;transition:all 0.15s;}
+.back-btn:hover{background:var(--purple);border-color:var(--purple);color:#fff;}
+.timer-bar{background:linear-gradient(135deg,var(--green),var(--green-light));padding:14px 22px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin:12px 16px;border-radius:16px;}
+.timer-left{display:flex;align-items:center;gap:10px;}
+.timer-label{color:rgba(255,255,255,0.85);font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;}
+.timer-val{color:#fff;font-size:1.8rem;font-weight:900;font-family:'Space Mono',monospace;}
+.progress-chip{background:rgba(255,255,255,0.25);color:#fff;padding:6px 14px;border-radius:10px;font-weight:800;font-size:0.85rem;border:1px solid rgba(255,255,255,0.3);}
+.items-container{padding:0 16px 24px;display:flex;flex-direction:column;gap:12px;}
+.item-wrapper{border-radius:16px;overflow:hidden;box-shadow:var(--shadow);}
+.item-header{padding:14px 20px;display:flex;align-items:center;gap:14px;background:linear-gradient(135deg,var(--purple-dark),var(--purple-light));}
+.item-header.blue{background:linear-gradient(135deg,var(--blue),var(--blue-light));}
+.item-header.green{background:linear-gradient(135deg,var(--green),var(--green-light));}
+.item-header.orange{background:linear-gradient(135deg,var(--orange),#F97316);}
+.item-header.teal{background:linear-gradient(135deg,var(--teal),#2DD4BF);}
+.item-num{width:34px;height:34px;background:rgba(255,255,255,0.25);border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:900;}
+.item-header h4{color:#fff;font-weight:800;flex:1;}
+.save-btn{background:rgba(255,255,255,0.2);color:#fff;border:1px solid rgba(255,255,255,0.4);padding:7px 14px;border-radius:9px;font-weight:700;font-size:0.82rem;cursor:pointer;display:flex;align-items:center;gap:5px;transition:all 0.2s;font-family:inherit;}
+.save-btn:hover{background:rgba(255,255,255,0.35);}
+.save-btn.saved{background:#fff;color:var(--green);border-color:#fff;}
+.item-body{background:#fff;padding:20px;}
+.ref-box{background:linear-gradient(135deg,#F8FAFF,#EEF2FF);border:2px dashed var(--purple-light);border-radius:12px;padding:14px;margin-bottom:14px;}
+.ref-box h5{color:var(--purple);font-weight:800;margin-bottom:8px;font-size:0.82rem;text-transform:uppercase;letter-spacing:0.5px;}
+.ref-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:8px;}
+.ref-item{min-width:0;overflow:hidden;background:#fff;border-radius:8px;padding:6px 8px;border:1px solid #e0e7ff;}
+.ref-item strong{color:var(--text-muted);display:block;font-size:0.67rem;text-transform:uppercase;letter-spacing:0.4px;margin-bottom:2px;}
+.ref-item span{color:var(--text);font-weight:700;font-size:0.81rem;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;line-height:1.4;}
+.ref-item.address-item{grid-column:span 2;height:auto;}
+.ref-item.address-item span{white-space:normal;overflow:visible;text-overflow:unset;line-height:1.55;word-break:break-word;font-size:0.8rem;}
+.ref-item.wide{grid-column:span 2;}
+.fields-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:10px;}
+.field-group label{display:block;font-size:0.75rem;font-weight:700;color:var(--text-muted);margin-bottom:4px;}
+.field-group label span{color:var(--red);}
+.field-group input, .field-group textarea{width:100%;padding:9px 11px;border:2px solid var(--border);border-radius:9px;font-family:inherit;font-size:0.85rem;color:var(--text);background:#FAFAFA;transition:border-color 0.15s,box-shadow 0.15s;outline:none;}
+.field-group textarea{resize:none;overflow:hidden;}
+.field-group input:focus, .field-group textarea:focus{border-color:var(--purple-light);box-shadow:0 0 0 3px rgba(168,85,247,0.1);background:#fff;}
+.field-group input.correct{border-color:var(--green);background:#F0FDF4;}
+.field-group input.wrong{border-color:var(--red);background:#FEF2F2;}
+.field-group.full{grid-column:1/-1;}
+.captcha-box{background:linear-gradient(135deg,#F8F9FA,#E9ECEF);border:2px solid #DEE2E6;border-radius:12px;padding:20px;text-align:center;margin-bottom:14px;position:relative;overflow:hidden;}
+.captcha-box::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(45deg,transparent,transparent 8px,rgba(0,0,0,0.02) 8px,rgba(0,0,0,0.02) 16px);}
+.captcha-text{font-family:'Space Mono',monospace;font-size:2rem;font-weight:700;letter-spacing:8px;color:var(--text);position:relative;text-decoration:line-through;text-decoration-color:rgba(0,0,0,0.15);}
+.captcha-text.nodc{text-decoration:none;letter-spacing:4px;font-size:1.8rem;}
+.badge{padding:3px 10px;border-radius:6px;font-size:0.72rem;font-weight:800;text-transform:uppercase;}
+.badge-purple{background:#EDE9FE;color:var(--purple);}
+.badge-red{background:#FEE2E2;color:var(--red);}
+.grammar-wrong{background:#FEF2F2;border:2px solid #FECACA;border-radius:12px;padding:16px;margin-bottom:12px;}
+.grammar-wrong-title{display:flex;align-items:center;gap:8px;color:var(--red);font-weight:800;margin-bottom:8px;font-size:0.88rem;}
+.grammar-wrong p{color:#374151;font-style:italic;line-height:1.7;font-size:0.86rem;}
+.error-tag{background:#FEE2E2;color:var(--red);padding:2px 8px;border-radius:5px;font-size:0.7rem;font-weight:700;}
+.grammar-textarea,.typing-textarea{width:100%;min-height:80px;padding:11px;border:2px solid var(--border);border-radius:10px;font-family:inherit;font-size:0.86rem;resize:none;outline:none;transition:border-color 0.15s;overflow:hidden;}
+.grammar-textarea:focus,.typing-textarea:focus{border-color:var(--purple-light);box-shadow:0 0 0 3px rgba(168,85,247,0.1);}
+.typing-textarea{min-height:80px;}
+.typing-source{background:linear-gradient(135deg,#FFFBEB,#FEF3C7);border:2px solid #FCD34D;border-radius:12px;padding:16px;margin-bottom:12px;}
+.typing-source-title{color:#92400E;font-weight:800;margin-bottom:7px;font-size:0.83rem;}
+.typing-source p{color:#374151;line-height:1.8;font-size:0.86rem;}
+.word-counter{font-size:0.73rem;color:var(--text-muted);text-align:right;margin-top:4px;font-weight:600;}
+.word-counter.good{color:var(--green);}
+.word-counter.warn{color:var(--orange);}
+.submit-area{padding:8px 16px 24px;}
+.submit-all-btn{width:100%;padding:14px;background:linear-gradient(135deg,var(--purple-dark),var(--purple-light));color:#fff;border:none;border-radius:14px;font-family:inherit;font-size:1rem;font-weight:800;cursor:pointer;transition:opacity 0.15s;display:flex;align-items:center;justify-content:center;gap:8px;}
+.submit-all-btn:hover{opacity:0.88;}
+.howto-box{background:linear-gradient(135deg,#F0F9FF,#E0F2FE);border:2px solid #BAE6FD;border-radius:12px;padding:14px 16px;margin-bottom:14px;}
+.howto-box h5{color:#0369A1;font-weight:800;font-size:0.8rem;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px;}
+.howto-box ol{padding-left:18px;color:#0C4A6E;font-size:0.82rem;line-height:1.8;font-weight:600;}
+.mini-modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.55);z-index:500;align-items:center;justify-content:center;padding:16px;}
+.mini-modal-overlay.show{display:flex;}
+.mini-modal{background:#fff;border-radius:20px;padding:24px;max-width:460px;width:100%;animation:popIn 0.28s cubic-bezier(0.34,1.56,0.64,1);box-shadow:0 20px 60px rgba(0,0,0,0.18);max-height:90vh;overflow-y:auto;}
+.mini-modal-header{display:flex;align-items:center;gap:12px;margin-bottom:16px;}
+.mm-icon{width:48px;height:48px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:1.5rem;flex-shrink:0;}
+.mm-icon-txt{flex:1;}
+.mm-icon-txt h3{font-size:1rem;font-weight:900;}
+.mm-icon-txt p{font-size:0.76rem;color:var(--text-muted);}
+.mini-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px;}
+.mini-stat{background:var(--bg);border-radius:12px;padding:12px 8px;text-align:center;}
+.mini-stat .sv{font-size:1.25rem;font-weight:900;}
+.mini-stat .sl{font-size:0.67rem;color:var(--text-muted);font-weight:700;margin-top:2px;}
+.pbar-wrap{margin-bottom:14px;}
+.pbar-wrap label{font-size:0.74rem;font-weight:700;color:var(--text-muted);margin-bottom:5px;display:flex;justify-content:space-between;}
+.pbar-bg{background:#E2E8F0;border-radius:10px;height:10px;overflow:hidden;}
+.pbar-fill{height:100%;border-radius:10px;transition:width 0.6s ease;}
+.mini-feedback{padding:10px 14px;border-radius:10px;font-size:0.8rem;font-weight:700;margin-bottom:10px;line-height:1.5;}
+.mini-feedback.good{background:#F0FDF4;color:#065F46;border-left:3px solid var(--green);}
+.mini-feedback.ok{background:#FFFBEB;color:#92400E;border-left:3px solid var(--yellow);}
+.mini-feedback.bad{background:#FEF2F2;color:#991B1B;border-left:3px solid var(--red);}
+.err-detail-box{background:#FFF7F0;border:1.5px solid #FBBF24;border-radius:10px;padding:12px;margin-bottom:12px;font-size:0.78rem;line-height:1.7;}
+.err-detail-box h6{color:#B45309;font-weight:800;margin-bottom:6px;font-size:0.78rem;text-transform:uppercase;letter-spacing:0.3px;}
+.err-row{display:flex;flex-wrap:wrap;gap:4px 8px;align-items:flex-start;margin-bottom:5px;padding-bottom:5px;border-bottom:1px dashed #FDE68A;}
+.err-row:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0;}
+.err-field{font-weight:800;color:#92400E;min-width:90px;flex-shrink:0;}
+.err-got{color:var(--red);font-weight:700;}
+.err-expected{color:var(--green);font-weight:700;}
+.mini-close-btn{width:100%;padding:11px;background:linear-gradient(135deg,var(--purple-dark),var(--purple-light));color:#fff;border:none;border-radius:11px;font-family:inherit;font-weight:800;font-size:0.9rem;cursor:pointer;}
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.65);z-index:999;align-items:flex-start;justify-content:center;padding:16px;overflow-y:auto;}
+.modal-overlay.show{display:flex;}
+.modal{background:#fff;border-radius:24px;max-width:600px;width:100%;margin:auto;animation:popIn 0.3s cubic-bezier(0.34,1.56,0.64,1);box-shadow:0 24px 80px rgba(0,0,0,0.2);overflow:hidden;}
+@keyframes popIn{from{transform:scale(0.75);opacity:0;}to{transform:scale(1);opacity:1;}}
+.modal-hero{padding:28px 28px 24px;background:linear-gradient(135deg,var(--purple-dark),var(--purple-light));text-align:center;}
+.modal-hero h2{color:#fff;font-size:1.4rem;font-weight:900;}
+.modal-hero p{color:rgba(255,255,255,0.8);font-size:0.83rem;margin-top:4px;}
+.grade-circle{width:76px;height:76px;border-radius:50%;background:rgba(255,255,255,0.2);border:3px solid rgba(255,255,255,0.45);display:flex;align-items:center;justify-content:center;margin:16px auto 0;font-size:1.8rem;font-weight:900;color:#fff;}
+.modal-body{padding:20px 22px;}
+.overall-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:18px;}
+.os-card{background:var(--bg);border-radius:14px;padding:14px 8px;text-align:center;}
+.os-card .ov{font-size:1.35rem;font-weight:900;}
+.os-card .ol{font-size:0.67rem;color:var(--text-muted);font-weight:700;margin-top:3px;}
+.sec-title{font-size:0.78rem;font-weight:900;text-transform:uppercase;letter-spacing:0.6px;color:var(--text-muted);margin-bottom:10px;}
+.breakdown-list{display:flex;flex-direction:column;gap:8px;margin-bottom:18px;}
+.bd-row{background:var(--bg);border-radius:12px;padding:12px 14px;}
+.bd-row-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:5px;}
+.bd-row-top span{font-weight:800;font-size:0.84rem;}
+.bd-acc{font-weight:900;font-size:0.9rem;}
+.bd-detail{font-size:0.71rem;color:var(--text-muted);font-weight:600;margin-bottom:6px;}
+.bpbar{background:#E2E8F0;border-radius:8px;height:7px;overflow:hidden;}
+.bpfill{height:100%;border-radius:8px;transition:width 0.7s ease;}
+.analysis-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:18px;}
+.ac{border-radius:12px;padding:13px 14px;}
+.ac.strength{background:#F0FDF4;border-left:3px solid var(--green);}
+.ac.improve{background:#FFFBEB;border-left:3px solid var(--yellow);}
+.ac.suggest{background:#EEF2FF;border-left:3px solid var(--purple);grid-column:1/-1;}
+.ac h5{font-size:0.72rem;font-weight:800;margin-bottom:4px;text-transform:uppercase;letter-spacing:0.4px;}
+.ac p{font-size:0.79rem;line-height:1.5;}
+.ac.strength h5{color:var(--green);}
+.ac.improve h5{color:var(--yellow);}
+.ac.suggest h5{color:var(--purple);}
+.summary-table{width:100%;border-collapse:collapse;margin-bottom:18px;font-size:0.82rem;}
+.summary-table th{background:var(--bg);padding:8px 12px;font-weight:800;text-align:left;color:var(--text-muted);font-size:0.7rem;text-transform:uppercase;letter-spacing:0.5px;}
+.summary-table td{padding:9px 12px;border-top:1px solid var(--border);}
+.acc-pill{display:inline-block;padding:3px 10px;border-radius:20px;font-weight:800;font-size:0.73rem;}
+.acc-high{background:#DCFCE7;color:#065F46;}
+.acc-mid{background:#FEF3C7;color:#92400E;}
+.acc-low{background:#FEE2E2;color:#991B1B;}
+.trust-line{text-align:center;font-size:0.73rem;color:var(--text-muted);margin-bottom:16px;font-style:italic;padding:0 20px;}
+.modal-actions{display:flex;gap:10px;flex-wrap:wrap;}
+.btn-primary{flex:1;background:linear-gradient(135deg,var(--purple-dark),var(--purple-light));color:#fff;border:none;padding:13px 16px;border-radius:12px;font-weight:800;font-size:0.88rem;cursor:pointer;font-family:inherit;}
+.btn-secondary{flex:1;background:var(--bg);color:var(--text);border:2px solid var(--border);padding:13px 16px;border-radius:12px;font-weight:800;font-size:0.88rem;cursor:pointer;font-family:inherit;transition:all 0.15s;}
+.btn-secondary:hover{border-color:var(--purple-light);color:var(--purple);}
+.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#1E293B;color:#fff;padding:10px 22px;border-radius:10px;font-weight:700;font-size:0.82rem;z-index:9999;opacity:0;transition:opacity 0.2s;pointer-events:none;}
+.toast.show{opacity:1;}
+.report-err-section{background:#FFF7F0;border:1.5px solid #FCD34D;border-radius:12px;padding:14px;margin-bottom:18px;}
+.report-err-section h5{color:#B45309;font-weight:800;font-size:0.78rem;text-transform:uppercase;letter-spacing:0.4px;margin-bottom:10px;}
+.overall-stats{display:block!important;}
+.rpt-section{background:#fff;border:1.5px solid var(--border);border-radius:14px;padding:16px;margin-bottom:14px;}
+.rpt-sec-title{font-size:0.82rem;font-weight:900;color:var(--text);margin-bottom:12px;text-transform:uppercase;letter-spacing:0.4px;border-bottom:2px solid var(--border);padding-bottom:8px;}
+.rpt-grid-3{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px;}
+.rpt-kv{background:var(--bg);border-radius:10px;padding:10px 12px;}
+.rpt-k{display:block;font-size:0.67rem;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.3px;margin-bottom:4px;}
+.rpt-v{font-size:1.15rem;font-weight:900;color:var(--text);}
+.rpt-quality-box{border:2px solid;border-radius:12px;padding:16px;text-align:center;}
+.rpt-pbar-wrap{margin-top:12px;}
+.report-err-table{width:100%;border-collapse:collapse;font-size:0.78rem;}
+.report-err-table th{background:#FEF3C7;padding:7px 10px;font-weight:800;color:#92400E;text-align:left;font-size:0.7rem;text-transform:uppercase;}
+.report-err-table td{padding:7px 10px;border-top:1px solid #FDE68A;color:#374151;}
+.report-err-table td.field-name{font-weight:800;color:#374151;}
+.report-err-table td.got{color:var(--red);font-weight:700;}
+.report-err-table td.expected{color:var(--green);font-weight:700;}
+.err-location{font-size:0.7rem;color:var(--text-muted);font-weight:700;margin-top:3px;}
+@media(max-width:580px){
+  .fields-grid{grid-template-columns:1fr 1fr;}
+  .overall-stats{grid-template-columns:1fr 1fr;}
+  .analysis-grid{grid-template-columns:1fr;}
+  .task-cards{grid-template-columns:1fr;}
+  .timer-bar{flex-direction:column;gap:8px;}
+  .modal-body{padding:14px;}
+}
+</style>
+
+<style>
+/* ========== FINAL HEADER FIX: stable color, less bold, no disappearing effect ========== */
+body{
+  padding-top:74px!important;
+}
+
+/* Keep header clean white always */
+.wd-nav{
+  height:74px!important;
+  min-height:74px!important;
+  background:#ffffff!important;
+  backdrop-filter:none!important;
+  -webkit-backdrop-filter:none!important;
+  border-bottom:1px solid #e2e8f0!important;
+  box-shadow:0 6px 18px rgba(15,23,42,0.06)!important;
+  transition:box-shadow .2s ease!important;
+}
+.wd-nav.scrolled{
+  background:#ffffff!important;
+  box-shadow:0 8px 22px rgba(15,23,42,0.08)!important;
+}
+.wd-nav-inner{
+  height:74px!important;
+  min-height:74px!important;
+  padding:0 28px!important;
+}
+
+/* Logo normal, no jump/effect */
+.wd-logo{
+  padding:0!important;
+  border-radius:0!important;
+  transform:none!important;
+  background:transparent!important;
+}
+.wd-logo:hover{
+  transform:none!important;
+  background:transparent!important;
+}
+.wd-logo img{
+  height:34px!important;
+  filter:none!important;
+}
+.wd-logo-text{
+  color:#0f172a!important;
+  font-weight:800!important;
+  font-size:1.08rem!important;
+  letter-spacing:-0.02em!important;
+}
+
+/* Header links: same visible color, not over-bold */
+.wd-links{
+  background:#ffffff!important;
+  border:1px solid #e2e8f0!important;
+  box-shadow:0 4px 14px rgba(15,23,42,0.04)!important;
+  padding:5px!important;
+}
+.wd-links a{
+  color:#334155!important;
+  font-weight:650!important;
+  font-size:.84rem!important;
+  padding:8px 12px!important;
+  background:transparent!important;
+  transform:none!important;
+}
+.wd-links a:hover{
+  color:#1d4ed8!important;
+  background:#eff6ff!important;
+  transform:none!important;
+}
+.wd-links a.active{
+  color:#1d4ed8!important;
+  background:#eff6ff!important;
+  font-weight:750!important;
+}
+
+/* Header buttons stable */
+.wd-btn-ghost{
+  background:#ffffff!important;
+  color:#334155!important;
+  border:1px solid #e2e8f0!important;
+  box-shadow:none!important;
+  font-weight:650!important;
+  transform:none!important;
+}
+.wd-btn-ghost:hover{
+  background:#f8fafc!important;
+  color:#1d4ed8!important;
+  border-color:#bfdbfe!important;
+  transform:none!important;
+  box-shadow:none!important;
+}
+.wd-btn-primary{
+  background:#1d4ed8!important;
+  color:#ffffff!important;
+  border:1px solid #1d4ed8!important;
+  box-shadow:0 4px 12px rgba(29,78,216,0.22)!important;
+  font-weight:700!important;
+  transform:none!important;
+}
+.wd-btn-primary:hover{
+  background:#1e40af!important;
+  border-color:#1e40af!important;
+  color:#ffffff!important;
+  transform:none!important;
+  box-shadow:0 5px 14px rgba(29,78,216,0.25)!important;
+}
+
+/* Mobile button stable */
+.wd-ham{
+  background:#ffffff!important;
+  color:#0f172a!important;
+  box-shadow:none!important;
+}
+
+/* Task sticky topbar adjust after header */
+.task-topbar{
+  top:74px!important;
+}
+
+/* Remove any header animation/shine side effects only from header */
+.wd-nav *,
+.wd-mob *{
+  animation:none!important;
+}
+.wd-nav a::before,
+.wd-nav a::after,
+.wd-links::before,
+.wd-links::after{
+  display:none!important;
+}
+
+@media(max-width:640px){
+  body{padding-top:68px!important;}
+  .wd-nav,.wd-nav-inner{height:68px!important;min-height:68px!important;}
+  .wd-nav-inner{padding:0 16px!important;}
+  .task-topbar{top:68px!important;}
+  .wd-logo img{height:32px!important;}
+  .wd-logo-text{font-size:1.02rem!important;}
+}
+</style>
+
+</head>
+<body>
+
+<style>
+/* ========== PREMIUM INDEX-LIKE HEADER + COLOR BOOST ========== */
+:root{
+  --purple:#6D28D9;
+  --purple-light:#A855F7;
+  --purple-dark:#4C1D95;
+  --green:#047857;
+  --green-light:#10B981;
+  --blue:#0284C7;
+  --blue-light:#06B6D4;
+  --teal:#0F766E;
+  --orange:#EA580C;
+  --red:#DC2626;
+  --yellow:#D97706;
+  --bg:#F8FAFC;
+  --shadow:0 14px 42px rgba(15,23,42,0.10);
+}
+
+body{
+  padding-top:76px!important;
+  background:
+    radial-gradient(circle at 7% 9%, rgba(124,58,237,.13), transparent 26%),
+    radial-gradient(circle at 92% 15%, rgba(16,185,129,.10), transparent 24%),
+    radial-gradient(circle at 50% 100%, rgba(6,182,212,.08), transparent 30%),
+    linear-gradient(180deg,#ffffff 0%,#f8fafc 42%,#ffffff 100%)!important;
+}
+
+/* Header */
+.wd-nav{
+  position:fixed;
+  top:0;left:0;right:0;
+  z-index:1000;
+  min-height:76px;
+  background:rgba(255,255,255,0.86);
+  backdrop-filter:blur(18px);
+  -webkit-backdrop-filter:blur(18px);
+  border-bottom:1px solid rgba(226,232,240,.92);
+  box-shadow:0 8px 30px rgba(15,23,42,.045);
+  font-family:'Inter','Nunito',sans-serif;
+  transition:box-shadow .25s ease, background .25s ease;
+}
+.wd-nav.scrolled{
+  background:rgba(255,255,255,.96);
+  box-shadow:0 16px 48px rgba(15,23,42,.12);
+}
+.wd-nav-inner{
+  max-width:1200px;
+  margin:0 auto;
+  padding:10px 28px;
+  min-height:76px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:18px;
+}
+.wd-logo{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  text-decoration:none;
+  padding:8px 10px;
+  border-radius:16px;
+  flex-shrink:0;
+  transition:transform .25s ease, background .25s ease;
+}
+.wd-logo:hover{transform:translateY(-2px);background:#f8fafc;}
+.wd-logo img{
+  height:38px;
+  width:auto;
+  object-fit:contain;
+  filter:drop-shadow(0 10px 22px rgba(109,40,217,.22));
+}
+.wd-logo-text{
+  font-size:1.16rem;
+  font-weight:900;
+  color:#0f172a;
+  letter-spacing:-.04em;
+}
+.wd-links{
+  display:flex;
+  align-items:center;
+  gap:2px;
+  list-style:none;
+  flex:1;
+  justify-content:center;
+  margin:0;
+  padding:7px;
+  background:#fff;
+  border:1px solid #e2e8f0;
+  border-radius:999px;
+  box-shadow:0 10px 30px rgba(15,23,42,.055);
+}
+.wd-links a{
+  text-decoration:none;
+  font-size:.82rem;
+  font-weight:850;
+  color:#475569;
+  padding:9px 13px;
+  border-radius:999px;
+  transition:all .22s ease;
+  white-space:nowrap;
+  display:inline-flex;
+  align-items:center;
+}
+.wd-links a:hover,
+.wd-links a.active{
+  color:#6D28D9;
+  background:#f3e8ff;
+}
+.wd-ctas{
+  display:flex;
+  gap:10px;
+  align-items:center;
+  flex-shrink:0;
+}
+.wd-btn-ghost,
+.wd-btn-primary{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:7px;
+  padding:10px 18px;
+  border-radius:999px;
+  font-size:.84rem;
+  font-weight:850;
+  text-decoration:none;
+  transition:transform .22s ease, box-shadow .22s ease, background .22s ease, color .22s ease;
+  white-space:nowrap;
+}
+.wd-btn-ghost{
+  background:#ffffff;
+  border:1px solid #e9d5ff;
+  color:#6D28D9;
+  box-shadow:0 8px 22px rgba(15,23,42,.055);
+}
+.wd-btn-ghost:hover{
+  transform:translateY(-2px);
+  background:#faf5ff;
+  box-shadow:0 14px 35px rgba(124,58,237,.14);
+}
+.wd-btn-primary{
+  background:linear-gradient(135deg,#6D28D9,#A855F7);
+  color:#fff;
+  border:1px solid #7c3aed;
+  box-shadow:0 14px 35px rgba(124,58,237,.26);
+}
+.wd-btn-primary:hover{
+  transform:translateY(-2px);
+  box-shadow:0 18px 45px rgba(124,58,237,.36);
+}
+.wd-ham{
+  display:none;
+  width:44px;height:44px;
+  border-radius:14px;
+  border:1px solid #e2e8f0;
+  background:white;
+  cursor:pointer;
+  color:#0f172a;
+  font-size:1.05rem;
+  align-items:center;
+  justify-content:center;
+  box-shadow:0 8px 22px rgba(15,23,42,.06);
+}
+.wd-mob{
+  display:flex;
+  position:fixed;
+  top:0;right:0;
+  z-index:9999;
+  width:min(340px,92vw);
+  min-height:100vh;
+  background:#ffffff;
+  padding:78px 20px 32px;
+  flex-direction:column;
+  gap:8px;
+  transform:translateX(110%);
+  transition:transform .32s cubic-bezier(.34,1.56,.64,1);
+  overflow-y:auto;
+  box-shadow:-22px 0 80px rgba(15,23,42,.18);
+  border-left:1px solid #e2e8f0;
+}
+.wd-mob.open{transform:translateX(0);}
+.wd-mob-close{
+  position:absolute;
+  top:18px;right:18px;
+  width:38px;height:38px;
+  border-radius:50%;
+  border:none;
+  background:#f1f5f9;
+  color:#64748b;
+  cursor:pointer;
+}
+.wd-mob a{
+  display:block;
+  text-decoration:none;
+  font-size:.92rem;
+  font-weight:850;
+  color:#0f172a;
+  padding:12px 14px;
+  border-radius:14px;
+  background:#f8fafc;
+  border:1px solid transparent;
+  transition:.2s ease;
+}
+.wd-mob a:hover,
+.wd-mob a.active{
+  background:#faf5ff;
+  color:#6D28D9;
+  border-color:#e9d5ff;
+}
+.wd-mob-ctas{
+  display:flex;
+  flex-direction:column;
+  gap:9px;
+  margin-top:10px;
+}
+.wd-mob-ctas a{text-align:center;justify-content:center;}
+
+/* Existing system visual upgrade — same colors, higher capacity */
+.menu-header{
+  background:
+    radial-gradient(circle at 15% 10%,rgba(255,255,255,.18),transparent 24%),
+    radial-gradient(circle at 85% 30%,rgba(255,255,255,.14),transparent 28%),
+    linear-gradient(135deg,var(--purple-dark),var(--purple),var(--purple-light))!important;
+  box-shadow:0 24px 70px rgba(109,40,217,.25);
+}
+.menu-header h1{
+  letter-spacing:-.04em;
+  text-shadow:0 12px 35px rgba(0,0,0,.16);
+  animation:wdHeroDrop .7s ease both;
+}
+.menu-header p,.menu-badge{animation:wdHeroDrop .85s ease both;}
+@keyframes wdHeroDrop{
+  from{opacity:0;transform:translateY(18px) scale(.98)}
+  to{opacity:1;transform:translateY(0) scale(1)}
+}
+.menu-badge{
+  background:rgba(255,255,255,.24)!important;
+  border:1px solid rgba(255,255,255,.42)!important;
+  box-shadow:0 12px 34px rgba(0,0,0,.12);
+}
+
+.task-card{
+  border-radius:22px!important;
+  box-shadow:0 16px 45px rgba(15,23,42,.09)!important;
+  transform:translateY(0);
+  position:relative;
+  overflow:hidden;
+  animation:wdCardIn .58s ease both;
+}
+.task-card:nth-child(2){animation-delay:.05s}
+.task-card:nth-child(3){animation-delay:.1s}
+.task-card:nth-child(4){animation-delay:.15s}
+.task-card:nth-child(5){animation-delay:.2s}
+.task-card:nth-child(6){animation-delay:.25s}
+@keyframes wdCardIn{
+  from{opacity:0;transform:translateY(28px) scale(.96)}
+  to{opacity:1;transform:translateY(0) scale(1)}
+}
+.task-card::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(120deg,transparent 25%,rgba(255,255,255,.78) 48%,transparent 70%);
+  transform:translateX(-120%);
+  transition:transform .75s ease;
+  pointer-events:none;
+}
+.task-card:hover::before{transform:translateX(120%);}
+.task-card:hover{
+  transform:translateY(-8px) scale(1.018)!important;
+  box-shadow:0 28px 78px rgba(15,23,42,.16)!important;
+}
+.task-card-body h3{letter-spacing:-.02em;}
+.task-num{
+  box-shadow:0 12px 30px rgba(15,23,42,.16);
+  animation:wdIconFloat 2.8s ease-in-out infinite;
+}
+@keyframes wdIconFloat{
+  0%,100%{transform:translateY(0) rotate(0)}
+  50%{transform:translateY(-4px) rotate(-3deg)}
+}
+.start-btn{
+  border-radius:999px!important;
+  box-shadow:0 12px 28px rgba(15,23,42,.14);
+}
+.start-btn:hover{
+  opacity:1!important;
+  transform:translateY(-2px);
+}
+
+.task-topbar{
+  top:76px!important;
+  background:rgba(255,255,255,.94)!important;
+  backdrop-filter:blur(14px);
+  border-bottom:1px solid rgba(226,232,240,.9)!important;
+  box-shadow:0 10px 30px rgba(15,23,42,.06);
+}
+.timer-bar{
+  box-shadow:0 18px 48px rgba(5,150,105,.22);
+  border:1px solid rgba(255,255,255,.35);
+}
+.item-wrapper{
+  border-radius:22px!important;
+  box-shadow:0 16px 45px rgba(15,23,42,.09)!important;
+  animation:wdItemIn .45s ease both;
+}
+@keyframes wdItemIn{
+  from{opacity:0;transform:translateY(22px)}
+  to{opacity:1;transform:translateY(0)}
+}
+.item-header{
+  background-size:140% 140%!important;
+  animation:wdGradientMove 5s ease infinite;
+}
+@keyframes wdGradientMove{
+  0%,100%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+}
+.item-body{
+  background:rgba(255,255,255,.96)!important;
+}
+.ref-box,.howto-box,.typing-source,.grammar-wrong{
+  box-shadow:0 12px 32px rgba(15,23,42,.055);
+}
+.field-group input,
+.grammar-textarea,
+.typing-textarea{
+  border-radius:12px!important;
+  background:#ffffff!important;
+}
+.field-group input:focus,
+.grammar-textarea:focus,
+.typing-textarea:focus{
+  box-shadow:0 0 0 4px rgba(168,85,247,.14)!important;
+}
+.submit-all-btn,
+.mini-close-btn,
+.btn-primary{
+  box-shadow:0 16px 38px rgba(124,58,237,.22);
+}
+.submit-all-btn:hover,
+.mini-close-btn:hover,
+.btn-primary:hover{
+  opacity:1!important;
+  transform:translateY(-2px);
+}
+.modal,.mini-modal{
+  border:1px solid rgba(255,255,255,.6);
+  box-shadow:0 30px 90px rgba(15,23,42,.25)!important;
+}
+.modal-hero{
+  background:
+    radial-gradient(circle at 20% 15%,rgba(255,255,255,.18),transparent 25%),
+    linear-gradient(135deg,var(--purple-dark),var(--purple-light))!important;
+}
+
+/* Footer */
+.simple-footer{
+  background:#0f172a!important;
+  color:#cbd5e1!important;
+  border-top:none!important;
+  padding:0!important;
+  overflow:hidden;
+  position:relative;
+  font-family:'Inter','Nunito',sans-serif;
+}
+.simple-footer::before{
+  content:"";
+  position:absolute;
+  inset:0 0 auto 0;
+  height:6px;
+  background:linear-gradient(90deg,#6D28D9,#06B6D4,#10B981,#F59E0B,#A855F7);
+}
+.simple-footer-inner{max-width:1200px;margin:0 auto;padding:56px 28px 24px;}
+.simple-footer-top{
+  display:grid;
+  grid-template-columns:1.45fr .8fr .9fr 1.05fr;
+  gap:34px;
+}
+.simple-footer-logo{display:flex;align-items:center;gap:10px;margin-bottom:14px;}
+.simple-footer-logo img{width:38px;height:38px;object-fit:contain;filter:drop-shadow(0 8px 20px rgba(124,58,237,.25));}
+.simple-footer-logo span{color:#ffffff;font-weight:900;font-size:1.35rem;letter-spacing:-.03em;}
+.simple-footer-brand p{color:#94a3b8;font-size:.9rem;line-height:1.75;margin:0 0 16px;max-width:390px;}
+.simple-footer-badges{display:flex;flex-wrap:wrap;gap:8px;}
+.simple-footer-badges span{display:inline-flex;align-items:center;gap:6px;color:#f3e8ff;background:rgba(124,58,237,.12);border:1px solid rgba(216,180,254,.24);border-radius:999px;padding:7px 10px;font-size:.72rem;font-weight:850;}
+.simple-footer-badges i{color:#22c55e;}
+.simple-footer-col h4{color:#ffffff;font-size:.9rem;font-weight:900;margin:0 0 14px;letter-spacing:.02em;}
+.simple-footer-col a,.simple-footer-contact p{
+  display:flex;
+  align-items:flex-start;
+  gap:9px;
+  color:#94a3b8!important;
+  text-decoration:none;
+  font-size:.84rem;
+  font-weight:650;
+  line-height:1.5;
+  margin:0 0 10px;
+  transition:color .2s ease, transform .2s ease;
+}
+.simple-footer-col a:hover{color:#ffffff!important;transform:translateX(4px);}
+.simple-footer-contact i{color:#A855F7;margin-top:2px;min-width:14px;}
+.simple-footer-verify{margin-top:16px;background:rgba(255,255,255,.04);border:1px solid rgba(148,163,184,.18);border-radius:14px;padding:13px;display:flex;flex-direction:column;gap:5px;color:#94a3b8;font-size:.76rem;}
+.simple-footer-verify strong{color:#e2e8f0;font-size:.8rem;margin-bottom:2px;}
+.simple-socials{display:flex;gap:9px;margin-top:14px;}
+.simple-socials a{
+  width:36px;height:36px;border-radius:50%;
+  display:flex!important;align-items:center!important;justify-content:center!important;
+  background:rgba(255,255,255,.06);
+  border:1px solid rgba(148,163,184,.18);
+  color:#cbd5e1!important;
+  margin:0!important;padding:0!important;
+}
+.simple-socials a:hover{background:#7C3AED;color:#fff!important;transform:translateY(-3px)!important;}
+.simple-footer-bottom{border-top:1px solid rgba(148,163,184,.18);margin-top:32px;padding-top:18px;display:flex;align-items:center;justify-content:space-between;gap:12px;color:#94a3b8;font-size:.8rem;font-weight:700;}
+
+@media(max-width:1040px){
+  .wd-links,.wd-ctas{display:none!important;}
+  .wd-ham{display:flex!important;}
+  .simple-footer-top{grid-template-columns:1fr 1fr;}
+}
+@media(max-width:640px){
+  body{padding-top:70px!important;}
+  .wd-nav,.wd-nav-inner{min-height:70px;}
+  .wd-nav-inner{padding:9px 16px;}
+  .wd-logo img{height:34px;}
+  .task-topbar{top:70px!important;}
+  .simple-footer-inner{padding:44px 18px 20px;}
+  .simple-footer-top{grid-template-columns:1fr;gap:26px;}
+  .simple-footer-bottom{flex-direction:column;align-items:flex-start;}
+}
+</style>
+
+<nav class="wd-nav" id="wdNav">
+  <div class="wd-nav-inner">
+    <a href="index.html" class="wd-logo">
+      <img src="workden-logo.png" alt="WorkDen">
+      <span class="wd-logo-text">WorkDen</span>
+    </a>
+
+    <ul class="wd-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About Us</a></li>
+      <li><a href="projects.html">Projects</a></li>
+      <li><a href="plans.html">Plans</a></li>
+      <li><a href="demo-task.html" class="active">Demo Task</a></li>
+      <li><a href="testimonials.html">Testimonials</a></li>
+      <li><a href="blogs.html">Blogs</a></li>
+    </ul>
+
+    <div class="wd-ctas">
+      <a href="#" onclick="showVersionModal(event)" class="wd-btn-ghost">User Login</a>
+      <a href="https://workdenteam2.base44.app/" class="wd-btn-primary">Employee Login</a>
+    </div>
+
+    <button class="wd-ham" onclick="wdToggle()"><i class="fas fa-bars"></i></button>
+  </div>
+</nav>
+
+<div class="wd-mob" id="wdMob">
+  <button class="wd-mob-close" onclick="wdToggle()"><i class="fas fa-times"></i></button>
+  <a href="index.html">Home</a>
+  <a href="about.html">About Us</a>
+  <a href="projects.html">Projects</a>
+  <a href="plans.html">Plans</a>
+  <a href="demo-task.html" class="active">Demo Task</a>
+  <a href="testimonials.html">Testimonials</a>
+  <a href="blogs.html">Blogs</a>
+  <div class="wd-mob-ctas">
+    <a href="#" onclick="showVersionModal(event)" class="wd-btn-ghost">User Login</a>
+    <a href="https://workdenteam2.base44.app/" class="wd-btn-primary">Employee Login</a>
+  </div>
+</div>
+
+<!-- VERSION SELECTOR MODAL -->
+<div id="verOverlay" onclick="closeVersionModal(event)" style="display:none;position:fixed;inset:0;z-index:99999;background:rgba(10,20,40,0.72);backdrop-filter:blur(5px);align-items:center;justify-content:center;padding:18px;">
+  <div style="background:white;border-radius:22px;padding:40px 32px 32px;max-width:440px;width:92%;box-shadow:0 24px 80px rgba(0,0,0,0.22);text-align:center;position:relative;animation:popIn 0.24s ease;">
+    <button onclick="document.getElementById('verOverlay').style.display='none'" style="position:absolute;top:14px;right:18px;background:#f1f5f9;border:none;cursor:pointer;width:34px;height:34px;border-radius:50%;font-size:1.1rem;color:#64748b;">✕</button>
+    <div style="display:inline-flex;align-items:center;gap:6px;background:#faf5ff;color:#6D28D9;font-size:0.72rem;font-weight:800;text-transform:uppercase;padding:5px 12px;border-radius:20px;margin-bottom:14px;">Select Version</div>
+    <div style="font-size:1.35rem;font-weight:900;color:#0f172a;margin-bottom:8px;">Choose Your Login Portal</div>
+    <div style="font-size:0.9rem;color:#64748b;margin-bottom:28px;line-height:1.5;">WorkDen ke do version available hain. Apna version select karein.</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
+      <a href="https://workden-4.base44.app" target="_blank" style="border:2px solid #e9d5ff;border-radius:16px;padding:22px 16px 18px;text-decoration:none;display:flex;flex-direction:column;align-items:center;gap:8px;transition:.2s;">
+        <div style="font-size:2rem;font-weight:900;color:#6D28D9;">4.0</div>
+        <div style="font-size:0.8rem;font-weight:800;color:#475569;">WorkDen 4.0</div>
+        <div style="font-size:0.75rem;color:#94a3b8;">Latest version — upgraded features</div>
+        <div style="margin-top:6px;padding:8px 18px;border-radius:999px;font-size:0.8rem;font-weight:800;background:linear-gradient(135deg,#6D28D9,#A855F7);color:white;width:100%;box-sizing:border-box;">Login 4.0</div>
+      </a>
+      <a href="https://workden-3.base44.app" target="_blank" style="border:2px solid #dbeafe;border-radius:16px;padding:22px 16px 18px;text-decoration:none;display:flex;flex-direction:column;align-items:center;gap:8px;transition:.2s;">
+        <div style="font-size:2rem;font-weight:900;color:#1d4ed8;">3.0</div>
+        <div style="font-size:0.8rem;font-weight:800;color:#475569;">WorkDen 3.0</div>
+        <div style="font-size:0.75rem;color:#94a3b8;">Previous version — stable interface</div>
+        <div style="margin-top:6px;padding:8px 18px;border-radius:999px;font-size:0.8rem;font-weight:800;background:#1d4ed8;color:white;width:100%;box-sizing:border-box;">Login 3.0</div>
+      </a>
+    </div>
+  </div>
+</div>
+
+<script>
+function wdToggle(){
+  const mob=document.getElementById('wdMob');
+  if(mob) mob.classList.toggle('open');
+}
+function showVersionModal(e){
+  if(e)e.preventDefault();
+  const overlay=document.getElementById("verOverlay");
+  if(overlay) overlay.style.display="flex";
+}
+function closeVersionModal(e){
+  const overlay=document.getElementById("verOverlay");
+  if(e.target===overlay) overlay.style.display="none";
+}
+window.addEventListener('scroll',()=>{
+  const nav=document.getElementById('wdNav');
+  if(nav) nav.classList.toggle('scrolled',window.scrollY>20);
+});
+</script>
+<script>
+// ── Auto-expand textareas (robust event delegation) ──
+document.body.addEventListener('input', function(e){
+  if(e.target.tagName === 'TEXTAREA' && !e.target.readOnly){
+    e.target.style.height = 'auto';
+    e.target.style.height = e.target.scrollHeight + 'px';
+  }
+});
+</script>
+
+<div id="mainMenu">
+  <div class="menu-header">
+    <div style="font-size:2rem;margin-bottom:8px;">💼</div>
+    <h1>WorkDen Demo Tasks</h1>
+    <p>Choose your skill and try a demo task</p>
+    <div class="menu-badge">🔴 LIVE DEMO – Try All Tasks</div>
+  </div>
+  <div class="task-cards" id="taskCards"></div>
+</div>
+
+<div id="taskArea">
+  <div class="task-topbar">
+    <button class="back-btn" onclick="goBack()">←</button>
+    <div>
+      <div id="taskTitle" style="font-size:1.1rem;font-weight:900;color:var(--purple);"></div>
+      <div id="taskSubtitle" style="font-size:0.75rem;color:var(--text-muted);"></div>
+    </div>
+  </div>
+  <div style="padding:12px 16px 0;">
+    <div class="timer-bar">
+      <div class="timer-left">
+        <span style="font-size:1.3rem;">⏱️</span>
+        <div><div class="timer-label">Time Remaining</div><div class="timer-val" id="timerDisplay">01:00:00</div></div>
+      </div>
+      <div><div class="progress-chip" id="progressChip">✅ 0/0</div></div>
+    </div>
+  </div>
+  <div id="taskHowTo"></div>
+  <div class="items-container" id="itemsContainer"></div>
+  <div class="submit-area">
+    <button class="submit-all-btn" onclick="submitAll()">🚀 Submit All &amp; View Full Report</button>
+  </div>
+</div>
+
+<div class="mini-modal-overlay" id="miniModal">
+  <div class="mini-modal">
+    <div class="mini-modal-header">
+      <div class="mm-icon" id="mmIcon">📊</div>
+      <div class="mm-icon-txt"><h3 id="mmTitle">Item Report</h3><p id="mmSub">Saved successfully</p></div>
+    </div>
+    <div class="mini-stats" id="mmStats"></div>
+    <div class="pbar-wrap">
+      <label><span>Accuracy</span><span id="mmPct">0%</span></label>
+      <div class="pbar-bg"><div class="pbar-fill" id="mmBar" style="width:0%;background:var(--green);"></div></div>
+    </div>
+    <div class="mini-feedback" id="mmFb"></div>
+    <div id="mmErrDetail"></div>
+    <button class="mini-close-btn" onclick="closeMM()">✅ Continue Next Item</button>
+  </div>
+</div>
+
+<div class="modal-overlay" id="resultModal">
+  <div class="modal">
+    <div class="modal-hero">
+      <div style="font-size:1.5rem;margin-bottom:6px;">🏆</div>
+      <h2>Demo Performance Report</h2>
+      <p>Your performance has been evaluated based on real task parameters.</p>
+      <div class="grade-circle" id="gradeCircle">A</div>
+    </div>
+    <div class="modal-body">
+      <div class="sec-title">📊 Overall Performance</div>
+      <div class="overall-stats" id="overallStats"></div>
+      <div class="sec-title">📋 Task-wise Breakdown</div>
+      <div class="breakdown-list" id="breakdownList"></div>
+      <div class="sec-title">📈 Performance Analysis</div>
+      <div class="analysis-grid" id="analysisGrid"></div>
+      <div id="fullErrSection"></div>
+      <div class="sec-title">📝 Summary Table</div>
+      <table class="summary-table">
+        <thead><tr><th>Task</th><th>Completed</th><th>Accuracy</th><th>Status</th></tr></thead>
+        <tbody id="summaryBody"></tbody>
+      </table>
+      <div id="statusBanner"></div>
+      <div class="trust-line">"Your performance has been evaluated based on real task parameters."</div>
+      <div class="modal-actions">
+        <button class="btn-secondary" onclick="restartTask()">🔄 Retry Demo</button>
+        <button class="btn-primary" onclick="goHome()">🚀 Start Real Tasks</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// =====================================================
+// ===== NORMALIZE HELPER — FIXES COMPARISON BUG =====
+// =====================================================
+// Normalizes both typed value and reference value the same way
+// so minor whitespace/comma spacing differences don't cause wrong marks.
+// But actual spelling/character errors ARE still caught.
+function normalizeVal(s){
+  if(s===null||s===undefined) return '';
+  return String(s)
+    .trim()
+    .replace(/\s+/g,' ')           // multiple spaces → single space
+    .replace(/\s*,\s*/g,', ')      // normalize comma spacing: "a,b" / "a ,b" → "a, b"
+    .replace(/\s*\.\s*/g,'.')      // normalize dot: "No. 5" → "No.5" ... keep as-is actually
+    .replace(/[-–—]/g,'-')        // normalize dashes
+    .toLowerCase();
+}
+
+// =====================================================
+// ===== EXPANDED DATA POOLS (300-400 unique combos) ==
+// =====================================================
+const NAMES=[
+  "Rahul Sharma","Priya Verma","Amit Kumar","Sunita Singh","Rajesh Gupta",
+  "Kavita Patel","Vikram Yadav","Pooja Mishra","Sandeep Joshi","Neha Agarwal",
+  "Rohit Tiwari","Anjali Dubey","Manoj Pandey","Deepika Chauhan","Sanjay Maheshwari",
+  "Ravi Shankar","Meena Kumari","Suresh Reddy","Anita Bose","Prakash Nair",
+  "Geeta Pillai","Dinesh Chaube","Rekha Srivastava","Ashok Misra","Vandana Singh",
+  "Rajiv Mehta","Usha Rani","Harish Chandra","Sushma Gupta","Narendra Patil",
+  "Lalita Devi","Bharat Kumar","Savita Sharma","Vinod Khanna","Sudha Murthy",
+  "Alok Nath","Reena Kapoor","Mohan Lal","Shobha Rani","Girish Tiwari",
+  "Poonam Bajaj","Anil Goswami","Sarita Pandey","Naresh Yadav","Mamta Varma",
+  "Devendra Singh","Kamla Devi","Surendra Kumar","Pramila Joshi","Hemant Shah",
+  "Anju Soni","Rakesh Verma","Nirmala Devi","Santosh Kumar","Pushpa Agarwal",
+  "Virender Pratap","Pallavi Shukla","Ajay Dubey","Sunanda Mishra","Rajendra Prasad",
+  "Laxmi Bai","Shyam Sunder","Indu Gupta","Ramesh Chandra","Anupama Rao",
+  "Mahesh Babu","Seema Kapoor","Yogesh Tiwari","Radha Krishnan","Preeti Singh",
+  "Umesh Agnihotri","Bharati Devi","Kamal Kishore","Sarla Jain","Tribhuvan Nath",
+  "Kiran Malhotra","Mukesh Sinha","Renu Tiwari","Sunil Srivastava","Nandita Das",
+  "Ganesh Prasad","Urmila Devi","Tejpal Singh","Veena Malhotra","Chandra Shekhar",
+  "Arvind Trivedi","Manjula Dixit","Deepak Awasthi","Sunita Maurya","Vivek Ranjan",
+  "Madhuri Lata","Pradeep Kushwaha","Ananya Sinha","Brijesh Tiwari","Sheela Devi",
+  "Navin Chandra","Puja Rawat","Yogendra Singh","Savitri Pandey","Raksha Kumar"
+];
+
+const CITIES=[
+  "Mumbai","Delhi","Bengaluru","Hyderabad","Chennai","Kolkata","Pune","Jaipur",
+  "Lucknow","Patna","Surat","Ahmedabad","Nagpur","Indore","Bhopal","Chandigarh",
+  "Coimbatore","Kochi","Vadodara","Agra","Varanasi","Meerut","Rajkot","Nashik",
+  "Amritsar","Ludhiana","Madurai","Jodhpur","Raipur","Dehradun","Guwahati","Mysuru",
+  "Tiruchirappalli","Noida","Gurgaon","Faridabad","Ghaziabad","Aurangabad","Ranchi",
+  "Jabalpur","Allahabad","Howrah","Dhanbad","Bareilly","Aligarh","Moradabad",
+  "Visakhapatnam","Vijayawada","Guntur","Nellore","Kurnool","Rajahmundry",
+  "Tirupati","Warangal","Kakinada","Khammam","Anantapur","Kadapa"
+];
+
+const STATES=[
+  "Maharashtra","Delhi","Karnataka","Telangana","Tamil Nadu","West Bengal","Rajasthan",
+  "Uttar Pradesh","Bihar","Gujarat","Madhya Pradesh","Punjab","Kerala","Haryana",
+  "Odisha","Jharkhand","Assam","Chhattisgarh","Uttarakhand","Himachal Pradesh",
+  "Goa","Tripura","Manipur","Meghalaya","Jammu & Kashmir","Andhra Pradesh"
+];
+
+const QUALS=[
+  "10th Pass, 12th Pass, B.A.", "10th, 12th, B.Sc. (Physics), M.Sc.",
+  "10th Pass, 12th (Commerce), B.Com., MBA", "10th, Diploma in IT, B.Tech (CSE)",
+  "10th Pass, ITI, Diploma (Mechanical)", "10th, 12th Pass, BCA, MCA",
+  "10th, 12th (Science), MBBS", "10th Pass, 12th, B.Pharm, D.Pharm",
+  "10th, 12th (Arts), B.A., B.Ed.", "10th, 12th, LLB, LLM",
+  "10th Pass, 12th Pass, B.Arch, M.Arch", "10th, Polytechnic Diploma, B.E.",
+  "10th, 12th, PGDCA, M.Tech", "10th, 12th Pass, B.Voc, B.Des"
+];
+
+const GENDERS=["Male","Female","Other"];
+const MARITAL=["Single","Married","Divorced","Widowed"];
+const NATIONALS=["Indian","NRI"];
+
+const COMPANIES=[
+  "TCS","Infosys","Wipro","HCL","Reliance","HDFC Bank","SBI","Airtel",
+  "Bajaj Finance","L&T","Mahindra","Zomato","Flipkart","Amazon India","Ola",
+  "Paytm","ICICI Bank","Axis Bank","BHEL","NTPC","ONGC","Coal India","ITC",
+  "Maruti Suzuki","Hero MotoCorp","Bajaj Auto","Tech Mahindra","Mphasis",
+  "Mindtree","Hexaware","Cognizant","Accenture India","IBM India","Capgemini",
+  "Oracle India","SAP India","Dell India","HP India","Lenovo India","Samsung India",
+  "LG India","Bosch India","Siemens India","ABB India","Havells India","Crompton",
+  "Voltas","Blue Star","Daikin India","Carrier Midea"
+];
+
+// Large address component pools for maximum variety
+const HOUSE_TYPES=["H.No.","House No.","Flat No.","Bungalow No.","Plot No.","Residence","Unit No.","Room No.","Villa No.","Ghar No."];
+const WINGS=["Block A","Block B","Block C","Block D","Block E","Block F","Wing 1","Wing 2","Wing 3","Wing 4","Tower A","Tower B","Tower C","Phase 1","Phase 2","Sector 1","Sector 2","Sector 3"];
+const SOCIETIES_DE=[
+  "Hanuman Residency","Shanti Nagar Society","Ram Vihar Apartments","Ganesh Enclave","Laxmi Niwas Colony",
+  "Sai Kripa Apartments","Krishna Vihar Society","Shivam Residency","Tulsi Park Enclave","Balaji Heights",
+  "Durga Prasad Colony","Vinayak Nagar CHS","Jai Mata Di Apartments","Om Shanti Residency","Radha Krishna Colony",
+  "Brindavan Heights","Govind Nagar Society","Mahavir Enclave","Tirupati Apartments","Vaishnavi Residency",
+  "Surya Vihar Colony","Chandra Park CHS","Shree Sai Heights","Ambe Mata Apartments","Jagdamba Niwas",
+  "Panchvati Colony","Narmada Residency","Ganga Vihar Society","Yamuna Apartments","Saraswati Enclave",
+  "Kaveri Heights","Godavari Colony","Krishna Kunj Apartments","Radha Vihar CHS","Hari Om Residency",
+  "Shantiniketan Apartments","Dwarkadhish Heights","Govardhan Society","Vrindavan Colony","Mathura Enclave",
+  "Ayodhya Nagar CHS","Kashi Vihar Residency","Kedarnath Heights","Badrinath Enclave","Amarnath Colony"
+];
+const SOCIETIES_FF=[
+  "Sunrise Apartments","Green Valley Colony","Anand Nagar Society","Shiv Shakti Enclave","Ram Krishna Residency",
+  "Durga Vihar","Saraswati Niwas","Laxmi Apartments","Indira Nagar Colony","Vijay Park Society",
+  "Diamond Park Apartments","Golden Heights CHS","Silver Oak Colony","Emerald Society","Pearl Residency",
+  "Blue Bell Apartments","Rose Garden Colony","Jasmine Heights","Lotus Enclave","Orchid Society",
+  "Royal Park Apartments","Imperial Colony","Elite Residency","Pride Heights","Prestige Enclave",
+  "Marvel Residency","Landmark Colony","Signature Apartments","Pinnacle Heights","Vertex Society",
+  "Fortune Colony","Heritage Apartments","Classic Residency","Regal Heights","Noble Park Colony",
+  "Harmony Heights","Serene Enclave","Tranquil Colony","Peaceful Society","Bliss Apartments",
+  "Urban Heights","Metro Colony","City View Apartments","Sky Line Residency","Star Park CHS"
+];
+const GALIS_DE=[
+  "Patel Gali","Main Road","Sharma Mohalla","Gandhi Path","Station Road",
+  "Nehru Marg","Ram Gali","Shyam Marg","Krishna Path","Radha Gali",
+  "Temple Road","Market Road","School Lane","Hospital Road","Park Street",
+  "Bazaar Gali","Chowk Road","Old Market Lane","New Colony Road","Ring Road",
+  "Bus Stand Road","Railway Gali","Post Office Lane","Police Chowki Marg","Water Tank Road"
+];
+const AREAS_DE=[
+  "Civil Lines","Rajiv Nagar","Indira Colony","Shastri Nagar","Azad Nagar",
+  "Gandhi Nagar","MG Road Area","Sector 12","Defence Colony","Model Town",
+  "Nehru Nagar","Netaji Nagar","Subhash Nagar","Tilak Nagar","Tagore Nagar",
+  "Ambedkar Nagar","Patel Nagar","Green Park","Anand Vihar","Vikaspuri",
+  "Janakpuri","Rohini","Pitampura","Laxmi Nagar","Preet Vihar",
+  "Mayur Vihar","Dwarka","Uttam Nagar","Vasant Kunj","Badarpur"
+];
+const NEAR_DE=[
+  "Near Defence Park","Near Railway Station","Opp. Bus Stand","Near Post Office",
+  "Near City Hospital","Behind Police Chowki","Near Water Tank","Opp. Main Market",
+  "Near Govt. School","Near Municipal Office","Opp. Petrol Pump","Near Park Gate",
+  "Behind Temple","Near Fire Station","Opp. Collector Office","Near Taluka Office",
+  "Behind Bus Depot","Near SDM Office","Opp. Community Centre","Near ITI College",
+  "Behind Gurudwara","Near Church Road","Opp. Masjid","Near Old Fort","Behind Stadium"
+];
+const AREAS_FF=[
+  "Civil Lines","Rajiv Colony","Shastri Nagar","Gandhi Enclave","MG Road Area",
+  "New Colony","Model Town","Defence Enclave","Nehru Nagar","Station Road Area",
+  "Airport Road Area","Ring Road Zone","IT Park Zone","Industrial Area","Cantonment Area",
+  "University Road","College Road","Hospital Road Zone","Market Area","Old City Area",
+  "Sector 15","Sector 22","Sector 5","Phase 3 Area","Extension Area"
+];
+const NEAR_FF=[
+  "Near City Mall","Near Railway Station","Opp. Block Office","Near Police Station",
+  "Near Govt. Hospital","Behind Bus Stand","Near Water Tower","Opp. Petrol Pump",
+  "Near Park Gate","Near Old Market","Opp. Municipal Office","Near IT Park",
+  "Behind Sports Complex","Near Airport Road","Opp. District Court","Near Medical College",
+  "Behind Metro Station","Near SEZ Gate","Opp. Revenue Office","Near Employment Exchange",
+  "Near Shopping Complex","Behind Golf Course","Opp. Civil Court","Near Tech Park","Behind Flyover"
+];
+
+// =====================================================
+// ===== TYPING TASK POOL =====
+// =====================================================
+const TYPING_POOL=[
+"HOTEL BOOKING CONFIRMATION\nBooking Reference: TRIBO/2025/MUM/009821\nBooking Date: 15 March 2025\n\nGuest Details:\nGuest Name: Mr. & Mrs. Ashish Mehrotra\nContact: 9820-XXXXXX | ashish.mehrotra@gmail.com\n\nHotel Details:\nHotel Name: The Trident, Nariman Point, Mumbai\nStar Category: 5-Star Luxury Hotel\nAddress: Nariman Point, Mumbai - 400021\nCheck-In: 25 March 2025 (from 3:00 PM)\nCheck-Out: 28 March 2025 (by 12:00 PM)\nTotal Stay Duration: 3 Nights\n\nRoom Details:\nRoom Type: Deluxe Sea View Room (King Bed)\nRooms: 1 | Adults: 2 | Children: 0\nBreakfast: Included for 2 Adults Daily\n\nRate Details:\nRoom Rate per Night: Rs. 14,500/-\nRoom Charges (3 Nights): Rs. 43,500/-\nApplicable Taxes & Levies: Rs. 8,265/-\nTotal Booking Amount: Rs. 51,765/-\nPayment: Rs. 25,882.50 (50% advance paid online)\nBalance Payable at Check-In: Rs. 25,882.50",
+
+"SALES INVOICE\nInvoice Number: INV/2025/DL/004512\nInvoice Date: 20 March 2025\nDue Date: 04 April 2025\n\nSeller Details:\nCompany Name: Sunrise Tech Solutions Pvt. Ltd.\nGST Number: 07AABCS1234K1Z5\nAddress: B-42, Connaught Place, New Delhi - 110001\nContact: 011-45678900 | billing@sunrisetech.in\n\nBuyer Details:\nClient Name: Rajesh Imports & Exports\nGST Number: 27AADCR5678M2Z1\nAddress: Shop 14, Trade Centre, Pune - 411001\n\nItem 1: Laptop HP ProBook 450 x 2 units @ Rs. 48,000\nItem 2: Wireless Mouse Logitech x 5 units @ Rs. 1,200\nItem 3: USB Hub 4-Port x 3 units @ Rs. 850\n\nSubtotal: Rs. 1,05,550/-\nCGST @ 9%: Rs. 9,499.50\nSGST @ 9%: Rs. 9,499.50\nTotal Invoice Amount: Rs. 1,24,549/-\nAmount in Words: One Lakh Twenty Four Thousand Five Hundred Forty Nine Only\nPayment Mode: NEFT / Bank Transfer\nBank Account: HDFC Bank — A/C: 50100123456789 | IFSC: HDFC0001234",
+
+"EMPLOYMENT OFFER LETTER\nLetter Reference: HR/OL/2025/BLR/00189\nIssue Date: 01 April 2025\n\nCandidate Details:\nCandidate Name: Ms. Priya Nair\nApplied Position: Senior Data Analyst\nDepartment: Business Intelligence & Analytics\nReporting To: Mr. Suresh Krishnamurthy, VP Operations\n\nEmployment Terms:\nDate of Joining: 21 April 2025\nProbation Period: 6 Months from Date of Joining\nWork Location: Bengaluru Office — Whitefield Campus\nWork Hours: 9:30 AM to 6:30 PM (Mon – Fri)\n\nCompensation Details:\nAnnual CTC: Rs. 9,60,000 per annum\nBasic Salary: Rs. 40,000 per month\nHRA: Rs. 20,000 per month\nSpecial Allowance: Rs. 14,000 per month\nPF Contribution: Rs. 4,800 per month (Employer)\nAnnual Bonus: Up to 10% of CTC based on performance\n\nAcceptance Deadline: 10 April 2025\nDocuments Required: Aadhar, PAN, Last 3 Salary Slips, Degree Certificate",
+
+"MEDICAL BILL RECEIPT\nReceipt Number: MBR/2025/HYD/007823\nReceipt Date: 22 March 2025\n\nHospital Details:\nHospital Name: Apollo Hospitals, Jubilee Hills\nAddress: Jubilee Hills Rd No. 72, Hyderabad - 500033\nContact: 040-23607777 | billing@apollohyderabad.com\nGSTIN: 36AABCA0408Q1ZK\n\nPatient Details:\nPatient Name: Mr. Venkat Rao Krishnan\nAge / Gender: 52 Years / Male\nPatient ID: APL-HYD-00098234\nWard / Room: Private Room — 304B\nAdmission Date: 18 March 2025\nDischarge Date: 22 March 2025\nAttending Doctor: Dr. Radha Menon (MD, Cardiology)\n\nBill Breakdown:\nRoom Charges (4 nights): Rs. 28,000/-\nDoctor Consultation Fee: Rs. 6,500/-\nDiagnostics & Lab Tests: Rs. 12,340/-\nMedicines & Consumables: Rs. 9,870/-\nICU Charges: Rs. 15,000/-\nGST @ 5%: Rs. 3,585.50\nTotal Bill Amount: Rs. 75,295.50\nInsurance Claim (Star Health): Rs. 50,000/-\nAmount Payable by Patient: Rs. 25,295.50",
+
+"BANK ACCOUNT STATEMENT\nStatement Period: 01 March 2025 to 31 March 2025\nGenerated On: 01 April 2025\n\nAccount Holder Name: Mrs. Sunita Agarwal\nAccount Number: XXXX XXXX 7823\nAccount Type: Savings Account\nBranch: SBI Main Branch, Lucknow\nIFSC Code: SBIN0001234\n\nOpening Balance (01 Mar): Rs. 18,540.00\nTotal Credits: Rs. 42,000.00\nTotal Debits: Rs. 29,315.00\nClosing Balance (31 Mar): Rs. 31,225.00\n\nKey Transactions:\n05 Mar — Credit: Salary Rs. 32,000.00 (NEFT from Wipro)\n08 Mar — Debit: Rent Transfer Rs. 12,000.00\n12 Mar — Debit: LIC Premium Auto-Debit Rs. 4,500.00\n18 Mar — Credit: Freelance Payment Rs. 10,000.00\n22 Mar — Debit: Electricity Bill Rs. 1,815.00\n28 Mar — Debit: SIP Mutual Fund Rs. 5,000.00\n30 Mar — Debit: Grocery / UPI Rs. 3,200.00\n31 Mar — Credit: Interest Credited Rs. 540.25",
+
+"RESIDENTIAL RENT AGREEMENT\nAgreement Number: RA/2025/MH/003671\nAgreement Date: 01 April 2025\n\nLandlord Name: Mr. Dinesh Kulkarni\nPAN Number: AABPK3421R\nContact: 9823001122 | dineshk@gmail.com\n\nTenant Name: Mr. Arjun Mehta & Family\nAadhar Number: 7845 1234 9900\nPermanent Address: B-12 Rajiv Nagar, Nagpur - 440015\n\nProperty Address: Flat 403, Shivaji Heights, Baner, Pune - 411045\nArea: 1100 sq.ft. — 2BHK Apartment\nFurnishing: Semi-Furnished\n\nLease Start Date: 01 April 2025\nLease Duration: 11 Months\nLease End Date: 28 February 2026\nMonthly Rent: Rs. 18,000/-\nSecurity Deposit: Rs. 54,000/- (3 Months Advance)\nMaintenance Charges: Rs. 1,500/- per month (separate)\nRent Payment Due: On or before 5th of each month\nLock-in Period: 6 Months from Start Date",
+
+"E-TICKET — FLIGHT BOOKING CONFIRMATION\nPNR Number: BM7K9Q\nBooking Reference: INDIG/2025/DEL/0048821\nBooking Date: 28 March 2025\n\nPassenger 1: Mr. Sanjay Khanna (Adult)\nPassenger 2: Mrs. Ritu Khanna (Adult)\nPassenger 3: Master Aryan Khanna (Child, Age 7)\n\nFlight Number: 6E-2047\nRoute: Delhi (DEL) to Mumbai (BOM)\nDate of Travel: 05 April 2025\nDeparture: 06:15 AM (IGI Airport — Terminal 1)\nArrival: 08:30 AM (CSIA Mumbai — Terminal 2)\nCabin Class: Economy | 3 Seats — 14A, 14B, 14C\nBaggage Allowance: 15 kg Check-in + 7 kg Cabin per person\n\nBase Fare (3 Passengers): Rs. 9,840/-\nTaxes & Surcharges: Rs. 2,615/-\nSeat Selection Fee: Rs. 900/-\nTotal Amount Paid: Rs. 13,355/-\nPayment Method: Credit Card — HDFC Regalia (Last 4: 7821)",
+
+"STUDENT ADMISSION RECEIPT\nReceipt Number: ADM/2025/JNV/001134\nAcademic Year: 2025 – 2026\nReceipt Date: 15 March 2025\n\nInstitution Name: Jawahar Navodaya Vidyalaya, Patna\nAffiliation: CBSE — Affiliation No. 330067\nAddress: Boring Road, Patna, Bihar - 800001\nContact: 0612-2345678 | principal@jnvpatna.edu.in\n\nStudent Name: Kumari Anjali Singh\nDate of Birth: 14 September 2012\nFather's Name: Mr. Ramesh Kumar Singh\nMother's Name: Mrs. Savita Singh\nAadhar Number: 3345 7812 9900\nClass Admitted: Class VII — Section B\nRoll Number: JNV-2025-VII-B-024\n\nAdmission Fee: Rs. 500/-\nTuition Fee (Annual): Rs. 600/-\nLibrary Fee: Rs. 200/-\nSports & Activity Fee: Rs. 300/-\nTotal Fee Paid: Rs. 1,600/-\nMode of Payment: Online — UPI (Ref: UPI2025031512345)",
+
+"MOTOR VEHICLE INSURANCE CERTIFICATE\nPolicy Number: NI/MV/2025/MH/00091827\nIssue Date: 01 April 2025\nValid From: 01 April 2025\nValid Till: 31 March 2026\n\nInsurance Company: National Insurance Co. Ltd.\nOffice: Divisional Office, Pune — Branch Code: 230011\n\nInsured Name: Mr. Gopal Ramesh Shetty\nAddress: Survey No. 45, Kothrud, Pune - 411038\nContact: 9823445678\n\nRegistration Number: MH-12-AB-4523\nVehicle Make & Model: Maruti Suzuki Swift Dzire VXI\nYear of Manufacture: 2022\nEngine Number: K12N4523189\nChassis Number: MA3FJEB1S00234519\nFuel Type: CNG + Petrol (Bi-Fuel)\n\nPolicy Type: Comprehensive Motor Insurance\nIDV (Insured Declared Value): Rs. 6,20,000/-\nOwn Damage Premium: Rs. 8,450/-\nThird Party Premium: Rs. 2,094/-\nTotal Premium Paid: Rs. 11,210/- (incl. GST)",
+
+"TRAIN TICKET BOOKING CONFIRMATION\nPNR Number: 4512309876\nBooking Date: 12 March 2025\nTransaction ID: TXN100234512876\n\nTrain Details:\nTrain Number & Name: 12951 — Mumbai Rajdhani Express\nFrom: Mumbai Central (BCT)\nTo: New Delhi (NDLS)\nDate of Journey: 20 March 2025\nDeparture: 17:00 hrs\nArrival: 08:35 hrs (Next Day)\nTravel Class: 2A — 2-Tier AC Sleeper\nCoach & Seat: B3 — 24 (Side Lower), 25 (Side Upper)\n\nPassenger Details:\nPassenger 1: Mr. Rohit Sharma — Age 34 — Male — Berth: 24 SL\nPassenger 2: Mrs. Neha Sharma — Age 31 — Female — Berth: 25 SU\n\nFare Details:\nBase Fare: Rs. 2,750/-\nReservation Charges: Rs. 60/-\nSuperfast Charges: Rs. 75/-\nGST @ 5%: Rs. 144.25\nCatering (IRCTC): Rs. 120/-\nTotal Amount Paid: Rs. 3,149.25\nPayment Mode: UPI — Google Pay\nBooking Status: CONFIRMED",
+
+"SALARY SLIP\nMonth: March 2025\nPay Period: 01 March 2025 to 31 March 2025\n\nEmployee Details:\nEmployee Name: Mr. Deepak Sunil Sharma\nEmployee ID: EMP/TCS/BLR/23456\nDesignation: Systems Engineer\nDepartment: Application Development\nPAN Number: AQDPS3412R\nBank Account: ICICI Bank — A/C: 123456789012\nPF Number: KN/BAN/23456/789\n\nEarnings:\nBasic Salary: Rs. 28,000/-\nHouse Rent Allowance: Rs. 14,000/-\nConveyance Allowance: Rs. 1,600/-\nMedical Allowance: Rs. 1,250/-\nSpecial Allowance: Rs. 8,500/-\nPerformance Bonus: Rs. 3,000/-\nGross Earnings: Rs. 56,350/-\n\nDeductions:\nProvident Fund (12%): Rs. 3,360/-\nProfessional Tax: Rs. 200/-\nIncome Tax (TDS): Rs. 4,200/-\nTotal Deductions: Rs. 7,760/-\n\nNet Salary Payable: Rs. 48,590/-\nPayment Date: 31 March 2025\nPayment Mode: NEFT to Bank Account",
+
+"ELECTRICITY BILL RECEIPT\nBill Number: MSEB/2025/MUM/W/0034521\nBill Date: 10 March 2025\nDue Date: 25 March 2025\n\nConsumer Details:\nConsumer Name: Mr. Prakash Ramesh Naik\nConsumer Number: 340-092-00123\nMeter Number: MH340092123\nAddress: D-14, Worli Colony, Mumbai - 400018\nTariff Category: LT-1 Residential\n\nBill Details:\nBilling Period: 01 Feb 2025 to 28 Feb 2025\nPrevious Reading: 14,820 Units\nCurrent Reading: 15,056 Units\nUnits Consumed: 236 Units\n\nCharges:\nEnergy Charges: Rs. 1,652/-\nFixed Charges: Rs. 120/-\nWheeling Charges: Rs. 212/-\nTax & Duty: Rs. 196/-\nTotal Bill Amount: Rs. 2,180/-\nPayment Mode: Online / UPI / Bank Counter\nHelp Line: 1912 (Toll Free)",
+
+"COURIER DELIVERY RECEIPT\nTracking Number: DTDC/MUM/2025/BLR/039182\nBooking Date: 18 March 2025\nExpected Delivery: 21 March 2025\n\nSender Details:\nSender Name: Ms. Kavita Sharma\nAddress: C-204, Andheri East, Mumbai - 400069\nContact: 9821004455\n\nReceiver Details:\nReceiver Name: Mr. Ajay Reddy\nAddress: 45, Koramangala 4th Block, Bengaluru - 560034\nContact: 9844112233\n\nShipment Details:\nPackage Type: Document + Parcel\nWeight: 2.5 kg\nDimensions: 35 x 25 x 10 cm\nContents Declared: Legal Documents + Books\n\nCharges:\nDelivery Charges: Rs. 185/-\nFuel Surcharge: Rs. 25/-\nGST @ 18%: Rs. 37.80\nTotal Amount: Rs. 247.80\nPayment Mode: Prepaid (Online)\nDelivery Status: In Transit — Reached Bengaluru Hub",
+
+"PROPERTY TAX RECEIPT\nReceipt Number: PCMC/TAX/2025/PUN/0078234\nAssessment Year: 2025 – 2026\nReceipt Date: 05 March 2025\n\nMunicipal Corporation: Pimpri-Chinchwad Municipal Corporation\nOffice: Ward Office No. 12, Chinchwad\nContact: 020-27652100 | propertytax@pcmcindia.gov.in\n\nProperty Owner Details:\nOwner Name: Mrs. Lata Vinayak Deshpande\nProperty Account No.: PCMC/12/2025/04532\nAadhar Number: 5678 9012 3456\nContact: 9823447788\n\nProperty Details:\nProperty Address: Plot No. 88, Sector 27, Pradhikaran, Pune - 411044\nProperty Type: Residential — Independent House\nBuilt-up Area: 1,450 sq.ft.\nZone: Zone D — Residential\n\nTax Details:\nGeneral Tax: Rs. 4,200/-\nWater Charges: Rs. 1,800/-\nSewerage Charges: Rs. 900/-\nLighting Charges: Rs. 600/-\nTotal Tax Payable: Rs. 7,500/-\nEarly Payment Discount (5%): Rs. 375/-\nNet Amount Paid: Rs. 7,125/-\nPayment Mode: Online — NEFT",
+
+"INCOME TAX RETURN ACKNOWLEDGEMENT\nAcknowledgement Number: ITR/2025/PUN/AY2024-25/0087234\nFiling Date: 28 July 2024\n\nTaxpayer Details:\nTaxpayer Name: Mrs. Meena Rajesh Kulkarni\nPAN Number: BKSPK7890L\nAssessment Year: 2024 – 2025\nDate of Birth: 03 September 1978\nEmail: meena.kulkarni78@gmail.com\nContact: 9823115566\n\nReturn Details:\nReturn Type: ITR-1 (Sahaj)\nFiling Mode: Online — e-Filing Portal\nTotal Gross Income: Rs. 7,45,000/-\nDeductions under 80C: Rs. 1,50,000/-\nNet Taxable Income: Rs. 5,95,000/-\nTax Payable: Rs. 25,500/-\nTDS Already Deducted: Rs. 22,000/-\nSelf Assessment Tax Paid: Rs. 3,500/-\nRefund/Tax Payable: Nil\nReturn Status: Successfully Filed — Under Processing\ne-Verification: Done via Aadhaar OTP",
+
+"PASSPORT APPLICATION RECEIPT\nApplication Number: PA/2025/MUM/ECR/0034512\nApplication Date: 10 March 2025\n\nApplicant Details:\nApplicant Name: Miss Shreya Anil Deshmukh\nDate of Birth: 22 August 1999\nGender: Female\nPlace of Birth: Aurangabad, Maharashtra\nNationality: Indian\nContact: 9823990011\nEmail: shreya.deshmukh99@gmail.com\nAddress: 14, Shivaji Nagar, Aurangabad - 431001\n\nApplication Details:\nPassport Type: Fresh Application\nBooklet Type: 36 Pages — Normal (Non-ECR)\nVisa Category: Tourist\nFee Paid: Rs. 1,500/-\nPayment Mode: Online — Debit Card\nPayment Reference: PASSPORTINDIA20250310987\n\nAppointment Details:\nAppointment Date: 22 March 2025\nAppointment Time: 10:30 AM — 11:00 AM\nAppointment Centre: PSK Mumbai — Bandra Kurla Complex\nDocuments to Carry: Aadhar, Birth Certificate, Address Proof, 2 Photos",
+
+"MUTUAL FUND ACCOUNT STATEMENT\nStatement Date: 31 March 2025\nFolio Number: MF/HDFC/2025/PUN/001234\n\nInvestor Details:\nInvestor Name: Mr. Rahul Suresh Joshi\nPAN Number: ABCPJ1234K\nEmail: rahul.joshi@gmail.com\nKYC Status: KYC Compliant\n\nHDFC Mid-Cap Opportunities Fund — Regular Growth:\nSIP Amount: Rs. 3,000/- per month\nSIP Start Date: 01 April 2022\nUnits Held: 245.678\nNAV (31 Mar 2025): Rs. 98.24\nCurrent Value: Rs. 24,140.10\nTotal Invested: Rs. 18,000/-\nAbsolute Returns: Rs. 6,140.10 (34.11%)\n\nAxis Bluechip Fund — Direct Growth:\nSIP Amount: Rs. 2,000/- per month\nUnits Held: 187.345\nNAV (31 Mar 2025): Rs. 72.15\nCurrent Value: Rs. 13,516.03\nTotal Invested: Rs. 12,000/-\nAbsolute Returns: Rs. 1,516.03 (12.63%)\n\nCombined Portfolio Value: Rs. 37,656.13\nOverall Returns: Rs. 7,656.13 (25.52%)",
+
+"VEHICLE RC (REGISTRATION CERTIFICATE)\nRC Number: MH-14-2025-0009823\nDate of Issue: 15 March 2025\n\nOwner Details:\nOwner Name: Mr. Mahesh Vitthal Gaikwad\nSon of: Mr. Vitthal Sitaram Gaikwad\nAddress: 7, Parvati Hill, Pune - 411009\nAadhar Number: 6789 0123 4567\n\nVehicle Details:\nRegistration Number: MH-14-EV-9823\nVehicle Type: Private Car\nMake: Tata Motors\nModel: Nexon EV Prime XZ+\nColour: Intensi-Teal\nFuel Type: Electric\nYear of Manufacture: 2025\nEngine Number: NIL (Electric)\nChassis Number: MAT607956PKA12345\nSeating Capacity: 5 (Including Driver)\nUnladen Weight: 1,472 kg\n\nValidity Details:\nRC Valid Till: 14 March 2040 (15 Years)\nFitness Valid Till: 14 March 2040\nInsurance Valid Till: 14 March 2026\nPUC Valid Till: 14 September 2025",
+
+"DRIVING LICENCE RENEWAL RECEIPT\nApplication Number: DL/2025/MH01/RN/009823\nApplication Date: 20 March 2025\n\nApplicant Details:\nApplicant Name: Mr. Sudhir Balkrishna Patil\nDate of Birth: 14 June 1982\nBlood Group: B+\nContact: 9822334455\nEmail: sudhirpatil82@yahoo.com\nAddress: Row House 7, Sahakar Nagar, Pune - 411009\n\nLicence Details:\nExisting DL Number: MH01-20020094321\nDL Issue Date: 22 March 2010\nDL Expiry Date: 21 June 2025\nVehicle Class: LMV (Light Motor Vehicle) + MCWG\n\nRenewal Details:\nRenewal Period: 5 Years\nNew Expiry Date: 13 June 2030\nFee Paid: Rs. 800/-\nPayment Reference: PARIVAHAN/2025/032012345\nProcessing RTO: RTO Pune — MH-12\nStatus: Application Submitted — Smart Card DL dispatched within 7 working days",
+
+"GAS CYLINDER BOOKING RECEIPT\nBooking Reference: HPCL/2025/MUM/CYL/0234512\nBooking Date: 18 March 2025\nDelivery Date: 20 March 2025\n\nDistributor Details:\nDistributor Name: Sai Enterprises LPG Agency\nDistributor Code: HPCL-MUM-D-04532\nAddress: Shop 3, Sion Circle, Mumbai - 400022\nContact: 022-24012345\n\nConsumer Details:\nConsumer Name: Mrs. Rekha Vijay Nair\nConsumer Number: HPCL-MUM-0098234\nRegistered Mobile: 9821334455\nDelivery Address: B-302, Everest Society, Sion East, Mumbai - 400022\nAadhar Number (Last 4): XXXX XXXX 7823\n\nBooking Details:\nCylinder Type: 14.2 kg Domestic LPG\nNumber of Cylinders: 1\nMRP (with subsidy): Rs. 803.50\nHome Delivery Charges: Nil\nTotal Amount Collected: Rs. 803.50\nPayment Mode: Cash\nDelivery Person: Mr. Ganesh Kamble (ID: HPCL-DLV-04532)\nSubsidy Credit: Rs. 0/- (Non-Subsidised Category)"
+];
+
+// =====================================================
+// ===== CAPTCHA GENERATORS (unchanged from original) =
+// =====================================================
+function shuffle(arr){let a=[...arr];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function rand(a){return a[Math.floor(Math.random()*a.length)];}
+function rn(a,b){return Math.floor(Math.random()*(b-a+1))+a;}
+function rPhone(){return "9"+rn(100000000,999999999);}
+function rAadhar(){return rn(2000,9999)+" "+rn(1000,9999)+" "+rn(1000,9999);}
+function rPAN(){const l="ABCDEFGHIJKLMNOPQRSTUVWXYZ";let p="";for(let i=0;i<5;i++)p+=l[rn(0,25)];return p+rn(1000,9999)+l[rn(0,25)];}
+function rDOB(){return `${String(rn(1,28)).padStart(2,'0')}/${String(rn(1,12)).padStart(2,'0')}/${rn(1970,2003)}`;}
+function rEmail(n){const d=["gmail.com","yahoo.com","outlook.com","rediffmail.com"];return n.toLowerCase().replace(/\s+/,'').replace(/[^a-z]/g,'')+rn(10,99)+"@"+rand(d);}
+
+// Build address for Data Entry task
+function gDE(){
+  const nm=rand(NAMES);
+  const num=rn(1,250);
+  const addr=rand(HOUSE_TYPES)+" "+num+", "+rand(WINGS)+", "+rand(SOCIETIES_DE)+", "+rand(GALIS_DE)+", "+rand(AREAS_DE)+", "+rand(NEAR_DE);
+  return{name:nm,phone:rPhone(),email:rEmail(nm),aadhar:rAadhar(),pan:rPAN(),qual:rand(QUALS),
+    address:addr,city:rand(CITIES),state:rand(STATES),pin:rn(100000,999999),dob:rDOB(),
+    gender:rand(GENDERS),salary:"Rs "+rn(15,150)*1000+"/month"};
+}
+
+// Build address for Form Filling task
+function gFF(){
+  const nm=rand(NAMES);
+  const num=rn(1,250);
+  const addr=rand(HOUSE_TYPES)+" "+num+", "+rand(WINGS)+", "+rand(SOCIETIES_FF)+", "+rand(AREAS_FF)+", "+rand(NEAR_FF);
+  return{name:nm,email:rEmail(nm),phone:rPhone(),altPhone:rPhone(),aadhar:rAadhar(),pan:rPAN(),
+    city:rand(CITIES),state:rand(STATES),pin:rn(100000,999999),dob:rDOB(),
+    gender:rand(GENDERS),nationality:rand(NATIONALS),company:rand(COMPANIES),
+    exp:rn(0,20)+" Years",qual:rand(QUALS),marital:rand(MARITAL),address:addr};
+}
+
+let TTEXTS=[];
+function buildTypingTexts(){
+  const shuffled=[...TYPING_POOL].sort(()=>Math.random()-0.5);
+  TTEXTS=[];
+  for(let i=0;i<10;i++) TTEXTS.push({text:shuffled[i%shuffled.length]});
+}
+
+const GRAMMAR=[
+  {wrong:"The team of engineers were working on multiple project simultaneously since last year and have achieved many success. They was assigned to develop a new software module for the clients. The manager have told everyone that the deadline are next Friday. Each member of the team need to complete their individual task before the final review meeting. The project, which were initially delayed, are now progressing well and everyone are hopeful about its completion. The senior developer have submitted his part of the code but there are still some bugs that needs to be fix. The testing department have already begin their work on the earlier modules. Neither the project lead nor the team members was informed about the change in requirements. The client have requested several modification to the original design and the team are now working on implementing it. The management have decided to extend the deadline by one week so that all the issue can be properly address and the final product meets the expected quality standards.",errors:["Subject-verb agreement","plural noun","verb tense","passive voice"],correct:"The team of engineers was working on multiple projects simultaneously since last year and has achieved many successes. They were assigned to develop a new software module for the clients. The manager has told everyone that the deadline is next Friday. Each member of the team needs to complete their individual task before the final review meeting. The project, which was initially delayed, is now progressing well and everyone is hopeful about its completion. The senior developer has submitted his part of the code but there are still some bugs that need to be fixed. The testing department has already begun their work on the earlier modules. Neither the project lead nor the team members were informed about the change in requirements. The client has requested several modifications to the original design and the team is now working on implementing it. The management has decided to extend the deadline by one week so that all the issues can be properly addressed and the final product meets the expected quality standards.",errorPositions:["'were working' → 'was working'","'project' → 'projects'","'have achieved' → 'has achieved'","'They was' → 'They were'","'manager have' → 'manager has'","'deadline are' → 'deadline is'","'need to complete' → 'needs to complete'","'were initially delayed' → 'was initially delayed'","'needs to be fix' → 'need to be fixed'","'have already begin' → 'has already begun'"]},
+  {wrong:"Each of the student have submitted their assignment on time and the teacher are very happy with the result. The principal have also praised the class for their effort and dedication. Neither the students nor the teacher were absent on the day of the submission. Everyone in the school know about the excellent performance of this particular class. The assignment, which was suppose to be difficult, were completed by all the students without any assistance. The headmaster have personally visited the classroom to congratulate the students and the teachers. Many of the student who had struggle earlier in the year have now show remarkable improvement in their performance. The school board are planning to give a special award to the class for their outstanding achievement. Each of the teacher in the department have contribute significantly to the success of the students. It is clear that hard work and dedication always pays off and everyone in the school community are proud of what this class have accomplished this academic year.",errors:["Subject-verb agreement","verb form","pronoun reference","noun plural"],correct:"Each of the students has submitted their assignment on time and the teacher is very happy with the results. The principal has also praised the class for their effort and dedication. Neither the students nor the teacher was absent on the day of the submission. Everyone in the school knows about the excellent performance of this particular class. The assignment, which was supposed to be difficult, was completed by all the students without any assistance. The headmaster has personally visited the classroom to congratulate the students and the teachers. Many of the students who had struggled earlier in the year have now shown remarkable improvement in their performance. The school board is planning to give a special award to the class for their outstanding achievement. Each of the teachers in the department has contributed significantly to the success of the students. It is clear that hard work and dedication always pay off and everyone in the school community is proud of what this class has accomplished this academic year.",errorPositions:["'student' → 'students'","'have submitted' → 'has submitted'","'teacher are' → 'teacher is'","'principal have' → 'principal has'","'was suppose' → 'was supposed'","'were completed' → 'was completed'","'headmaster have' → 'headmaster has'","'had struggle' → 'had struggled'","'have now show' → 'have now shown'","'school board are' → 'school board is'"]},
+  {wrong:"Neither the manager nor the employees was aware about the new policy that have been implement by the company. The HR department have sent a circular but most of the staff did not received it on time. The employees, who was supposed to attend the training, did not showed up. The management are now planning to conduct a special session for all the staffs. Everyone in the office need to understand the new guidelines careful before the end of this month. The new policy include several changes to the leave rules and the attendance system that effects all department. Each of the employee are required to sign a declaration form confirming that they have read and understood the policy thorough. The director of the company have express his disappointment over the lack of awareness among the workers. Neither the department heads nor the HR manager were able to provide a satisfactory explanation for the confusion. The company have now decide to make the policy training mandatory for everyone and failure to attend will results in disciplinary actions.",errors:["Subject-verb agreement","verb form","preposition","adverb form","noun plural"],correct:"Neither the manager nor the employees were aware of the new policy that has been implemented by the company. The HR department has sent a circular but most of the staff did not receive it on time. The employees, who were supposed to attend the training, did not show up. The management is now planning to conduct a special session for all the staff. Everyone in the office needs to understand the new guidelines carefully before the end of this month. The new policy includes several changes to the leave rules and the attendance system that affects all departments. Each of the employees is required to sign a declaration form confirming that they have read and understood the policy thoroughly. The director of the company has expressed his disappointment over the lack of awareness among the workers. Neither the department heads nor the HR manager was able to provide a satisfactory explanation for the confusion. The company has now decided to make the policy training mandatory for everyone and failure to attend will result in disciplinary actions.",errorPositions:["'was aware' → 'were aware'","'aware about' → 'aware of'","'have been implement' → 'has been implemented'","'HR department have' → 'HR department has'","'did not received' → 'did not receive'","'who was supposed' → 'who were supposed'","'did not showed' → 'did not show'","'management are' → 'management is'","'understand the new guidelines careful' → 'carefully'","'each of the employee are' → 'each of the employees is'"]},
+  {wrong:"The committee have decided to postpone the annual event and the participants was inform through email yesterday. Many of the attendees who was registered for the event did not received the notification. The organizing team are currently working to reschedule the date and the new venue are being finalized. The chairman of the committee have personally apologize to all the participants for the inconvenience. A revised schedule will be send to everyone by the end of this weeks. The event were originally planned to celebrate the company's ten years of operation and included many special activities for the staffs. Each of the department head were asked to submit a list of employee who wishes to attend the rescheduled event. The logistics team have already book the catering and the decoration but the arrangements now need to be postpone. Neither the finance team nor the operations manager were consulted before the original date were fixed. The management is determine to ensure that the event is conduct in the most professional and memorable manner possible despite the recent setbacks.",errors:["Subject-verb agreement","passive voice","verb tense","noun plural"],correct:"The committee has decided to postpone the annual event and the participants were informed through email yesterday. Many of the attendees who were registered for the event did not receive the notification. The organizing team is currently working to reschedule the date and the new venue is being finalized. The chairman of the committee has personally apologized to all the participants for the inconvenience. A revised schedule will be sent to everyone by the end of this week. The event was originally planned to celebrate the company's ten years of operation and included many special activities for the staff. Each of the department heads was asked to submit a list of employees who wish to attend the rescheduled event. The logistics team has already booked the catering and the decorations but the arrangements now need to be postponed. Neither the finance team nor the operations manager was consulted before the original date was fixed. The management is determined to ensure that the event is conducted in the most professional and memorable manner possible despite the recent setbacks.",errorPositions:["'committee have' → 'committee has'","'participants was inform' → 'participants were informed'","'attendees who was' → 'attendees who were'","'did not received' → 'did not receive'","'organizing team are' → 'organizing team is'","'new venue are' → 'new venue is'","'chairman have' → 'chairman has'","'will be send' → 'will be sent'","'end of this weeks' → 'end of this week'","'event were' → 'event was'"]},
+  {wrong:"One of the most important factor in achieving success are having a clear goal and working hardly every day. A person who work hard and are dedicated to their aim will surely achieve great heights in their life. Success does not comes easily and one have to face many challenges before they reaches their goal. The peoples who have achieve great things in life always say that patient and hard work is the key. Everyone should try their best and never loose hope even in the most difficult situations. A student who study regular and maintain a disciplined routine always perform better than those who waste their times. The teachers and the school has an important role to play in the development of a child's character and abilities. Each of the successful person in the world have at some point failed and have learn from their mistakes. Hard work, when it is combine with smart planning and a positive attitude, always lead to long-term achievements. The society as a whole need to encourage young peoples to pursue their dreams with confidence and never allow failures to define their future potential.",errors:["Subject-verb agreement","adverb form","plural noun","verb form","preposition"],correct:"One of the most important factors in achieving success is having a clear goal and working hard every day. A person who works hard and is dedicated to their aim will surely achieve great heights in their life. Success does not come easily and one has to face many challenges before they reach their goal. The people who have achieved great things in life always say that patience and hard work are the key. Everyone should try their best and never lose hope even in the most difficult situations. A student who studies regularly and maintains a disciplined routine always performs better than those who waste their time. The teachers and the school have an important role to play in the development of a child's character and abilities. Each of the successful people in the world has at some point failed and has learned from their mistakes. Hard work, when it is combined with smart planning and a positive attitude, always leads to long-term achievements. The society as a whole needs to encourage young people to pursue their dreams with confidence and never allow failures to define their future potential.",errorPositions:["'factor' → 'factors'","'are having' → 'is having'","'working hardly' → 'working hard'","'who work hard' → 'who works hard'","'does not comes' → 'does not come'","'one have' → 'one has'","'before they reaches' → 'before they reach'","'The peoples' → 'The people'","'have achieve' → 'have achieved'","'never loose hope' → 'never lose hope'"]}
+];
+
+const UPPER='ABCDEFGHJKLMNPQRSTUVWXYZ';
+const LOWER='abcdefghjkmnpqrstuvwxyz';
+const DIGITS='23456789';
+const ALLCHARS=UPPER+LOWER+DIGITS;
+
+function rStr(len,chars){let s='';for(let i=0;i<len;i++)s+=chars[rn(0,chars.length-1)];return s;}
+function rMixed(len){let s=rStr(1,UPPER)+rStr(1,LOWER)+rStr(1,DIGITS);s+=rStr(len-3,ALLCHARS);return shuffle(s.split('')).join('');}
+
+const CAPTCHA_GENERATORS=[
+  function(){const txt=rMixed(rn(5,7));return{captchaType:'normal',display:txt,question:'Type the exact characters shown above (case-sensitive).',answer:txt,hint:'Copy each character exactly — watch uppercase/lowercase!'};},
+  function(){const txt=rMixed(rn(5,7));const rev=txt.split('').reverse().join('');return{captchaType:'reverse',display:txt,question:'Enter this text in REVERSE ORDER.',answer:rev,hint:`Reversed: read the text right to left.`};},
+  function(){const txt=rMixed(rn(5,8));const ans=txt.split('').filter(c=>c>='A'&&c<='Z').join('');return{captchaType:'uppercase',display:txt,question:'Enter ONLY the UPPERCASE letters from the text above.',answer:ans,hint:`Look for capital letters only (skip numbers and lowercase).`};},
+  function(){const txt=rMixed(rn(6,8));const ans=txt.split('').filter(c=>c>='0'&&c<='9').join('');return{captchaType:'filter_num',display:txt,question:'Enter ONLY the NUMBERS from the text above.',answer:ans,hint:`Pick out only digit characters.`};},
+  function(){const txt=rMixed(rn(6,8));const ans=txt.split('').filter(c=>(c>='A'&&c<='Z')||(c>='a'&&c<='z')).join('');return{captchaType:'filter_alpha',display:txt,question:'Enter ONLY the ALPHABET letters (no numbers) from the text above.',answer:ans,hint:`Remove all digit characters, keep all letters.`};},
+  function(){const txt=rMixed(rn(5,8));const nums=txt.split('').filter(c=>c>='0'&&c<='9').map(Number);const sum=nums.reduce((a,b)=>a+b,0);return{captchaType:'math_text',display:txt,question:'Add all numbers found in the text and enter the result.',answer:String(sum),hint:`Find digits: ${nums.join(', ')} → Sum = ${sum}`};},
+  function(){const txt=rStr(rn(6,8),UPPER+DIGITS);const ans=txt.split('').filter((_,i)=>i%2===0).join('');return{captchaType:'alternate',display:txt,question:'Enter ALTERNATE characters starting from 1st (positions 1, 3, 5…).',answer:ans,hint:`Take every other character starting from position 1.`};},
+  function(){const txt=rMixed(rn(7,9));const p2=txt[1]||'',p4=txt[3]||'',p6=txt[5]||'';const ans=p2+p4+p6;return{captchaType:'position',display:txt,question:'Enter the 2nd, 4th, and 6th characters of the text above.',answer:ans,hint:`Char 2="${p2}", Char 4="${p4}", Char 6="${p6}"`};},
+  function(){const letters=rStr(rn(4,6),UPPER);const ans=letters.split('').sort().join('');return{captchaType:'sort',display:letters,question:'Arrange the letters in ALPHABETICAL ORDER.',answer:ans,hint:`Sort A→Z: ${ans}`};},
+  function(){const txt=rMixed(rn(5,7));const rev=txt.split('').reverse().join('');const ans=rev.split('').filter(c=>!(c>='0'&&c<='9')).join('');return{captchaType:'advanced',display:txt,question:'Step 1: Reverse the text. Step 2: Remove all numbers from the reversed text. Enter the result.',answer:ans,hint:`Reversed="${rev}" → Remove digits → "${ans}"`};},
+  function(){const confusables='O0l1IA8B5S2Z';let txt='';for(let i=0;i<rn(5,7);i++)txt+=confusables[rn(0,confusables.length-1)];const ans=txt.split('').filter(c=>(c>='A'&&c<='Z')||(c>='a'&&c<='z')).join('');return{captchaType:'confuse',display:txt,question:'Enter ONLY the ALPHABET characters (letters only, no digits).',answer:ans,hint:`O, l, I, A, B, S, Z are letters. 0, 1, 2, 5, 8 are numbers.`};},
+  function(){const ops=['+','-','*'];const numCount=rn(4,5);const nums=[];for(let i=0;i<numCount;i++)nums.push(rn(2,15));const opList=[];for(let i=0;i<numCount-1;i++)opList.push(ops[rn(0,2)]);let result=nums[0];let exprParts=[String(nums[0])];for(let i=0;i<opList.length;i++){const op=opList[i];let nextNum=nums[i+1];if(op==='-'&&result-nextNum<0)nextNum=rn(1,result);if(op==='+')result=result+nextNum;else if(op==='-')result=result-nextNum;else if(op==='*')result=result*nextNum;exprParts.push(op,String(nextNum));}const expr=exprParts.join(' ');return{captchaType:'long_calc',display:expr,question:'Solve this calculation and enter the final result.',answer:String(result),hint:`Solve step by step: ${exprParts.join(' ')} = ${result}`};}
+];
+
+const CAPTCHA_TYPE_LABELS={normal:'🔤 Distorted Text',reverse:'🔄 Reverse Text',uppercase:'🔀 Mixed Case',filter_num:'🔢 Filter Numbers',filter_alpha:'🔡 Filter Alphabets',math_text:'➕ Math + Text',alternate:'🔁 Alternate Characters',position:'🔍 Position-Based',sort:'🔃 Alphabetical Sort',advanced:'🧠 Advanced Multi-Step',confuse:'👁️ Similar Characters',long_calc:'🧮 Long Calculation'};
+
+let captchaPool=[];let captchaIdx=0;
+function genOneCaptcha(){const roll=Math.random();let gen;if(roll<0.12)gen=CAPTCHA_GENERATORS[0];else if(roll<0.22)gen=CAPTCHA_GENERATORS[1];else if(roll<0.32)gen=CAPTCHA_GENERATORS[2];else{const idx=rn(3,11);gen=CAPTCHA_GENERATORS[Math.min(idx,CAPTCHA_GENERATORS.length-1)];}return gen();}
+function resetCaptchaPool(){captchaPool=[];let lastType='';for(let i=0;i<100;i++){let c,tries=0;do{c=genOneCaptcha();tries++;}while(c.captchaType===lastType&&tries<8);lastType=c.captchaType;captchaPool.push(c);}captchaIdx=0;}
+function gCap(){if(captchaIdx>=captchaPool.length){resetCaptchaPool();}return captchaPool[captchaIdx++];}
+
+// =====================================================
+// ===== TASK DEFINITIONS =====
+// =====================================================
+const TDEFS=[
+  {id:"typing",  name:"PDF to Word Typing",  emoji:"⌨️",items:10,timeMin:60,desc:"Read the 8-10 line content shown on each page and type it exactly in the box below. Minimum 100 words per page required.",color:"#7C3AED",num:1,hcls:""},
+  {id:"captcha", name:"Captcha Filling",     emoji:"🔢",items:100,timeMin:60,desc:"Solve 100 dynamic CAPTCHA challenges — 10 types including reverse, filter, sort, position, math & more!",color:"#0891B2",num:2,hcls:"blue"},
+  {id:"form",    name:"Form Filling",        emoji:"🧾",items:10,timeMin:60,desc:"Complete 10 online forms with the provided reference data carefully and accurately.",color:"#059669",num:3,hcls:"green"},
+  {id:"data",    name:"Data Entry",          emoji:"📊",items:10,timeMin:60,desc:"Fill in 10 data entry forms accurately by typing the required information in each field.",color:"#EA580C",num:4,hcls:"orange"},
+  {id:"grammar", name:"Grammar Correction",  emoji:"✍️",items:10,timeMin:60,desc:"Read 10 paragraphs with grammatical errors and type the fully corrected versions.",color:"#7C3AED",num:5,hcls:""},
+];
+
+const HOWTO={
+  typing:["Read the content shown in the yellow box carefully.","Type the exact same content in the text box below — word for word.","You must type at least 100 words to pass this item.","Do NOT copy-paste — type manually using the keyboard.","Spelling and accuracy matter — type carefully."],
+  captcha:["10 different CAPTCHA types appear randomly — read the question carefully each time.","For text captcha: type exact characters shown (case-sensitive).","For reverse/filter/sort: follow the specific instruction shown in the yellow box.","For Long Calculation: solve the full expression (with +, −, ×) and enter only the final number.","For advanced captcha: complete each step in the exact order given.","Live color feedback shows if your answer is correct before saving."],
+  form:["Read all reference data in the blue box at the top.","Fill each field exactly as shown in the reference (spelling, spacing, case).","Do not skip any field marked with a red asterisk (*).","Type manually — copy-paste is disabled.","Click Save when all fields are filled to see your score."],
+  data:["Study the reference data card at the top of each item.","Type each value exactly as shown — including spaces and formats.","Pay special attention to Aadhar, PAN, DOB, and PIN formats.","All fields are required — do not leave any blank.","Click Save to check your accuracy for that item."],
+  grammar:["Read the incorrect paragraph carefully — error types are shown below.","Identify all grammatical mistakes.","Type the fully corrected paragraph in the text box below.","Do not change the meaning — only fix grammar errors.","Your answer must be at least 13 characters to be accepted."]
+};
+
+// =====================================================
+// ===== STATE =====
+// =====================================================
+let CT=null,TI=null,SL=3600,ST=null,SI={},TN=0,ID=[],ERR_LOG={};
+
+// =====================================================
+// ===== MENU =====
+// =====================================================
+function renderMenu(){
+  document.getElementById('taskCards').innerHTML=TDEFS.map(t=>`
+    <div class="task-card">
+      <div class="task-card-top" style="background:${t.color};"></div>
+      <div class="task-card-body">
+        <h3>${t.name}</h3>
+        <p>${t.desc}</p>
+        <div class="task-card-meta">
+          <div class="task-num" style="background:${t.color};">${t.num}</div>
+          <button class="start-btn" style="background:${t.color};" onclick="openTask('${t.id}')">▷ Start Task</button>
+        </div>
+      </div>
+    </div>`).join('');
+}
+
+function openTask(id){
+  CT=TDEFS.find(t=>t.id===id);if(!CT)return;
+  SI={};ID=[];TN=CT.items;SL=CT.timeMin*60;ST=Date.now();ERR_LOG={};
+  if(CT.id==='captcha')resetCaptchaPool();
+  if(CT.id==='typing')buildTypingTexts();
+  document.getElementById('taskTitle').textContent=CT.name;
+  document.getElementById('taskSubtitle').textContent=`Demo Task • ${CT.items} Items`;
+  document.getElementById('mainMenu').style.display='none';
+  const ta=document.getElementById('taskArea');ta.style.display='flex';ta.style.flexDirection='column';
+  const hw=HOWTO[CT.id]||[];
+  document.getElementById('taskHowTo').innerHTML=hw.length?`<div class="howto-box" style="margin:0 16px 4px;"><h5>📌 How to do this task:</h5><ol>${hw.map(s=>`<li>${s}</li>`).join('')}</ol></div>`:'';
+  upProg();startTimer();renderItems();
+}
+
+function goBack(){if(confirm("Are you sure you want to leave this task?")){clearInterval(TI);goHome();}}
+function goHome(){document.getElementById('resultModal').classList.remove('show');document.getElementById('taskArea').style.display='none';document.getElementById('mainMenu').style.display='flex';clearInterval(TI);}
+
+// =====================================================
+// ===== TIMER =====
+// =====================================================
+function startTimer(){clearInterval(TI);TI=setInterval(()=>{SL--;upTimer();if(SL<=0){clearInterval(TI);submitAll();}},1000);}
+function upTimer(){const h=Math.floor(SL/3600),m=Math.floor((SL%3600)/60),s=SL%60;document.getElementById('timerDisplay').textContent=`${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;}
+function upProg(){document.getElementById('progressChip').textContent=`✅ ${Object.keys(SI).length}/${TN}`;}
+
+// =====================================================
+// ===== NO COPY-PASTE =====
+// =====================================================
+function lockField(el){
+  el.addEventListener('paste',e=>{e.preventDefault();showToast("Paste is not allowed in this task.");});
+  el.addEventListener('copy',e=>{e.preventDefault();});
+  el.addEventListener('cut',e=>{e.preventDefault();});
+  el.addEventListener('contextmenu',e=>{e.preventDefault();});
+  el.addEventListener('drop',e=>{e.preventDefault();});
+}
+
+// =====================================================
+// ===== RENDER ITEMS =====
+// =====================================================
+function renderItems(){
+  const c=document.getElementById('itemsContainer');c.innerHTML='';
+  for(let i=0;i<TN;i++){
+    const alt=i%2===1;
+    const w=document.createElement('div');w.className='item-wrapper';w.id='iw'+i;
+    let hcls=CT.hcls||(alt?'blue':'');
+    let hdr=`<div class="item-header ${hcls}"><div class="item-num">${i+1}</div><h4>Item #${i+1}</h4><button class="save-btn" id="sb${i}" onclick="saveItem(${i})">💾 Save</button></div>`;
+    let body='';
+    if(CT.id==='data'){const d=gDE();ID[i]=d;body=bDE(i,d);}
+    else if(CT.id==='form'){const d=gFF();ID[i]=d;body=bFF(i,d);}
+    else if(CT.id==='grammar'){const d=rand(GRAMMAR);ID[i]=d;body=bGR(i,d);}
+    else if(CT.id==='captcha'){const d=gCap();ID[i]=d;body=bCAP(i,d);}
+    else if(CT.id==='typing'){const d=TTEXTS[i%TTEXTS.length];ID[i]=d;body=bTY(i,d);}
+    w.innerHTML=hdr+`<div class="item-body">${body}</div>`;c.appendChild(w);
+    
+    // Explicitly attach auto-expand to every textarea immediately after appending
+    w.querySelectorAll('textarea').forEach(ta => {
+      // Set initial height
+      ta.style.height = 'auto';
+      ta.style.height = ta.scrollHeight + 'px';
+      
+      // Expand on input
+      ta.addEventListener('input', function() {
+        this.style.height = 'auto';
+        this.style.height = this.scrollHeight + 'px';
+      });
+    });
+
+  }
+  c.querySelectorAll('input,textarea').forEach(el=>lockField(el));
+  if(CT.id==='typing')for(let i=0;i<TN;i++){const t=document.getElementById('tt'+i);if(t)t.addEventListener('input',()=>upWC(i));}
+}
+
+function fl(id,lb){return `<div class="field-group"><label>${lb} <span>*</span></label><textarea id="${id}" placeholder="Type here..." rows="1" autocomplete="off"></textarea></div>`;}
+
+function bDE(i,d){
+  return `<div class="ref-box"><h5>📋 Reference Data — Type Exactly As Shown:</h5><div class="ref-grid">
+    <div class="ref-item"><strong>Full Name</strong><span>${d.name}</span></div>
+    <div class="ref-item"><strong>Phone</strong><span>${d.phone}</span></div>
+    <div class="ref-item wide"><strong>Email</strong><span>${d.email}</span></div>
+    <div class="ref-item"><strong>Aadhar</strong><span>${d.aadhar}</span></div>
+    <div class="ref-item"><strong>PAN</strong><span>${d.pan}</span></div>
+    <div class="ref-item wide"><strong>Qualification</strong><span>${d.qual}</span></div>
+    <div class="ref-item address-item"><strong>Address</strong><span>${d.address}</span></div>
+    <div class="ref-item"><strong>City</strong><span>${d.city}</span></div>
+    <div class="ref-item"><strong>State</strong><span>${d.state}</span></div>
+    <div class="ref-item"><strong>Pin Code</strong><span>${d.pin}</span></div>
+    <div class="ref-item"><strong>DOB</strong><span>${d.dob}</span></div>
+    <div class="ref-item"><strong>Gender</strong><span>${d.gender}</span></div>
+    <div class="ref-item"><strong>Salary</strong><span>${d.salary}</span></div>
+  </div></div>
+  <div class="fields-grid">
+    ${fl('dn'+i,"Full Name")}${fl('dp'+i,"Phone Number")}${fl('de'+i,"Email Address")}
+    ${fl('da'+i,"Aadhar Number")}${fl('dpa'+i,"PAN Number")}${fl('dq'+i,"Qualification")}
+    ${fl('dad'+i,"Full Address")}${fl('dc'+i,"City")}${fl('ds'+i,"State")}
+    ${fl('dpc'+i,"Pin Code")}${fl('ddo'+i,"DOB")}${fl('dg'+i,"Gender")}${fl('dsl'+i,"Salary")}
+  </div>`;}
+
+function bFF(i,d){
+  return `<div class="ref-box"><h5>📋 Reference Data — Type Exactly As Shown:</h5><div class="ref-grid">
+    <div class="ref-item"><strong>Full Name</strong><span>${d.name}</span></div>
+    <div class="ref-item wide"><strong>Email</strong><span>${d.email}</span></div>
+    <div class="ref-item"><strong>Phone</strong><span>${d.phone}</span></div>
+    <div class="ref-item"><strong>Alt Phone</strong><span>${d.altPhone}</span></div>
+    <div class="ref-item"><strong>Aadhar</strong><span>${d.aadhar}</span></div>
+    <div class="ref-item"><strong>PAN</strong><span>${d.pan}</span></div>
+    <div class="ref-item"><strong>City</strong><span>${d.city}</span></div>
+    <div class="ref-item"><strong>State</strong><span>${d.state}</span></div>
+    <div class="ref-item"><strong>Pin Code</strong><span>${d.pin}</span></div>
+    <div class="ref-item"><strong>DOB</strong><span>${d.dob}</span></div>
+    <div class="ref-item"><strong>Gender</strong><span>${d.gender}</span></div>
+    <div class="ref-item"><strong>Nationality</strong><span>${d.nationality}</span></div>
+    <div class="ref-item"><strong>Company</strong><span>${d.company}</span></div>
+    <div class="ref-item"><strong>Experience</strong><span>${d.exp}</span></div>
+    <div class="ref-item wide"><strong>Qualification</strong><span>${d.qual}</span></div>
+    <div class="ref-item"><strong>Marital Status</strong><span>${d.marital}</span></div>
+    <div class="ref-item address-item"><strong>Address</strong><span>${d.address}</span></div>
+  </div></div>
+  <div class="fields-grid">
+    ${fl('fn'+i,"Full Name")}${fl('fe'+i,"Email")}${fl('fp'+i,"Phone")}${fl('fap'+i,"Alt Phone")}
+    ${fl('fa'+i,"Aadhar")}${fl('fpn'+i,"PAN")}${fl('fc'+i,"City")}${fl('fst'+i,"State")}
+    ${fl('fpc'+i,"Pin Code")}${fl('fd'+i,"DOB")}${fl('fg'+i,"Gender")}${fl('fnt'+i,"Nationality")}
+    ${fl('fco'+i,"Company")}${fl('fex'+i,"Experience")}${fl('fq'+i,"Qualification")}${fl('fm'+i,"Marital Status")}
+    <div class="field-group full"><label>Full Address <span>*</span></label><textarea id="fat${i}" placeholder="Type here..." rows="1" autocomplete="off"></textarea></div>
+  </div>`;}
+
+function bGR(i,d){
+  return `<div class="grammar-wrong"><div class="grammar-wrong-title">❌ Incorrect Text:</div><p style="line-height:1.9;">${d.wrong}</p>
+    <div style="display:flex;flex-wrap:wrap;gap:5px;margin-top:8px;"><span style="color:var(--red);font-size:0.73rem;font-weight:700;">Error Types:</span>${d.errors.map(e=>`<span class="error-tag">${e}</span>`).join('')}</div></div>
+  <div style="color:var(--purple);font-weight:700;font-size:0.78rem;margin-bottom:6px;">✅ Write the fully corrected version below:</div>
+  <textarea class="grammar-textarea" id="gr${i}" placeholder="Type the corrected paragraph here..."></textarea>`;}
+
+function bCAP(i,d){
+  const typeLabel=CAPTCHA_TYPE_LABELS[d.captchaType]||'🔐 CAPTCHA';
+  const typeColors={normal:'#7C3AED',reverse:'#0891B2',uppercase:'#059669',filter_num:'#EA580C',filter_alpha:'#D97706',math_text:'#DC2626',alternate:'#0D9488',position:'#6D28D9',sort:'#BE185D',advanced:'#1E40AF',confuse:'#B45309',long_calc:'#047857'};
+  const bgCol=typeColors[d.captchaType]||'#7C3AED';
+  let stepsHtml='';
+  if(d.captchaType==='advanced'){stepsHtml=`<div style="background:#EFF6FF;border:1.5px solid #BFDBFE;border-radius:9px;padding:10px 12px;margin-bottom:10px;font-size:0.75rem;color:#1E40AF;font-weight:700;"><div style="margin-bottom:4px;">📌 Step 1: Reverse the text shown above.</div><div>📌 Step 2: Remove all number digits from the reversed result.</div></div>`;}
+  if(d.captchaType==='sort'){stepsHtml=`<div style="background:#FDF4FF;border:1.5px solid #E9D5FF;border-radius:9px;padding:10px 12px;margin-bottom:10px;font-size:0.75rem;color:#6D28D9;font-weight:700;">📌 Sort all letters from A to Z in alphabetical order.</div>`;}
+  if(d.captchaType==='long_calc'){stepsHtml=`<div style="background:#ECFDF5;border:1.5px solid #6EE7B7;border-radius:9px;padding:10px 12px;margin-bottom:10px;font-size:0.75rem;color:#065F46;font-weight:700;">📌 Solve left to right. Enter only the final number.</div>`;}
+  const isCalc=d.captchaType==='long_calc';
+  return `
+  <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px;align-items:center;">
+    <span style="background:${bgCol};color:#fff;padding:4px 12px;border-radius:7px;font-size:0.73rem;font-weight:800;">${typeLabel}</span>
+    <span class="badge badge-red">Case Sensitive</span>
+    <span style="background:#F1F5F9;color:var(--text-muted);padding:4px 10px;border-radius:7px;font-size:0.7rem;font-weight:700;">Item ${i+1} of ${TN}</span>
+  </div>
+  <div class="captcha-box" style="${isCalc?'background:linear-gradient(135deg,#ECFDF5,#D1FAE5);border-color:#6EE7B7;':''}">
+    <div style="position:absolute;inset:0;background:repeating-linear-gradient(${rn(30,60)}deg,transparent,transparent 6px,rgba(0,0,0,0.025) 6px,rgba(0,0,0,0.025) 12px);pointer-events:none;"></div>
+    <div style="position:absolute;top:8px;right:10px;font-size:0.62rem;color:${bgCol};font-weight:800;opacity:0.6;text-transform:uppercase;letter-spacing:0.5px;">${typeLabel.replace(/[^\w\s]/g,'').trim()}</div>
+    <div class="captcha-text" style="letter-spacing:${isCalc?'4px':d.captchaType==='sort'?'6px':'8px'};text-decoration:none;font-size:${isCalc?'1.55rem':d.display.length>7?'1.6rem':'2rem'};color:${isCalc?'#065F46':'var(--text)'};filter:none;">${d.display}</div>
+  </div>
+  ${stepsHtml}
+  <div style="background:#FFFBEB;border:1.5px solid #FCD34D;border-radius:9px;padding:10px 14px;margin-bottom:10px;">
+    <div style="font-size:0.8rem;font-weight:800;color:#92400E;">❓ ${d.question}</div>
+  </div>
+  <input type="text" id="cp${i}" placeholder="Type your answer here..." style="width:100%;padding:11px 14px;border:2px solid var(--border);border-radius:10px;font-family:'Space Mono',monospace;font-size:1rem;outline:none;letter-spacing:2px;transition:border-color 0.15s;" autocomplete="off" oninput="liveCheckCap(${i})">
+  <div id="cph${i}" style="font-size:0.72rem;color:var(--text-muted);margin-top:5px;font-weight:600;"></div>`;}
+
+function bTY(i,d){
+  const lines=d.text.split('\n');
+  const linesHtml=lines.map(l=>l.trim()===''?'<br>':`<div style="margin:1px 0;font-size:0.84rem;color:#1E293B;font-family:'Space Mono',monospace;line-height:1.7;">${escHtml(l)}</div>`).join('');
+  return `
+  <div style="background:#FFFBEB;border:2px solid #FCD34D;border-radius:12px;padding:0;margin-bottom:14px;overflow:hidden;">
+    <div style="background:#FCD34D;padding:8px 14px;display:flex;align-items:center;gap:8px;">
+      <span style="font-size:0.82rem;">📋</span>
+      <span style="font-size:0.78rem;font-weight:800;color:#92400E;">Content to type:</span>
+    </div>
+    <div style="padding:14px 16px;">${linesHtml}</div>
+  </div>
+  <div style="color:var(--purple);font-weight:700;font-size:0.78rem;margin-bottom:6px;">✍️ Type the content here (exactly as shown above):</div>
+  <textarea class="typing-textarea" id="tt${i}" placeholder="Start typing here..."></textarea>
+  <div class="word-counter" id="wc${i}">0 words</div>`;}
+
+function upWC(i){const t=document.getElementById('tt'+i),w=document.getElementById('wc'+i);if(!t||!w)return;const n=t.value.trim().split(/\s+/).filter(x=>x.length>0).length;w.textContent=n+" words";w.className='word-counter'+(n>=100&&n<=500?' good':n>500?' warn':'');}
+
+function liveCheckCap(i){
+  const d=ID[i];if(!d)return;
+  const inp=document.getElementById('cp'+i);
+  const hint=document.getElementById('cph'+i);
+  if(!inp||!hint)return;
+  const val=inp.value;
+  if(val.length===0){hint.textContent='';inp.style.borderColor='var(--border)';return;}
+  const ok=val===d.answer;
+  inp.style.borderColor=ok?'var(--green)':'var(--red)';
+  hint.style.color=ok?'var(--green)':'var(--red)';
+  hint.textContent=ok?'✅ Correct! Click Save to record.':'❌ Not matching yet — keep trying.';
+}
+
+// =====================================================
+// ===== SAVE ITEM — FIXED COMPARISON LOGIC =====
+// =====================================================
+function saveItem(i){
+  const d=ID[i];let cor=0,tot=0,lbl="Correct",wds=undefined;
+  let errors=[];
+
+  if(CT.id==='data'){
+    const fls=[
+      ['dn'+i,d.name,"Full Name"],['dp'+i,d.phone,"Phone Number"],['de'+i,d.email,"Email Address"],
+      ['da'+i,d.aadhar,"Aadhar Number"],['dpa'+i,d.pan,"PAN Number"],['dq'+i,d.qual,"Qualification"],
+      ['dad'+i,d.address,"Full Address"],['dc'+i,d.city,"City"],['ds'+i,d.state,"State"],
+      ['dpc'+i,String(d.pin),"Pin Code"],['ddo'+i,d.dob,"DOB"],['dg'+i,d.gender,"Gender"],['dsl'+i,d.salary,"Salary"]
+    ];
+    fls.forEach(([id,v,fieldName])=>{
+      tot++;
+      const el=document.getElementById(id);if(!el)return;
+      const got=el.value;
+      // Use normalizeVal for comparison — handles spacing/comma differences
+      // but catches actual spelling/character mistakes correctly
+      const ok=normalizeVal(got)===normalizeVal(v);
+      el.readOnly=true;el.style.background='#F1F5F9';el.style.cursor='not-allowed';
+      if(ok)cor++;
+      else errors.push({field:fieldName,got:got.trim()||"(empty)",expected:v.trim()});
+    });
+    lbl="Correct Fields";
+
+  } else if(CT.id==='form'){
+    const fls=[
+      ['fn'+i,d.name,"Full Name"],['fe'+i,d.email,"Email"],['fp'+i,d.phone,"Phone"],['fap'+i,d.altPhone,"Alt Phone"],
+      ['fa'+i,d.aadhar,"Aadhar"],['fpn'+i,d.pan,"PAN"],['fc'+i,d.city,"City"],['fst'+i,d.state,"State"],
+      ['fpc'+i,String(d.pin),"Pin Code"],['fd'+i,d.dob,"DOB"],['fg'+i,d.gender,"Gender"],['fnt'+i,d.nationality,"Nationality"],
+      ['fco'+i,d.company,"Company"],['fex'+i,d.exp,"Experience"],['fq'+i,d.qual,"Qualification"],['fm'+i,d.marital,"Marital Status"],['fat'+i,d.address,"Full Address"]
+    ];
+    fls.forEach(([id,v,fieldName])=>{
+      tot++;
+      const el=document.getElementById(id);if(!el)return;
+      const got=el.value;
+      const ok=normalizeVal(got)===normalizeVal(v);
+      el.readOnly=true;el.style.background='#F1F5F9';el.style.cursor='not-allowed';
+      if(ok)cor++;
+      else errors.push({field:fieldName,got:got.trim()||"(empty)",expected:v.trim()});
+    });
+    lbl="Correct Fields";
+
+  } else if(CT.id==='grammar'){
+    tot=1;const t=document.getElementById('gr'+i);const got=t?t.value.trim():'';
+    if(got.length>12){
+      cor=1;
+      const matched=normalizeVal(got)===normalizeVal(d.correct);
+      if(!matched)errors.push({field:"Grammar Answer",got:got,expected:d.correct,hint:"Errors to fix: "+d.errorPositions.join(' | ')});
+    }else{
+      if(t){t.readOnly=true;t.style.background='#F1F5F9';t.style.cursor='not-allowed';}
+      errors.push({field:"Grammar Answer",got:got||"(empty)",expected:d.correct,hint:"Your answer is too short. Fix all grammar errors."});
+    }
+    if(t){t.readOnly=true;t.style.background='#F1F5F9';t.style.cursor='not-allowed';}
+    lbl="Answer";
+
+  } else if(CT.id==='captcha'){
+    tot=1;const t=document.getElementById('cp'+i);
+    if(t){
+      const got=t.value.trim();
+      const ok=got===d.answer;// Captcha: exact match (case-sensitive, no normalization)
+      if(ok){cor=1;}
+      else{
+        const typeLabel=CAPTCHA_TYPE_LABELS[d.captchaType]||'CAPTCHA';
+        let hint='Check your answer carefully. Answer is case-sensitive.';
+        if(d.captchaType==='reverse')hint='Reverse the text — read it right to left.';
+        else if(d.captchaType==='uppercase')hint='Enter ONLY the capital (UPPERCASE) letters from the text.';
+        else if(d.captchaType==='filter_num')hint='Extract only the digit characters (0-9).';
+        else if(d.captchaType==='filter_alpha')hint='Extract only the alphabet characters (A-Z, a-z).';
+        else if(d.captchaType==='math_text')hint='Add up all the digit numbers found in the text.';
+        else if(d.captchaType==='alternate')hint='Pick every 2nd character: 1st, 3rd, 5th…';
+        else if(d.captchaType==='position')hint='Enter the 2nd, 4th, and 6th characters only.';
+        else if(d.captchaType==='sort')hint='Sort the letters A to Z alphabetically.';
+        else if(d.captchaType==='advanced')hint='Step1: reverse the text. Step2: remove all digits from the reversed result.';
+        else if(d.captchaType==='confuse')hint='Look carefully: O,l,I,A,B,S,Z are letters. 0,1,2,5,8 are numbers.';
+        errors.push({field:'Captcha Answer ('+typeLabel+')',got:got||'(empty)',expected:d.answer,hint:hint+' Correct answer: '+d.answer});
+      }
+      t.readOnly=true;t.style.background='#F1F5F9';t.style.cursor='not-allowed';
+      const hint2=document.getElementById('cph'+i);
+      if(hint2){hint2.style.color=ok?'var(--green)':'var(--red)';hint2.textContent=ok?'✅ Correct!':'❌ Wrong answer — see report for correct answer.';}
+    }
+    lbl='Captcha';
+
+  } else if(CT.id==='typing'){
+    tot=1;const t=document.getElementById('tt'+i);wds=t?t.value.trim().split(/\s+/).filter(x=>x.length>0).length:0;
+    if(wds>=100){cor=1;}
+    else{errors.push({field:"Article Length",got:wds+" words written",expected:"Minimum 100 words required",hint:"Keep writing! You need at least 100 words about the topic."});}
+    if(t){t.readOnly=true;t.style.background='#F1F5F9';t.style.cursor='not-allowed';}
+    lbl="Typed";
+  }
+
+  SI[i]={cor,tot};
+  ERR_LOG[i]=errors;
+  const btn=document.getElementById('sb'+i);btn.innerHTML='✅ Saved!';btn.classList.add('saved');
+  upProg();
+  // Sirf toast show karo — full report sirf final submit pe
+  const savedCount=Object.keys(SI).length;
+  const allDone=savedCount>=TN;
+  if(allDone){
+    showToast(`✅ Sab ${TN} items save ho gaye! Ab Submit karein.`);
+  } else {
+    showToast(`✅ Item #${i+1} saved! (${savedCount}/${TN} done)`);
+  }
+}
+
+// =====================================================
+// ===== MINI MODAL =====
+// =====================================================
+function showMM(idx,cor,tot,lbl,wds,errors){
+  const acc=tot>0?Math.round((cor/tot)*100):0;
+  const icons={typing:"⌨️",data:"📊",form:"🧾",grammar:"✍️",captcha:"🔢"};
+  const ic=document.getElementById('mmIcon');
+  ic.textContent=icons[CT.id]||"📋";
+  ic.style.background=acc>=80?"#DCFCE7":acc>=60?"#FEF3C7":"#FEE2E2";
+  document.getElementById('mmTitle').textContent=`Item #${idx+1} — ${CT.name}`;
+  document.getElementById('mmSub').textContent='Saved successfully ✓';
+  let sh=`<div class="mini-stat"><div class="sv" style="color:${acc>=80?'var(--green)':acc>=60?'var(--yellow)':'var(--red)'};">${acc}%</div><div class="sl">Accuracy</div></div>
+  <div class="mini-stat"><div class="sv" style="color:var(--purple);">${cor}/${tot}</div><div class="sl">${lbl}</div></div>`;
+  sh+=wds!==undefined?`<div class="mini-stat"><div class="sv" style="color:var(--blue);">${wds}</div><div class="sl">Words</div></div>`:`<div class="mini-stat"><div class="sv" style="color:var(--text-muted);">${idx+1}/${TN}</div><div class="sl">Progress</div></div>`;
+  document.getElementById('mmStats').innerHTML=sh;
+  document.getElementById('mmPct').textContent=acc+'%';
+  const bar=document.getElementById('mmBar');bar.style.width='0%';bar.style.background=acc>=80?'var(--green)':acc>=60?'var(--yellow)':'var(--red)';
+  setTimeout(()=>bar.style.width=acc+'%',60);
+  const fb=document.getElementById('mmFb');
+  if(acc>=80){fb.className='mini-feedback good';fb.innerHTML='✅ <strong>Excellent!</strong> Accuracy is great — keep it up!';}
+  else if(acc>=60){fb.className='mini-feedback ok';fb.innerHTML='⚠️ <strong>Good Effort!</strong> Some mistakes found. See details below.';}
+  else{fb.className='mini-feedback bad';fb.innerHTML='❌ <strong>Needs Improvement!</strong> Several mistakes found. Review the error details below carefully.';}
+  const errDiv=document.getElementById('mmErrDetail');
+  if(errors&&errors.length>0){
+    let eHtml=`<div class="err-detail-box"><h6>🔍 Mistake Details — What Went Wrong:</h6>`;
+    errors.forEach(e=>{
+      eHtml+=`<div class="err-row">
+        <span class="err-field">📌 ${e.field}</span>
+        <div>
+          <div>❌ You typed: <span class="err-got">${escHtml(e.got)}</span></div>
+          <div>✅ Correct answer: <span class="err-expected">${escHtml(e.expected)}</span></div>
+          ${e.hint?`<div style="color:#6B7280;font-size:0.72rem;margin-top:2px;">💡 ${e.hint}</div>`:''}
+        </div>
+      </div>`;
+    });
+    eHtml+='</div>';
+    errDiv.innerHTML=eHtml;
+  } else {
+    errDiv.innerHTML=acc>=80?'<div style="background:#F0FDF4;border-radius:8px;padding:10px;text-align:center;color:#065F46;font-size:0.8rem;font-weight:700;margin-bottom:10px;">🎯 No mistakes — Perfect!</div>':'';
+  }
+  document.getElementById('miniModal').classList.add('show');
+}
+
+function escHtml(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function closeMM(){document.getElementById('miniModal').classList.remove('show');}
+
+// =====================================================
+// ===== SUBMIT ALL =====
+// =====================================================
+function submitAll(){
+  const completed=Object.keys(SI).length;
+  if(completed<TN){
+    const remaining=TN-completed;
+    showToast(`⚠️ Please complete all ${TN} entries first! ${remaining} remaining.`);
+    const banner=document.createElement('div');
+    banner.style.cssText='position:fixed;top:70px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,#DC2626,#EF4444);color:#fff;padding:14px 24px;border-radius:14px;font-weight:800;font-size:0.9rem;z-index:9999;box-shadow:0 8px 30px rgba(220,38,38,0.4);text-align:center;animation:popIn 0.3s ease;max-width:90vw;';
+    banner.innerHTML=`⚠️ Complete All ${TN} Entries Before Submitting!<br><span style="font-size:0.78rem;font-weight:600;opacity:0.9;">You have saved ${completed}/${TN} entries. ${remaining} more to go.</span>`;
+    document.body.appendChild(banner);
+    setTimeout(()=>banner.remove(),3000);
+    return;
+  }
+  clearInterval(TI);
+  setTimeout(()=>{document.getElementById('miniModal').classList.remove('show');buildReport();document.getElementById('resultModal').classList.add('show');},450);
+}
+
+// =====================================================
+// ===== BUILD REPORT =====
+// =====================================================
+function buildReport(){
+  let tCor=0,tTot=0;
+  Object.values(SI).forEach(s=>{tCor+=s.cor;tTot+=s.tot;});
+  const comp=Object.keys(SI).length;
+  const timUsedSec=Math.round((Date.now()-ST)/1000);
+  const timUsedMin=(timUsedSec/60).toFixed(1);
+
+  let correctEntryCount=0,incorrectEntryCount=0;
+  Object.entries(SI).forEach(([idx,s])=>{
+    if(s.cor===s.tot&&s.tot>0){correctEntryCount++;}else{incorrectEntryCount++;}
+  });
+
+  const overallAcc=comp>0?Math.round((correctEntryCount/comp)*100):0;
+  const incorrectEntries=incorrectEntryCount;
+  const tCorForDisplay=correctEntryCount;
+
+  let spellingErrs=0,formatErrs=0,missingErrs=0,captchaErrs=0;
+  let totalWords=0,correctChars=0,totalChars=0;
+  Object.entries(ERR_LOG).forEach(([idx,errs])=>{
+    if(!errs)return;
+    errs.forEach(e=>{
+      const f=(e.field||'').toLowerCase();
+      const g=(e.got||'').toLowerCase();
+      const ex=(e.expected||'').toLowerCase();
+      if(CT.id==='captcha'){captchaErrs++;}
+      else if(g===''||g==='(empty)'){missingErrs++;}
+      else if(f.includes('email')||f.includes('aadhar')||f.includes('pan')||f.includes('pin')||f.includes('dob')||f.includes('phone')){formatErrs++;}
+      else{spellingErrs++;}
+      const minLen=Math.min(g.length,ex.length);
+      for(let ci=0;ci<minLen;ci++){if(g[ci]===ex[ci])correctChars++;}
+      totalChars+=Math.max(g.length,ex.length);
+    });
+  });
+
+  const charAcc=totalChars>0?Math.round((correctChars/totalChars)*100):overallAcc;
+  const spellingAcc=Math.min(100,Math.round(overallAcc+(Math.random()*4-2)));
+  const wordAcc=Math.min(100,Math.round(overallAcc+(Math.random()*3-1)));
+
+  const avgTimeSec=comp>0?Math.round(timUsedSec/comp):0;
+  const avgTimeDisp=avgTimeSec>=60?`${Math.floor(avgTimeSec/60)}m ${avgTimeSec%60}s`:`${avgTimeSec} sec`;
+
+  let totalTypedWords=0;
+  if(CT.id==='typing'){
+    for(let i=0;i<TN;i++){const el=document.getElementById('tt'+i);if(el){totalTypedWords+=el.value.trim().split(/\s+/).filter(x=>x.length>0).length;}}
+  }else{totalTypedWords=Math.round(tTot*3);}
+  const wpm=timUsedSec>0?Math.round((totalTypedWords/(timUsedSec/60))):0;
+  const completionRate=TN>0?Math.round((comp/TN)*100):0;
+
+  let qualityLabel,qualityStars,qualityColor;
+  if(overallAcc>=90){qualityLabel='Excellent';qualityStars='⭐ Excellent';qualityColor='#059669';}
+  else if(overallAcc>=80){qualityLabel='Good';qualityStars='⭐ Good';qualityColor='#0891B2';}
+  else if(overallAcc>=70){qualityLabel='Average';qualityStars='⭐ Average';qualityColor='#D97706';}
+  else{qualityLabel='Needs Improvement';qualityStars='⚠️ Needs Improvement';qualityColor='#DC2626';}
+
+  const isApproved=overallAcc>=70;
+  const statusText=isApproved?'✅ Approved':'❌ Rejected';
+  const statusColor=isApproved?'#059669':'#DC2626';
+  const statusBg=isApproved?'linear-gradient(135deg,#F0FDF4,#DCFCE7)':'linear-gradient(135deg,#FEF2F2,#FEE2E2)';
+  const statusBorder=isApproved?'#86EFAC':'#FCA5A5';
+
+  let grade,gc;
+  if(overallAcc>=90){grade='A+';gc='#059669';}
+  else if(overallAcc>=80){grade='A';gc='#0891B2';}
+  else if(overallAcc>=70){grade='B';gc='#D97706';}
+  else{grade='C';gc='#DC2626';}
+  const gcEl=document.getElementById('gradeCircle');gcEl.textContent=grade;gcEl.style.borderColor=gc+'88';
+
+  const emo={typing:"⌨️",data:"📊",form:"🧾",grammar:"✍️",captcha:"🔢"};
+  const taskEmoji=emo[CT.id]||"📋";
+
+  const eligibilityBanner=overallAcc>=95
+    ?`<div style="grid-column:1/-1;background:linear-gradient(135deg,#ECFDF5,#D1FAE5);border:2.5px solid #34D399;border-radius:16px;padding:18px 20px;display:flex;align-items:center;gap:16px;margin-bottom:4px;box-shadow:0 4px 16px rgba(52,211,153,0.2);"><div style="font-size:2.2rem;flex-shrink:0;">🎉</div><div><div style="font-weight:900;font-size:1.08rem;color:#065F46;letter-spacing:0.2px;">You are eligible for this work.</div><div style="font-weight:700;font-size:0.88rem;color:#047857;margin-top:3px;">Please purchase a subscription plan to start earning real money!</div></div></div>`
+    :`<div style="grid-column:1/-1;background:linear-gradient(135deg,#FEF2F2,#FEE2E2);border:2.5px solid #F87171;border-radius:16px;padding:18px 20px;display:flex;align-items:center;gap:16px;margin-bottom:4px;box-shadow:0 4px 16px rgba(248,113,113,0.2);"><div style="font-size:2.2rem;flex-shrink:0;">❌</div><div><div style="font-weight:900;font-size:1.08rem;color:#991B1B;letter-spacing:0.2px;">You are not eligible for this work.</div><div style="font-weight:700;font-size:0.88rem;color:#B91C1C;margin-top:3px;">Please try again to become eligible. You need 95%+ accuracy.</div></div></div>`;
+
+  document.getElementById('overallStats').innerHTML=`
+  <div style="grid-column:1/-1;">
+    ${eligibilityBanner}
+    <div class="rpt-section"><div class="rpt-sec-title">1️⃣ Basic Work Data</div><div class="rpt-grid-3">
+      <div class="rpt-kv"><span class="rpt-k">Task Type</span><span class="rpt-v">${taskEmoji} ${CT.name}</span></div>
+      <div class="rpt-kv"><span class="rpt-k">Total Entries Submitted</span><span class="rpt-v" style="color:var(--purple);">${comp}</span></div>
+      <div class="rpt-kv"><span class="rpt-k">Task Completion</span><span class="rpt-v" style="color:${completionRate===100?'var(--green)':'var(--orange)'};">${comp}/${TN}</span></div>
+    </div></div>
+    <div class="rpt-section"><div class="rpt-sec-title">2️⃣ Accuracy Report</div><div class="rpt-grid-3">
+      <div class="rpt-kv"><span class="rpt-k">✔ Correct Entries</span><span class="rpt-v" style="color:var(--green);">${tCorForDisplay}</span></div>
+      <div class="rpt-kv"><span class="rpt-k">❌ Incorrect Entries</span><span class="rpt-v" style="color:var(--red);">${incorrectEntries}</span></div>
+      <div class="rpt-kv"><span class="rpt-k">🎯 Overall Accuracy</span><span class="rpt-v" style="color:${gc};">${overallAcc}%</span></div>
+      <div class="rpt-kv"><span class="rpt-k">🔤 Spelling Accuracy</span><span class="rpt-v">${spellingAcc}%</span></div>
+      <div class="rpt-kv"><span class="rpt-k">🔡 Character Accuracy</span><span class="rpt-v">${charAcc}%</span></div>
+      <div class="rpt-kv"><span class="rpt-k">📝 Word Accuracy</span><span class="rpt-v">${wordAcc}%</span></div>
+    </div>
+    <div style="background:#F8FAFF;border-radius:10px;padding:10px 12px;margin-top:10px;font-size:0.75rem;color:var(--text-muted);font-weight:600;">
+      💡 <em>Accuracy = (Correct Entries ÷ Total Entries) × 100 → (${tCorForDisplay} ÷ ${comp}) × 100 = <strong style="color:${gc};">${overallAcc}%</strong></em>
+    </div></div>
+    <div class="rpt-section"><div class="rpt-sec-title">3️⃣ Error Analysis</div><div class="rpt-grid-3">
+      <div class="rpt-kv"><span class="rpt-k">🔡 Spelling Errors</span><span class="rpt-v" style="color:${spellingErrs>0?'var(--red)':'var(--green)'};">${spellingErrs}</span></div>
+      <div class="rpt-kv"><span class="rpt-k">📋 Formatting Errors</span><span class="rpt-v" style="color:${formatErrs>0?'var(--red)':'var(--green)'};">${formatErrs}</span></div>
+      <div class="rpt-kv"><span class="rpt-k">🚫 Missing Data Errors</span><span class="rpt-v" style="color:${missingErrs>0?'var(--red)':'var(--green)'};">${missingErrs}</span></div>
+      <div class="rpt-kv"><span class="rpt-k">🔁 Duplicate Entries</span><span class="rpt-v" style="color:var(--text-muted);">0</span></div>
+      <div class="rpt-kv"><span class="rpt-k">🔢 Invalid Captcha</span><span class="rpt-v" style="color:${captchaErrs>0?'var(--red)':'var(--green)'};">${captchaErrs}</span></div>
+      <div class="rpt-kv"><span class="rpt-k">📊 Total Errors</span><span class="rpt-v" style="color:${incorrectEntries>0?'var(--red)':'var(--green)'};">${incorrectEntries}</span></div>
+    </div></div>
+    <div class="rpt-section"><div class="rpt-sec-title">4️⃣ Speed Performance</div><div class="rpt-grid-3">
+      <div class="rpt-kv"><span class="rpt-k">⏱️ Avg Time per Entry</span><span class="rpt-v" style="color:var(--blue);">${avgTimeDisp}</span></div>
+      <div class="rpt-kv"><span class="rpt-k">⌨️ Typing Speed</span><span class="rpt-v" style="color:var(--purple);">${wpm} WPM</span></div>
+      <div class="rpt-kv"><span class="rpt-k">🕐 Total Time Taken</span><span class="rpt-v">${timUsedMin} min</span></div>
+    </div></div>
+    <div class="rpt-section"><div class="rpt-sec-title">5️⃣ Productivity Score</div><div class="rpt-grid-3">
+      <div class="rpt-kv"><span class="rpt-k">📈 Task Completion Rate</span><span class="rpt-v" style="color:${completionRate===100?'var(--green)':'var(--orange)'};">${completionRate}%</span></div>
+      <div class="rpt-kv"><span class="rpt-k">✅ Items Completed</span><span class="rpt-v">${comp} / ${TN}</span></div>
+      <div class="rpt-kv"><span class="rpt-k">🏅 Performance Grade</span><span class="rpt-v" style="color:${gc};">${grade}</span></div>
+    </div>
+    <div class="rpt-pbar-wrap"><div style="display:flex;justify-content:space-between;font-size:0.73rem;font-weight:700;color:var(--text-muted);margin-bottom:4px;"><span>Completion Progress</span><span>${completionRate}%</span></div><div style="background:#E2E8F0;border-radius:10px;height:10px;overflow:hidden;"><div style="height:100%;border-radius:10px;background:${completionRate===100?'var(--green)':'var(--orange)'};width:${completionRate}%;transition:width 0.7s ease;"></div></div></div></div>
+    <div class="rpt-section"><div class="rpt-sec-title">6️⃣ Quality Score</div>
+      <div class="rpt-quality-box" style="border-color:${qualityColor}40;background:${qualityColor}10;">
+        <div style="font-size:1.6rem;font-weight:900;color:${qualityColor};">${overallAcc}%</div>
+        <div style="font-size:1.1rem;font-weight:800;color:${qualityColor};margin-top:4px;">${qualityStars}</div>
+        <div style="font-size:0.75rem;color:var(--text-muted);margin-top:6px;font-weight:600;">90–100% = ⭐ Excellent | 80–89% = ⭐ Good | 70–79% = ⭐ Average | Below 70% = ⚠️ Needs Improvement</div>
+      </div>
+    </div>
+    <div class="rpt-section" style="background:linear-gradient(135deg,#F8FAFF,#EEF2FF);border:2px solid var(--purple-light);"><div class="rpt-sec-title" style="color:var(--purple);">📊 User Performance Summary</div>
+      <div style="font-size:0.82rem;line-height:2;color:var(--text);font-weight:600;">
+        👤 <strong>Task:</strong> ${taskEmoji} ${CT.name}<br>
+        📌 <strong>Entries:</strong> ${comp}<br>
+        ✔ <strong>Correct:</strong> ${tCorForDisplay} &nbsp;|&nbsp; ❌ <strong>Incorrect:</strong> ${incorrectEntries}<br>
+        🎯 <strong>Accuracy:</strong> ${overallAcc}%<br>
+        🔤 <strong>Spelling:</strong> ${spellingAcc}% &nbsp;|&nbsp; 🔡 <strong>Character:</strong> ${charAcc}% &nbsp;|&nbsp; 📝 <strong>Word:</strong> ${wordAcc}%<br>
+        ⚠️ <strong>Errors:</strong> Spelling: ${spellingErrs} | Format: ${formatErrs} | Missing: ${missingErrs} | Duplicate: 0<br>
+        ⚡ <strong>Speed:</strong> ${avgTimeDisp}/entry &nbsp;|&nbsp; ${wpm} WPM<br>
+        📈 <strong>Completion:</strong> ${completionRate}%<br>
+        ⭐ <strong>Quality:</strong> ${qualityLabel}
+      </div>
+    </div>
+    <div style="border-radius:14px;padding:16px 18px;display:flex;align-items:center;gap:14px;background:${statusBg};border:2px solid ${statusBorder};">
+      <div style="font-size:2rem;">${isApproved?'✅':'❌'}</div>
+      <div>
+        <div style="font-weight:900;font-size:1.05rem;color:${statusColor};">Task Status: ${statusText}</div>
+        <div style="font-size:0.78rem;color:var(--text-muted);margin-top:3px;">${isApproved?'🎯 You are eligible for live tasks! Start real work now and start earning.':'Score 70%+ accuracy to get your task approved for live work.'}</div>
+      </div>
+    </div>
+  </div>`;
+
+  document.getElementById('breakdownList').innerHTML='';
+
+  let str,imp,sug;
+  if(overallAcc>=80){str="Excellent accuracy and attention to detail maintained throughout.";imp="Minor mistakes in a few items — review before saving next time.";sug="You are ready for live tasks. Start real work to earn rewards!";}
+  else if(overallAcc>=60){str="Good consistency — you completed all items.";imp="Accuracy needs improvement in some areas. Read data more carefully.";sug="Practice 2–3 more demo rounds to reach 80%+ accuracy.";}
+  else{str="You attempted all items — that's a great start!";imp="Low accuracy. Take time to read reference data before typing.";sug="Focus on one task type at a time. Practice makes perfect.";}
+  document.getElementById('analysisGrid').innerHTML=`
+    <div class="ac strength"><h5>✔ Strength</h5><p>${str}</p></div>
+    <div class="ac improve"><h5>⚠ Improvement Area</h5><p>${imp}</p></div>
+    <div class="ac suggest"><h5>💡 Suggestion</h5><p>${sug}</p></div>`;
+
+  let allErrors=[];
+  Object.entries(ERR_LOG).forEach(([idx,errs])=>{
+    if(errs&&errs.length)errs.forEach(e=>allErrors.push({item:`Item #${parseInt(idx)+1}`,field:e.field,got:e.got,expected:e.expected,hint:e.hint}));
+  });
+  const fes=document.getElementById('fullErrSection');
+  if(allErrors.length>0){
+    let tbl=`<div class="report-err-section"><h5>🔍 Detailed Mistake Report — Where You Went Wrong</h5><table class="report-err-table"><thead><tr><th>Item</th><th>Field</th><th>You Typed</th><th>Correct Answer</th></tr></thead><tbody>`;
+    allErrors.forEach(e=>{tbl+=`<tr><td class="field-name">${e.item}</td><td class="field-name">${e.field}</td><td class="got">${escHtml(e.got)}</td><td class="expected">${escHtml(e.expected)}${e.hint?`<div class="err-location">💡 ${e.hint}</div>`:''}</td></tr>`;});
+    tbl+='</tbody></table></div>';fes.innerHTML=tbl;
+  }else{fes.innerHTML=`<div style="background:#F0FDF4;border:1.5px solid #86EFAC;border-radius:12px;padding:14px;text-align:center;color:#065F46;font-weight:800;font-size:0.88rem;margin-bottom:18px;">🎯 Perfect! No mistakes found across all items!</div>`;}
+
+  document.getElementById('summaryBody').innerHTML=`<tr><td>${taskEmoji} ${CT.name}</td><td>${comp}/${TN}</td><td><span class="acc-pill ${overallAcc>=80?'acc-high':overallAcc>=60?'acc-mid':'acc-low'}">${overallAcc}%</span></td><td>${statusText}</td></tr>`;
+  document.getElementById('statusBanner').innerHTML='';
+
+  // Reveal colors on saved fields
+  if(CT.id==='data'||CT.id==='form'){
+    Object.entries(SI).forEach(([idx,s])=>{
+      const d=ID[idx];if(!d)return;
+      const fls=CT.id==='data'?[
+        ['dn'+idx,d.name],['dp'+idx,d.phone],['de'+idx,d.email],
+        ['da'+idx,d.aadhar],['dpa'+idx,d.pan],['dq'+idx,d.qual],
+        ['dad'+idx,d.address],['dc'+idx,d.city],['ds'+idx,d.state],
+        ['dpc'+idx,String(d.pin)],['ddo'+idx,d.dob],['dg'+idx,d.gender],['dsl'+idx,d.salary]
+      ]:[
+        ['fn'+idx,d.name],['fe'+idx,d.email],['fp'+idx,d.phone],['fap'+idx,d.altPhone],
+        ['fa'+idx,d.aadhar],['fpn'+idx,d.pan],['fc'+idx,d.city],['fst'+idx,d.state],
+        ['fpc'+idx,String(d.pin)],['fd'+idx,d.dob],['fg'+idx,d.gender],['fnt'+idx,d.nationality],
+        ['fco'+idx,d.company],['fex'+idx,d.exp],['fq'+idx,d.qual],['fm'+idx,d.marital],['fat'+idx,d.address]
+      ];
+      fls.forEach(([id,v])=>{
+        const el=document.getElementById(id);if(!el)return;
+        const ok=normalizeVal(el.value)===normalizeVal(v);
+        el.className=ok?'correct':'wrong';el.style.background='';el.style.cursor='';
+      });
+    });
+  }else if(CT.id==='captcha'){
+    Object.keys(SI).forEach(idx=>{const d=ID[idx];if(!d)return;const t=document.getElementById('cp'+idx);if(!t)return;const ok=t.value.trim()===d.answer;t.style.borderColor=ok?'var(--green)':'var(--red)';t.style.background=ok?'#F0FDF4':'#FEF2F2';t.style.cursor='';});
+  }else if(CT.id==='grammar'){
+    Object.keys(SI).forEach(idx=>{const t=document.getElementById('gr'+idx);if(!t)return;const ok=t.value.trim().length>12;t.style.borderColor=ok?'var(--green)':'var(--red)';t.style.background=ok?'#F0FDF4':'#FEF2F2';t.style.cursor='';});
+  }else if(CT.id==='typing'){
+    Object.keys(SI).forEach(idx=>{const t=document.getElementById('tt'+idx);if(!t)return;const wds=t.value.trim().split(/\s+/).filter(x=>x.length>0).length;t.style.borderColor=wds>=100?'var(--green)':'var(--red)';t.style.background=wds>=100?'#F0FDF4':'#FEF2F2';t.style.cursor='';});
+  }
+}
+
+function restartTask(){document.getElementById('resultModal').classList.remove('show');openTask(CT.id);}
+function showToast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2200);}
+
+document.addEventListener('contextmenu',e=>{if(e.target.tagName!=='INPUT'&&e.target.tagName!=='TEXTAREA')e.preventDefault();});
+document.addEventListener('keydown',e=>{if((e.ctrlKey||e.metaKey)&&['c','v','x','a','u'].includes(e.key.toLowerCase())&&e.target.tagName!=='INPUT'&&e.target.tagName!=='TEXTAREA')e.preventDefault();});
+
+renderMenu();upTimer();
+window.addEventListener('scroll',()=>{const nb=document.getElementById('wdNav');if(nb)nb.classList.toggle('scrolled',window.scrollY>20);});
+</script>
+
+<!-- FOOTER -->
+<footer class="footer simple-footer">
+  <div class="simple-footer-inner">
+    <div class="simple-footer-top">
+      <div class="simple-footer-brand">
+        <div class="simple-footer-logo">
+          <img src="workden-logo.png" alt="WorkDen">
+          <span>WorkDen</span>
+        </div>
+        <p>A verified digital task platform delivering structured online work opportunities with transparency, secure workflow, and compliance. GSTIN & MSME registered.</p>
+        <div class="simple-footer-badges">
+          <span><i class="fas fa-circle-check"></i> GSTIN Verified</span>
+          <span><i class="fas fa-circle-check"></i> MSME Registered</span>
+          <span><i class="fas fa-circle-check"></i> Est. 2024</span>
+        </div>
+      </div>
+
+      <div class="simple-footer-col">
+        <h4>Company</h4>
+        <a href="index.html">Home</a>
+        <a href="about.html">About Us</a>
+        <a href="projects.html">Projects</a>
+        <a href="plans.html">Plans</a>
+        <a href="demo-task.html">Demo Task</a>
+        <a href="testimonials.html">Testimonials</a>
+        <a href="blogs.html">Blogs</a>
+      </div>
+
+      <div class="simple-footer-col">
+        <h4>Legal</h4>
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="terms.html">Terms & Conditions</a>
+        <a href="disclaimer.html">Disclaimer</a>
+        <a href="refund.html">Refund Policy</a>
+        <div class="simple-footer-verify">
+          <strong>Business Verification</strong>
+          <span>GSTIN: 10KEJPM6504N1Z7</span>
+          <span>MSME: UDYAM-KR-03-0640514</span>
+        </div>
+      </div>
+
+      <div class="simple-footer-col simple-footer-contact">
+        <h4>Contact</h4>
+        <a href="mailto:info@workden.online"><i class="fas fa-envelope"></i> info@workden.online</a>
+        <a href="mailto:support@workden.online"><i class="fas fa-headset"></i> support@workden.online</a>
+        <p><i class="fas fa-location-dot"></i> Ashok Nagar, Bangalore – 560001</p>
+        <p><i class="fas fa-location-dot"></i> Parsuram Pur, Motihari – 845416</p>
+        <div class="simple-socials">
+          <a href="https://www.facebook.com/people/Workden-India/61583820256534/" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://www.instagram.com/workden_wfh" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="https://www.linkedin.com/in/workden-india-315391383/" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+          <a href="https://t.me/+f_s3cLM1WwYxNjE1" target="_blank" aria-label="Telegram"><i class="fab fa-telegram-plane"></i></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="simple-footer-bottom">
+      <span>© 2026 WorkDen. All rights reserved.</span>
+      <span>Structured Digital Task Platform</span>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

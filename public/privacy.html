@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Privacy Policy – WorkDen</title>
+<link rel="icon" href="favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@700;800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+*{box-sizing:border-box;}
+body{font-family:'DM Sans','Segoe UI',sans-serif;margin:0;padding:0;color:#334155;background:#fff;-webkit-font-smoothing:antialiased;}
+.ld-nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(255,255,255,0.97);backdrop-filter:blur(20px);border-bottom:1px solid #e2e8f0;transition:box-shadow 0.3s;}
+.ld-nav-inner{max-width:1280px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:68px;}
+.ld-logo{display:flex;align-items:center;gap:10px;text-decoration:none;}
+.ld-logo span{font-family:Sora,sans-serif;font-size:1.2rem;font-weight:800;color:#0f172a;}
+.ld-logo img{height:36px;width:auto;}
+.ld-links{display:flex;align-items:center;gap:4px;list-style:none;margin:0;padding:0;}
+.ld-links a{text-decoration:none;font-size:0.875rem;font-weight:500;color:#334155;padding:8px 14px;border-radius:8px;transition:all 0.2s;}
+.ld-links a:hover{color:#1a56db;background:#eff6ff;}
+.ld-ctas{display:flex;gap:10px;align-items:center;}
+.ld-btn-ghost{display:inline-flex;align-items:center;gap:6px;padding:10px 22px;border-radius:10px;font-size:0.875rem;font-weight:600;text-decoration:none;background:transparent;border:2px solid #e2e8f0;color:#334155;transition:all 0.2s;}
+.ld-btn-ghost:hover{border-color:#1a56db;color:#1a56db;background:#eff6ff;}
+.ld-btn-primary{display:inline-flex;align-items:center;gap:6px;padding:10px 22px;border-radius:10px;font-size:0.875rem;font-weight:600;text-decoration:none;background:#1a56db;color:white;box-shadow:0 4px 14px rgba(26,86,219,0.3);transition:all 0.2s;}
+.ld-btn-primary:hover{background:#1240a8;}
+.ld-ham{display:none;background:none;border:none;cursor:pointer;padding:8px;color:#0f172a;font-size:1.4rem;}
+.ld-mob{display:flex;position:fixed;inset:0;z-index:9999;background:white;padding:80px 24px 40px;flex-direction:column;gap:8px;transform:translateX(100%);transition:transform 0.35s;overflow-y:auto;}
+.ld-mob a{display:block;text-decoration:none;font-size:1.05rem;font-weight:600;color:#0f172a;padding:14px 20px;border-radius:12px;background:#f8fafc;transition:all 0.2s;}
+.ld-mob a:hover{background:#eff6ff;color:#1a56db;}
+.ld-mob-ctas{display:flex;flex-direction:column;gap:10px;margin-top:16px;}
+.ld-mob-close{position:absolute;top:18px;right:20px;background:none;border:none;font-size:1.6rem;cursor:pointer;color:#0f172a;padding:8px;}
+/* Content wrapper */
+.legal-wrap{max-width:860px;margin:0 auto;padding:100px 24px 80px;}
+.legal-hero{background:linear-gradient(160deg,#f0f7ff,#fafbff);border-bottom:1px solid #e2e8f0;padding:80px 0 48px;text-align:center;margin-bottom:0;}
+.legal-hero-inner{max-width:700px;margin:0 auto;padding:0 24px;}
+.legal-hero h1{font-family:Sora,sans-serif;font-size:2rem;font-weight:800;color:#0f172a;margin-bottom:10px;}
+.legal-hero p{color:#475569;font-size:1rem;}
+.legal-body{max-width:860px;margin:0 auto;padding:60px 24px 80px;}
+.legal-body h2{font-size:1.15rem;font-weight:700;color:#0f172a;margin:32px 0 10px;}
+.legal-body h3{font-size:1rem;font-weight:700;color:#0f172a;margin:24px 0 8px;}
+.legal-body p,.legal-body li{font-size:0.9rem;color:#475569;line-height:1.8;margin-bottom:8px;}
+.legal-body ul,.legal-body ol{padding-left:20px;}
+.legal-body a{color:#1a56db;}
+.legal-box{background:#f0f7ff;border:1px solid #bfdbfe;border-radius:12px;padding:20px 24px;margin:20px 0;}
+.legal-box strong{color:#1a56db;}
+/* Footer */
+.ld-footer{background:#0f172a;color:#94a3b8;padding:48px 0 24px;margin-top:0;}
+.ld-footer-inner{max-width:1280px;margin:0 auto;padding:0 24px;}
+.ld-footer-bottom{display:flex;align-items:center;justify-content:space-between;padding-top:24px;border-top:1px solid rgba(255,255,255,0.08);font-size:0.8rem;color:rgba(255,255,255,0.3);flex-wrap:wrap;gap:8px;}
+@media(max-width:768px){.ld-links,.ld-ctas{display:none!important;}.ld-ham{display:flex!important;}}
+</style>
+</head>
+<body>
+<nav class="ld-nav" id="ldNav">
+  <div class="ld-nav-inner">
+    <a href="index.html" class="ld-logo"><img src="workden-logo.png" alt="WorkDen"><span>WorkDen</span></a>
+    <ul class="ld-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About Us</a></li>
+      <li><a href="projects.html">Projects</a></li>
+      <li><a href="demo-task.html">Demo Task</a></li>
+      <li><a href="testimonials.html">Testimonials</a></li>
+      <li><a href="blogs.html">Blogs</a></li>
+    </ul>
+    <div class="ld-ctas">
+      <a href="#" onclick="showVersionModal(event)" class="ld-btn-ghost">User Login</a>
+      <a href="https://workdenteam2.base44.app/" class="ld-btn-primary">Employee Login</a>
+    </div>
+    <button class="ld-ham" onclick="ldToggle()"><i class="fas fa-bars"></i></button>
+  </div>
+</nav>
+<div class="ld-mob" id="ldMob">
+  <button class="ld-mob-close" onclick="ldToggle()"><i class="fas fa-times"></i></button>
+  <a href="index.html">Home</a><a href="about.html">About Us</a><a href="projects.html">Projects</a>
+  <a href="demo-task.html">Demo Task</a><a href="testimonials.html">Testimonials</a><a href="blogs.html">Blogs</a>
+  <div class="ld-mob-ctas">
+    <a href="#" onclick="showVersionModal(event)" class="ld-btn-ghost">User Login</a>
+    <a href="https://workdenteam2.base44.app/" class="ld-btn-primary">Employee Login</a>
+  </div>
+</div>
+<script>
+function ldToggle(){const m=document.getElementById('ldMob');m.style.transform=m.style.transform==='translateX(0%)'?'translateX(100%)':'translateX(0%)';}
+window.addEventListener('scroll',()=>{const n=document.getElementById('ldNav');if(n)n.style.boxShadow=window.scrollY>20?'0 4px 24px rgba(0,0,0,0.1)':'none';});
+</script>
+<div class="legal-hero" style="margin-top:68px;">
+  <div class="legal-hero-inner">
+    <span style="display:inline-flex;align-items:center;gap:6px;font-size:0.75rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:#1a56db;background:#eff6ff;padding:6px 14px;border-radius:100px;border:1px solid #bfdbfe;margin-bottom:16px;"><i class="fas fa-file-alt"></i> Legal</span>
+    <h1>Privacy Policy</h1>
+    <p>WorkDen – Verified Digital Task Platform | GSTIN: 10KEJPM6504N1Z7</p>
+  </div>
+</div>
+<div class="legal-body">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy – WorkDen | Data Protection</title>
+    <link rel="icon" type="image/png" href="favicon.png">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+
+    
+</head>
+<body class="flex flex-col min-h-screen bg-bgLight overflow-x-hidden">
+
+
+
+
+
+
+<main class="flex-grow pt-24 pb-16 sm:pb-24 bg-gradient-to-b from-blue-50 via-white to-white">
+
+    <div class="max-w-5xl mx-auto px-4 sm:px-6">
+
+        <!-- HERO -->
+        <div class="text-center mb-14 sm:mb-20">
+
+            <div class="w-20 h-20 mx-auto mb-6 
+                        bg-white shadow-lg rounded-2xl 
+                        flex items-center justify-center 
+                        border border-blue-100">
+                <i class="fas fa-user-shield text-3xl text-blue-600"></i>
+            </div>
+
+            <h1 class="text-3xl sm:text-4xl md:text-5xl 
+                       font-bold text-gray-900 tracking-tight mb-4">
+                Privacy Policy
+            </h1>
+
+            <p class="text-gray-600 text-base sm:text-lg">
+                Your privacy and data protection are important to us.
+            </p>
+
+            <p class="mt-4 text-sm text-gray-400">
+                Last Updated: 3 December 2025
+            </p>
+
+        </div>
+
+        <!-- POLICY CARD -->
+        <div class="bg-white rounded-3xl shadow-2xl border border-gray-100 
+                    p-6 sm:p-10 md:p-14">
+
+            <div class="space-y-8 sm:space-y-10 text-gray-600 leading-relaxed">
+
+                <!-- INTRO -->
+                <p class="text-gray-700 font-medium">
+                    WorkDen ("we", "our", "us") respects your privacy and is committed to protecting the personal information of users ("you", "user") who access or use our website, platform, or related services. By using WorkDen, you agree to the collection and use of information in accordance with this Privacy Policy.
+                </p>
+
+                <!-- 1 -->
+                <div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-4">
+                        1. Information We Collect
+                    </h3>
+                    <ul class="space-y-2 list-disc pl-5 sm:pl-6">
+                        <li><span class="font-semibold text-blue-600">Personal Information:</span> Full name, email address, contact number, city/state details, account identifiers.</li>
+                        <li><span class="font-semibold text-blue-600">Account & Task Information:</span> Login details, submissions, performance records.</li>
+                        <li><span class="font-semibold text-blue-600">Technical Information:</span> IP address, browser type, device data, login timestamps, cookies.</li>
+                    </ul>
+                </div>
+
+                <!-- 2 -->
+                <div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-4">
+                        2. How We Use Your Information
+                    </h3>
+                    <ul class="space-y-2 list-disc pl-5 sm:pl-6">
+                        <li>Create and manage accounts</li>
+                        <li>Allocate and review tasks</li>
+                        <li>Ensure platform security</li>
+                        <li>Communicate updates and support</li>
+                        <li>Prevent fraud or misuse</li>
+                    </ul>
+                </div>
+
+                <!-- 3 -->
+                <div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-4">
+                        3. Data Sharing & Disclosure
+                    </h3>
+                    <p>
+                        We do not sell, rent, or trade personal user data. Information may be shared only with trusted service providers, to comply with legal obligations, or to protect the rights and safety of WorkDen and its users.
+                    </p>
+                </div>
+
+                <!-- 4 -->
+                <div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-4">
+                        4. Data Security
+                    </h3>
+                    <p>
+                        We implement reasonable safeguards to protect user data. However, no online platform can guarantee complete security.
+                    </p>
+                </div>
+
+                <!-- 5 -->
+                <div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-4">
+                        5. Cookies & Tracking Technologies
+                    </h3>
+                    <p>
+                        Cookies may be used to maintain login sessions and improve user experience.
+                    </p>
+                </div>
+
+                <!-- 6 -->
+                <div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-4">
+                        6. User Responsibilities
+                    </h3>
+                    <p>
+                        Users must keep login credentials confidential and provide accurate information. Misuse may result in suspension.
+                    </p>
+                </div>
+
+                <!-- 7 -->
+                <div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-4">
+                        7. Task Data & Uploaded Files
+                    </h3>
+                    <p>
+                        Task-related files are used strictly for verification and quality review. Data is not reused or distributed.
+                    </p>
+                </div>
+
+                <!-- 8 -->
+                <div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-4">
+                        8. Registration Fees & Refund Policy
+                    </h3>
+                    <p>
+                        WorkDen may charge a one-time registration or portal access fee. 
+                        <span class="font-semibold text-gray-900">
+                        All registration or access fees are non-refundable under any circumstances.
+                        </span>
+                    </p>
+                </div>
+
+                <!-- 9 -->
+                <div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-4">
+                        9. Third-Party Services
+                    </h3>
+                    <p>
+                        We are not responsible for privacy practices of external platforms such as payment gateways or external links.
+                    </p>
+                </div>
+
+                <!-- 10 -->
+                <div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-4">
+                        10. Data Retention
+                    </h3>
+                    <p>
+                        User data is retained only as long as necessary to operate the platform and meet legal or audit requirements.
+                    </p>
+                </div>
+
+                <!-- 11 -->
+                <div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-4">
+                        11. User Rights
+                    </h3>
+                    <p>
+                        Users may request access, correction, or deletion of their personal data by contacting us. Requests will be handled within a reasonable timeframe.
+                    </p>
+                </div>
+
+                <!-- 12 -->
+                <div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-4">
+                        12. Children's Privacy
+                    </h3>
+                    <p>
+                        WorkDen services are intended for users aged 18 or older. We do not knowingly collect data from minors.
+                    </p>
+                </div>
+
+                <!-- 13 -->
+                <div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-4">
+                        13. Policy Updates
+                    </h3>
+                    <p>
+                        We may update this Privacy Policy periodically. Continued use of the platform indicates acceptance of changes.
+                    </p>
+                </div>
+
+                <!-- 14 -->
+                <div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-4">
+                        14. Governing Law
+                    </h3>
+                    <p>
+                        This Privacy Policy shall be governed by the laws of India.
+                    </p>
+                </div>
+
+                <!-- Contact -->
+<div class="relative rounded-3xl p-8 sm:p-10 
+            bg-gradient-to-br from-blue-50 via-white to-blue-100 
+            border border-blue-100 shadow-lg overflow-hidden">
+
+    <!-- Top Accent Line -->
+    <div class="absolute top-0 left-0 w-full h-1 
+                bg-gradient-to-r from-blue-500 to-blue-600"></div>
+
+    <h3 class="text-lg sm:text-xl font-semibold text-blue-700 mb-6 tracking-wide">
+        Contact for Privacy Matters
+    </h3>
+
+    <div class="space-y-4 text-sm">
+
+        <!-- Email -->
+        <a href="mailto:support@workden.online"
+           class="flex items-center gap-3 text-gray-700 
+                  hover:text-blue-600 transition duration-300">
+
+            <div class="w-9 h-9 rounded-xl bg-blue-100 
+                        flex items-center justify-center text-blue-600">
+                <i class="fas fa-envelope"></i>
+            </div>
+
+            support@workden.online
+        </a>
+
+        <!-- Website -->
+        <a href="https://workden.online"
+           target="_blank"
+           class="flex items-center gap-3 text-gray-700 
+                  hover:text-blue-600 transition duration-300">
+
+            <div class="w-9 h-9 rounded-xl bg-blue-100 
+                        flex items-center justify-center text-blue-600">
+                <i class="fas fa-globe"></i>
+            </div>
+
+            https://workden.online
+        </a>
+
+    </div>
+
+</div>
+
+
+            </div>
+        </div>
+
+    </div>
+
+</main>
+
+
+
+</div>
+
+<footer class="ld-footer">
+  <div class="ld-footer-inner">
+    <div class="ld-footer-bottom">
+      <span>© 2026 WorkDen. All rights reserved. | GSTIN: 10KEJPM6504N1Z7 | MSME: UDYAM-KR-03-0640514</span>
+      <span>info@workden.online</span>
+    </div>
+  </div>
+</footer>
+
+<!-- VERSION SELECTOR MODAL -->
+<div id="verOverlay" onclick="closeVersionModal(event)" style="display:none;position:fixed;inset:0;z-index:9999;background:rgba(10,20,40,0.72);backdrop-filter:blur(4px);align-items:center;justify-content:center;">
+  <div style="background:white;border-radius:20px;padding:40px 32px 32px;max-width:440px;width:92%;box-shadow:0 24px 80px rgba(0,0,0,0.22);text-align:center;position:relative;">
+    <button onclick="document.getElementById('verOverlay').style.display='none'" style="position:absolute;top:14px;right:18px;background:#f1f5f9;border:none;cursor:pointer;width:32px;height:32px;border-radius:50%;font-size:1.1rem;color:#64748b;">✕</button>
+    <div style="display:inline-flex;align-items:center;gap:6px;background:#eff6ff;color:#1d4ed8;font-size:0.72rem;font-weight:700;text-transform:uppercase;padding:5px 12px;border-radius:20px;margin-bottom:14px;">Select Version</div>
+    <div style="font-size:1.35rem;font-weight:800;color:#0f172a;margin-bottom:8px;">Choose Your Login Portal</div>
+    <div style="font-size:0.9rem;color:#64748b;margin-bottom:28px;line-height:1.5;">WorkDen ke do version available hain. Apna version select karein.</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
+      <a href="https://workden-4.base44.app" target="_blank" style="border:2px solid #bfdbfe;border-radius:14px;padding:22px 16px 18px;text-decoration:none;display:flex;flex-direction:column;align-items:center;gap:8px;">
+        <div style="font-size:2rem;font-weight:900;color:#1d4ed8;">4.0</div>
+        <div style="font-size:0.8rem;font-weight:700;color:#475569;">WorkDen 4.0</div>
+        <div style="font-size:0.75rem;color:#94a3b8;">Latest version — upgraded features</div>
+        <div style="margin-top:6px;padding:7px 18px;border-radius:8px;font-size:0.8rem;font-weight:700;background:#1d4ed8;color:white;width:100%;box-sizing:border-box;">Login 4.0</div>
+      </a>
+      <a href="https://workden-3.base44.app" target="_blank" style="border:2px solid #ddd6fe;border-radius:14px;padding:22px 16px 18px;text-decoration:none;display:flex;flex-direction:column;align-items:center;gap:8px;">
+        <div style="font-size:2rem;font-weight:900;color:#7c3aed;">3.0</div>
+        <div style="font-size:0.8rem;font-weight:700;color:#475569;">WorkDen 3.0</div>
+        <div style="font-size:0.75rem;color:#94a3b8;">Previous version — stable interface</div>
+        <div style="margin-top:6px;padding:7px 18px;border-radius:8px;font-size:0.8rem;font-weight:700;background:#7c3aed;color:white;width:100%;box-sizing:border-box;">Login 3.0</div>
+      </a>
+    </div>
+  </div>
+</div>
+<script>
+function showVersionModal(e){if(e)e.preventDefault();document.getElementById("verOverlay").style.display="flex";}
+function closeVersionModal(e){if(e.target===document.getElementById("verOverlay"))document.getElementById("verOverlay").style.display="none";}
+</script>
+</body>
+</html>

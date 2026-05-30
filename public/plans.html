@@ -1,0 +1,918 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Plans – WorkDen Access Plans</title>
+<meta name="description" content="Choose WorkDen plans: Online Typing Work plan and Freelance Telecaller/Affiliate Marketer opportunity.">
+<link rel="icon" href="favicon.png">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="style.css">
+
+<style>
+:root{
+  --brand:#1d4ed8;
+  --brand-2:#2563eb;
+  --brand-dark:#1e3a8a;
+  --brand-pale:#eff6ff;
+  --dark:#0f172a;
+  --mid:#334155;
+  --text:#475569;
+  --muted:#64748b;
+  --surface:#f8fafc;
+  --border:#e2e8f0;
+  --green:#16a34a;
+  --radius-lg:24px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  font-family:'Inter',sans-serif;
+  background:#ffffff;
+  color:var(--text);
+  overflow-x:hidden;
+}
+
+/* ===== NAVBAR ===== */
+.navbar{
+  position:fixed;
+  top:0;left:0;right:0;
+  z-index:999;
+  background:rgba(255,255,255,.84)!important;
+  backdrop-filter:blur(18px);
+  -webkit-backdrop-filter:blur(18px);
+  border-bottom:1px solid rgba(226,232,240,.95);
+  box-shadow:0 8px 30px rgba(15,23,42,.045);
+  transition:.28s ease;
+}
+.navbar.scrolled{box-shadow:0 16px 45px rgba(15,23,42,.12)}
+.nav-inner{
+  max-width:1200px;margin:0 auto;padding:11px 28px;
+  display:flex;align-items:center;justify-content:space-between;gap:18px;
+}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none;padding:8px 10px;border-radius:16px;transition:.25s ease;}
+.nav-logo:hover{background:#f8fafc;transform:translateY(-2px)}
+.nav-logo img{width:36px;height:36px;object-fit:contain;filter:drop-shadow(0 8px 18px rgba(29,78,216,.18))}
+.nav-logo-text{font-size:1.15rem;font-weight:900;color:#0f172a;letter-spacing:-.035em}
+.nav-links{list-style:none;display:flex;align-items:center;gap:2px;margin:0;padding:7px;background:#ffffff;border:1px solid var(--border);border-radius:999px;box-shadow:0 10px 30px rgba(15,23,42,.05);}
+.nav-links a{display:flex;align-items:center;text-decoration:none;color:#475569;font-size:.82rem;font-weight:800;border-radius:999px;padding:9px 13px;transition:.22s ease;}
+.nav-links a:hover,.nav-links a.active{background:#eff6ff;color:var(--brand);}
+.nav-ctas{display:flex;gap:10px;align-items:center}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border-radius:999px;padding:10px 18px;font-size:.84rem;font-weight:850;text-decoration:none;border:none;cursor:pointer;transition:transform .22s ease,box-shadow .22s ease,background .22s ease,color .22s ease;white-space:nowrap;}
+.btn:hover{transform:translateY(-2px)}
+.btn-primary{background:linear-gradient(135deg,#1d4ed8,#2563eb);color:#fff;box-shadow:0 12px 30px rgba(37,99,235,.25);}
+.btn-primary:hover{box-shadow:0 18px 42px rgba(37,99,235,.34)}
+.btn-ghost{background:#fff;color:#1d4ed8;border:1px solid #dbeafe;box-shadow:0 8px 22px rgba(15,23,42,.05);}
+.hamburger{display:none;width:42px;height:42px;border-radius:14px;border:1px solid var(--border);background:white;color:#0f172a;font-size:1rem;}
+.mobile-nav{position:fixed;inset:0 0 auto auto;width:min(330px,92vw);min-height:100vh;z-index:1000;background:white;box-shadow:-24px 0 80px rgba(15,23,42,.18);padding:26px;transform:translateX(110%);transition:.32s cubic-bezier(.34,1.56,.64,1);display:flex;flex-direction:column;gap:10px;}
+.mobile-nav.open{transform:translateX(0)}
+.mobile-nav a{color:#334155;text-decoration:none;padding:12px 14px;border-radius:14px;font-weight:800;}
+.mobile-nav a.active,.mobile-nav a:hover{background:#eff6ff;color:#1d4ed8}
+.mobile-nav-close{align-self:flex-end;width:38px;height:38px;border-radius:50%;border:0;background:#f1f5f9;color:#64748b;cursor:pointer;}
+
+/* ===== HERO ===== */
+.page-hero{position:relative;padding:138px 0 72px;overflow:hidden;}
+.page-hero::before{content:"";position:absolute;width:560px;height:560px;border-radius:50%;right:-210px;top:-240px;background:linear-gradient(135deg,rgba(29,78,216,.16),rgba(6,182,212,.08));filter:blur(2px);animation:floatOrb 8s ease-in-out infinite;}
+.page-hero::after{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(15,23,42,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(15,23,42,.04) 1px,transparent 1px);background-size:44px 44px;mask-image:linear-gradient(to bottom,rgba(0,0,0,.55),transparent 78%);pointer-events:none;}
+@keyframes floatOrb{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(-22px,28px) scale(1.04)}}
+.page-hero-inner{position:relative;z-index:2;max-width:860px;margin:0 auto;text-align:center;padding:0 28px;animation:heroIn .8s ease both;}
+@keyframes heroIn{from{opacity:0;transform:translateY(34px) scale(.98)}to{opacity:1;transform:translateY(0) scale(1)}}
+.section-label{display:inline-flex;align-items:center;gap:8px;padding:7px 13px;border-radius:999px;background:#ffffff;border:1px solid #dbeafe;color:#1d4ed8;font-size:.74rem;font-weight:900;text-transform:uppercase;letter-spacing:.08em;box-shadow:0 10px 28px rgba(29,78,216,.08);}
+.page-hero h1{font-size:clamp(2.1rem,5vw,4.1rem);line-height:1.03;letter-spacing:-.06em;font-weight:900;color:#0f172a;margin:18px 0 16px;}
+.gradient-text{background:linear-gradient(135deg,#1d4ed8,#06b6d4,#7c3aed);-webkit-background-clip:text;background-clip:text;color:transparent;}
+.page-hero p{max-width:700px;margin:0 auto 26px;color:#64748b;font-size:1.02rem;line-height:1.75;}
+.hero-pills{display:flex;justify-content:center;flex-wrap:wrap;gap:10px;}
+.hero-pills span{display:inline-flex;align-items:center;gap:7px;background:rgba(255,255,255,.78);border:1px solid #e2e8f0;padding:9px 13px;border-radius:999px;color:#334155;font-size:.8rem;font-weight:800;box-shadow:0 10px 28px rgba(15,23,42,.055);animation:pillFloat 3s ease-in-out infinite;}
+.hero-pills span:nth-child(2){animation-delay:.3s}
+.hero-pills span:nth-child(3){animation-delay:.6s}
+@keyframes pillFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+
+/* ===== DARK PRICING SECTION — matches React component exactly ===== */
+.plans-section{padding:0 0 0;position:relative;}
+
+.pricing-dark-wrap{
+  padding:42px 0 102px;
+  position:relative;
+  z-index:2;
+}
+/* Subtle grid lines — bg-[linear-gradient(to_right,#ffffff2c_1px...] */
+.pricing-dark-wrap::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background-image:linear-gradient(to right,rgba(255,255,255,.17) 1px,transparent 1px),linear-gradient(to bottom,rgba(58,58,58,.01) 1px,transparent 1px);
+  background-size:70px 80px;
+  pointer-events:none;
+  z-index:0;
+  mask-image:radial-gradient(50% 50%,white,transparent);
+  -webkit-mask-image:radial-gradient(50% 50%,white,transparent);
+}
+/* Blue ellipse glow overlay */
+.pricing-glow{
+  position:absolute;
+  left:10%;top:0;
+  width:80%;height:100%;
+  background:radial-gradient(circle at center,#206ce8 0%,transparent 70%);
+  opacity:.6;
+  mix-blend-mode:multiply;
+  pointer-events:none;
+  z-index:0;
+}
+/* Blue border ellipse blur — component's Ellipse 1 & 2 */
+.pricing-ellipse{
+  position:absolute;
+  left:-568px;right:-568px;top:-114px;
+  height:2053px;
+  border-radius:50%;
+  border:200px solid #3131f5;
+  filter:blur(92px);
+  pointer-events:none;
+  z-index:0;
+  opacity:.5;
+}
+/* Sparkles canvas */
+.pricing-sparkles{
+  position:absolute;
+  top:0;left:0;right:0;
+  height:384px;
+  overflow:hidden;
+  mask-image:radial-gradient(50% 50%,white,transparent 85%);
+  -webkit-mask-image:radial-gradient(50% 50%,white,transparent 85%);
+  pointer-events:none;
+  z-index:1;
+}
+#sparkleCanvas{position:absolute;inset:0;width:100%;height:100%;}
+
+/* Article header — pt-32 max-w-3xl */
+.pricing-header{
+  position:relative;
+  z-index:10;
+  text-align:center;
+  padding:96px 28px 32px;
+  max-width:768px;
+  margin:0 auto;
+}
+.pricing-header h2{
+  font-size:clamp(2rem,4vw,2.6rem);
+  font-weight:700;
+  color:#111827;
+  margin:0 0 12px;
+  line-height:1.2;
+}
+.pricing-header p{
+  color:#4b5563;
+  font-size:1.1rem;
+  margin:0 0 24px;
+  line-height:1.6;
+}
+
+/* Toggle — matches component's PricingSwitch */
+.pricing-toggle{display:flex;justify-content:center;margin-bottom:4px;}
+.toggle-inner{
+  position:relative;
+  display:inline-flex;
+  align-items:center;
+  background:#f3f4f6;
+  border:1px solid #e5e7eb;
+  padding:4px;
+  border-radius:999px;
+}
+.toggle-pill{
+  position:absolute;
+  top:4px;left:4px;
+  height:40px;
+  border-radius:999px;
+  background:linear-gradient(to top,#3b82f6,#2563eb);
+  border:4px solid #2563eb;
+  box-shadow:0 4px 6px -1px rgba(37,99,235,.4), 0 2px 4px -2px rgba(37,99,235,.4);
+  transition:left .4s cubic-bezier(.175,.885,.32,1.15), width .4s cubic-bezier(.175,.885,.32,1.15);
+  pointer-events:none;
+  z-index:0;
+}
+.toggle-btn{
+  position:relative;
+  z-index:10;
+  padding:12px 28px;
+  border-radius:999px;
+  border:none;
+  background:transparent;
+  color:#6b7280;
+  font-weight:600;
+  font-size:1rem;
+  font-family:'Inter',sans-serif;
+  cursor:pointer;
+  transition:color .3s ease;
+}
+.toggle-btn.active{
+  color:#ffffff;
+}
+
+/* Cards grid — md:grid-cols-3 max-w-5xl gap-4 */
+.plan-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:16px;
+  max-width:1024px;
+  margin:0 auto;
+  padding:24px 28px 60px;
+  position:relative;
+  z-index:10;
+  align-items:stretch;
+}
+
+/* ─── Card entrance animation — fly up from below with blur ─── */
+@keyframes cardIn{
+  0%  { opacity:0; transform:translateY(52px) scale(.95); filter:blur(8px); }
+  70% { filter:blur(0px); }
+  100%{ opacity:1; transform:translateY(0) scale(1); filter:blur(0px); }
+}
+
+.plan-card{
+  background:#ffffff;
+  border:1px solid #e5e7eb;
+  border-radius:16px;
+  display:flex;
+  flex-direction:column;
+  overflow:hidden;
+  position:relative;
+  transition:all .3s cubic-bezier(.22,1,.36,1);
+  opacity:0;
+  transform:translateY(30px);
+  will-change:transform,opacity;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+}
+.plan-card.revealed{
+  animation: cardIn .7s cubic-bezier(.22,1,.36,1) both;
+}
+.plan-card:hover{
+  transform:translateY(-6px);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+}
+.plan-card.popular{
+  box-shadow: 0px 8px 40px rgba(59,130,246,0.15);
+  z-index:20;
+  border-color:#3b82f6;
+  border-width:2px;
+}
+.plan-card.popular:hover{
+  box-shadow: 0px 14px 50px rgba(59,130,246,0.25);
+  transform: translateY(-8px);
+}
+
+@keyframes shimmerSweep{
+  0%   { left:-60%; }
+  100% { left:130%; }
+}
+.plan-card .card-shimmer{
+  position:absolute;
+  top:0; left:-60%;
+  width:45%; height:100%;
+  background:linear-gradient(90deg,
+    transparent 0%,
+    rgba(0,0,0,.03) 50%,
+    transparent 100%);
+  pointer-events:none;
+  z-index:5;
+  opacity:0;
+}
+.plan-card:hover .card-shimmer{
+  opacity:1;
+  animation: shimmerSweep .65s ease forwards;
+}
+
+.card-header{
+  padding:24px 24px 0;
+}
+.card-plan-name{
+  font-size:1.6rem;
+  font-weight:700;
+  color:#111827;
+  margin:0 0 8px;
+  line-height:1.2;
+}
+.card-price-row{
+  display:flex;
+  align-items:baseline;
+  margin:0 0 4px;
+}
+.card-currency{
+  font-size:2rem;
+  font-weight:700;
+  color:#111827;
+}
+.card-amount{
+  font-size:2.8rem;
+  font-weight:800;
+  color:#111827;
+  line-height:1;
+  letter-spacing:-.03em;
+}
+.card-period{
+  color:#6b7280;
+  font-size:.9rem;
+  margin-left:4px;
+  font-weight:500;
+}
+.card-free{
+  font-size:2.25rem;
+  font-weight:800;
+  color:#10b981;
+  line-height:1;
+}
+.card-desc{
+  font-size:.9rem;
+  color:#4b5563;
+  line-height:1.6;
+  margin:0 0 16px;
+}
+
+.card-content{
+  padding:0 24px 24px;
+  display:flex;
+  flex-direction:column;
+  flex:1;
+}
+
+.card-btn{
+  display:block;
+  width:100%;
+  padding:16px;
+  font-size:1.25rem;
+  font-weight:500;
+  border-radius:12px;
+  text-align:center;
+  text-decoration:none;
+  cursor:pointer;
+  border:none;
+  margin-bottom:24px;
+  font-family:'Inter',sans-serif;
+  transition:opacity .2s, transform .2s;
+}
+.card-btn:hover{opacity:.9;transform:translateY(-1px);}
+
+.btn-popular{
+  background:#2563eb;
+  color:#ffffff;
+}
+.btn-outline{
+  background:#111827;
+  color:#ffffff;
+}
+
+.card-divider{
+  border:none;
+  border-top:1px solid #e5e7eb;
+  margin:0 0 16px;
+}
+
+.card-feat-title{
+  font-size:1.05rem;
+  font-weight:700;
+  color:#111827;
+  margin:0 0 12px;
+}
+
+.card-feat-list{
+  list-style:none;
+  padding:0;margin:0;
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  flex:1;
+}
+.card-feat-list li{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-size:.95rem;
+  color:#4b5563;
+  font-weight:500;
+}
+.feat-dot{
+  width:10px;
+  height:10px;
+  border-radius:50%;
+  background:#d1d5db;
+  flex-shrink:0;
+  display:grid;
+  place-content:center;
+}
+
+.card-refund-note{
+  margin-top:16px;
+  padding:12px 14px;
+  border-radius:10px;
+  background:#fffbeb;
+  border:1px solid #fde68a;
+  color:#92400e;
+  font-size:.85rem;
+  font-weight:600;
+}
+@keyframes refundPulse{
+  0%,100%{ box-shadow:0 0 0 0 rgba(217,119,6,.0); }
+  50%     { box-shadow:0 0 12px 4px rgba(217,119,6,.2); }
+}
+
+/* ===== VALUE SECTION ===== */
+.value-section{padding:8px 0 92px;}
+.section-inner{max-width:1200px;margin:0 auto;padding:0 28px;}
+.value-strip{background:radial-gradient(circle at 10% 10%,rgba(29,78,216,.13),transparent 28%),linear-gradient(135deg,#0f172a,#1e3a8a 72%,#2563eb);border-radius:32px;padding:34px;color:white;overflow:hidden;position:relative;box-shadow:0 30px 90px rgba(29,78,216,.24);}
+.value-strip::before{content:"";position:absolute;width:290px;height:290px;border-radius:50%;background:rgba(255,255,255,.10);right:-110px;top:-120px;animation:floatOrb 7s ease-in-out infinite;}
+.value-grid{display:grid;grid-template-columns:1.1fr repeat(3,1fr);gap:18px;position:relative;z-index:1;}
+.value-title h2{margin:0 0 10px;font-size:clamp(1.55rem,3vw,2.2rem);letter-spacing:-.045em;line-height:1.1;}
+.value-title p{margin:0;color:rgba(255,255,255,.72);line-height:1.65;font-size:.92rem;}
+.value-mini{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);border-radius:22px;padding:20px;transition:.25s ease;}
+.value-mini:hover{transform:translateY(-7px);background:rgba(255,255,255,.12);}
+.value-mini i{width:42px;height:42px;border-radius:14px;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.12);color:#bfdbfe;margin-bottom:14px;}
+.value-mini strong{display:block;color:white;font-size:.95rem;margin-bottom:6px;}
+.value-mini span{color:rgba(255,255,255,.68);font-size:.8rem;line-height:1.55;}
+
+/* ===== FOOTER ===== */
+.simple-footer{background:#0f172a!important;color:#cbd5e1!important;border-top:none!important;padding:0!important;overflow:hidden;position:relative;}
+.simple-footer-inner{max-width:1200px;margin:0 auto;padding:52px 28px 22px;}
+.simple-footer-top{display:grid;grid-template-columns:1.45fr .8fr .9fr 1.05fr;gap:34px;}
+.simple-footer-logo{display:flex;align-items:center;gap:10px;margin-bottom:14px;}
+.simple-footer-logo img{width:38px;height:38px;object-fit:contain;filter:drop-shadow(0 8px 20px rgba(59,130,246,.25));}
+.simple-footer-logo span{color:#ffffff;font-weight:900;font-size:1.35rem;letter-spacing:-.03em;}
+.simple-footer-brand p{color:#94a3b8;font-size:.9rem;line-height:1.75;margin:0 0 16px;max-width:390px;}
+.simple-footer-badges{display:flex;flex-wrap:wrap;gap:8px;}
+.simple-footer-badges span{display:inline-flex;align-items:center;gap:6px;color:#dbeafe;background:rgba(59,130,246,.10);border:1px solid rgba(147,197,253,.22);border-radius:999px;padding:7px 10px;font-size:.72rem;font-weight:800;}
+.simple-footer-badges i{color:#22c55e;}
+.simple-footer-col h4{color:#ffffff;font-size:.9rem;font-weight:900;margin:0 0 14px;letter-spacing:.02em;}
+.simple-footer-col a,.simple-footer-contact p{display:flex;align-items:flex-start;gap:9px;color:#94a3b8!important;text-decoration:none;font-size:.84rem;font-weight:600;line-height:1.5;margin:0 0 10px;transition:color .2s ease,transform .2s ease;}
+.simple-footer-col a:hover{color:#ffffff!important;transform:translateX(3px);}
+.simple-footer-contact i{color:#60a5fa;margin-top:2px;min-width:14px;}
+.simple-footer-verify{margin-top:16px;background:rgba(255,255,255,.04);border:1px solid rgba(148,163,184,.18);border-radius:14px;padding:13px;display:flex;flex-direction:column;gap:5px;color:#94a3b8;font-size:.76rem;}
+.simple-footer-verify strong{color:#e2e8f0;font-size:.8rem;margin-bottom:2px;}
+.simple-socials{display:flex;gap:9px;margin-top:14px;}
+.simple-socials a{width:36px;height:36px;border-radius:50%;display:flex!important;align-items:center!important;justify-content:center!important;background:rgba(255,255,255,.06);border:1px solid rgba(148,163,184,.18);color:#cbd5e1!important;margin:0!important;padding:0!important;}
+.simple-socials a:hover{background:#2563eb;color:#fff!important;transform:translateY(-3px)!important;}
+.simple-footer-bottom{border-top:1px solid rgba(148,163,184,.18);margin-top:32px;padding-top:18px;display:flex;align-items:center;justify-content:space-between;gap:12px;color:#94a3b8;font-size:.8rem;font-weight:700;}
+
+/* Modal */
+#verOverlay .ver-modal-card{animation:modalPop .24s ease both;}
+@keyframes modalPop{from{opacity:0;transform:scale(.92) translateY(20px)}to{opacity:1;transform:scale(1) translateY(0)}}
+
+/* ── Scroll reveal ── */
+.reveal-up{opacity:0;transform:translateY(36px);transition:opacity .68s ease,transform .68s ease;}
+.reveal-up.revealed{opacity:1;transform:translateY(0);}
+
+/* ── Price count-up animation ── */
+@keyframes priceIn{
+  from{ opacity:0; transform:translateY(12px); }
+  to  { opacity:1; transform:translateY(0); }
+}
+.card-amount, .card-free, .card-currency{
+  animation: priceIn .5s cubic-bezier(.22,1,.36,1) both;
+  animation-delay:.3s;
+}
+
+@media(max-width:900px){
+  .nav-links{display:none}
+  .hamburger{display:block}
+  .plan-grid{grid-template-columns:1fr;max-width:480px;}
+  .value-grid{grid-template-columns:1fr 1fr}
+  .simple-footer-top{grid-template-columns:1fr 1fr}
+}
+@media(max-width:640px){
+  .nav-inner{padding:10px 16px}
+  .nav-ctas{display:none}
+  .page-hero{padding:120px 0 56px}
+  .page-hero h1{font-size:2.25rem}
+  .plan-grid{padding:16px 16px 40px;}
+  .value-grid{grid-template-columns:1fr}
+  .value-strip{padding:24px;border-radius:26px}
+  .simple-footer-inner{padding:42px 18px 20px}
+  .simple-footer-top{grid-template-columns:1fr;gap:26px}
+  .simple-footer-bottom{flex-direction:column;align-items:flex-start}
+}
+</style>
+</head>
+
+<body>
+
+<nav class="navbar" id="navbar">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <img src="workden-logo.png" alt="WorkDen">
+      <span class="nav-logo-text">WorkDen</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About Us</a></li>
+      <li><a href="projects.html">Projects</a></li>
+      <li><a href="plans.html" class="active">Plans</a></li>
+      <li><a href="demo-task.html">Demo Task</a></li>
+      <li><a href="testimonials.html">Testimonials</a></li>
+      <li><a href="blogs.html">Blogs</a></li>
+    </ul>
+    <div class="nav-ctas">
+      <a href="#" onclick="showVersionModal(event)" class="btn btn-ghost">User Login</a>
+      <a href="https://workdenteam2.base44.app/" class="btn btn-primary">Employee Login</a>
+    </div>
+    <button class="hamburger" onclick="toggleNav()"><i class="fas fa-bars"></i></button>
+  </div>
+</nav>
+
+<div class="mobile-nav" id="mobNav">
+  <button class="mobile-nav-close" onclick="toggleNav()"><i class="fas fa-times"></i></button>
+  <a href="index.html">Home</a>
+  <a href="about.html">About Us</a>
+  <a href="projects.html">Projects</a>
+  <a href="plans.html" class="active">Plans</a>
+  <a href="demo-task.html">Demo Task</a>
+  <a href="testimonials.html">Testimonials</a>
+  <a href="blogs.html">Blogs</a>
+  <div style="margin-top:12px;display:flex;flex-direction:column;gap:8px;">
+    <a href="#" onclick="showVersionModal(event)" class="btn btn-ghost">User Login</a>
+    <a href="https://workdenteam2.base44.app/" class="btn btn-primary">Employee Login</a>
+  </div>
+</div>
+
+<header class="page-hero">
+  <div class="page-hero-inner">
+    <span class="section-label"><i class="fas fa-crown"></i> WorkDen Plans</span>
+    <h1>Choose Your <span class="gradient-text">WorkDen Access</span> Plan</h1>
+    <p>Online task work start karna ho ya WorkDen ke saath freelance telecalling/affiliate marketing opportunity join karni ho — dono options clear, simple aur professional way me available hain.</p>
+    <div class="hero-pills">
+      <span><i class="fas fa-shield-halved" style="color:#16a34a"></i> GSTIN &amp; MSME Verified</span>
+      <span><i class="fas fa-bolt" style="color:#f59e0b"></i> Fast Onboarding</span>
+      <span><i class="fas fa-headset" style="color:#1d4ed8"></i> Live Support</span>
+    </div>
+  </div>
+</header>
+
+<!-- ====== DARK PRICING SECTION — exact match to React component ====== -->
+<section class="plans-section">
+  <div class="pricing-dark-wrap">
+
+    <!-- Sparkles canvas -->
+    <div class="pricing-sparkles">
+      <canvas id="sparkleCanvas"></canvas>
+    </div>
+    <!-- Blue ellipse glow -->
+    <div class="pricing-ellipse"></div>
+    <!-- Radial glow -->
+    <div class="pricing-glow"></div>
+
+    <!-- Header — matches <article className="text-center mb-6 pt-32 ..."> -->
+    <div class="pricing-header">
+      <h2>Plans that work best for you</h2>
+      <p>Trusted by thousands of workers across India. Transparent pricing, no hidden fees.</p>
+      <!-- Toggle switch -->
+      <div class="pricing-toggle">
+        <div class="toggle-inner" id="toggleWrap">
+          <div class="toggle-pill" id="togglePill"></div>
+          <button class="toggle-btn active" id="btnPaid" onclick="switchPlan('paid')">₹999 Plan</button>
+          <button class="toggle-btn" id="btnFree" onclick="switchPlan('free')">Free Plan</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Cards grid — grid md:grid-cols-3 max-w-5xl gap-4 -->
+    <div class="plan-grid" id="planGrid">
+
+      <!-- ─── CARD 1: Online Typing Work (₹999) — popular, blue glow ─── -->
+      <article class="plan-card popular" id="card-paid-1">
+        <div class="card-header">
+          <h3 class="card-plan-name">Online Typing Work</h3>
+          <div class="card-price-row">
+            <span class="card-currency">₹</span>
+            <span class="card-amount">999</span>
+            <span class="card-period">/one-time</span>
+          </div>
+          <p class="card-desc">Task portal access ke saath training, VIP ID card aur priority support included. Ghar baithe kaam shuru karo.</p>
+        </div>
+        <div class="card-content">
+          <hr class="card-divider">
+          <h4 class="card-feat-title">What's included:</h4>
+          <ul class="card-feat-list">
+            <li><span class="feat-dot"></span> Full Access to All Tasks</li>
+            <li><span class="feat-dot"></span> Professional VIP ID Card</li>
+            <li><span class="feat-dot"></span> Complete Training + Live Webinar</li>
+            <li><span class="feat-dot"></span> Live + Priority Support</li>
+            <li><span class="feat-dot"></span> Easy &amp; Less Tasks Daily</li>
+            <li><span class="feat-dot"></span> Fast Task Approval</li>
+            <li><span class="feat-dot"></span> Min. Withdrawal: ₹500</li>
+            <li><span class="feat-dot"></span> No Maximum Earning Limit</li>
+          </ul>
+          <div class="card-refund-note">
+            ⚠️ <strong>Note:</strong> Refund is not available once the ID is activated. Please read all terms before purchasing.
+          </div>
+        </div>
+      </article>
+
+      <!-- ─── CARD 2: Freelance Telecaller (Free) ─── -->
+      <article class="plan-card" id="card-free-1">
+        <div class="card-header">
+          <h3 class="card-plan-name">Freelance Telecaller</h3>
+          <div class="card-price-row">
+            <span class="card-free">Free</span>
+          </div>
+          <p class="card-desc">Calling, follow-up aur affiliate promotion ke through WorkDen opportunity explain karo. Zero investment required.</p>
+        </div>
+        <div class="card-content">
+          <hr class="card-divider">
+          <h4 class="card-feat-title">What's included:</h4>
+          <ul class="card-feat-list">
+            <li><span class="feat-dot"></span> Free Registration — ₹0</li>
+            <li><span class="feat-dot"></span> Work From Home Calling</li>
+            <li><span class="feat-dot"></span> Affiliate Marketing Support</li>
+            <li><span class="feat-dot"></span> Basic Platform Training</li>
+            <li><span class="feat-dot"></span> Flexible Working Hours</li>
+            <li><span class="feat-dot"></span> Performance-Based Growth</li>
+            <li><span class="feat-dot"></span> Weekly Payout via UPI/Bank</li>
+            <li><span class="feat-dot"></span> Community Access &amp; Support</li>
+          </ul>
+        </div>
+      </article>
+
+      <!-- ─── CARD 3: Affiliate Marketer (Free) ─── -->
+      <article class="plan-card" id="card-free-2">
+        <div class="card-header">
+          <h3 class="card-plan-name">Affiliate Marketer</h3>
+          <div class="card-price-row">
+            <span class="card-free">Free</span>
+          </div>
+          <p class="card-desc">WorkDen ke products promote karo aur har successful referral par commission kamao. No targets, no pressure.</p>
+        </div>
+        <div class="card-content">
+          <hr class="card-divider">
+          <h4 class="card-feat-title">What's included:</h4>
+          <ul class="card-feat-list">
+            <li><span class="feat-dot"></span> Referral Commission on Every Sale</li>
+            <li><span class="feat-dot"></span> Dedicated Affiliate Dashboard</li>
+            <li><span class="feat-dot"></span> Marketing Materials Provided</li>
+            <li><span class="feat-dot"></span> Social Media Promotion Tools</li>
+            <li><span class="feat-dot"></span> No Target Pressure</li>
+            <li><span class="feat-dot"></span> Work Anytime, Anywhere</li>
+            <li><span class="feat-dot"></span> Instant Payout on Approval</li>
+            <li><span class="feat-dot"></span> Dedicated Affiliate Support</li>
+          </ul>
+        </div>
+      </article>
+
+    </div><!-- /plan-grid -->
+  </div><!-- /pricing-dark-wrap -->
+</section>
+
+<!-- ===== VALUE SECTION ===== -->
+<section class="value-section">
+  <div class="section-inner">
+    <div class="value-strip reveal-up">
+      <div class="value-grid">
+        <div class="value-title">
+          <h2>Why choose WorkDen plans?</h2>
+          <p>Har plan ko clear role ke according design kiya gaya hai — task work ke liye paid access aur freelance marketing/calling ke liye free joining option.</p>
+        </div>
+        <div class="value-mini">
+          <i class="fas fa-layer-group"></i>
+          <strong>Structured System</strong>
+          <span>Portal, tasks, support aur training ek proper flow me available.</span>
+        </div>
+        <div class="value-mini">
+          <i class="fas fa-user-shield"></i>
+          <strong>Verified Platform</strong>
+          <span>GSTIN, MSME aur transparent policies ke saath professional setup.</span>
+        </div>
+        <div class="value-mini">
+          <i class="fas fa-headset"></i>
+          <strong>Support Focused</strong>
+          <span>Training, live support aur guidance se users ko clarity milti hai.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer simple-footer">
+  <div class="simple-footer-inner">
+    <div class="simple-footer-top">
+      <div class="simple-footer-brand">
+        <div class="simple-footer-logo">
+          <img src="workden-logo.png" alt="WorkDen">
+          <span>WorkDen</span>
+        </div>
+        <p>A verified digital task platform delivering structured online work opportunities with transparency, secure workflow, and compliance. GSTIN &amp; MSME registered.</p>
+        <div class="simple-footer-badges">
+          <span><i class="fas fa-circle-check"></i> GSTIN Verified</span>
+          <span><i class="fas fa-circle-check"></i> MSME Registered</span>
+          <span><i class="fas fa-circle-check"></i> Est. 2024</span>
+        </div>
+      </div>
+      <div class="simple-footer-col">
+        <h4>Company</h4>
+        <a href="index.html">Home</a>
+        <a href="about.html">About Us</a>
+        <a href="projects.html">Projects</a>
+        <a href="plans.html">Plans</a>
+        <a href="demo-task.html">Demo Task</a>
+        <a href="testimonials.html">Testimonials</a>
+        <a href="blogs.html">Blogs</a>
+      </div>
+      <div class="simple-footer-col">
+        <h4>Legal</h4>
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="terms.html">Terms &amp; Conditions</a>
+        <a href="disclaimer.html">Disclaimer</a>
+        <a href="refund.html">Refund Policy</a>
+        <div class="simple-footer-verify">
+          <strong>Business Verification</strong>
+          <span>GSTIN: 10KEJPM6504N1Z7</span>
+          <span>MSME: UDYAM-KR-03-0640514</span>
+        </div>
+      </div>
+      <div class="simple-footer-col simple-footer-contact">
+        <h4>Contact</h4>
+        <a href="mailto:info@workden.online"><i class="fas fa-envelope"></i> info@workden.online</a>
+        <a href="mailto:support@workden.online"><i class="fas fa-headset"></i> support@workden.online</a>
+        <p><i class="fas fa-location-dot"></i> Ashok Nagar, Bangalore – 560001</p>
+        <p><i class="fas fa-location-dot"></i> Parsuram Pur, Motihari – 845416</p>
+        <div class="simple-socials">
+          <a href="https://www.facebook.com/people/Workden-India/61583820256534/" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://www.instagram.com/workden_wfh" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="https://www.linkedin.com/in/workden-india-315391383/" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+          <a href="https://t.me/+f_s3cLM1WwYxNjE1" target="_blank" aria-label="Telegram"><i class="fab fa-telegram-plane"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="simple-footer-bottom">
+      <span>© 2026 WorkDen. All rights reserved.</span>
+      <span>Structured Digital Task Platform</span>
+    </div>
+  </div>
+</footer>
+
+<!-- VERSION MODAL -->
+<div id="verOverlay" onclick="closeVersionModal(event)" style="display:none;position:fixed;inset:0;z-index:9999;background:rgba(10,20,40,0.72);backdrop-filter:blur(4px);align-items:center;justify-content:center;">
+  <div class="ver-modal-card" style="background:white;border-radius:20px;padding:40px 32px 32px;max-width:440px;width:92%;box-shadow:0 24px 80px rgba(0,0,0,0.22);text-align:center;position:relative;">
+    <button onclick="document.getElementById('verOverlay').style.display='none'" style="position:absolute;top:14px;right:18px;background:#f1f5f9;border:none;cursor:pointer;width:32px;height:32px;border-radius:50%;font-size:1.1rem;color:#64748b;">✕</button>
+    <div style="display:inline-flex;align-items:center;gap:6px;background:#eff6ff;color:#1d4ed8;font-size:0.72rem;font-weight:700;text-transform:uppercase;padding:5px 12px;border-radius:20px;margin-bottom:14px;">Select Version</div>
+    <div style="font-size:1.35rem;font-weight:800;color:#0f172a;margin-bottom:8px;">Choose Your Login Portal</div>
+    <div style="font-size:0.9rem;color:#64748b;margin-bottom:28px;line-height:1.5;">WorkDen ke do version available hain. Apna version select karein.</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
+      <a href="https://workden-4.base44.app" target="_blank" style="border:2px solid #bfdbfe;border-radius:14px;padding:22px 16px 18px;text-decoration:none;display:flex;flex-direction:column;align-items:center;gap:8px;">
+        <div style="font-size:2rem;font-weight:900;color:#1d4ed8;">4.0</div>
+        <div style="font-size:0.8rem;font-weight:700;color:#475569;">WorkDen 4.0</div>
+        <div style="font-size:0.75rem;color:#94a3b8;">Latest version — upgraded features</div>
+        <div style="margin-top:6px;padding:7px 18px;border-radius:8px;font-size:0.8rem;font-weight:700;background:#1d4ed8;color:white;width:100%;box-sizing:border-box;">Login 4.0</div>
+      </a>
+      <a href="https://workden-3.base44.app" target="_blank" style="border:2px solid #ddd6fe;border-radius:14px;padding:22px 16px 18px;text-decoration:none;display:flex;flex-direction:column;align-items:center;gap:8px;">
+        <div style="font-size:2rem;font-weight:900;color:#7c3aed;">3.0</div>
+        <div style="font-size:0.8rem;font-weight:700;color:#475569;">WorkDen 3.0</div>
+        <div style="font-size:0.75rem;color:#94a3b8;">Previous version — stable interface</div>
+        <div style="margin-top:6px;padding:7px 18px;border-radius:8px;font-size:0.8rem;font-weight:700;background:#7c3aed;color:white;width:100%;box-sizing:border-box;">Login 3.0</div>
+      </a>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ── Navbar scroll ── */
+window.addEventListener('scroll',()=>{
+  document.getElementById('navbar').classList.toggle('scrolled',window.scrollY>20);
+});
+function toggleNav(){
+  document.getElementById('mobNav').classList.toggle('open');
+}
+function showVersionModal(e){
+  if(e)e.preventDefault();
+  document.getElementById("verOverlay").style.display="flex";
+}
+function closeVersionModal(e){
+  if(e.target===document.getElementById("verOverlay")){
+    document.getElementById("verOverlay").style.display="none";
+  }
+}
+
+/* ── Toggle switch ── */
+function switchPlan(type){
+  const pill = document.getElementById('togglePill');
+  const btnPaid = document.getElementById('btnPaid');
+  const btnFree = document.getElementById('btnFree');
+  const card1 = document.getElementById('card-paid-1');
+  const card2 = document.getElementById('card-free-1');
+  const card3 = document.getElementById('card-free-2');
+
+  if(type === 'paid'){
+    btnPaid.classList.add('active');
+    btnFree.classList.remove('active');
+    pill.style.left = '4px';
+    pill.style.width = btnPaid.offsetWidth + 'px';
+    // Show paid card + free cards all
+    card1.style.display = '';
+    card2.style.display = '';
+    card3.style.display = '';
+    card1.classList.add('popular');
+    card2.classList.remove('popular');
+    card3.classList.remove('popular');
+  } else {
+    btnFree.classList.add('active');
+    btnPaid.classList.remove('active');
+    pill.style.left = (btnPaid.offsetLeft + btnPaid.offsetWidth) + 'px';
+    pill.style.width = btnFree.offsetWidth + 'px';
+    // Hide paid card, show free cards
+    card1.style.display = 'none';
+    card2.style.display = '';
+    card3.style.display = '';
+    card2.classList.add('popular');
+    card3.classList.remove('popular');
+  }
+}
+
+/* ── Init toggle pill size ── */
+window.addEventListener('load', ()=>{
+  const pill = document.getElementById('togglePill');
+  const btnPaid = document.getElementById('btnPaid');
+  pill.style.width = btnPaid.offsetWidth + 'px';
+  pill.style.left = '4px';
+});
+
+/* ── Sparkles canvas ── */
+(function(){
+  const canvas = document.getElementById('sparkleCanvas');
+  if(!canvas) return;
+  const ctx = canvas.getContext('2d');
+  let w, h, particles = [], raf;
+
+  function init(){
+    w = canvas.width = canvas.offsetWidth;
+    h = canvas.height = canvas.offsetHeight;
+    const count = Math.min(Math.floor(w * h / 800), 500);
+    particles = Array.from({length: count}, () => ({
+      x: Math.random()*w, y: Math.random()*h,
+      r: Math.random()*1+0.3,
+      o: Math.random(),
+      od: (Math.random()*0.015+0.003)*(Math.random()>.5?1:-1),
+      dx: (Math.random()-.5)*0.3,
+      dy: (Math.random()-.5)*0.3,
+    }));
+  }
+
+  function draw(){
+    ctx.clearRect(0,0,w,h);
+    for(const p of particles){
+      p.x += p.dx; p.y += p.dy; p.o += p.od;
+      if(p.o<=0||p.o>=1) p.od*=-1;
+      if(p.x<0)p.x=w; if(p.x>w)p.x=0;
+      if(p.y<0)p.y=h; if(p.y>h)p.y=0;
+      ctx.beginPath();
+      ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+      ctx.fillStyle = `rgba(255,255,255,${Math.max(0,Math.min(1,p.o))})`;
+      ctx.fill();
+    }
+    raf = requestAnimationFrame(draw);
+  }
+
+  init(); draw();
+  window.addEventListener('resize',()=>{cancelAnimationFrame(raf);init();draw();});
+})();
+
+/* ── Reveal on scroll with staggered card animations ── */
+const observer = new IntersectionObserver((entries)=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      entry.target.classList.add('revealed');
+      observer.unobserve(entry.target);
+    }
+  });
+},{threshold:.08});
+
+// Inject card-shimmer div + set stagger animation delay per card
+document.querySelectorAll('.plan-card').forEach((card, i)=>{
+  // Insert shimmer streak element
+  const shimmer = document.createElement('div');
+  shimmer.className = 'card-shimmer';
+  card.appendChild(shimmer);
+  // Stagger: card1=0ms, card2=150ms, card3=300ms
+  card.style.animationDelay = (i * 150) + 'ms';
+  observer.observe(card);
+});
+
+document.querySelectorAll('.reveal-up').forEach((el)=>{
+  observer.observe(el);
+});
+
+/* ── Subtle pulse on feat-dots ── */
+document.querySelectorAll('.feat-dot').forEach((dot, i)=>{
+  dot.style.animation = 'featDotPulse 2.4s ease-in-out infinite';
+  dot.style.animationDelay = (i * 120 % 800) + 'ms';
+});
+
+/* Dynamic keyframes injection */
+const _planStyle = document.createElement('style');
+_planStyle.textContent = `
+  @keyframes featDotPulse {
+    0%,100%{ transform:scale(1);   opacity:.65; }
+    50%    { transform:scale(1.35); opacity:1;  }
+  }
+  .card-btn:active{ transform:scale(.97) translateY(1px) !important; }
+`;
+document.head.appendChild(_planStyle);
+</script>
+
+</body>
+</html>

@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About Us – WorkDen</title>
+<meta name="description" content="WorkDen is a verified digital task platform founded in 2024. GSTIN & MSME registered.">
+<link rel="icon" href="favicon.png">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="style.css">
+<style>
+.page-hero{padding:100px 0 60px;background:#f8fafc;border-bottom:1px solid var(--border);margin-top:64px;}
+.page-hero-inner{max-width:680px;margin:0 auto;padding:0 28px;text-align:center;}
+.page-hero .section-label{margin-bottom:14px;display:inline-flex;}
+.page-hero h1{font-size:clamp(1.8rem,4vw,2.6rem);font-weight:900;color:var(--dark);letter-spacing:-0.035em;margin-bottom:12px;}
+.page-hero p{font-size:1rem;color:var(--text);line-height:1.72;}
+.section{padding:80px 0;}
+.section-alt{background:var(--surface);}
+.section-inner{max-width:1200px;margin:0 auto;padding:0 28px;}
+/* Two col */
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;}
+.two-col-text .section-label{margin-bottom:14px;display:inline-flex;}
+.two-col-text h2{font-size:clamp(1.5rem,3vw,2rem);font-weight:800;color:var(--dark);letter-spacing:-0.03em;margin-bottom:14px;}
+.two-col-text p{font-size:0.925rem;color:var(--text);line-height:1.78;margin-bottom:12px;}
+.blockquote{background:var(--brand-pale);border-left:3px solid var(--brand);border-radius:0 10px 10px 0;padding:14px 18px;font-size:0.875rem;font-style:italic;color:var(--brand-dark);margin-top:20px;font-weight:500;}
+/* Visual panel */
+.info-panel{background:var(--dark);border-radius:16px;padding:36px 32px;color:white;}
+.info-panel-title{font-size:1.1rem;font-weight:800;margin-bottom:4px;}
+.info-panel-sub{font-size:0.84rem;color:var(--muted);margin-bottom:24px;}
+.info-rows{display:flex;flex-direction:column;gap:12px;}
+.info-row{display:flex;align-items:center;gap:14px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);border-radius:10px;padding:13px 16px;}
+.info-row-icon{width:36px;height:36px;flex-shrink:0;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:0.95rem;}
+.info-row-label{font-size:0.875rem;font-weight:600;color:white;}
+.info-row-val{font-size:0.77rem;color:var(--muted);margin-top:1px;}
+/* Steps */
+.step-list{display:flex;flex-direction:column;}
+.step-item{display:flex;gap:18px;padding:22px 0;border-bottom:1px solid var(--border);}
+.step-item:last-child{border-bottom:none;}
+.step-num{width:38px;height:38px;flex-shrink:0;background:var(--brand);color:white;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:0.875rem;font-weight:800;}
+.step-title{font-size:0.975rem;font-weight:700;color:var(--dark);margin-bottom:5px;}
+.step-desc{font-size:0.875rem;color:var(--text);line-height:1.65;}
+/* MV grid */
+.mv-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:48px;}
+.mv-card{border-radius:14px;padding:28px 26px;position:relative;overflow:hidden;}
+.mv-card.mission{background:#eff6ff;border:1px solid #bfdbfe;}
+.mv-card.vision{background:#f5f3ff;border:1px solid #ddd6fe;}
+.mv-tag{font-size:0.7rem;font-weight:800;text-transform:uppercase;letter-spacing:0.12em;margin-bottom:10px;}
+.mv-card.mission .mv-tag{color:var(--brand);}
+.mv-card.vision .mv-tag{color:#7c3aed;}
+.mv-text{font-size:0.9rem;color:var(--mid);line-height:1.75;}
+/* Team */
+.team-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:48px;}
+.team-card{background:white;border:1px solid var(--border);border-radius:var(--radius-lg);padding:28px 22px;text-align:center;box-shadow:var(--shadow-sm);transition:all 0.25s;}
+.team-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg);border-color:#bfdbfe;}
+.team-avatar{width:80px;height:80px;border-radius:50%;object-fit:cover;margin:0 auto 14px;display:block;border:2px solid var(--border);}
+.team-name{font-size:1rem;font-weight:700;color:var(--dark);margin-bottom:4px;}
+.team-role{font-size:0.8rem;color:var(--muted);}
+/* Credentials */
+.cred-box{background:white;border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;margin-top:48px;}
+.cred-grid{display:grid;grid-template-columns:repeat(3,1fr);}
+.cred-col{padding:28px 26px;}
+.cred-col:not(:last-child){border-right:1px solid var(--border);}
+.cred-col-title{font-size:0.68rem;font-weight:800;text-transform:uppercase;letter-spacing:0.1em;color:var(--brand);margin-bottom:18px;}
+.cred-item{margin-bottom:14px;}
+.cred-label{font-size:0.73rem;color:var(--muted);margin-bottom:2px;}
+.cred-val{font-size:0.875rem;font-weight:700;color:var(--dark);}
+.cred-link{display:inline-block;margin-top:5px;font-size:0.7rem;background:var(--brand);color:white;padding:3px 10px;border-radius:5px;text-decoration:none;font-weight:600;}
+.cred-link:hover{background:var(--brand-dark);}
+@media(max-width:900px){.two-col,.cred-grid{grid-template-columns:1fr;}.cred-col:not(:last-child){border-right:none;border-bottom:1px solid var(--border);}.mv-grid,.team-grid{grid-template-columns:1fr 1fr;}}
+@media(max-width:580px){.mv-grid,.team-grid{grid-template-columns:1fr;}}
+
+
+/* ========== PREMIUM HEADER / FOOTER + HEAVY ABOUT ANIMATIONS ========== */
+:root{
+  --premium-blue:#1d4ed8;
+  --premium-blue-2:#2563eb;
+  --premium-ink:#0f172a;
+  --premium-line:#e2e8f0;
+  --premium-glow:0 26px 80px rgba(29,78,216,.18);
+}
+html{scroll-behavior:smooth;}
+body{
+  background:
+    radial-gradient(circle at 8% 6%, rgba(37,99,235,.10), transparent 25%),
+    radial-gradient(circle at 92% 14%, rgba(245,158,11,.10), transparent 22%),
+    linear-gradient(180deg,#ffffff 0%,#f8fafc 46%,#ffffff 100%);
+  overflow-x:hidden;
+}
+.navbar{
+  background:rgba(255,255,255,.86)!important;
+  backdrop-filter:blur(18px);
+  -webkit-backdrop-filter:blur(18px);
+  border-bottom:1px solid rgba(226,232,240,.92)!important;
+  box-shadow:0 8px 30px rgba(15,23,42,.04);
+}
+.navbar.scrolled{box-shadow:0 18px 50px rgba(15,23,42,.12)!important;}
+.nav-logo{padding:8px 10px;border-radius:16px;transition:transform .25s ease,background .25s ease;}
+.nav-logo:hover{transform:translateY(-2px);background:#f8fafc;}
+.nav-logo img{filter:drop-shadow(0 8px 18px rgba(29,78,216,.18));}
+.nav-links{
+  background:#ffffff!important;
+  border:1px solid var(--premium-line)!important;
+  border-radius:999px!important;
+  padding:7px!important;
+  box-shadow:0 10px 30px rgba(15,23,42,.05)!important;
+}
+.nav-links a{border-radius:999px!important;padding:9px 14px!important;transition:all .22s ease!important;}
+.nav-links a:hover,.nav-links a.active{background:#eff6ff!important;color:var(--premium-blue)!important;}
+.btn{border-radius:999px!important;transition:transform .22s ease,box-shadow .22s ease,background .22s ease!important;}
+.btn:hover{transform:translateY(-2px);}
+.btn-primary{background:linear-gradient(135deg,#1d4ed8,#2563eb)!important;box-shadow:0 12px 30px rgba(37,99,235,.24)!important;}
+.btn-primary:hover{box-shadow:0 18px 42px rgba(37,99,235,.32)!important;}
+.btn-ghost{background:#fff!important;border:1px solid var(--premium-line)!important;box-shadow:0 8px 22px rgba(15,23,42,.05)!important;}
+
+/* Hero upgrade */
+.page-hero{
+  position:relative;
+  padding:116px 0 78px!important;
+  background:
+    linear-gradient(135deg,rgba(255,255,255,.94),rgba(248,250,252,.98)),
+    radial-gradient(circle at 22% 20%,rgba(29,78,216,.18),transparent 28%),
+    radial-gradient(circle at 82% 18%,rgba(34,197,94,.12),transparent 24%)!important;
+  overflow:hidden;
+}
+.page-hero::before{
+  content:"";position:absolute;width:520px;height:520px;border-radius:50%;right:-210px;top:-210px;
+  background:linear-gradient(135deg,rgba(29,78,216,.13),rgba(245,158,11,.11));filter:blur(2px);
+  animation:orbFloat 7s ease-in-out infinite alternate;
+}
+.page-hero::after{
+  content:"";position:absolute;inset:0;
+  background-image:linear-gradient(rgba(15,23,42,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(15,23,42,.04) 1px,transparent 1px);
+  background-size:42px 42px;mask-image:linear-gradient(to bottom,rgba(0,0,0,.55),transparent 74%);pointer-events:none;
+}
+.page-hero-inner{position:relative;z-index:1;animation:heroPop .9s cubic-bezier(.2,.8,.2,1) both;}
+.page-hero h1{
+  background:linear-gradient(135deg,#0f172a 0%,#172554 55%,#1d4ed8 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent!important;
+  text-shadow:0 14px 45px rgba(29,78,216,.10);
+}
+.section-label{box-shadow:0 8px 24px rgba(29,78,216,.08);}
+.section-title,.two-col-text h2{
+  background:linear-gradient(135deg,#0f172a,#1e3a8a);
+  -webkit-background-clip:text;background-clip:text;color:transparent!important;
+}
+
+/* reveal + card motion */
+.two-col,.mv-grid,.team-grid,.cred-box,.section-header,.step-item,.info-row,.mv-card,.team-card,.cred-col{will-change:transform,opacity;}
+.reveal-up{opacity:0;transform:translateY(42px) scale(.985);transition:opacity .72s ease,transform .72s cubic-bezier(.2,.8,.2,1);}
+.reveal-up.revealed{opacity:1;transform:translateY(0) scale(1);}
+.info-panel{
+  position:relative;overflow:hidden;
+  background:linear-gradient(135deg,#0f172a,#1e3a8a 78%)!important;
+  box-shadow:0 28px 85px rgba(15,23,42,.22);
+  transform-style:preserve-3d;
+}
+.info-panel::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;right:-85px;top:-90px;background:rgba(255,255,255,.09);}
+.info-panel::after{content:"";position:absolute;inset:0;background:linear-gradient(120deg,transparent 0%,rgba(255,255,255,.08) 46%,transparent 54%);transform:translateX(-120%);animation:shineSweep 5.5s ease-in-out infinite;}
+.info-panel > *{position:relative;z-index:1;}
+.info-row,.step-item,.mv-card,.team-card,.cred-box{
+  transition:transform .28s ease,box-shadow .28s ease,border-color .28s ease,background .28s ease!important;
+}
+.info-row:hover{transform:translateX(8px) scale(1.015);background:rgba(255,255,255,.09)!important;}
+.step-item{background:#fff;border:1px solid transparent;border-radius:18px;padding:18px!important;margin-bottom:12px;}
+.step-item:hover{border-color:#bfdbfe;box-shadow:0 15px 45px rgba(29,78,216,.12);transform:translateX(7px) scale(1.01);}
+.step-num{box-shadow:0 12px 28px rgba(29,78,216,.25);}
+.blockquote{position:relative;overflow:hidden;box-shadow:0 12px 38px rgba(29,78,216,.09);}
+.blockquote::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.42),transparent);transform:translateX(-110%);animation:quoteShine 5s infinite;}
+.mv-card{box-shadow:0 14px 40px rgba(15,23,42,.06);}
+.mv-card::before{content:"";position:absolute;width:150px;height:150px;border-radius:50%;right:-50px;bottom:-55px;background:rgba(255,255,255,.55);transition:.3s ease;}
+.mv-card:hover{transform:translateY(-8px) scale(1.02);box-shadow:var(--premium-glow);}
+.mv-card:hover::before{transform:scale(1.25);}
+.team-card{position:relative;overflow:hidden;border-radius:24px!important;}
+.team-card::before{content:"";position:absolute;inset:auto 0 0 0;height:4px;background:linear-gradient(90deg,#1d4ed8,#22c55e,#f59e0b);transform:scaleX(0);transform-origin:left;transition:.28s ease;}
+.team-card:hover::before{transform:scaleX(1);}
+.team-card:hover{transform:translateY(-10px) rotate(-.6deg)!important;box-shadow:0 28px 78px rgba(29,78,216,.17)!important;}
+.team-avatar{transition:transform .35s cubic-bezier(.2,.8,.2,1),box-shadow .35s ease;}
+.team-card:hover .team-avatar{transform:scale(1.08) rotate(2deg);box-shadow:0 16px 45px rgba(29,78,216,.20);}
+.cred-box{box-shadow:0 20px 60px rgba(15,23,42,.08);}
+.cred-box:hover{box-shadow:0 30px 90px rgba(29,78,216,.16);}
+.cred-link{border-radius:999px!important;transition:transform .2s ease,box-shadow .2s ease!important;}
+.cred-link:hover{transform:translateY(-2px);box-shadow:0 10px 25px rgba(29,78,216,.25);}
+
+/* Extra premium trust strip */
+.about-power-strip{margin-top:28px;display:grid;grid-template-columns:repeat(4,1fr);gap:14px;}
+.about-power-card{background:rgba(255,255,255,.82);border:1px solid #e2e8f0;border-radius:20px;padding:16px;box-shadow:0 12px 35px rgba(15,23,42,.06);transition:.25s ease;}
+.about-power-card:hover{transform:translateY(-5px);box-shadow:0 22px 60px rgba(29,78,216,.14);border-color:#bfdbfe;}
+.about-power-card i{color:#1d4ed8;margin-bottom:9px;font-size:1.05rem;}
+.about-power-card strong{display:block;color:#0f172a;font-size:.86rem;margin-bottom:4px;}
+.about-power-card span{display:block;color:#64748b;font-size:.74rem;line-height:1.45;}
+
+/* Simple real-website footer copied from index */
+.simple-footer{background:#0f172a!important;color:#cbd5e1!important;border-top:none!important;padding:0!important;overflow:hidden;}
+.simple-footer::before{display:none!important;}
+.simple-footer-inner{max-width:1200px;margin:0 auto;padding:52px 28px 22px;}
+.simple-footer-top{display:grid;grid-template-columns:1.45fr .8fr .9fr 1.05fr;gap:34px;}
+.simple-footer-logo{display:flex;align-items:center;gap:10px;margin-bottom:14px;}
+.simple-footer-logo img{width:38px;height:38px;object-fit:contain;filter:drop-shadow(0 8px 20px rgba(59,130,246,.25));}
+.simple-footer-logo span{color:#ffffff;font-weight:900;font-size:1.35rem;letter-spacing:-.03em;}
+.simple-footer-brand p{color:#94a3b8;font-size:.9rem;line-height:1.75;margin:0 0 16px;max-width:390px;}
+.simple-footer-badges{display:flex;flex-wrap:wrap;gap:8px;}
+.simple-footer-badges span{display:inline-flex;align-items:center;gap:6px;color:#dbeafe;background:rgba(59,130,246,.10);border:1px solid rgba(147,197,253,.22);border-radius:999px;padding:7px 10px;font-size:.72rem;font-weight:800;}
+.simple-footer-badges i{color:#22c55e;}
+.simple-footer-col h4{color:#ffffff;font-size:.9rem;font-weight:900;margin:0 0 14px;letter-spacing:.02em;}
+.simple-footer-col a,.simple-footer-contact p{display:flex;align-items:flex-start;gap:9px;color:#94a3b8!important;text-decoration:none;font-size:.84rem;font-weight:600;line-height:1.5;margin:0 0 10px;transition:color .2s ease,transform .2s ease;}
+.simple-footer-col a:hover{color:#ffffff!important;transform:translateX(3px);}
+.simple-footer-contact i{color:#60a5fa;margin-top:2px;min-width:14px;}
+.simple-footer-verify{margin-top:16px;background:rgba(255,255,255,.04);border:1px solid rgba(148,163,184,.18);border-radius:14px;padding:13px;display:flex;flex-direction:column;gap:5px;color:#94a3b8;font-size:.76rem;}
+.simple-footer-verify strong{color:#e2e8f0;font-size:.8rem;margin-bottom:2px;}
+.simple-socials{display:flex;gap:9px;margin-top:14px;}
+.simple-socials a{width:36px;height:36px;border-radius:50%;display:flex!important;align-items:center!important;justify-content:center!important;background:rgba(255,255,255,.06);border:1px solid rgba(148,163,184,.18);color:#cbd5e1!important;margin:0!important;padding:0!important;}
+.simple-socials a:hover{background:#2563eb;color:#fff!important;transform:translateY(-3px)!important;}
+.simple-footer-bottom{border-top:1px solid rgba(148,163,184,.18);margin-top:32px;padding-top:18px;display:flex;align-items:center;justify-content:space-between;gap:12px;color:#94a3b8;font-size:.8rem;font-weight:700;}
+
+@keyframes heroPop{from{opacity:0;transform:translateY(34px) scale(.98)}to{opacity:1;transform:translateY(0) scale(1)}}
+@keyframes orbFloat{from{transform:translate(0,0) scale(1)}to{transform:translate(-28px,24px) scale(1.08)}}
+@keyframes shineSweep{0%,65%{transform:translateX(-120%)}100%{transform:translateX(120%)}}
+@keyframes quoteShine{0%,65%{transform:translateX(-110%)}100%{transform:translateX(110%)}}
+@media(max-width:1024px){
+  .nav-links{border-radius:18px!important;box-shadow:none!important;}
+  .simple-footer-top{grid-template-columns:1fr 1fr;}
+  .about-power-strip{grid-template-columns:repeat(2,1fr);}
+}
+@media(max-width:640px){
+  .navbar{background:rgba(255,255,255,.96)!important;}
+  .page-hero{padding:96px 0 58px!important;}
+  .simple-footer-inner{padding:42px 18px 20px;}
+  .simple-footer-top{grid-template-columns:1fr;gap:26px;}
+  .simple-footer-bottom{flex-direction:column;align-items:flex-start;}
+  .about-power-strip{grid-template-columns:1fr;}
+}
+
+</style>
+</head>
+<body>
+<!-- NAVBAR -->
+
+<nav class="navbar" id="navbar">
+
+  <div class="nav-inner">
+
+    <a href="index.html" class="nav-logo">
+
+      <img src="workden-logo.png" alt="WorkDen">
+
+      <span class="nav-logo-text">WorkDen</span>
+
+    </a>
+
+    <ul class="nav-links">
+
+      <li><a href="index.html">Home</a></li>
+
+      <li><a href="about.html" class="active">About Us</a></li>
+
+      <li><a href="projects.html">Projects</a></li>
+
+      <li><a href="plans.html">Plans</a></li>
+
+      <li><a href="demo-task.html">Demo Task</a></li>
+
+      <li><a href="testimonials.html">Testimonials</a></li>
+
+      <li><a href="blogs.html">Blogs</a></li>
+
+    </ul>
+
+    <div class="nav-ctas">
+
+      <a href="#" onclick="showVersionModal(event)" class="btn btn-ghost">User Login</a>
+
+      <a href="https://workdenteam2.base44.app/" class="btn btn-primary">Employee Login</a>
+
+    </div>
+
+    <button class="hamburger" onclick="toggleNav()"><i class="fas fa-bars"></i></button>
+
+  </div>
+
+</nav>
+
+
+
+<!-- MOBILE NAV -->
+
+<div class="mobile-nav" id="mobNav">
+
+  <button class="mobile-nav-close" onclick="toggleNav()"><i class="fas fa-times"></i></button>
+
+  <a href="index.html">Home</a>
+
+  <a href="about.html" class="active">About Us</a>
+
+  <a href="projects.html">Projects</a>
+
+  <a href="plans.html">Plans</a>
+
+  <a href="demo-task.html">Demo Task</a>
+
+  <a href="testimonials.html">Testimonials</a>
+
+  <a href="blogs.html">Blogs</a>
+
+  <div class="mobile-nav-ctas" style="margin-top:12px;">
+
+    <a href="#" onclick="showVersionModal(event)" class="btn btn-ghost">User Login</a>
+
+    <a href="https://workdenteam2.base44.app/" class="btn btn-primary">Employee Login</a>
+
+  </div>
+
+</div>
+
+
+
+
+</div>
+
+<div class="page-hero">
+  <div class="page-hero-inner">
+    <span class="section-label"><i class="fas fa-building"></i> About Us</span>
+    <h1>About WorkDen</h1>
+    <p>Building a transparent, structured, and secure digital task ecosystem across India since 2024.</p>
+    <div class="about-power-strip reveal-up">
+      
+    </div>
+  </div>
+</div>
+
+<!-- WHO WE ARE -->
+<section class="section">
+  <div class="section-inner">
+    <div class="two-col reveal-up">
+      <div class="two-col-text">
+        <span class="section-label"><i class="fas fa-info-circle"></i> Company Overview</span>
+        <h2>Who We Are</h2>
+        <p>Founded in 2024, WorkDen is a structured digital task facilitation platform designed to connect individuals with skill-based, remote task opportunities across India.</p>
+        <p>Our platform focuses on accuracy, transparency, and responsible digital participation. We provide users with access to a professional task portal where work is assigned based on eligibility, project demand, and performance compliance.</p>
+        <p>WorkDen is fully registered under Indian law — GSTIN and MSME certified — making us one of the few verified WFH platforms in the country.</p>
+        <div class="blockquote">WorkDen operates on a task-based performance model. The platform does not provide employment contracts or guaranteed income — we connect skilled individuals with digital work opportunities.</div>
+      </div>
+      <div class="info-panel reveal-up">
+        <div class="info-panel-title">Platform at a Glance</div>
+        <div class="info-panel-sub">Key facts about WorkDen</div>
+        <div class="info-rows">
+          <div class="info-row reveal-up"><div class="info-row-icon" style="background:rgba(34,197,94,0.15);color:#4ade80;"><i class="fas fa-calendar"></i></div><div><div class="info-row-label">Established</div><div class="info-row-val">2024 – Operating since day one</div></div></div>
+          <div class="info-row reveal-up"><div class="info-row-icon" style="background:rgba(59,130,246,0.15);color:#60a5fa;"><i class="fas fa-certificate"></i></div><div><div class="info-row-label">GSTIN</div><div class="info-row-val">10KEJPM6504N1Z7</div></div></div>
+          <div class="info-row reveal-up"><div class="info-row-icon" style="background:rgba(139,92,246,0.15);color:#c084fc;"><i class="fas fa-building-columns"></i></div><div><div class="info-row-label">MSME</div><div class="info-row-val">UDYAM-KR-03-0640514</div></div></div>
+          <div class="info-row reveal-up"><div class="info-row-icon" style="background:rgba(251,191,36,0.15);color:#fbbf24;"><i class="fas fa-users"></i></div><div><div class="info-row-label">Active Users</div><div class="info-row-val">1,34,000+ across India</div></div></div>
+          <div class="info-row reveal-up"><div class="info-row-icon" style="background:rgba(249,115,22,0.15);color:#fb923c;"><i class="fas fa-tasks"></i></div><div><div class="info-row-label">Category</div><div class="info-row-val">Digital Task Facilitation Platform</div></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="section section-alt">
+  <div class="section-inner">
+    <div class="two-col reveal-up">
+      <div class="two-col-text">
+        <span class="section-label"><i class="fas fa-list-ol"></i> Process</span>
+        <h2>How WorkDen Works</h2>
+        <p>A simple, structured four-step process from registration to task submission.</p>
+        <div class="step-list" style="margin-top:24px;">
+          <div class="step-item reveal-up"><div class="step-num">1</div><div><div class="step-title">Try the Free Demo</div><div class="step-desc">Experience the platform firsthand — completely free. No payment, no commitment required.</div></div></div>
+          <div class="step-item reveal-up"><div class="step-num">2</div><div><div class="step-title">Register & Verify</div><div class="step-desc">Complete a simple registration and verification to access the professional task portal.</div></div></div>
+          <div class="step-item reveal-up"><div class="step-num">3</div><div><div class="step-title">Get Tasks Assigned</div><div class="step-desc">Tasks are allocated based on project availability and your eligibility criteria.</div></div></div>
+          <div class="step-item reveal-up"><div class="step-num">4</div><div><div class="step-title">Submit & Earn</div><div class="step-desc">Work undergoes quality review. Earnings depend on accuracy and guideline adherence.</div></div></div>
+        </div>
+      </div>
+      <div class="two-col-text">
+        <span class="section-label" style="margin-bottom:14px;display:inline-flex;"><i class="fas fa-bullseye"></i> Purpose</span>
+        <h2>Our Purpose</h2>
+        <p>We aim to create a professional digital environment where individuals can participate in flexible, skill-driven tasks under clearly defined guidelines and quality standards.</p>
+        <div style="display:flex;flex-direction:column;gap:10px;margin-top:24px;">
+          <div style="display:flex;align-items:center;gap:10px;font-size:0.875rem;color:var(--mid);"><i class="fas fa-check-circle" style="color:var(--green);font-size:0.9rem;"></i> Structured task allocation system</div>
+          <div style="display:flex;align-items:center;gap:10px;font-size:0.875rem;color:var(--mid);"><i class="fas fa-check-circle" style="color:var(--green);font-size:0.9rem;"></i> Accuracy-based quality review</div>
+          <div style="display:flex;align-items:center;gap:10px;font-size:0.875rem;color:var(--mid);"><i class="fas fa-check-circle" style="color:var(--green);font-size:0.9rem;"></i> Secure portal infrastructure</div>
+          <div style="display:flex;align-items:center;gap:10px;font-size:0.875rem;color:var(--mid);"><i class="fas fa-check-circle" style="color:var(--green);font-size:0.9rem;"></i> Transparent participation policies</div>
+          <div style="display:flex;align-items:center;gap:10px;font-size:0.875rem;color:var(--mid);"><i class="fas fa-check-circle" style="color:var(--green);font-size:0.9rem;"></i> Dedicated recruiter support teams</div>
+          <div style="display:flex;align-items:center;gap:10px;font-size:0.875rem;color:var(--mid);"><i class="fas fa-check-circle" style="color:var(--green);font-size:0.9rem;"></i> Free demo before any commitment</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MISSION & VISION -->
+<section class="section">
+  <div class="section-inner">
+    <div class="section-header reveal-up">
+      <span class="section-label"><i class="fas fa-compass"></i> Mission & Vision</span>
+      <h2 class="section-title" style="margin-top:12px;">What Drives Us</h2>
+    </div>
+    <div class="mv-grid reveal-up">
+      <div class="mv-card mission reveal-up">
+        <div class="mv-tag"><i class="fas fa-bullseye"></i> Mission</div>
+        <p class="mv-text">To establish a secure and transparent digital task platform that upholds professional standards, structured workflows, and responsible user participation across India.</p>
+      </div>
+      <div class="mv-card vision reveal-up">
+        <div class="mv-tag" style="color:#7c3aed;"><i class="fas fa-eye"></i> Vision</div>
+        <p class="mv-text">To become a trusted and recognized name in India's digital task ecosystem by enabling skill-based remote participation through structured and ethical operations.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TEAM -->
+<section class="section section-alt">
+  <div class="section-inner">
+    <div class="section-header reveal-up">
+      <span class="section-label"><i class="fas fa-users"></i> Leadership</span>
+      <h2 class="section-title" style="margin-top:12px;">Our Team</h2>
+    </div>
+    <div class="team-grid reveal-up">
+      <div class="team-card reveal-up">
+        <img src="director.png" class="team-avatar" alt="Shivam Mishra">
+        <div class="team-name">Shivam Mishra</div>
+        <div class="team-role">Managing Director</div>
+      </div>
+      <div class="team-card reveal-up">
+        <img src="manager.png" class="team-avatar" alt="Rajesh Tripathi">
+        <div class="team-name">Rajesh Tripathi</div>
+        <div class="team-role">Operations Head</div>
+      </div>
+      <div class="team-card reveal-up">
+        <img src="support.png" class="team-avatar" alt="Utsav Tiwari">
+        <div class="team-name">Utsav Tiwari</div>
+        <div class="team-role">Recruitment Lead</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CREDENTIALS -->
+<section class="section">
+  <div class="section-inner">
+    <div class="section-header reveal-up">
+      <span class="section-label"><i class="fas fa-file-shield"></i> Verification</span>
+      <h2 class="section-title" style="margin-top:12px;">Company Credentials</h2>
+    </div>
+    <div class="cred-box reveal-up">
+      <div class="cred-grid">
+        <div class="cred-col reveal-up">
+          <div class="cred-col-title">Registration Details</div>
+          <div class="cred-item"><div class="cred-label">Registered Name</div><div class="cred-val">WorkDen</div></div>
+          <div class="cred-item"><div class="cred-label">Established</div><div class="cred-val">2024</div></div>
+          <div class="cred-item"><div class="cred-label">Category</div><div class="cred-val">Digital Task Platform</div></div>
+          <div class="cred-item"><div class="cred-label">GSTIN</div><div class="cred-val">10KEJPM6504N1Z7</div><a href="https://drive.google.com/file/d/1lDqxLP5AAFvfiGAMfcOtqVOSGc80_9Dg/view?usp=drive_link" target="_blank" class="cred-link">View Certificate</a></div>
+          <div class="cred-item"><div class="cred-label">MSME (Udyam)</div><div class="cred-val">UDYAM-KR-03-0640514</div><a href="https://drive.google.com/file/d/1vyHb_CaIFMMU9jRKau1QZNHbkLJ0Rnjx/view?usp=drive_link" target="_blank" class="cred-link">View Certificate</a></div>
+        </div>
+        <div class="cred-col reveal-up">
+          <div class="cred-col-title">Office Locations</div>
+          <div class="cred-item" style="margin-bottom:20px;">
+            <div class="cred-label">Primary Office</div>
+            <div class="cred-val" style="font-size:0.875rem;font-weight:600;line-height:1.6;">Ashok Nagar, Bangalore – 560001</div>
+          </div>
+          <div class="cred-item">
+            <div class="cred-label">Secondary Office</div>
+            <div class="cred-val" style="font-size:0.875rem;font-weight:600;line-height:1.6;">Parsuram Pur, Motihari – 845416</div>
+          </div>
+          <div style="margin-top:20px;background:var(--brand-pale);border:1px solid #bfdbfe;border-radius:10px;padding:14px 16px;">
+            <div style="font-size:0.72rem;font-weight:700;color:var(--brand);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:6px;">Operational Since</div>
+            <div style="font-size:1.3rem;font-weight:900;color:var(--brand);letter-spacing:-0.03em;">2024</div>
+            <div style="font-size:0.78rem;color:var(--text);">Pan-India digital task operations</div>
+          </div>
+        </div>
+        <div class="cred-col reveal-up">
+          <div class="cred-col-title">Contact Information</div>
+          <div class="cred-item"><div class="cred-label">General Enquiries</div><a href="mailto:info@workden.online" style="color:var(--brand);font-weight:600;font-size:0.875rem;text-decoration:none;">info@workden.online</a></div>
+          <div class="cred-item"><div class="cred-label">Support</div><a href="mailto:support@workden.online" style="color:var(--brand);font-weight:600;font-size:0.875rem;text-decoration:none;">support@workden.online</a></div>
+          <div class="cred-item"><div class="cred-label">Website</div><a href="https://workdenuser.online" target="_blank" style="color:var(--brand);font-weight:600;font-size:0.875rem;text-decoration:none;">workdenuser.online</a></div>
+          <a href="demo-task.html" class="btn btn-primary" style="width:100%;justify-content:center;margin-top:20px;">Try Free Demo <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer simple-footer">
+  <div class="simple-footer-inner">
+    <div class="simple-footer-top">
+      <div class="simple-footer-brand">
+        <div class="simple-footer-logo">
+          <img src="workden-logo.png" alt="WorkDen">
+          <span>WorkDen</span>
+        </div>
+        <p>A verified digital task platform delivering structured online work opportunities with transparency, secure workflow, and compliance. GSTIN & MSME registered.</p>
+        <div class="simple-footer-badges">
+          <span><i class="fas fa-circle-check"></i> GSTIN Verified</span>
+          <span><i class="fas fa-circle-check"></i> MSME Registered</span>
+          <span><i class="fas fa-circle-check"></i> Est. 2024</span>
+        </div>
+      </div>
+
+      <div class="simple-footer-col">
+        <h4>Company</h4>
+        <a href="index.html">Home</a>
+        <a href="about.html">About Us</a>
+        <a href="projects.html">Projects</a>
+        <a href="plans.html">Plans</a>
+        <a href="demo-task.html">Demo Task</a>
+        <a href="testimonials.html">Testimonials</a>
+        <a href="blogs.html">Blogs</a>
+      </div>
+
+      <div class="simple-footer-col">
+        <h4>Legal</h4>
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="terms.html">Terms & Conditions</a>
+        <a href="disclaimer.html">Disclaimer</a>
+        <a href="refund.html">Refund Policy</a>
+        <div class="simple-footer-verify">
+          <strong>Business Verification</strong>
+          <span>GSTIN: 10KEJPM6504N1Z7</span>
+          <span>MSME: UDYAM-KR-03-0640514</span>
+        </div>
+      </div>
+
+      <div class="simple-footer-col simple-footer-contact">
+        <h4>Contact</h4>
+        <a href="mailto:info@workden.online"><i class="fas fa-envelope"></i> info@workden.online</a>
+        <a href="mailto:support@workden.online"><i class="fas fa-headset"></i> support@workden.online</a>
+        <p><i class="fas fa-location-dot"></i> Ashok Nagar, Bangalore – 560001</p>
+        <p><i class="fas fa-location-dot"></i> Parsuram Pur, Motihari – 845416</p>
+        <div class="simple-socials">
+          <a href="https://www.facebook.com/people/Workden-India/61583820256534/" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://www.instagram.com/workden_wfh" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="https://www.linkedin.com/in/workden-india-315391383/" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+          <a href="https://t.me/+f_s3cLM1WwYxNjE1" target="_blank" aria-label="Telegram"><i class="fab fa-telegram-plane"></i></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="simple-footer-bottom">
+      <span>© 2026 WorkDen. All rights reserved.</span>
+      <span>Structured Digital Task Platform</span>
+    </div>
+  </div>
+</footer>
+<script>
+window.addEventListener('scroll',()=>{document.getElementById('navbar').classList.toggle('scrolled',window.scrollY>20);});
+function toggleNav(){document.getElementById('mobNav').classList.toggle('open');}
+</script>
+
+<!-- VERSION SELECTOR MODAL -->
+<div id="verOverlay" onclick="closeVersionModal(event)" style="display:none;position:fixed;inset:0;z-index:9999;background:rgba(10,20,40,0.72);backdrop-filter:blur(4px);align-items:center;justify-content:center;">
+  <div style="background:white;border-radius:20px;padding:40px 32px 32px;max-width:440px;width:92%;box-shadow:0 24px 80px rgba(0,0,0,0.22);text-align:center;position:relative;">
+    <button onclick="document.getElementById('verOverlay').style.display='none'" style="position:absolute;top:14px;right:18px;background:#f1f5f9;border:none;cursor:pointer;width:32px;height:32px;border-radius:50%;font-size:1.1rem;color:#64748b;">✕</button>
+    <div style="display:inline-flex;align-items:center;gap:6px;background:#eff6ff;color:#1d4ed8;font-size:0.72rem;font-weight:700;text-transform:uppercase;padding:5px 12px;border-radius:20px;margin-bottom:14px;">Select Version</div>
+    <div style="font-size:1.35rem;font-weight:800;color:#0f172a;margin-bottom:8px;">Choose Your Login Portal</div>
+    <div style="font-size:0.9rem;color:#64748b;margin-bottom:28px;line-height:1.5;">WorkDen ke do version available hain. Apna version select karein.</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
+      <a href="https://workden-4.base44.app" target="_blank" style="border:2px solid #bfdbfe;border-radius:14px;padding:22px 16px 18px;text-decoration:none;display:flex;flex-direction:column;align-items:center;gap:8px;">
+        <div style="font-size:2rem;font-weight:900;color:#1d4ed8;">4.0</div>
+        <div style="font-size:0.8rem;font-weight:700;color:#475569;">WorkDen 4.0</div>
+        <div style="font-size:0.75rem;color:#94a3b8;">Latest version — upgraded features</div>
+        <div style="margin-top:6px;padding:7px 18px;border-radius:8px;font-size:0.8rem;font-weight:700;background:#1d4ed8;color:white;width:100%;box-sizing:border-box;">Login 4.0</div>
+      </a>
+      <a href="https://workden-3.base44.app" target="_blank" style="border:2px solid #ddd6fe;border-radius:14px;padding:22px 16px 18px;text-decoration:none;display:flex;flex-direction:column;align-items:center;gap:8px;">
+        <div style="font-size:2rem;font-weight:900;color:#7c3aed;">3.0</div>
+        <div style="font-size:0.8rem;font-weight:700;color:#475569;">WorkDen 3.0</div>
+        <div style="font-size:0.75rem;color:#94a3b8;">Previous version — stable interface</div>
+        <div style="margin-top:6px;padding:7px 18px;border-radius:8px;font-size:0.8rem;font-weight:700;background:#7c3aed;color:white;width:100%;box-sizing:border-box;">Login 3.0</div>
+      </a>
+    </div>
+  </div>
+</div>
+<script>
+function showVersionModal(e){if(e)e.preventDefault();document.getElementById("verOverlay").style.display="flex";}
+function closeVersionModal(e){if(e.target===document.getElementById("verOverlay"))document.getElementById("verOverlay").style.display="none";}
+</script>
+
+<script>
+(function(){
+  const items = document.querySelectorAll('.reveal-up');
+  const obs = new IntersectionObserver((entries)=>{
+    entries.forEach((entry)=>{
+      if(entry.isIntersecting){
+        const siblings = Array.from(entry.target.parentElement ? entry.target.parentElement.children : []);
+        const idx = Math.max(0, siblings.indexOf(entry.target));
+        entry.target.style.transitionDelay = Math.min(idx * 70, 420) + 'ms';
+        entry.target.classList.add('revealed');
+        obs.unobserve(entry.target);
+      }
+    });
+  },{threshold:.12,rootMargin:'0px 0px -40px 0px'});
+  items.forEach(el=>obs.observe(el));
+
+  const panels = document.querySelectorAll('.info-panel,.team-card,.mv-card,.cred-box');
+  panels.forEach(card=>{
+    card.addEventListener('mousemove',(e)=>{
+      const r = card.getBoundingClientRect();
+      const x = ((e.clientX-r.left)/r.width - .5) * 8;
+      const y = ((e.clientY-r.top)/r.height - .5) * -8;
+      card.style.transform = `perspective(900px) rotateX(${y}deg) rotateY(${x}deg) translateY(-4px)`;
+    });
+    card.addEventListener('mouseleave',()=>{card.style.transform='';});
+  });
+})();
+</script>
+
+</body>
+</html>

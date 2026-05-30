@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Testimonials – WorkDen</title>
+<link rel="icon" href="favicon.png">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="style.css">
+<style>
+.page-hero{padding:100px 0 60px;background:#f8fafc;border-bottom:1px solid var(--border);margin-top:64px;text-align:center;}
+.page-hero-inner{max-width:640px;margin:0 auto;padding:0 28px;}
+.page-hero .section-label{margin-bottom:14px;display:inline-flex;}
+.page-hero h1{font-size:clamp(1.8rem,4vw,2.6rem);font-weight:900;color:var(--dark);letter-spacing:-0.035em;margin-bottom:12px;}
+.page-hero p{font-size:1rem;color:var(--text);line-height:1.72;}
+.section{padding:80px 0;}
+.section-alt{background:var(--surface);}
+.section-inner{max-width:1200px;margin:0 auto;padding:0 28px;}
+/* Video marquee */
+.video-marquee-outer{overflow:hidden;padding:4px 0;}
+.video-marquee-track{display:flex;gap:20px;width:max-content;animation:vScroll 42s linear infinite;}
+.video-marquee-track:hover{animation-play-state:paused;}
+@keyframes vScroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.vid-card{flex-shrink:0;width:320px;background:white;border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow-sm);}
+.vid-card iframe{width:100%;height:190px;display:block;}
+.vid-card-info{padding:13px 16px;display:flex;align-items:center;gap:10px;}
+.vid-avatar{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:0.78rem;color:white;flex-shrink:0;}
+.vid-name{font-size:0.875rem;font-weight:700;color:var(--dark);}
+.vid-role{font-size:0.75rem;color:var(--muted);}
+/* Written */
+.written-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;}
+.w-card{background:white;border:1px solid var(--border);border-radius:var(--radius-lg);padding:26px;transition:all 0.25s;}
+.w-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg);border-color:#bfdbfe;}
+.w-stars{color:#f59e0b;font-size:0.8rem;margin-bottom:12px;}
+.w-text{font-size:0.875rem;color:var(--text);line-height:1.75;margin-bottom:18px;}
+.w-author{display:flex;align-items:center;gap:10px;padding-top:16px;border-top:1px solid var(--border);}
+.w-avatar{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:0.875rem;color:white;flex-shrink:0;}
+.w-name{font-size:0.875rem;font-weight:700;color:var(--dark);}
+.w-city{font-size:0.75rem;color:var(--muted);}
+/* Trust box */
+.trust-summary{background:linear-gradient(135deg,#eff6ff,#f5f3ff);border:1px solid #bfdbfe;border-radius:16px;padding:40px;text-align:center;margin-top:52px;}
+.ts-stars{font-size:1.8rem;letter-spacing:2px;margin-bottom:10px;}
+.ts-heading{font-size:1.5rem;font-weight:900;color:var(--dark);letter-spacing:-0.03em;margin-bottom:6px;}
+.ts-sub{font-size:0.9rem;color:var(--text);margin-bottom:24px;}
+@media(max-width:900px){.written-grid{grid-template-columns:1fr 1fr;}}
+@media(max-width:560px){.written-grid{grid-template-columns:1fr;}}
+/* Image Testimonials */
+.img-testi-card {
+  background: white; border: 1px solid var(--border); border-radius: var(--radius-lg);
+  overflow: hidden; box-shadow: var(--shadow-sm); transition: all 0.25s; cursor: pointer;
+}
+.img-testi-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); border-color: #bfdbfe; }
+.img-testi-card .img-wrap {
+  width: 100%; height: 260px; background: #f8fafc;
+  display: flex; align-items: center; justify-content: center; overflow: hidden; position: relative;
+}
+.img-testi-card .img-wrap img { 
+  width: 100%; height: 100%; object-fit: contain; display: block; 
+  transition: transform 0.3s;
+}
+.img-testi-card:hover .img-wrap img { transform: scale(1.03); }
+.img-testi-card .img-wrap::after {
+  content: '\f065'; font-family: 'Font Awesome 6 Free'; font-weight: 900;
+  position: absolute; top: 8px; right: 8px;
+  background: rgba(29,78,216,0.85); color: white;
+  width: 28px; height: 28px; border-radius: 6px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.75rem; opacity: 0; transition: opacity 0.2s;
+}
+.img-testi-card:hover .img-wrap::after { opacity: 1; }
+.img-testi-info { padding: 12px 14px; }
+.img-testi-name { font-size: 0.88rem; font-weight: 700; color: #0f172a; }
+.img-testi-city { font-size: 0.75rem; color: #64748b; margin-top: 2px; }
+
+/* Lightbox */
+.lightbox-overlay {
+  display: none; position: fixed; inset: 0; z-index: 99999;
+  background: rgba(0,0,0,0.92); align-items: center; justify-content: center;
+  padding: 20px;
+}
+.lightbox-overlay.active { display: flex; }
+.lightbox-img-wrap { max-width: 90vw; max-height: 90vh; position: relative; }
+.lightbox-img-wrap img { max-width: 90vw; max-height: 85vh; object-fit: contain; border-radius: 10px; display: block; }
+.lightbox-close {
+  position: fixed; top: 16px; right: 20px;
+  background: rgba(255,255,255,0.15); border: none; color: white;
+  width: 40px; height: 40px; border-radius: 50%; font-size: 1.2rem;
+  cursor: pointer; display: flex; align-items: center; justify-content: center;
+  transition: background 0.15s;
+}
+.lightbox-close:hover { background: rgba(255,255,255,0.3); }
+.lightbox-name { text-align: center; color: white; margin-top: 12px; font-size: 0.9rem; font-weight: 600; }
+.lightbox-city { text-align: center; color: rgba(255,255,255,0.6); font-size: 0.8rem; margin-top: 3px; }
+@media(max-width:900px){ .img-testi-grid { grid-template-columns: repeat(2,1fr) !important; } }
+@media(max-width:560px){ .img-testi-grid { grid-template-columns: 1fr 1fr !important; gap: 10px !important; }
+  .img-testi-card .img-wrap { height: 180px; } }
+
+
+/* ========== PREMIUM WHITE THEME + HEAVY ANIMATIONS ========== */
+:root{--premium-blue:#1d4ed8;--premium-blue-2:#2563eb;--premium-ink:#0f172a;--premium-soft:#f8fafc;--premium-line:#e2e8f0;--premium-card:#ffffff;--premium-gold:#f59e0b;--premium-shadow:0 18px 55px rgba(15,23,42,.10);--premium-shadow-hover:0 26px 80px rgba(29,78,216,.18);} 
+html{scroll-behavior:smooth;} body{background:radial-gradient(circle at 8% 6%,rgba(37,99,235,.10),transparent 25%),radial-gradient(circle at 95% 18%,rgba(245,158,11,.08),transparent 24%),linear-gradient(180deg,#fff 0%,#f8fafc 46%,#fff 100%);overflow-x:hidden;}
+.navbar{background:rgba(255,255,255,.86)!important;backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-bottom:1px solid rgba(226,232,240,.9);box-shadow:0 8px 30px rgba(15,23,42,.04);animation:navDrop .65s ease both;}
+@keyframes navDrop{from{opacity:0;transform:translateY(-18px)}to{opacity:1;transform:translateY(0)}}
+.navbar.scrolled{box-shadow:0 16px 45px rgba(15,23,42,.10);} .nav-inner{position:relative;} .nav-logo{padding:8px 10px;border-radius:16px;transition:transform .25s ease,background .25s ease;} .nav-logo:hover{transform:translateY(-2px);background:#f8fafc;} .nav-logo img{filter:drop-shadow(0 8px 18px rgba(29,78,216,.18));}
+.nav-links{background:#fff;border:1px solid var(--premium-line);border-radius:999px;padding:7px;box-shadow:0 10px 30px rgba(15,23,42,.05);} .nav-links a{border-radius:999px;padding:9px 14px!important;transition:all .22s ease;position:relative;overflow:hidden;} .nav-links a:hover,.nav-links a.active{background:#eff6ff;color:var(--premium-blue)!important;}
+.btn{border-radius:999px!important;transition:transform .22s ease,box-shadow .22s ease,background .22s ease!important;} .btn:hover{transform:translateY(-2px);} .btn-primary{background:linear-gradient(135deg,#1d4ed8,#2563eb)!important;box-shadow:0 12px 30px rgba(37,99,235,.24)!important;} .btn-primary:hover{box-shadow:0 18px 42px rgba(37,99,235,.32)!important;} .btn-ghost{background:#fff!important;border:1px solid var(--premium-line)!important;box-shadow:0 8px 22px rgba(15,23,42,.05);}
+.page-hero{position:relative;overflow:hidden;padding:108px 0 72px!important;background:linear-gradient(135deg,#ffffff 0%,#f8fafc 55%,#eff6ff 100%)!important;border-bottom:1px solid #dbeafe!important;} .page-hero::before{content:"";position:absolute;width:520px;height:520px;border-radius:50%;background:linear-gradient(135deg,rgba(29,78,216,.14),rgba(245,158,11,.10));right:-210px;top:-210px;filter:blur(3px);animation:floatOrb 7s ease-in-out infinite;} .page-hero::after{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(15,23,42,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(15,23,42,.035) 1px,transparent 1px);background-size:42px 42px;mask-image:linear-gradient(to bottom,rgba(0,0,0,.55),transparent 72%);pointer-events:none;}
+@keyframes floatOrb{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(-18px,16px) scale(1.06)}} .page-hero-inner{position:relative;z-index:2;animation:heroPop .8s cubic-bezier(.16,1,.3,1) both;} @keyframes heroPop{from{opacity:0;transform:translateY(34px) scale(.96)}to{opacity:1;transform:translateY(0) scale(1)}} .page-hero h1{background:linear-gradient(135deg,#0f172a 0%,#172554 58%,#1d4ed8 100%);-webkit-background-clip:text;background-clip:text;color:transparent!important;text-wrap:balance;} .page-hero p{text-wrap:balance;}
+.section-header{text-align:center;max-width:760px;margin-left:auto;margin-right:auto;} .section-title{background:linear-gradient(135deg,#0f172a,#1e3a8a);-webkit-background-clip:text;background-clip:text;color:transparent!important;} .section-label{box-shadow:0 8px 24px rgba(29,78,216,.08);animation:labelPulse 2.8s ease-in-out infinite;} @keyframes labelPulse{0%,100%{transform:translateY(0)}50%{transform:translateY(-2px)}}
+.video-marquee-outer{position:relative;} .video-marquee-outer::before,.video-marquee-outer::after{content:"";position:absolute;top:0;width:100px;height:100%;z-index:2;pointer-events:none;} .video-marquee-outer::before{left:0;background:linear-gradient(90deg,#f8fafc,rgba(248,250,252,0));}.video-marquee-outer::after{right:0;background:linear-gradient(270deg,#f8fafc,rgba(248,250,252,0));}.video-marquee-track{animation:vScroll 34s linear infinite!important;} .vid-card{border-radius:24px!important;box-shadow:0 16px 45px rgba(15,23,42,.08)!important;transition:transform .28s ease, box-shadow .28s ease, border-color .28s ease;position:relative;overflow:hidden;} .vid-card::after{content:"";position:absolute;inset:0;background:linear-gradient(120deg,transparent 0%,rgba(255,255,255,.55) 48%,transparent 68%);transform:translateX(-120%);transition:transform .8s ease;pointer-events:none;} .vid-card:hover{transform:translateY(-8px) scale(1.02);box-shadow:0 26px 70px rgba(29,78,216,.16)!important;border-color:#93c5fd!important;} .vid-card:hover::after{transform:translateX(120%);} 
+.img-testi-card,.w-card{position:relative;overflow:hidden;opacity:0;transform:translateY(32px) scale(.98);transition:opacity .65s ease, transform .65s ease, box-shadow .28s ease, border-color .28s ease!important;box-shadow:0 12px 34px rgba(15,23,42,.065)!important;} .img-testi-card.revealed,.w-card.revealed{opacity:1;transform:translateY(0) scale(1);} .img-testi-card::before,.w-card::before{content:"";position:absolute;left:0;right:0;bottom:0;height:3px;background:linear-gradient(90deg,#1d4ed8,#22c55e,#f59e0b,#7c3aed);transform:scaleX(0);transform-origin:left;transition:transform .32s ease;} .img-testi-card:hover::before,.w-card:hover::before{transform:scaleX(1);} .img-testi-card:hover,.w-card:hover{transform:translateY(-10px) scale(1.018)!important;box-shadow:0 28px 80px rgba(29,78,216,.18)!important;border-color:#93c5fd!important;} .img-testi-card .img-wrap{background:linear-gradient(135deg,#fff,#f8fafc)!important;} .img-testi-card .img-wrap img{transition:transform .45s cubic-bezier(.16,1,.3,1),filter .3s ease!important;} .img-testi-card:hover .img-wrap img{transform:scale(1.055)!important;filter:saturate(1.08) contrast(1.03);} .w-stars{animation:starGlow 2.6s ease-in-out infinite;} @keyframes starGlow{0%,100%{filter:drop-shadow(0 0 0 rgba(245,158,11,0))}50%{filter:drop-shadow(0 0 9px rgba(245,158,11,.42))}}
+.trust-summary{position:relative;overflow:hidden;background:radial-gradient(circle at 15% 20%,rgba(29,78,216,.16),transparent 28%),linear-gradient(135deg,#ffffff,#eff6ff 58%,#f5f3ff)!important;box-shadow:0 24px 75px rgba(29,78,216,.14);animation:summaryFloat 4s ease-in-out infinite;} @keyframes summaryFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}} .trust-summary::before{content:"";position:absolute;width:240px;height:240px;right:-80px;top:-100px;border-radius:50%;background:rgba(29,78,216,.10);}.trust-summary>*{position:relative;z-index:1;}.ts-stars{animation:starsPop 1.8s ease-in-out infinite;} @keyframes starsPop{0%,100%{transform:scale(1)}50%{transform:scale(1.06)}}
+.lightbox-overlay.active{animation:lightboxFade .22s ease both;} @keyframes lightboxFade{from{opacity:0}to{opacity:1}} .lightbox-img-wrap{animation:lightboxZoom .28s cubic-bezier(.16,1,.3,1) both;} @keyframes lightboxZoom{from{opacity:0;transform:scale(.92) translateY(14px)}to{opacity:1;transform:scale(1) translateY(0)}}
+.simple-footer{background:#0f172a!important;color:#cbd5e1!important;border-top:none!important;padding:0!important;overflow:hidden;position:relative;} .simple-footer::before{content:"";position:absolute;top:0;left:0;right:0;height:5px;background:linear-gradient(90deg,#1d4ed8,#06b6d4,#22c55e,#f59e0b,#7c3aed)!important;display:block!important;} .simple-footer-inner{max-width:1200px;margin:0 auto;padding:52px 28px 22px;} .simple-footer-top{display:grid;grid-template-columns:1.45fr .8fr .9fr 1.05fr;gap:34px;} .simple-footer-logo{display:flex;align-items:center;gap:10px;margin-bottom:14px;} .simple-footer-logo img{width:38px;height:38px;object-fit:contain;filter:drop-shadow(0 8px 20px rgba(59,130,246,.25));}.simple-footer-logo span{color:#fff;font-weight:900;font-size:1.35rem;letter-spacing:-.03em}.simple-footer-brand p{color:#94a3b8;font-size:.9rem;line-height:1.75;margin:0 0 16px;max-width:390px}.simple-footer-badges{display:flex;flex-wrap:wrap;gap:8px}.simple-footer-badges span{display:inline-flex;align-items:center;gap:6px;color:#dbeafe;background:rgba(59,130,246,.10);border:1px solid rgba(147,197,253,.22);border-radius:999px;padding:7px 10px;font-size:.72rem;font-weight:800}.simple-footer-badges i{color:#22c55e}.simple-footer-col h4{color:#fff;font-size:.9rem;font-weight:900;margin:0 0 14px;letter-spacing:.02em}.simple-footer-col a,.simple-footer-contact p{display:flex;align-items:flex-start;gap:9px;color:#94a3b8!important;text-decoration:none;font-size:.84rem;font-weight:600;line-height:1.5;margin:0 0 10px;transition:color .2s ease,transform .2s ease}.simple-footer-col a:hover{color:#fff!important;transform:translateX(3px)}.simple-footer-contact i{color:#60a5fa;margin-top:2px;min-width:14px}.simple-footer-verify{margin-top:16px;background:rgba(255,255,255,.04);border:1px solid rgba(148,163,184,.18);border-radius:14px;padding:13px;display:flex;flex-direction:column;gap:5px;color:#94a3b8;font-size:.76rem}.simple-footer-verify strong{color:#e2e8f0;font-size:.8rem;margin-bottom:2px}.simple-socials{display:flex;gap:9px;margin-top:14px}.simple-socials a{width:36px;height:36px;border-radius:50%;display:flex!important;align-items:center!important;justify-content:center!important;background:rgba(255,255,255,.06);border:1px solid rgba(148,163,184,.18);color:#cbd5e1!important;margin:0!important;padding:0!important}.simple-socials a:hover{background:#2563eb;color:#fff!important;transform:translateY(-3px)!important}.simple-footer-bottom{border-top:1px solid rgba(148,163,184,.18);margin-top:32px;padding-top:18px;display:flex;align-items:center;justify-content:space-between;gap:12px;color:#94a3b8;font-size:.8rem;font-weight:700;}
+@media(max-width:1024px){.nav-links{border-radius:18px;box-shadow:none}.simple-footer-top{grid-template-columns:1fr 1fr}.video-marquee-outer::before,.video-marquee-outer::after{width:44px}} @media(max-width:640px){.navbar{background:rgba(255,255,255,.96)!important}.page-hero{padding:86px 0 54px!important}.simple-footer-inner{padding:42px 18px 20px}.simple-footer-top{grid-template-columns:1fr;gap:26px}.simple-footer-bottom{flex-direction:column;align-items:flex-start}.vid-card{width:285px!important}.vid-card iframe{height:170px!important}}
+
+</style>
+</head>
+<body>
+<nav class="navbar" id="navbar">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo"><img src="workden-logo.png" alt="WorkDen"><span class="nav-logo-text">WorkDen</span></a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li><li><a href="about.html">About Us</a></li>
+      <li><a href="projects.html">Projects</a></li><li><a href="plans.html">Plans</a></li><li><a href="demo-task.html">Demo Task</a></li>
+      <li><a href="testimonials.html" class="active">Testimonials</a></li><li><a href="blogs.html">Blogs</a></li>
+    </ul>
+    <div class="nav-ctas">
+      <a href="#" onclick="showVersionModal(event)" class="btn btn-ghost">User Login</a>
+      <a href="https://workdenteam2.base44.app/" class="btn btn-primary">Employee Login</a>
+    </div>
+    <button class="hamburger" onclick="toggleNav()"><i class="fas fa-bars"></i></button>
+  </div>
+</nav>
+<div class="mobile-nav" id="mobNav">
+  <button class="mobile-nav-close" onclick="toggleNav()"><i class="fas fa-times"></i></button>
+  <a href="index.html">Home</a><a href="about.html">About Us</a><a href="projects.html">Projects</a>
+  <a href="plans.html">Plans</a><a href="demo-task.html">Demo Task</a><a href="testimonials.html" class="active">Testimonials</a><a href="blogs.html">Blogs</a>
+  <div class="mobile-nav-ctas" style="margin-top:12px;">
+    <a href="#" onclick="showVersionModal(event)" class="btn btn-ghost">User Login</a>
+    <a href="https://workdenteam2.base44.app/" class="btn btn-primary">Employee Login</a>
+  </div>
+</div>
+
+<div class="page-hero">
+  <div class="page-hero-inner">
+    <span class="section-label"><i class="fas fa-star"></i> Testimonials</span>
+    <h1>Real People. Real Experiences.</h1>
+    <p>Hear from actual users who work through WorkDen every day across India.</p>
+  </div>
+</div>
+
+<!-- VIDEO TESTIMONIALS -->
+<section class="section section-alt">
+  <div class="section-inner">
+    <div class="section-header" style="margin-bottom:40px;">
+      <span class="section-label"><i class="fas fa-video"></i> Video Reviews</span>
+      <h2 class="section-title" style="margin-top:12px;">Watch User Reviews</h2>
+      <p class="section-sub">Real video testimonials from WorkDen users across India.</p>
+    </div>
+  </div>
+  <div class="video-marquee-outer">
+    <div class="video-marquee-track">
+      <div class="vid-card"><iframe src="https://drive.google.com/file/d/1TfgX3JHS3dr-aoNM6MfVNFzdTiqe4zDy/preview" allowfullscreen></iframe><div class="vid-card-info"><div class="vid-avatar" style="background:linear-gradient(135deg,#1d4ed8,#6366f1);">RS</div><div><div class="vid-name">Rahul Sharma</div><div class="vid-role">Content Moderator</div></div></div></div>
+      <div class="vid-card"><iframe src="https://drive.google.com/file/d/1WOQP62KcC0EeVufQl4mCDrKK-K7cxNT3/preview" allowfullscreen></iframe><div class="vid-card-info"><div class="vid-avatar" style="background:linear-gradient(135deg,#ec4899,#f97316);">AV</div><div><div class="vid-name">Anjali Verma</div><div class="vid-role">Data Specialist</div></div></div></div>
+      <div class="vid-card"><iframe src="https://drive.google.com/file/d/1H8ziVfY7GlJMd5SQ3nTwVhNhWx2p2czl/preview" allowfullscreen></iframe><div class="vid-card-info"><div class="vid-avatar" style="background:linear-gradient(135deg,#10b981,#0891b2);">VG</div><div><div class="vid-name">Vikas Gupta</div><div class="vid-role">Translator</div></div></div></div>
+      <div class="vid-card"><iframe src="https://drive.google.com/file/d/1uSjJiSWYrCn3FMXpJSXpfl4n3Hk3PNch/preview" allowfullscreen></iframe><div class="vid-card-info"><div class="vid-avatar" style="background:linear-gradient(135deg,#7c3aed,#ec4899);">PS</div><div><div class="vid-name">Priya Singh</div><div class="vid-role">Operations Executive</div></div></div></div>
+      <div class="vid-card"><iframe src="https://drive.google.com/file/d/1gCnbQb8TZetJpcCaXn2i6_r8Jp-_9ciL/preview" allowfullscreen></iframe><div class="vid-card-info"><div class="vid-avatar" style="background:linear-gradient(135deg,#f59e0b,#ef4444);">AP</div><div><div class="vid-name">Amit Patel</div><div class="vid-role">Backend Support</div></div></div></div>
+      <!-- duplicate for loop -->
+      <div class="vid-card"><iframe src="https://drive.google.com/file/d/1TfgX3JHS3dr-aoNM6MfVNFzdTiqe4zDy/preview" allowfullscreen></iframe><div class="vid-card-info"><div class="vid-avatar" style="background:linear-gradient(135deg,#1d4ed8,#6366f1);">RS</div><div><div class="vid-name">Rahul Sharma</div><div class="vid-role">Content Moderator</div></div></div></div>
+      <div class="vid-card"><iframe src="https://drive.google.com/file/d/1WOQP62KcC0EeVufQl4mCDrKK-K7cxNT3/preview" allowfullscreen></iframe><div class="vid-card-info"><div class="vid-avatar" style="background:linear-gradient(135deg,#ec4899,#f97316);">AV</div><div><div class="vid-name">Anjali Verma</div><div class="vid-role">Data Specialist</div></div></div></div>
+      <div class="vid-card"><iframe src="https://drive.google.com/file/d/1H8ziVfY7GlJMd5SQ3nTwVhNhWx2p2czl/preview" allowfullscreen></iframe><div class="vid-card-info"><div class="vid-avatar" style="background:linear-gradient(135deg,#10b981,#0891b2);">VG</div><div><div class="vid-name">Vikas Gupta</div><div class="vid-role">Translator</div></div></div></div>
+      <div class="vid-card"><iframe src="https://drive.google.com/file/d/1uSjJiSWYrCn3FMXpJSXpfl4n3Hk3PNch/preview" allowfullscreen></iframe><div class="vid-card-info"><div class="vid-avatar" style="background:linear-gradient(135deg,#7c3aed,#ec4899);">PS</div><div><div class="vid-name">Priya Singh</div><div class="vid-role">Operations Executive</div></div></div></div>
+      <div class="vid-card"><iframe src="https://drive.google.com/file/d/1gCnbQb8TZetJpcCaXn2i6_r8Jp-_9ciL/preview" allowfullscreen></iframe><div class="vid-card-info"><div class="vid-avatar" style="background:linear-gradient(135deg,#f59e0b,#ef4444);">AP</div><div><div class="vid-name">Amit Patel</div><div class="vid-role">Backend Support</div></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- IMAGE TESTIMONIALS -->
+<section class="section">
+  <div class="section-inner">
+    <div class="section-header" style="margin-bottom:40px;">
+      <span class="section-label"><i class="fas fa-image"></i> User Screenshots</span>
+      <h2 class="section-title" style="margin-top:12px;">Real User Testimonials</h2>
+      <p class="section-sub">Verified screenshots shared by WorkDen users from across India.</p>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:18px;" class="img-testi-grid">
+      <div class="img-testi-card" onclick="openLightbox('https://drive.google.com/thumbnail?id=17FLZiJbzPWndzUbIo4NhRM3M-LghjCaP&sz=w1000','Aarav Sharma','Delhi, India')">
+        <div class="img-wrap"><img src="https://drive.google.com/thumbnail?id=17FLZiJbzPWndzUbIo4NhRM3M-LghjCaP&sz=w1000" alt="User Testimonial 1" loading="lazy"></div>
+        <div class="img-testi-info"><div class="img-testi-name">Aarav Sharma</div><div class="img-testi-city">Delhi, India</div></div>
+      </div>
+      <div class="img-testi-card" onclick="openLightbox('https://drive.google.com/thumbnail?id=1oRyTXN7nOWpuH_Re7clKMq0qjhZnKBHY&sz=w1000','Pooja Patel','Ahmedabad, Gujarat')">
+        <div class="img-wrap"><img src="https://drive.google.com/thumbnail?id=1oRyTXN7nOWpuH_Re7clKMq0qjhZnKBHY&sz=w1000" alt="User Testimonial 2" loading="lazy"></div>
+        <div class="img-testi-info"><div class="img-testi-name">Pooja Patel</div><div class="img-testi-city">Ahmedabad, Gujarat</div></div>
+      </div>
+      <div class="img-testi-card" onclick="openLightbox('https://drive.google.com/thumbnail?id=14w2itsxlNSi_-QwbbhLzD3oIOEWqGHas&sz=w1000','Ravi Kumar','Hyderabad, Telangana')">
+        <div class="img-wrap"><img src="https://drive.google.com/thumbnail?id=14w2itsxlNSi_-QwbbhLzD3oIOEWqGHas&sz=w1000" alt="User Testimonial 3" loading="lazy"></div>
+        <div class="img-testi-info"><div class="img-testi-name">Ravi Kumar</div><div class="img-testi-city">Hyderabad, Telangana</div></div>
+      </div>
+      <div class="img-testi-card" onclick="openLightbox('https://drive.google.com/thumbnail?id=1L0mvZmBgJXzzDESnTCj9z-GDu9WY5Km8&sz=w1000','Sneha Joshi','Pune, Maharashtra')">
+        <div class="img-wrap"><img src="https://drive.google.com/thumbnail?id=1L0mvZmBgJXzzDESnTCj9z-GDu9WY5Km8&sz=w1000" alt="User Testimonial 4" loading="lazy"></div>
+        <div class="img-testi-info"><div class="img-testi-name">Sneha Joshi</div><div class="img-testi-city">Pune, Maharashtra</div></div>
+      </div>
+      <div class="img-testi-card" onclick="openLightbox('https://drive.google.com/thumbnail?id=1Dp7HowTJWav60reJoNy5aBVoehecO6oJ&sz=w1000','Mohit Yadav','Lucknow, UP')">
+        <div class="img-wrap"><img src="https://drive.google.com/thumbnail?id=1Dp7HowTJWav60reJoNy5aBVoehecO6oJ&sz=w1000" alt="User Testimonial 5" loading="lazy"></div>
+        <div class="img-testi-info"><div class="img-testi-name">Mohit Yadav</div><div class="img-testi-city">Lucknow, UP</div></div>
+      </div>
+      <div class="img-testi-card" onclick="openLightbox('https://drive.google.com/thumbnail?id=1AzNVMtUka9jUkleIxYWnQwqEOtT1bLNY&sz=w1000','Divya Mishra','Bhopal, MP')">
+        <div class="img-wrap"><img src="https://drive.google.com/thumbnail?id=1AzNVMtUka9jUkleIxYWnQwqEOtT1bLNY&sz=w1000" alt="User Testimonial 6" loading="lazy"></div>
+        <div class="img-testi-info"><div class="img-testi-name">Divya Mishra</div><div class="img-testi-city">Bhopal, MP</div></div>
+      </div>
+      <div class="img-testi-card" onclick="openLightbox('https://drive.google.com/thumbnail?id=1blG5-vo0px8ke_xR9Zf_6-XW5lF6wbDp&sz=w1000','Suresh Reddy','Chennai, Tamil Nadu')">
+        <div class="img-wrap"><img src="https://drive.google.com/thumbnail?id=1blG5-vo0px8ke_xR9Zf_6-XW5lF6wbDp&sz=w1000" alt="User Testimonial 7" loading="lazy"></div>
+        <div class="img-testi-info"><div class="img-testi-name">Suresh Reddy</div><div class="img-testi-city">Chennai, Tamil Nadu</div></div>
+      </div>
+      <div class="img-testi-card" onclick="openLightbox('https://drive.google.com/thumbnail?id=18Vx4eqOoi3Pc7FVFo5V9I4MhdYk-bIQL&sz=w1000','Rohan Verma','Lucknow, Uttar Pradesh')">
+  <div class="img-wrap">
+    <img src="https://drive.google.com/thumbnail?id=18Vx4eqOoi3Pc7FVFo5V9I4MhdYk-bIQL&sz=w1000" alt="User Testimonial 1" loading="lazy">
+  </div>
+  <div class="img-testi-info">
+    <div class="img-testi-name">Rohan Verma</div>
+    <div class="img-testi-city">Lucknow, Uttar Pradesh</div>
+  </div>
+</div>
+
+<div class="img-testi-card" onclick="openLightbox('https://drive.google.com/thumbnail?id=1fnxNxaj6AQUURCzR-eGIC2VhsVInQGth&sz=w1000','Priya Sharma','Indore, Madhya Pradesh')">
+  <div class="img-wrap">
+    <img src="https://drive.google.com/thumbnail?id=1fnxNxaj6AQUURCzR-eGIC2VhsVInQGth&sz=w1000" alt="User Testimonial 2" loading="lazy">
+  </div>
+  <div class="img-testi-info">
+    <div class="img-testi-name">Priya Sharma</div>
+    <div class="img-testi-city">Indore, Madhya Pradesh</div>
+  </div>
+</div>
+
+<div class="img-testi-card" onclick="openLightbox('https://drive.google.com/thumbnail?id=1gaDk9evdh01Hsv2209gdjDMbsA1mTto0&sz=w1000','Kavya Singh','Jaipur, Rajasthan')"> <div class="img-wrap"><img src="https://drive.google.com/thumbnail?id=1gaDk9evdh01Hsv2209gdjDMbsA1mTto0&sz=w1000" alt="User Testimonial 8" loading="lazy"></div> <div class="img-testi-info"><div class="img-testi-name">Kavya Singh</div><div class="img-testi-city">Jaipur, Rajasthan</div></div> </div>
+
+<div class="img-testi-card" onclick="openLightbox('https://drive.google.com/thumbnail?id=1tMp-bXz73OOBJ9TRe05AXUUv5z7p5Wvs&sz=w1000','Aman Raj','Patna, Bihar')">
+  <div class="img-wrap">
+    <img src="https://drive.google.com/thumbnail?id=1tMp-bXz73OOBJ9TRe05AXUUv5z7p5Wvs&sz=w1000" alt="User Testimonial 3" loading="lazy">
+  </div>
+  <div class="img-testi-info">
+    <div class="img-testi-name">Aman Raj</div>
+    <div class="img-testi-city">Patna, Bihar</div>
+  </div>
+</div>
+
+<div class="img-testi-card" onclick="openLightbox('https://drive.google.com/thumbnail?id=1YgAHUs42hl_OyOwB6_OwzrUjxVm6aVbM&sz=w1000','Sneha Kapoor','Chandigarh, Punjab')">
+  <div class="img-wrap">
+    <img src="https://drive.google.com/thumbnail?id=1YgAHUs42hl_OyOwB6_OwzrUjxVm6aVbM&sz=w1000" alt="User Testimonial 4" loading="lazy">
+  </div>
+  <div class="img-testi-info">
+    <div class="img-testi-name">Sneha Kapoor</div>
+    <div class="img-testi-city">Chandigarh, Punjab</div>
+  </div>
+</div>
+
+<div class="img-testi-card" onclick="openLightbox('https://drive.google.com/thumbnail?id=132aft4symoWWwKJHEfoE9hpHL87rsRic&sz=w1000','Rahul Meena','Kota, Rajasthan')">
+  <div class="img-wrap">
+    <img src="https://drive.google.com/thumbnail?id=132aft4symoWWwKJHEfoE9hpHL87rsRic&sz=w1000" alt="User Testimonial 5" loading="lazy">
+  </div>
+  <div class="img-testi-info">
+    <div class="img-testi-name">Rahul Meena</div>
+    <div class="img-testi-city">Kota, Rajasthan</div>
+  </div>
+</div>
+
+<div class="img-testi-card" onclick="openLightbox('https://drive.google.com/thumbnail?id=1LRHWjP5JLcKwCMSf-knbxTop-M4SaKee&sz=w1000','Neha Yadav','Bhopal, Madhya Pradesh')">
+  <div class="img-wrap">
+    <img src="https://drive.google.com/thumbnail?id=1LRHWjP5JLcKwCMSf-knbxTop-M4SaKee&sz=w1000" alt="User Testimonial 6" loading="lazy">
+  </div>
+  <div class="img-testi-info">
+    <div class="img-testi-name">Neha Yadav</div>
+    <div class="img-testi-city">Bhopal, Madhya Pradesh</div>
+  </div>
+</div>
+
+<div class="img-testi-card" onclick="openLightbox('https://drive.google.com/thumbnail?id=1zAJJn4FGKxWrIkluVo6ZiWHuS6d_PQ6Z&sz=w1000','Arjun Patel','Surat, Gujarat')">
+  <div class="img-wrap">
+    <img src="https://drive.google.com/thumbnail?id=1zAJJn4FGKxWrIkluVo6ZiWHuS6d_PQ6Z&sz=w1000" alt="User Testimonial 7" loading="lazy">
+  </div>
+  <div class="img-testi-info">
+    <div class="img-testi-name">Arjun Patel</div>
+    <div class="img-testi-city">Surat, Gujarat</div>
+  </div>
+</div>
+
+<div class="img-testi-card" onclick="openLightbox('https://drive.google.com/thumbnail?id=1Bzz9hU72or1_XVTL4rsVOqa6IK-jX8jK&sz=w1000','Pooja Malhotra','Delhi, India')">
+  <div class="img-wrap">
+    <img src="https://drive.google.com/thumbnail?id=1Bzz9hU72or1_XVTL4rsVOqa6IK-jX8jK&sz=w1000" alt="User Testimonial 8" loading="lazy">
+  </div>
+  <div class="img-testi-info">
+    <div class="img-testi-name">Pooja Malhotra</div>
+    <div class="img-testi-city">Delhi, India</div>
+  </div>
+</div>
+
+<div class="img-testi-card" onclick="openLightbox('https://drive.google.com/thumbnail?id=162_3CEIZlQPhPPKeRGqbbIeex1KGdc7V&sz=w1000','Sahanawaz','Kota, Rajasthan')">
+  <div class="img-wrap">
+    <img src="https://drive.google.com/thumbnail?id=162_3CEIZlQPhPPKeRGqbbIeex1KGdc7V&sz=w1000" alt="User Testimonial 9" loading="lazy">
+  </div>
+  <div class="img-testi-info">
+    <div class="img-testi-name">Sahanawaz</div>
+    <div class="img-testi-city">Kota, Rajasthan</div>
+  </div>
+</div>
+
+<div class="img-testi-card" onclick="openLightbox('https://drive.google.com/thumbnail?id=1WHhZP8vtl5LWeuPhvFAnZwzzPQzaLkQa&sz=w1000','Umesh Nagar','Kota, Rajasthan')">
+  <div class="img-wrap">
+    <img src="https://drive.google.com/thumbnail?id=1WHhZP8vtl5LWeuPhvFAnZwzzPQzaLkQa&sz=w1000" alt="User Testimonial 10" loading="lazy">
+  </div>
+  <div class="img-testi-info">
+    <div class="img-testi-name">Umesh Nagar</div>
+    <div class="img-testi-city">Kota, Rajasthan</div>
+  </div>
+</div>
+
+    </div>
+  </div>
+</section>
+
+<!-- WRITTEN REVIEWS -->
+<section class="section">
+  <div class="section-inner">
+    <div class="section-header" style="margin-bottom:48px;">
+      <span class="section-label"><i class="fas fa-comment-dots"></i> Written Reviews</span>
+      <h2 class="section-title" style="margin-top:12px;">What Our Users Say</h2>
+    </div>
+    <div class="written-grid">
+      <div class="w-card">
+        <div class="w-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+        <p class="w-text">The portal interface is simple and structured. Task tracking and submission workflow is very easy to understand even as a first-timer.</p>
+        <div class="w-author"><div class="w-avatar" style="background:linear-gradient(135deg,#1d4ed8,#6366f1);">RS</div><div><div class="w-name">Rohit Sharma</div><div class="w-city">Delhi, India</div></div></div>
+      </div>
+      <div class="w-card">
+        <div class="w-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+        <p class="w-text">Projects are clearly defined with detailed submission instructions. Very easy to manage remote digital work from home on this platform.</p>
+        <div class="w-author"><div class="w-avatar" style="background:linear-gradient(135deg,#ec4899,#f97316);">NV</div><div><div class="w-name">Neha Verma</div><div class="w-city">Mumbai, India</div></div></div>
+      </div>
+      <div class="w-card">
+        <div class="w-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+        <p class="w-text">Dashboard gives a clear overview of all tasks. Managing assignments is very convenient. The GSTIN verification gave me confidence to trust the platform.</p>
+        <div class="w-author"><div class="w-avatar" style="background:linear-gradient(135deg,#10b981,#0891b2);">AS</div><div><div class="w-name">Ankit Singh</div><div class="w-city">Bangalore, India</div></div></div>
+      </div>
+      <div class="w-card">
+        <div class="w-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+        <p class="w-text">I was sceptical at first but the free demo convinced me completely. Everything is transparent and support team responds quickly to any doubts.</p>
+        <div class="w-author"><div class="w-avatar" style="background:linear-gradient(135deg,#f59e0b,#ef4444);">PK</div><div><div class="w-name">Priya Kumari</div><div class="w-city">Patna, Bihar</div></div></div>
+      </div>
+      <div class="w-card">
+        <div class="w-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+        <p class="w-text">As a housewife, WorkDen is perfect. I work 3-4 hours daily from home, manage my family, and still earn. Tasks are genuinely simple to follow.</p>
+        <div class="w-author"><div class="w-avatar" style="background:linear-gradient(135deg,#7c3aed,#ec4899);">SM</div><div><div class="w-name">Sunita Mishra</div><div class="w-city">Lucknow, UP</div></div></div>
+      </div>
+      <div class="w-card">
+        <div class="w-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+        <p class="w-text">Being a college student I needed something flexible. WorkDen fits around my class schedule perfectly. The work is simple and payment structure is clear.</p>
+        <div class="w-author"><div class="w-avatar" style="background:linear-gradient(135deg,#0891b2,#1d4ed8);">AY</div><div><div class="w-name">Ayush Yadav</div><div class="w-city">Jaipur, Rajasthan</div></div></div>
+      </div>
+    </div>
+
+    <div class="trust-summary">
+      <div class="ts-stars">⭐⭐⭐⭐⭐</div>
+      <div class="ts-heading">Trusted by 1,34,000+ Users</div>
+      <div class="ts-sub">Across India since 2024 · GSTIN & MSME Verified</div>
+      <a href="demo-task.html" class="btn btn-primary btn-lg">Try Free Demo <i class="fas fa-arrow-right"></i></a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer simple-footer">
+  <div class="simple-footer-inner">
+    <div class="simple-footer-top">
+      <div class="simple-footer-brand">
+        <div class="simple-footer-logo">
+          <img src="workden-logo.png" alt="WorkDen">
+          <span>WorkDen</span>
+        </div>
+        <p>A verified digital task platform delivering structured online work opportunities with transparency, secure workflow, and compliance. GSTIN & MSME registered.</p>
+        <div class="simple-footer-badges">
+          <span><i class="fas fa-circle-check"></i> GSTIN Verified</span>
+          <span><i class="fas fa-circle-check"></i> MSME Registered</span>
+          <span><i class="fas fa-circle-check"></i> Est. 2024</span>
+        </div>
+      </div>
+
+      <div class="simple-footer-col">
+        <h4>Company</h4>
+        <a href="index.html">Home</a>
+        <a href="about.html">About Us</a>
+        <a href="projects.html">Projects</a>
+        <a href="plans.html">Plans</a>
+        <a href="demo-task.html">Demo Task</a>
+        <a href="testimonials.html">Testimonials</a>
+        <a href="blogs.html">Blogs</a>
+      </div>
+
+      <div class="simple-footer-col">
+        <h4>Legal</h4>
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="terms.html">Terms & Conditions</a>
+        <a href="disclaimer.html">Disclaimer</a>
+        <a href="refund.html">Refund Policy</a>
+        <div class="simple-footer-verify">
+          <strong>Business Verification</strong>
+          <span>GSTIN: 10KEJPM6504N1Z7</span>
+          <span>MSME: UDYAM-KR-03-0640514</span>
+        </div>
+      </div>
+
+      <div class="simple-footer-col simple-footer-contact">
+        <h4>Contact</h4>
+        <a href="mailto:info@workden.online"><i class="fas fa-envelope"></i> info@workden.online</a>
+        <a href="mailto:support@workden.online"><i class="fas fa-headset"></i> support@workden.online</a>
+        <p><i class="fas fa-location-dot"></i> Ashok Nagar, Bangalore – 560001</p>
+        <p><i class="fas fa-location-dot"></i> Parsuram Pur, Motihari – 845416</p>
+        <div class="simple-socials">
+          <a href="https://www.facebook.com/people/Workden-India/61583820256534/" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://www.instagram.com/workden_wfh" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="https://www.linkedin.com/in/workden-india-315391383/" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+          <a href="https://t.me/+f_s3cLM1WwYxNjE1" target="_blank" aria-label="Telegram"><i class="fab fa-telegram-plane"></i></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="simple-footer-bottom">
+      <span>© 2026 WorkDen. All rights reserved.</span>
+      <span>Structured Digital Task Platform</span>
+    </div>
+  </div>
+</footer>
+<script>
+window.addEventListener('scroll',()=>{document.getElementById('navbar').classList.toggle('scrolled',window.scrollY>20);});
+function toggleNav(){document.getElementById('mobNav').classList.toggle('open');}
+</script>
+
+<!-- VERSION SELECTOR MODAL -->
+<div id="verOverlay" onclick="closeVersionModal(event)" style="display:none;position:fixed;inset:0;z-index:9999;background:rgba(10,20,40,0.72);backdrop-filter:blur(4px);align-items:center;justify-content:center;">
+  <div style="background:white;border-radius:20px;padding:40px 32px 32px;max-width:440px;width:92%;box-shadow:0 24px 80px rgba(0,0,0,0.22);text-align:center;position:relative;">
+    <button onclick="document.getElementById('verOverlay').style.display='none'" style="position:absolute;top:14px;right:18px;background:#f1f5f9;border:none;cursor:pointer;width:32px;height:32px;border-radius:50%;font-size:1.1rem;color:#64748b;">✕</button>
+    <div style="display:inline-flex;align-items:center;gap:6px;background:#eff6ff;color:#1d4ed8;font-size:0.72rem;font-weight:700;text-transform:uppercase;padding:5px 12px;border-radius:20px;margin-bottom:14px;">Select Version</div>
+    <div style="font-size:1.35rem;font-weight:800;color:#0f172a;margin-bottom:8px;">Choose Your Login Portal</div>
+    <div style="font-size:0.9rem;color:#64748b;margin-bottom:28px;line-height:1.5;">WorkDen ke do version available hain. Apna version select karein.</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
+      <a href="https://workden-4.base44.app" target="_blank" style="border:2px solid #bfdbfe;border-radius:14px;padding:22px 16px 18px;text-decoration:none;display:flex;flex-direction:column;align-items:center;gap:8px;">
+        <div style="font-size:2rem;font-weight:900;color:#1d4ed8;">4.0</div>
+        <div style="font-size:0.8rem;font-weight:700;color:#475569;">WorkDen 4.0</div>
+        <div style="font-size:0.75rem;color:#94a3b8;">Latest version — upgraded features</div>
+        <div style="margin-top:6px;padding:7px 18px;border-radius:8px;font-size:0.8rem;font-weight:700;background:#1d4ed8;color:white;width:100%;box-sizing:border-box;">Login 4.0</div>
+      </a>
+      <a href="https://workden-3.base44.app" target="_blank" style="border:2px solid #ddd6fe;border-radius:14px;padding:22px 16px 18px;text-decoration:none;display:flex;flex-direction:column;align-items:center;gap:8px;">
+        <div style="font-size:2rem;font-weight:900;color:#7c3aed;">3.0</div>
+        <div style="font-size:0.8rem;font-weight:700;color:#475569;">WorkDen 3.0</div>
+        <div style="font-size:0.75rem;color:#94a3b8;">Previous version — stable interface</div>
+        <div style="margin-top:6px;padding:7px 18px;border-radius:8px;font-size:0.8rem;font-weight:700;background:#7c3aed;color:white;width:100%;box-sizing:border-box;">Login 3.0</div>
+      </a>
+    </div>
+  </div>
+</div>
+<script>
+function showVersionModal(e){if(e)e.preventDefault();document.getElementById("verOverlay").style.display="flex";}
+function closeVersionModal(e){if(e.target===document.getElementById("verOverlay"))document.getElementById("verOverlay").style.display="none";}
+</script>
+
+<!-- LIGHTBOX -->
+<div class="lightbox-overlay" id="lightboxOverlay" onclick="closeLightbox(event)">
+  <button class="lightbox-close" onclick="document.getElementById('lightboxOverlay').classList.remove('active')"><i class="fas fa-times"></i></button>
+  <div class="lightbox-img-wrap">
+    <img id="lightboxImg" src="" alt="Testimonial">
+    <div class="lightbox-name" id="lightboxName"></div>
+    <div class="lightbox-city" id="lightboxCity"></div>
+  </div>
+</div>
+<script>
+function openLightbox(src, name, city) {
+  document.getElementById('lightboxImg').src = src;
+  document.getElementById('lightboxName').textContent = name;
+  document.getElementById('lightboxCity').textContent = city;
+  document.getElementById('lightboxOverlay').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+function closeLightbox(e) {
+  if(e.target === document.getElementById('lightboxOverlay') || e.target.closest('.lightbox-close')) {
+    document.getElementById('lightboxOverlay').classList.remove('active');
+    document.body.style.overflow = '';
+  }
+}
+document.addEventListener('keydown', function(e){ if(e.key==='Escape'){ document.getElementById('lightboxOverlay').classList.remove('active'); document.body.style.overflow=''; }});
+</script>
+
+<script>
+(function(){
+  const animated = document.querySelectorAll('.img-testi-card,.w-card');
+  animated.forEach((el,i)=>{ el.style.transitionDelay = Math.min(i*45, 650) + 'ms'; });
+  const obs = new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{ if(entry.isIntersecting){ entry.target.classList.add('revealed'); obs.unobserve(entry.target); } });
+  },{threshold:.12, rootMargin:'0px 0px -40px 0px'});
+  animated.forEach(el=>obs.observe(el));
+  document.querySelectorAll('.img-testi-card,.w-card,.vid-card').forEach(card=>{
+    card.addEventListener('mousemove',e=>{
+      const r=card.getBoundingClientRect();
+      const x=((e.clientX-r.left)/r.width-.5)*6;
+      const y=((e.clientY-r.top)/r.height-.5)*-6;
+      card.style.transform=`translateY(-10px) scale(1.018) rotateX(${y}deg) rotateY(${x}deg)`;
+    });
+    card.addEventListener('mouseleave',()=>{card.style.transform='';});
+  });
+})();
+</script>
+
+</body>
+</html>

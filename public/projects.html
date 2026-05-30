@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Projects – Available Work Types | WorkDen</title>
+<meta name="description" content="Explore available digital task categories at WorkDen – form filling, data entry, chat support, grammar correction, typing and more.">
+<link rel="icon" href="favicon.png">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="style.css">
+<style>
+.page-hero{padding:100px 0 60px;background:#f8fafc;border-bottom:1px solid var(--border);margin-top:64px;text-align:center;}
+.page-hero-inner{max-width:640px;margin:0 auto;padding:0 28px;}
+.page-hero .section-label{margin-bottom:14px;display:inline-flex;}
+.page-hero h1{font-size:clamp(1.8rem,4vw,2.6rem);font-weight:900;color:var(--dark);letter-spacing:-0.035em;margin-bottom:12px;}
+.page-hero p{font-size:1rem;color:var(--text);line-height:1.72;}
+.projects-section{padding:72px 0 96px;background:var(--surface);}
+.projects-inner{max-width:1200px;margin:0 auto;padding:0 28px;}
+.proj-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+.proj-main-card{background:white;border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow-sm);transition:all 0.25s;}
+.proj-main-card:hover{transform:translateY(-5px);box-shadow:var(--shadow-xl);border-color:#bfdbfe;}
+.proj-card-top{padding:28px 26px 22px;}
+.proj-icon-wrap{width:54px;height:54px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;margin-bottom:18px;}
+.proj-badge-row{display:flex;gap:8px;margin-bottom:12px;}
+.badge{display:inline-flex;align-items:center;gap:4px;font-size:0.68rem;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;padding:3px 9px;border-radius:5px;}
+.badge-blue{background:var(--brand-pale);color:var(--brand);border:1px solid #bfdbfe;}
+.badge-green{background:var(--green-pale);color:var(--green);border:1px solid #bbf7d0;}
+.badge-amber{background:var(--gold-pale);color:var(--gold);border:1px solid #fde68a;}
+.proj-title{font-size:1.05rem;font-weight:700;color:var(--dark);margin-bottom:8px;}
+.proj-desc{font-size:0.875rem;color:var(--text);line-height:1.7;}
+.proj-card-footer{padding:15px 26px;border-top:1px solid var(--border);background:var(--surface);display:flex;align-items:center;justify-content:space-between;}
+.proj-level{display:flex;align-items:center;gap:6px;font-size:0.78rem;color:var(--muted);font-weight:500;}
+.proj-action{font-size:0.8rem;font-weight:700;color:var(--brand);text-decoration:none;display:flex;align-items:center;gap:5px;}
+.proj-action:hover{color:var(--brand-dark);}
+.bottom-cta{margin-top:52px;background:linear-gradient(135deg,var(--dark),#1e3a8a);border-radius:16px;padding:44px 36px;text-align:center;color:white;position:relative;overflow:hidden;}
+.bottom-cta::before{content:'';position:absolute;top:-80px;right:-80px;width:300px;height:300px;background:radial-gradient(circle,rgba(59,130,246,0.15) 0%,transparent 70%);border-radius:50%;}
+.bottom-cta h3{font-size:1.6rem;font-weight:900;margin-bottom:10px;letter-spacing:-0.03em;}
+.bottom-cta p{color:rgba(255,255,255,0.65);font-size:0.95rem;margin-bottom:28px;}
+.bottom-cta-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;position:relative;}
+@media(max-width:900px){.proj-grid{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:560px){.proj-grid{grid-template-columns:1fr;}}
+
+
+/* ========== PREMIUM PROJECTS PAGE UPGRADE - WHITE THEME + HEAVY ANIMATIONS ========== */
+:root{
+  --premium-blue:#1d4ed8;
+  --premium-blue-2:#2563eb;
+  --premium-ink:#0f172a;
+  --premium-soft:#f8fafc;
+  --premium-line:#e2e8f0;
+  --premium-card:#ffffff;
+  --premium-gold:#f59e0b;
+  --premium-shadow:0 18px 55px rgba(15,23,42,0.10);
+  --premium-shadow-hover:0 30px 90px rgba(29,78,216,0.20);
+}
+html{scroll-behavior:smooth;}
+body{
+  background:
+    radial-gradient(circle at 8% 6%, rgba(37,99,235,0.12), transparent 26%),
+    radial-gradient(circle at 92% 10%, rgba(245,158,11,0.10), transparent 24%),
+    linear-gradient(180deg,#ffffff 0%,#f8fafc 45%,#ffffff 100%);
+  overflow-x:hidden;
+}
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  background-image:
+    linear-gradient(rgba(15,23,42,0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(15,23,42,0.035) 1px, transparent 1px);
+  background-size:46px 46px;
+  mask-image:linear-gradient(to bottom, rgba(0,0,0,.55), transparent 70%);
+  z-index:-2;
+}
+.navbar{
+  background:rgba(255,255,255,0.86)!important;
+  backdrop-filter:blur(18px);
+  -webkit-backdrop-filter:blur(18px);
+  border-bottom:1px solid rgba(226,232,240,0.92)!important;
+  box-shadow:0 8px 30px rgba(15,23,42,0.04)!important;
+}
+.navbar.scrolled{box-shadow:0 16px 45px rgba(15,23,42,0.10)!important;}
+.nav-logo{padding:8px 10px;border-radius:16px;transition:transform .25s ease, background .25s ease;}
+.nav-logo:hover{transform:translateY(-2px);background:#f8fafc;}
+.nav-logo img{filter:drop-shadow(0 8px 18px rgba(29,78,216,0.18));}
+.nav-links{
+  background:#ffffff;
+  border:1px solid var(--premium-line);
+  border-radius:999px;
+  padding:7px;
+  box-shadow:0 10px 30px rgba(15,23,42,0.05);
+}
+.nav-links a{border-radius:999px;padding:9px 14px!important;transition:all .22s ease;}
+.nav-links a:hover,.nav-links a.active{background:#eff6ff;color:var(--premium-blue)!important;}
+.btn{border-radius:999px!important;transition:transform .22s ease, box-shadow .22s ease, background .22s ease!important;}
+.btn:hover{transform:translateY(-2px);}
+.btn-primary{background:linear-gradient(135deg,#1d4ed8,#2563eb)!important;box-shadow:0 12px 30px rgba(37,99,235,0.24)!important;}
+.btn-primary:hover{box-shadow:0 18px 42px rgba(37,99,235,0.32)!important;}
+.btn-ghost{background:#fff!important;border:1px solid var(--premium-line)!important;box-shadow:0 8px 22px rgba(15,23,42,0.05);}
+.page-hero{
+  position:relative;
+  overflow:hidden;
+  padding:112px 0 72px!important;
+  background:
+    linear-gradient(135deg,rgba(255,255,255,.96),rgba(248,250,252,.94)),
+    radial-gradient(circle at 70% 18%,rgba(29,78,216,.20),transparent 30%)!important;
+  border-bottom:1px solid #dbeafe!important;
+}
+.page-hero::before{
+  content:"";
+  position:absolute;
+  width:520px;height:520px;
+  right:-190px;top:-230px;
+  border-radius:50%;
+  background:linear-gradient(135deg,rgba(29,78,216,.16),rgba(6,182,212,.10));
+  filter:blur(2px);
+  animation:orbFloat 7s ease-in-out infinite;
+}
+.page-hero::after{
+  content:"";
+  position:absolute;
+  left:-140px;bottom:-210px;
+  width:420px;height:420px;border-radius:50%;
+  background:linear-gradient(135deg,rgba(245,158,11,.12),rgba(34,197,94,.10));
+  animation:orbFloat 8s ease-in-out infinite reverse;
+}
+@keyframes orbFloat{0%,100%{transform:translate3d(0,0,0) scale(1)}50%{transform:translate3d(-18px,18px,0) scale(1.06)}}
+.page-hero-inner{position:relative;z-index:1;animation:heroPop .75s cubic-bezier(.2,.8,.2,1) both;}
+@keyframes heroPop{from{opacity:0;transform:translateY(24px) scale(.98)}to{opacity:1;transform:translateY(0) scale(1)}}
+.page-hero .section-label{
+  background:linear-gradient(135deg,#ffffff,#eff6ff)!important;
+  border:1px solid #bfdbfe!important;
+  box-shadow:0 12px 30px rgba(29,78,216,.10)!important;
+}
+.page-hero h1{
+  background:linear-gradient(135deg,#0f172a 0%,#1e3a8a 58%,#1d4ed8 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent!important;
+  text-wrap:balance;
+}
+.page-hero p{max-width:700px;margin:0 auto;color:#475569!important;}
+.projects-section{
+  background:linear-gradient(180deg,#ffffff 0%,#f8fafc 54%,#ffffff 100%)!important;
+  position:relative;
+  overflow:hidden;
+}
+.projects-section::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    radial-gradient(circle at 12% 18%,rgba(29,78,216,.08),transparent 25%),
+    radial-gradient(circle at 92% 70%,rgba(124,58,237,.08),transparent 24%);
+  pointer-events:none;
+}
+.projects-inner{position:relative;z-index:1;}
+.proj-grid{perspective:1200px;}
+.proj-main-card{
+  position:relative;
+  overflow:hidden;
+  border-radius:24px!important;
+  border:1px solid rgba(226,232,240,.95)!important;
+  box-shadow:0 12px 35px rgba(15,23,42,.07)!important;
+  transform-style:preserve-3d;
+  will-change:transform,opacity;
+  opacity:0;
+  transform:translateY(42px) scale(.96);
+  transition:opacity .65s ease, transform .65s cubic-bezier(.2,.8,.2,1), box-shadow .28s ease, border-color .28s ease!important;
+}
+.proj-main-card.revealed{opacity:1;transform:translateY(0) scale(1);}
+.proj-main-card::before{
+  content:"";
+  position:absolute;
+  inset:-1px;
+  background:linear-gradient(120deg,transparent 0%,rgba(255,255,255,0) 35%,rgba(255,255,255,.85) 48%,rgba(255,255,255,0) 62%,transparent 100%);
+  transform:translateX(-120%);
+  transition:transform .75s ease;
+  pointer-events:none;
+  z-index:2;
+}
+.proj-main-card::after{
+  content:"";
+  position:absolute;left:0;right:0;bottom:0;height:4px;
+  background:linear-gradient(90deg,#1d4ed8,#22c55e,#f59e0b,#7c3aed);
+  transform:scaleX(0);transform-origin:left;transition:transform .35s ease;
+}
+.proj-main-card:hover{
+  transform:translateY(-12px) rotateX(1deg) rotateY(-1deg) scale(1.018)!important;
+  box-shadow:var(--premium-shadow-hover)!important;
+  border-color:#93c5fd!important;
+}
+.proj-main-card:hover::before{transform:translateX(120%);}
+.proj-main-card:hover::after{transform:scaleX(1);}
+.proj-card-top{position:relative;z-index:1;}
+.proj-icon-wrap{
+  box-shadow:0 16px 36px rgba(15,23,42,.08);
+  transition:transform .32s cubic-bezier(.34,1.56,.64,1), box-shadow .32s ease;
+}
+.proj-main-card:hover .proj-icon-wrap{transform:scale(1.14) rotate(-6deg);box-shadow:0 22px 48px rgba(29,78,216,.16);}
+.proj-title{letter-spacing:-.015em;}
+.badge{border-radius:999px!important;padding:5px 10px!important;}
+.proj-card-footer{background:#f8fafc!important;position:relative;z-index:1;}
+.proj-action{padding:7px 11px;border-radius:999px;transition:all .22s ease!important;}
+.proj-action:hover{background:#eff6ff;transform:translateX(4px);}
+.bottom-cta{
+  border-radius:30px!important;
+  box-shadow:0 30px 90px rgba(29,78,216,.22);
+  opacity:0;
+  transform:translateY(38px) scale(.98);
+  transition:opacity .7s ease, transform .7s cubic-bezier(.2,.8,.2,1);
+}
+.bottom-cta.revealed{opacity:1;transform:translateY(0) scale(1);}
+.bottom-cta::after{
+  content:"";
+  position:absolute;inset:0;
+  background-image:linear-gradient(rgba(255,255,255,.06) 1px, transparent 1px),linear-gradient(90deg,rgba(255,255,255,.06) 1px, transparent 1px);
+  background-size:28px 28px;
+  mask-image:linear-gradient(to bottom,rgba(0,0,0,.45),transparent 75%);
+}
+.bottom-cta h3,.bottom-cta p,.bottom-cta-btns{position:relative;z-index:1;}
+/* Same clean real-website footer used on index */
+.simple-footer{
+  background:#0f172a!important;
+  color:#cbd5e1!important;
+  border-top:none!important;
+  padding:0!important;
+  overflow:hidden;
+}
+.simple-footer::before{display:none!important;}
+.simple-footer-inner{max-width:1200px;margin:0 auto;padding:52px 28px 22px;}
+.simple-footer-top{display:grid;grid-template-columns:1.45fr .8fr .9fr 1.05fr;gap:34px;}
+.simple-footer-logo{display:flex;align-items:center;gap:10px;margin-bottom:14px;}
+.simple-footer-logo img{width:38px;height:38px;object-fit:contain;filter:drop-shadow(0 8px 20px rgba(59,130,246,.25));}
+.simple-footer-logo span{color:#ffffff;font-weight:900;font-size:1.35rem;letter-spacing:-.03em;}
+.simple-footer-brand p{color:#94a3b8;font-size:.9rem;line-height:1.75;margin:0 0 16px;max-width:390px;}
+.simple-footer-badges{display:flex;flex-wrap:wrap;gap:8px;}
+.simple-footer-badges span{display:inline-flex;align-items:center;gap:6px;color:#dbeafe;background:rgba(59,130,246,.10);border:1px solid rgba(147,197,253,.22);border-radius:999px;padding:7px 10px;font-size:.72rem;font-weight:800;}
+.simple-footer-badges i{color:#22c55e;}
+.simple-footer-col h4{color:#ffffff;font-size:.9rem;font-weight:900;margin:0 0 14px;letter-spacing:.02em;}
+.simple-footer-col a,.simple-footer-contact p{display:flex;align-items:flex-start;gap:9px;color:#94a3b8!important;text-decoration:none;font-size:.84rem;font-weight:600;line-height:1.5;margin:0 0 10px;transition:color .2s ease, transform .2s ease;}
+.simple-footer-col a:hover{color:#ffffff!important;transform:translateX(3px);}
+.simple-footer-contact i{color:#60a5fa;margin-top:2px;min-width:14px;}
+.simple-footer-verify{margin-top:16px;background:rgba(255,255,255,.04);border:1px solid rgba(148,163,184,.18);border-radius:14px;padding:13px;display:flex;flex-direction:column;gap:5px;color:#94a3b8;font-size:.76rem;}
+.simple-footer-verify strong{color:#e2e8f0;font-size:.8rem;margin-bottom:2px;}
+.simple-socials{display:flex;gap:9px;margin-top:14px;}
+.simple-socials a{width:36px;height:36px;border-radius:50%;display:flex!important;align-items:center!important;justify-content:center!important;background:rgba(255,255,255,.06);border:1px solid rgba(148,163,184,.18);color:#cbd5e1!important;margin:0!important;padding:0!important;}
+.simple-socials a:hover{background:#2563eb;color:#fff!important;transform:translateY(-3px)!important;}
+.simple-footer-bottom{border-top:1px solid rgba(148,163,184,.18);margin-top:32px;padding-top:18px;display:flex;align-items:center;justify-content:space-between;gap:12px;color:#94a3b8;font-size:.8rem;font-weight:700;}
+@media(max-width:1024px){
+  .nav-links{border-radius:18px;box-shadow:none;}
+  .simple-footer-top{grid-template-columns:1fr 1fr;}
+}
+@media(max-width:640px){
+  .navbar{background:rgba(255,255,255,.96)!important;}
+  .page-hero{padding:92px 0 52px!important;}
+  .projects-inner,.page-hero-inner{padding:0 18px!important;}
+  .simple-footer-inner{padding:42px 18px 20px;}
+  .simple-footer-top{grid-template-columns:1fr;gap:26px;}
+  .simple-footer-bottom{flex-direction:column;align-items:flex-start;}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important;}
+  .proj-main-card,.bottom-cta{opacity:1!important;transform:none!important;}
+}
+
+</style>
+</head>
+<body>
+<nav class="navbar" id="navbar">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo"><img src="workden-logo.png" alt="WorkDen"><span class="nav-logo-text">WorkDen</span></a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li><li><a href="about.html">About Us</a></li>
+      <li><a href="projects.html" class="active">Projects</a></li><li><a href="plans.html">Plans</a></li><li><a href="demo-task.html">Demo Task</a></li>
+      <li><a href="testimonials.html">Testimonials</a></li><li><a href="blogs.html">Blogs</a></li>
+    </ul>
+    <div class="nav-ctas">
+      <a href="#" onclick="showVersionModal(event)" class="btn btn-ghost">User Login</a>
+      <a href="https://workdenteam2.base44.app/" class="btn btn-primary">Employee Login</a>
+    </div>
+    <button class="hamburger" onclick="toggleNav()"><i class="fas fa-bars"></i></button>
+  </div>
+</nav>
+<div class="mobile-nav" id="mobNav">
+  <button class="mobile-nav-close" onclick="toggleNav()"><i class="fas fa-times"></i></button>
+  <a href="index.html">Home</a><a href="about.html">About Us</a><a href="projects.html" class="active">Projects</a>
+  <a href="plans.html">Plans</a><a href="demo-task.html">Demo Task</a><a href="testimonials.html">Testimonials</a><a href="blogs.html">Blogs</a>
+  <div class="mobile-nav-ctas" style="margin-top:12px;">
+    <a href="#" onclick="showVersionModal(event)" class="btn btn-ghost">User Login</a>
+    <a href="https://workdenteam2.base44.app/" class="btn btn-primary">Employee Login</a>
+  </div>
+</div>
+
+<div class="page-hero">
+  <div class="page-hero-inner">
+    <span class="section-label"><i class="fas fa-briefcase"></i> Work Categories</span>
+    <h1>Available Projects</h1>
+    <p>All tasks have clear step-by-step instructions inside the portal. No prior experience needed for most categories.</p>
+  </div>
+</div>
+
+<section class="projects-section">
+  <div class="projects-inner">
+    <div class="proj-grid">
+
+      <div class="proj-main-card">
+        <div class="proj-card-top">
+          <div class="proj-icon-wrap" style="background:#eff6ff;color:var(--brand);"><i class="fas fa-file-pen"></i></div>
+          <div class="proj-badge-row"><span class="badge badge-blue">Most Popular</span><span class="badge badge-green">Beginner</span></div>
+          <div class="proj-title">Form Filling</div>
+          <p class="proj-desc">Fill structured online forms with given instructions. Data is pre-provided — you simply enter it accurately into the designated fields in the portal.</p>
+        </div>
+        <div class="proj-card-footer">
+          <span class="proj-level"><i class="fas fa-signal"></i> Easy · No Experience Needed</span>
+          <a href="#" onclick="showVersionModal(event)" class="proj-action">Start <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+
+      <div class="proj-main-card">
+        <div class="proj-card-top">
+          <div class="proj-icon-wrap" style="background:#f5f3ff;color:#7c3aed;"><i class="fas fa-table"></i></div>
+          <div class="proj-badge-row"><span class="badge badge-blue">High Volume</span><span class="badge badge-green">Beginner</span></div>
+          <div class="proj-title">Data Entry</div>
+          <p class="proj-desc">Enter structured spreadsheet data into a secure database. Straightforward copy-and-enter tasks with clear reference materials provided in the dashboard.</p>
+        </div>
+        <div class="proj-card-footer">
+          <span class="proj-level"><i class="fas fa-signal"></i> Easy · Basic Typing</span>
+          <a href="#" onclick="showVersionModal(event)" class="proj-action">Start <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+
+      <div class="proj-main-card">
+        <div class="proj-card-top">
+          <div class="proj-icon-wrap" style="background:#f0fdf4;color:var(--green);"><i class="fas fa-envelope"></i></div>
+          <div class="proj-badge-row"><span class="badge badge-amber">Intermediate</span></div>
+          <div class="proj-title">Email Support</div>
+          <p class="proj-desc">Handle basic customer email queries using predefined templates. Templates are provided — you select and send the appropriate response to each query.</p>
+        </div>
+        <div class="proj-card-footer">
+          <span class="proj-level"><i class="fas fa-signal"></i> Medium · Template Based</span>
+          <a href="#" onclick="showVersionModal(event)" class="proj-action">Start <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+
+      <div class="proj-main-card">
+        <div class="proj-card-top">
+          <div class="proj-icon-wrap" style="background:#fff7ed;color:#ea580c;"><i class="fas fa-message"></i></div>
+          <div class="proj-badge-row"><span class="badge badge-amber">Intermediate</span></div>
+          <div class="proj-title">Chat Support</div>
+          <p class="proj-desc">Respond to live chat queries from the dashboard using guided templates. Quick responses with clear guidelines provided for each type of customer query.</p>
+        </div>
+        <div class="proj-card-footer">
+          <span class="proj-level"><i class="fas fa-signal"></i> Medium · Communication</span>
+          <a href="#" onclick="showVersionModal(event)" class="proj-action">Start <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+
+      <div class="proj-main-card">
+        <div class="proj-card-top">
+          <div class="proj-icon-wrap" style="background:#fdf4ff;color:#9333ea;"><i class="fas fa-spell-check"></i></div>
+          <div class="proj-badge-row"><span class="badge badge-amber">Intermediate</span></div>
+          <div class="proj-title">Grammar Correction</div>
+          <p class="proj-desc">Edit and correct short text documents for grammatical errors. Clear error indicators are shown in the portal — you identify and fix what's highlighted.</p>
+        </div>
+        <div class="proj-card-footer">
+          <span class="proj-level"><i class="fas fa-signal"></i> Medium · English Knowledge</span>
+          <a href="#" onclick="showVersionModal(event)" class="proj-action">Start <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+
+      <div class="proj-main-card">
+        <div class="proj-card-top">
+          <div class="proj-icon-wrap" style="background:#f0f9ff;color:#0284c7;"><i class="fas fa-keyboard"></i></div>
+          <div class="proj-badge-row"><span class="badge badge-blue">Easy Start</span><span class="badge badge-green">Beginner</span></div>
+          <div class="proj-title">Typing Tasks</div>
+          <p class="proj-desc">Type the same text shown in the dashboard into the input box. Simple and straightforward — perfect for anyone with basic typing skills and a phone or laptop.</p>
+        </div>
+        <div class="proj-card-footer">
+          <span class="proj-level"><i class="fas fa-signal"></i> Easy · Basic Typing</span>
+          <a href="#" onclick="showVersionModal(event)" class="proj-action">Start <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+
+      <div class="proj-main-card">
+        <div class="proj-card-top">
+          <div class="proj-icon-wrap" style="background:#fefce8;color:#ca8a04;"><i class="fas fa-lock"></i></div>
+          <div class="proj-badge-row"><span class="badge badge-blue">Entry Level</span><span class="badge badge-green">No Experience</span></div>
+          <div class="proj-title">Captcha Filling</div>
+          <p class="proj-desc">Enter captcha codes displayed in the dashboard into the designated input field. Simple, repeatable task — ideal for those just starting with online work.</p>
+        </div>
+        <div class="proj-card-footer">
+          <span class="proj-level"><i class="fas fa-signal"></i> Very Easy · Anyone</span>
+          <a href="#" onclick="showVersionModal(event)" class="proj-action">Start <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="bottom-cta">
+      <h3>Not sure where to start?</h3>
+      <p>Try our free demo task — experience the portal before making any decisions. No payment needed.</p>
+      <div class="bottom-cta-btns">
+        <a href="demo-task.html" class="btn btn-gold btn-lg"><i class="fas fa-play"></i> Try Free Demo</a>
+        <a href="#" onclick="showVersionModal(event)" class="btn" style="background:rgba(255,255,255,0.1);color:white;border:1.5px solid rgba(255,255,255,0.3);">User Login <i class="fas fa-arrow-right"></i></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer simple-footer">
+  <div class="simple-footer-inner">
+    <div class="simple-footer-top">
+      <div class="simple-footer-brand">
+        <div class="simple-footer-logo">
+          <img src="workden-logo.png" alt="WorkDen">
+          <span>WorkDen</span>
+        </div>
+        <p>A verified digital task platform delivering structured online work opportunities with transparency, secure workflow, and compliance. GSTIN & MSME registered.</p>
+        <div class="simple-footer-badges">
+          <span><i class="fas fa-circle-check"></i> GSTIN Verified</span>
+          <span><i class="fas fa-circle-check"></i> MSME Registered</span>
+          <span><i class="fas fa-circle-check"></i> Est. 2024</span>
+        </div>
+      </div>
+
+      <div class="simple-footer-col">
+        <h4>Company</h4>
+        <a href="index.html">Home</a>
+        <a href="about.html">About Us</a>
+        <a href="projects.html">Projects</a>
+        <a href="plans.html">Plans</a>
+        <a href="demo-task.html">Demo Task</a>
+        <a href="testimonials.html">Testimonials</a>
+        <a href="blogs.html">Blogs</a>
+      </div>
+
+      <div class="simple-footer-col">
+        <h4>Legal</h4>
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="terms.html">Terms & Conditions</a>
+        <a href="disclaimer.html">Disclaimer</a>
+        <a href="refund.html">Refund Policy</a>
+        <div class="simple-footer-verify">
+          <strong>Business Verification</strong>
+          <span>GSTIN: 10KEJPM6504N1Z7</span>
+          <span>MSME: UDYAM-KR-03-0640514</span>
+        </div>
+      </div>
+
+      <div class="simple-footer-col simple-footer-contact">
+        <h4>Contact</h4>
+        <a href="mailto:info@workden.online"><i class="fas fa-envelope"></i> info@workden.online</a>
+        <a href="mailto:support@workden.online"><i class="fas fa-headset"></i> support@workden.online</a>
+        <p><i class="fas fa-location-dot"></i> Ashok Nagar, Bangalore – 560001</p>
+        <p><i class="fas fa-location-dot"></i> Parsuram Pur, Motihari – 845416</p>
+        <div class="simple-socials">
+          <a href="https://www.facebook.com/people/Workden-India/61583820256534/" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://www.instagram.com/workden_wfh" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="https://www.linkedin.com/in/workden-india-315391383/" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+          <a href="https://t.me/+f_s3cLM1WwYxNjE1" target="_blank" aria-label="Telegram"><i class="fab fa-telegram-plane"></i></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="simple-footer-bottom">
+      <span>© 2026 WorkDen. All rights reserved.</span>
+      <span>Structured Digital Task Platform</span>
+    </div>
+  </div>
+</footer>
+<script>
+window.addEventListener('scroll',()=>{document.getElementById('navbar').classList.toggle('scrolled',window.scrollY>20);});
+function toggleNav(){document.getElementById('mobNav').classList.toggle('open');}
+</script>
+
+<!-- VERSION SELECTOR MODAL -->
+<div id="verOverlay" onclick="closeVersionModal(event)" style="display:none;position:fixed;inset:0;z-index:9999;background:rgba(10,20,40,0.72);backdrop-filter:blur(4px);align-items:center;justify-content:center;">
+  <div style="background:white;border-radius:20px;padding:40px 32px 32px;max-width:440px;width:92%;box-shadow:0 24px 80px rgba(0,0,0,0.22);text-align:center;position:relative;">
+    <button onclick="document.getElementById('verOverlay').style.display='none'" style="position:absolute;top:14px;right:18px;background:#f1f5f9;border:none;cursor:pointer;width:32px;height:32px;border-radius:50%;font-size:1.1rem;color:#64748b;">✕</button>
+    <div style="display:inline-flex;align-items:center;gap:6px;background:#eff6ff;color:#1d4ed8;font-size:0.72rem;font-weight:700;text-transform:uppercase;padding:5px 12px;border-radius:20px;margin-bottom:14px;">Select Version</div>
+    <div style="font-size:1.35rem;font-weight:800;color:#0f172a;margin-bottom:8px;">Choose Your Login Portal</div>
+    <div style="font-size:0.9rem;color:#64748b;margin-bottom:28px;line-height:1.5;">WorkDen ke do version available hain. Apna version select karein.</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
+      <a href="https://workden-4.base44.app" target="_blank" style="border:2px solid #bfdbfe;border-radius:14px;padding:22px 16px 18px;text-decoration:none;display:flex;flex-direction:column;align-items:center;gap:8px;">
+        <div style="font-size:2rem;font-weight:900;color:#1d4ed8;">4.0</div>
+        <div style="font-size:0.8rem;font-weight:700;color:#475569;">WorkDen 4.0</div>
+        <div style="font-size:0.75rem;color:#94a3b8;">Latest version — upgraded features</div>
+        <div style="margin-top:6px;padding:7px 18px;border-radius:8px;font-size:0.8rem;font-weight:700;background:#1d4ed8;color:white;width:100%;box-sizing:border-box;">Login 4.0</div>
+      </a>
+      <a href="https://workden-3.base44.app" target="_blank" style="border:2px solid #ddd6fe;border-radius:14px;padding:22px 16px 18px;text-decoration:none;display:flex;flex-direction:column;align-items:center;gap:8px;">
+        <div style="font-size:2rem;font-weight:900;color:#7c3aed;">3.0</div>
+        <div style="font-size:0.8rem;font-weight:700;color:#475569;">WorkDen 3.0</div>
+        <div style="font-size:0.75rem;color:#94a3b8;">Previous version — stable interface</div>
+        <div style="margin-top:6px;padding:7px 18px;border-radius:8px;font-size:0.8rem;font-weight:700;background:#7c3aed;color:white;width:100%;box-sizing:border-box;">Login 3.0</div>
+      </a>
+    </div>
+  </div>
+</div>
+<script>
+function showVersionModal(e){if(e)e.preventDefault();document.getElementById("verOverlay").style.display="flex";}
+function closeVersionModal(e){if(e.target===document.getElementById("verOverlay"))document.getElementById("verOverlay").style.display="none";}
+</script>
+
+<script>
+(function(){
+  const revealTargets = document.querySelectorAll('.proj-main-card,.bottom-cta');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach((entry)=>{
+      if(entry.isIntersecting){
+        const items = [...document.querySelectorAll('.proj-main-card')];
+        const idx = items.indexOf(entry.target);
+        entry.target.style.transitionDelay = idx >= 0 ? (idx * 70) + 'ms' : '0ms';
+        entry.target.classList.add('revealed');
+        io.unobserve(entry.target);
+      }
+    });
+  },{threshold:0.14});
+  revealTargets.forEach(el=>io.observe(el));
+
+  document.querySelectorAll('.proj-main-card').forEach((card)=>{
+    card.addEventListener('mousemove',(e)=>{
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      const rx = ((y / rect.height) - .5) * -5;
+      const ry = ((x / rect.width) - .5) * 5;
+      card.style.transform = `translateY(-12px) rotateX(${rx}deg) rotateY(${ry}deg) scale(1.018)`;
+    });
+    card.addEventListener('mouseleave',()=>{
+      if(card.classList.contains('revealed')) card.style.transform = '';
+    });
+  });
+})();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Terms & Conditions – WorkDen</title>
+<link rel="icon" href="favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@700;800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+*{box-sizing:border-box;}
+body{font-family:'DM Sans','Segoe UI',sans-serif;margin:0;padding:0;color:#334155;background:#fff;-webkit-font-smoothing:antialiased;}
+.ld-nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(255,255,255,0.97);backdrop-filter:blur(20px);border-bottom:1px solid #e2e8f0;transition:box-shadow 0.3s;}
+.ld-nav-inner{max-width:1280px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:68px;}
+.ld-logo{display:flex;align-items:center;gap:10px;text-decoration:none;}
+.ld-logo span{font-family:Sora,sans-serif;font-size:1.2rem;font-weight:800;color:#0f172a;}
+.ld-logo img{height:36px;width:auto;}
+.ld-links{display:flex;align-items:center;gap:4px;list-style:none;margin:0;padding:0;}
+.ld-links a{text-decoration:none;font-size:0.875rem;font-weight:500;color:#334155;padding:8px 14px;border-radius:8px;transition:all 0.2s;}
+.ld-links a:hover{color:#1a56db;background:#eff6ff;}
+.ld-ctas{display:flex;gap:10px;align-items:center;}
+.ld-btn-ghost{display:inline-flex;align-items:center;gap:6px;padding:10px 22px;border-radius:10px;font-size:0.875rem;font-weight:600;text-decoration:none;background:transparent;border:2px solid #e2e8f0;color:#334155;transition:all 0.2s;}
+.ld-btn-ghost:hover{border-color:#1a56db;color:#1a56db;background:#eff6ff;}
+.ld-btn-primary{display:inline-flex;align-items:center;gap:6px;padding:10px 22px;border-radius:10px;font-size:0.875rem;font-weight:600;text-decoration:none;background:#1a56db;color:white;box-shadow:0 4px 14px rgba(26,86,219,0.3);transition:all 0.2s;}
+.ld-btn-primary:hover{background:#1240a8;}
+.ld-ham{display:none;background:none;border:none;cursor:pointer;padding:8px;color:#0f172a;font-size:1.4rem;}
+.ld-mob{display:flex;position:fixed;inset:0;z-index:9999;background:white;padding:80px 24px 40px;flex-direction:column;gap:8px;transform:translateX(100%);transition:transform 0.35s;overflow-y:auto;}
+.ld-mob a{display:block;text-decoration:none;font-size:1.05rem;font-weight:600;color:#0f172a;padding:14px 20px;border-radius:12px;background:#f8fafc;transition:all 0.2s;}
+.ld-mob a:hover{background:#eff6ff;color:#1a56db;}
+.ld-mob-ctas{display:flex;flex-direction:column;gap:10px;margin-top:16px;}
+.ld-mob-close{position:absolute;top:18px;right:20px;background:none;border:none;font-size:1.6rem;cursor:pointer;color:#0f172a;padding:8px;}
+/* Content wrapper */
+.legal-wrap{max-width:860px;margin:0 auto;padding:100px 24px 80px;}
+.legal-hero{background:linear-gradient(160deg,#f0f7ff,#fafbff);border-bottom:1px solid #e2e8f0;padding:80px 0 48px;text-align:center;margin-bottom:0;}
+.legal-hero-inner{max-width:700px;margin:0 auto;padding:0 24px;}
+.legal-hero h1{font-family:Sora,sans-serif;font-size:2rem;font-weight:800;color:#0f172a;margin-bottom:10px;}
+.legal-hero p{color:#475569;font-size:1rem;}
+.legal-body{max-width:860px;margin:0 auto;padding:60px 24px 80px;}
+.legal-body h2{font-size:1.15rem;font-weight:700;color:#0f172a;margin:32px 0 10px;}
+.legal-body h3{font-size:1rem;font-weight:700;color:#0f172a;margin:24px 0 8px;}
+.legal-body p,.legal-body li{font-size:0.9rem;color:#475569;line-height:1.8;margin-bottom:8px;}
+.legal-body ul,.legal-body ol{padding-left:20px;}
+.legal-body a{color:#1a56db;}
+.legal-box{background:#f0f7ff;border:1px solid #bfdbfe;border-radius:12px;padding:20px 24px;margin:20px 0;}
+.legal-box strong{color:#1a56db;}
+/* Footer */
+.ld-footer{background:#0f172a;color:#94a3b8;padding:48px 0 24px;margin-top:0;}
+.ld-footer-inner{max-width:1280px;margin:0 auto;padding:0 24px;}
+.ld-footer-bottom{display:flex;align-items:center;justify-content:space-between;padding-top:24px;border-top:1px solid rgba(255,255,255,0.08);font-size:0.8rem;color:rgba(255,255,255,0.3);flex-wrap:wrap;gap:8px;}
+@media(max-width:768px){.ld-links,.ld-ctas{display:none!important;}.ld-ham{display:flex!important;}}
+</style>
+</head>
+<body>
+<nav class="ld-nav" id="ldNav">
+  <div class="ld-nav-inner">
+    <a href="index.html" class="ld-logo"><img src="workden-logo.png" alt="WorkDen"><span>WorkDen</span></a>
+    <ul class="ld-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About Us</a></li>
+      <li><a href="projects.html">Projects</a></li>
+      <li><a href="demo-task.html">Demo Task</a></li>
+      <li><a href="testimonials.html">Testimonials</a></li>
+      <li><a href="blogs.html">Blogs</a></li>
+    </ul>
+    <div class="ld-ctas">
+      <a href="#" onclick="showVersionModal(event)" class="ld-btn-ghost">User Login</a>
+      <a href="https://workdenteam2.base44.app/" class="ld-btn-primary">Employee Login</a>
+    </div>
+    <button class="ld-ham" onclick="ldToggle()"><i class="fas fa-bars"></i></button>
+  </div>
+</nav>
+<div class="ld-mob" id="ldMob">
+  <button class="ld-mob-close" onclick="ldToggle()"><i class="fas fa-times"></i></button>
+  <a href="index.html">Home</a><a href="about.html">About Us</a><a href="projects.html">Projects</a>
+  <a href="demo-task.html">Demo Task</a><a href="testimonials.html">Testimonials</a><a href="blogs.html">Blogs</a>
+  <div class="ld-mob-ctas">
+    <a href="#" onclick="showVersionModal(event)" class="ld-btn-ghost">User Login</a>
+    <a href="https://workdenteam2.base44.app/" class="ld-btn-primary">Employee Login</a>
+  </div>
+</div>
+<script>
+function ldToggle(){const m=document.getElementById('ldMob');m.style.transform=m.style.transform==='translateX(0%)'?'translateX(100%)':'translateX(0%)';}
+window.addEventListener('scroll',()=>{const n=document.getElementById('ldNav');if(n)n.style.boxShadow=window.scrollY>20?'0 4px 24px rgba(0,0,0,0.1)':'none';});
+</script>
+<div class="legal-hero" style="margin-top:68px;">
+  <div class="legal-hero-inner">
+    <span style="display:inline-flex;align-items:center;gap:6px;font-size:0.75rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:#1a56db;background:#eff6ff;padding:6px 14px;border-radius:100px;border:1px solid #bfdbfe;margin-bottom:16px;"><i class="fas fa-file-alt"></i> Legal</span>
+    <h1>Terms & Conditions</h1>
+    <p>WorkDen – Verified Digital Task Platform | GSTIN: 10KEJPM6504N1Z7</p>
+  </div>
+</div>
+<div class="legal-body">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terms & Conditions – WorkDen | User Agreement</title>
+    <link rel="icon" type="image/png" href="favicon.png">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+
+    
+</head>
+<body class="flex flex-col min-h-screen bg-bgLight overflow-x-hidden">
+
+
+
+
+
+
+<main class="flex-grow pt-24 pb-16 sm:pb-24 bg-gray-50">
+
+    <!-- HERO -->
+    <section class="relative bg-white border-b border-gray-200 py-14 sm:py-20 text-center overflow-hidden">
+
+        <!-- Soft Glow -->
+        <div class="hidden sm:block absolute -top-6 left-1/2 -translate-x-1/2 
+                    w-[250px] h-[120px] bg-blue-100 blur-2xl opacity-30"></div>
+
+        <div class="relative max-w-3xl mx-auto px-4">
+
+            <!-- Icon -->
+            <div class="flex justify-center mb-5">
+                <div class="w-14 h-14 flex items-center justify-center rounded-xl 
+                            bg-white border border-gray-200 shadow-md">
+                    <i class="fas fa-file-contract text-xl text-gray-800"></i>
+                </div>
+            </div>
+
+            <h1 class="text-3xl sm:text-4xl font-bold text-gray-900 tracking-tight">
+                Terms & Conditions
+            </h1>
+
+            <p class="mt-3 text-gray-500 text-sm">
+                Effective Date: 03 Decemeber 2025
+            </p>
+
+        </div>
+    </section>
+
+
+    <!-- CONTENT -->
+    <section class="max-w-5xl mx-auto px-4 sm:px-6 mt-12 sm:mt-16">
+
+        <div class="bg-white rounded-3xl shadow-2xl border border-gray-100 
+                    p-6 sm:p-10 md:p-14">
+
+            <div class="space-y-8 sm:space-y-10 text-gray-700 leading-relaxed text-sm sm:text-base">
+
+                <section class="bg-gray-50 p-5 sm:p-6 rounded-xl border border-gray-200">
+                    <p>
+                        Welcome to <strong>WorkDen</strong>. By accessing or using our platform,
+                        you agree to comply with these Terms & Conditions.
+                        If you do not agree, please discontinue use immediately.
+                    </p>
+                </section>
+
+                <section>
+                    <h2 class="text-lg sm:text-xl font-semibold text-gray-900 mb-3">1. Platform Nature</h2>
+                    <p>
+                        WorkDen is a digital task facilitation platform and does not provide employment.
+                        Users participate independently in task-based activities.
+                    </p>
+                </section>
+
+                <section>
+                    <h2 class="text-lg sm:text-xl font-semibold text-gray-900 mb-3">2. Eligibility</h2>
+                    <p>
+                        Users must be at least 18 years old. Providing inaccurate or misleading
+                        information may result in account suspension or termination.
+                    </p>
+                </section>
+
+                <section>
+                    <h2 class="text-lg sm:text-xl font-semibold text-gray-900 mb-3">3. Registration</h2>
+                    <p>
+                        Accurate details must be provided during registration.
+                        Duplicate or fraudulent accounts are prohibited.
+                    </p>
+                </section>
+
+                <section>
+                    <h2 class="text-lg sm:text-xl font-semibold text-gray-900 mb-3">4. Application & Approval</h2>
+                    <p>
+                        After successful payment confirmation, your portal access and onboarding process will be activated.
+                        Access credentials will be shared upon verification of payment.
+                    </p>
+                </section>
+
+               <section class="bg-gray-50 p-5 sm:p-6 rounded-xl border border-gray-200">
+                 <h2 class="text-lg sm:text-xl font-semibold text-gray-900 mb-3">5. Fees & Refund Policy</h2>
+                 <p class="font-semibold">
+                        Payments made to WorkDen are generally non-refundable once services are activated.
+                </p>
+                <p>
+                       Fees are charged for portal access and onboarding services.
+                      Once access credentials are generated and shared, the service is considered delivered.
+                      Refunds may be considered only in cases of duplicate payment or technical issues.
+               </p>
+                </section>
+
+                <section>
+                    <h2 class="text-lg sm:text-xl font-semibold text-gray-900 mb-3">6. Task Rules</h2>
+                    <p>
+                        Users must avoid fake submissions, automation tools,
+                        or policy violations.
+                    </p>
+                </section>
+
+                <section>
+                    <h2 class="text-lg sm:text-xl font-semibold text-gray-900 mb-3">7. Earnings & Payments</h2>
+                    <p>
+                        Earnings are performance-based and depend on approved tasks.
+                        No fixed income or guaranteed earnings are promised.
+                    </p>
+                </section>
+
+                <section>
+                    <h2 class="text-lg sm:text-xl font-semibold text-gray-900 mb-3">8. Account Suspension</h2>
+                    <p>
+                        Accounts may be suspended for fraud, suspicious activity,
+                        or repeated low-quality submissions.
+                    </p>
+                </section>
+
+                <section>
+                    <h2 class="text-lg sm:text-xl font-semibold text-gray-900 mb-3">9. Chargebacks & Disputes</h2>
+                    <p>
+                        False chargebacks or disputes may result in permanent suspension
+                        and possible legal action.
+                    </p>
+                </section>
+
+                <section>
+                    <h2 class="text-lg sm:text-xl font-semibold text-gray-900 mb-3">10. Intellectual Property</h2>
+                    <p>
+                        All website content and branding belong to WorkDen
+                        and cannot be reproduced without written permission.
+                    </p>
+                </section>
+
+                <section>
+                    <h2 class="text-lg sm:text-xl font-semibold text-gray-900 mb-3">11. Limitation of Liability</h2>
+                    <p>
+                        WorkDen shall not be liable for indirect or consequential damages
+                        arising from platform usage.
+                    </p>
+                </section>
+
+                <section>
+                    <h2 class="text-lg sm:text-xl font-semibold text-gray-900 mb-3">12. Modifications</h2>
+                    <p>
+                        We reserve the right to update these Terms at any time.
+                        Continued use implies acceptance of revised terms.
+                    </p>
+                </section>
+
+                <section>
+                    <h2 class="text-lg sm:text-xl font-semibold text-gray-900 mb-3">13. Governing Law</h2>
+                    <p>
+                        These Terms are governed by the laws of India and subject to Indian jurisdiction.
+                    </p>
+                </section>
+
+                <!-- CONTACT BOX (animation preserved) -->
+                <section class="relative bg-gradient-to-r from-blue-50 to-indigo-50 
+                                border border-blue-100 p-5 sm:p-6 rounded-2xl 
+                                shadow-sm hover:shadow-lg transition duration-500 group overflow-hidden">
+
+                    <div class="absolute -top-6 -right-6 w-32 h-32 bg-blue-200 opacity-20 
+                                blur-2xl rounded-full group-hover:scale-110 transition duration-500"></div>
+
+                    <h2 class="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-2">
+                        <span class="w-8 h-8 flex items-center justify-center rounded-lg 
+                                     bg-blue-600 text-white text-sm shadow-md">
+                            <i class="fas fa-envelope-open-text"></i>
+                        </span>
+                        14. Contact Information
+                    </h2>
+
+                    <div class="space-y-2 text-sm text-gray-600 relative z-10">
+                        <p class="flex items-center gap-2">
+                            <i class="fas fa-envelope text-blue-600"></i>
+                            support@workden.online
+                        </p>
+
+                        <p class="flex items-center gap-2">
+                            <i class="fas fa-map-marker-alt text-blue-600"></i>
+                            Bangalore, India
+                        </p>
+                    </div>
+
+                </section>
+
+            </div>
+        </div>
+    </section>
+
+</main>
+
+
+
+</div>
+
+<footer class="ld-footer">
+  <div class="ld-footer-inner">
+    <div class="ld-footer-bottom">
+      <span>© 2026 WorkDen. All rights reserved. | GSTIN: 10KEJPM6504N1Z7 | MSME: UDYAM-KR-03-0640514</span>
+      <span>info@workden.online</span>
+    </div>
+  </div>
+</footer>
+
+<!-- VERSION SELECTOR MODAL -->
+<div id="verOverlay" onclick="closeVersionModal(event)" style="display:none;position:fixed;inset:0;z-index:9999;background:rgba(10,20,40,0.72);backdrop-filter:blur(4px);align-items:center;justify-content:center;">
+  <div style="background:white;border-radius:20px;padding:40px 32px 32px;max-width:440px;width:92%;box-shadow:0 24px 80px rgba(0,0,0,0.22);text-align:center;position:relative;">
+    <button onclick="document.getElementById('verOverlay').style.display='none'" style="position:absolute;top:14px;right:18px;background:#f1f5f9;border:none;cursor:pointer;width:32px;height:32px;border-radius:50%;font-size:1.1rem;color:#64748b;">✕</button>
+    <div style="display:inline-flex;align-items:center;gap:6px;background:#eff6ff;color:#1d4ed8;font-size:0.72rem;font-weight:700;text-transform:uppercase;padding:5px 12px;border-radius:20px;margin-bottom:14px;">Select Version</div>
+    <div style="font-size:1.35rem;font-weight:800;color:#0f172a;margin-bottom:8px;">Choose Your Login Portal</div>
+    <div style="font-size:0.9rem;color:#64748b;margin-bottom:28px;line-height:1.5;">WorkDen ke do version available hain. Apna version select karein.</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
+      <a href="https://workden-4.base44.app" target="_blank" style="border:2px solid #bfdbfe;border-radius:14px;padding:22px 16px 18px;text-decoration:none;display:flex;flex-direction:column;align-items:center;gap:8px;">
+        <div style="font-size:2rem;font-weight:900;color:#1d4ed8;">4.0</div>
+        <div style="font-size:0.8rem;font-weight:700;color:#475569;">WorkDen 4.0</div>
+        <div style="font-size:0.75rem;color:#94a3b8;">Latest version — upgraded features</div>
+        <div style="margin-top:6px;padding:7px 18px;border-radius:8px;font-size:0.8rem;font-weight:700;background:#1d4ed8;color:white;width:100%;box-sizing:border-box;">Login 4.0</div>
+      </a>
+      <a href="https://workden-3.base44.app" target="_blank" style="border:2px solid #ddd6fe;border-radius:14px;padding:22px 16px 18px;text-decoration:none;display:flex;flex-direction:column;align-items:center;gap:8px;">
+        <div style="font-size:2rem;font-weight:900;color:#7c3aed;">3.0</div>
+        <div style="font-size:0.8rem;font-weight:700;color:#475569;">WorkDen 3.0</div>
+        <div style="font-size:0.75rem;color:#94a3b8;">Previous version — stable interface</div>
+        <div style="margin-top:6px;padding:7px 18px;border-radius:8px;font-size:0.8rem;font-weight:700;background:#7c3aed;color:white;width:100%;box-sizing:border-box;">Login 3.0</div>
+      </a>
+    </div>
+  </div>
+</div>
+<script>
+function showVersionModal(e){if(e)e.preventDefault();document.getElementById("verOverlay").style.display="flex";}
+function closeVersionModal(e){if(e.target===document.getElementById("verOverlay"))document.getElementById("verOverlay").style.display="none";}
+</script>
+</body>
+</html>
