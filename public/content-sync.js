@@ -588,27 +588,11 @@ function applyWebsiteContent(data) {
 
 // ── DOM DOMContentLoaded IMPLEMENTATION ────────────────────────────────────
 document.addEventListener("DOMContentLoaded", async () => {
-  // Check and apply cache first instantly (0ms load time!)
-  const cachedContent = localStorage.getItem('website_content');
-  let hasCache = false;
-  
-  if (cachedContent) {
-    try {
-      const data = JSON.parse(cachedContent);
-      applyWebsiteContent(data);
-      hasCache = true;
-    } catch (e) {
-      console.error("Failed to parse cached content:", e);
-    }
-  }
-
-  // Hide dynamic elements during loading if no cache is available to prevent static flash
-  if (!hasCache) {
-    const style = document.createElement('style');
-    style.id = 'sync-fade-hide';
-    style.innerHTML = '[data-content-id] { opacity: 0 !important; }';
-    document.head.appendChild(style);
-  }
+  // Directly hide dynamic elements during loading to prevent static flash
+  const style = document.createElement('style');
+  style.id = 'sync-fade-hide';
+  style.innerHTML = '[data-content-id] { opacity: 0 !important; }';
+  document.head.appendChild(style);
 
   try {
     let data = null;
@@ -643,8 +627,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (data) {
       // Apply fresh data immediately
       applyWebsiteContent(data);
-      // Save data to cache for next load
-      localStorage.setItem('website_content', JSON.stringify(data));
     }
   } catch (err) {
     console.info("WorkDen CMS: Could not load dynamic content.", err);

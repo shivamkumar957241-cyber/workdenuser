@@ -2776,18 +2776,27 @@ function renderHistory(attempts) {
       const card = document.createElement('div');
       card.className = "drawer-card flex flex-col gap-2.5 p-4 border border-slate-200/70 rounded-2xl bg-white shadow-sm hover:shadow-md transition-all duration-200";
       
-      const hasReport = !!att.reportData;
-      let buttonHtml = '';
-      if (hasReport) {
-        if (!window.SAVED_REPORTS) window.SAVED_REPORTS = {};
-        const reportKey = "rep_" + att.timestamp.replace(/[^a-zA-Z0-9]/g, '') + "_" + Math.floor(Math.random() * 1000);
-        window.SAVED_REPORTS[reportKey] = att.reportData;
-        buttonHtml = `
-          <button onclick="showSavedReport('${reportKey}')" class="mt-2.5 w-full bg-slate-50 hover:bg-slate-100 border border-slate-200 text-blue-600 hover:text-blue-700 font-black text-[10px] uppercase tracking-wider py-2 rounded-xl transition-all cursor-pointer flex items-center justify-center gap-1.5">
-            <i class="fa-solid fa-file-invoice"></i> View Performance Report
-          </button>
-        `;
-      }
+      if (!window.SAVED_REPORTS) window.SAVED_REPORTS = {};
+      const reportKey = "rep_" + att.timestamp.replace(/[^a-zA-Z0-9]/g, '') + "_" + Math.floor(Math.random() * 1000);
+      
+      // Store attempt info so we can reconstruct if reportData is missing from old database attempts
+      window.SAVED_REPORTS[reportKey] = att.reportData ? att.reportData : {
+        isGenerated: false,
+        taskName: att.taskName,
+        taskCategory: att.taskCategory,
+        totalEntries: att.totalEntries,
+        correctEntries: att.correctEntries,
+        wrongEntries: att.wrongEntries,
+        accuracy: att.accuracy,
+        status: att.status,
+        timestamp: att.timestamp
+      };
+      
+      const buttonHtml = `
+        <button onclick="showSavedReport('${reportKey}')" class="mt-2.5 w-full bg-slate-50 hover:bg-slate-100 border border-slate-200 text-blue-600 hover:text-blue-700 font-black text-[10px] uppercase tracking-wider py-2 rounded-xl transition-all cursor-pointer flex items-center justify-center gap-1.5">
+          <i class="fa-solid fa-file-invoice"></i> View Performance Report
+        </button>
+      `;
 
       card.innerHTML = `
         <div class="flex justify-between items-start">
@@ -2853,9 +2862,124 @@ window.showSavedReport = function(reportKey) {
     showToast("⚠️ Report data not found.");
     return;
   }
-  const r = window.SAVED_REPORTS[reportKey];
+  let r = window.SAVED_REPORTS[reportKey];
   
-  // Inject saved HTML strings directly into the report elements
+  // Reconstruct if this is an older attempt lacking full HTML records
+  if (r.isGenerated === false) {
+    const accVal = parseFloat(r.accuracy || 0);
+    const total = parseInt(r.totalEntries || 0);
+    const correct = parseInt(r.correctEntries || 0);
+    const wrong = parseInt(r.wrongEntries || 0);
+    const isApproved = r.status === 'Approved';
+    
+    // Emojis and colors based on task
+    let taskEmoji = '📋';
+    if (r.taskCategory === 'data') taskEmoji = '📊';
+    else if (r.taskCategory === 'form') taskEmoji = '🧾';
+    else if (r.taskCategory === 'grammar') taskEmoji = '✍️';
+    else if (r.taskCategory === 'typing') taskEmoji = '⌨️';
+    
+    // Status text & banner
+    const threshold = parseInt(getReportConfig("reportApprovalThreshold", "95"));
+    const statusText = isApproved ? getReportConfig("reportStatusApprovedText", "Task Status: Approved") : getReportConfig("reportStatusRejectedText", "Task Status: Rejected");
+    const statusDesc = isApproved ? getReportConfig("reportApprovedDesc", "You are eligible for live tasks! Start real work now.") : getReportConfig("reportRejectedDesc", `Score ${threshold}%+ accuracy to get your task approved.`);
+    const statusBg = isApproved ? '#F0FDF4' : '#FEF2F2';
+    const statusBorder = isApproved ? '#86EFAC' : '#FCA5A5';
+    const statusColor = isApproved ? '#15803D' : '#B91C1C';
+    
+    const eligibilityBanner = isApproved
+      ? `<div style="background:#ECFDF5;border:2px solid #34D399;border-radius:14px;padding:16px;text-align:center;color:#065F46;margin-bottom:18px;">
+          <h4 style="font-weight:900;font-size:1.15rem;margin-bottom:4px;">🎉 ${getReportConfig("reportEligibleHeading", "You are eligible for this work.")}</h4>
+          <p style="font-size:0.8rem;color:#047857;font-weight:600;line-height:1.4;">${getReportConfig("reportEligibleSub", "Please purchase a subscription plan to start earning real money!")}</p>
+        </div>`
+      : `<div style="background:#FFFBEB;border:2px solid #FCD34D;border-radius:14px;padding:16px;text-align:center;color:#9B1C1C;margin-bottom:18px;">
+          <h4 style="font-weight:900;font-size:1.15rem;margin-bottom:4px;">⚠️ ${getReportConfig("reportNotEligibleHeading", "You are not eligible for this work.")}</h4>
+          <p style="font-size:0.8rem;color:#C53030;font-weight:600;line-height:1.4;">${getReportConfig("reportNotEligibleSub", `You need ${threshold}%+ accuracy to become eligible. Please try again!`)}</p>
+        </div>`;
+
+    // Grade and color
+    let grade = 'D', gc = '#EF4444';
+    if (accVal >= 90) { grade = 'A'; gc = '#10B981'; }
+    else if (accVal >= 80) { grade = 'B'; gc = '#3B82F6'; }
+    else if (accVal >= 70) { grade = 'C'; gc = '#F59E0B'; }
+    
+    const overallStatsHtml = `
+      <div style="grid-column:1/-1;">
+        ${eligibilityBanner}
+        <div class="rpt-section"><div class="rpt-sec-title">1️⃣ Basic Work Data</div><div class="rpt-grid-3">
+          <div class="rpt-kv"><span class="rpt-k">Task Type</span><span class="rpt-v">${taskEmoji} ${r.taskName}</span></div>
+          <div class="rpt-kv"><span class="rpt-k">Total Entries Submitted</span><span class="rpt-v" style="color:var(--purple);">${total}</span></div>
+          <div class="rpt-kv"><span class="rpt-k">Task Completion</span><span class="rpt-v" style="color:var(--green);">${total}/10</span></div>
+        </div></div>
+        <div class="rpt-section"><div class="rpt-sec-title">2️⃣ Accuracy Report</div><div class="rpt-grid-3">
+          <div class="rpt-kv"><span class="rpt-k">✔ Correct Entries</span><span class="rpt-v" style="color:var(--green);">${correct}</span></div>
+          <div class="rpt-kv"><span class="rpt-k">❌ Incorrect Entries</span><span class="rpt-v" style="color:var(--red);">${wrong}</span></div>
+          <div class="rpt-kv"><span class="rpt-k">🎯 Overall Accuracy</span><span class="rpt-v" style="color:${gc};">${accVal}%</span></div>
+        </div></div>
+        <div class="rpt-section"><div class="rpt-sec-title">3️⃣ Productivity Score</div><div class="rpt-grid-3">
+          <div class="rpt-kv"><span class="rpt-k">📈 Task Completion Rate</span><span class="rpt-v" style="color:var(--green);">100%</span></div>
+          <div class="rpt-kv"><span class="rpt-k">🏅 Performance Grade</span><span class="rpt-v" style="color:${gc};">${grade}</span></div>
+        </div></div>
+        <div style="border-radius:14px;padding:16px 18px;display:flex;align-items:center;gap:14px;background:${statusBg};border:2px solid ${statusBorder};margin-top:14px;">
+          <div style="font-size:2rem;">${isApproved?'✅':'❌'}</div>
+          <div>
+            <div style="font-weight:900;font-size:1.05rem;color:${statusColor};">${statusText}</div>
+            <div style="font-size:0.78rem;color:var(--text-muted);margin-top:3px;">${statusDesc}</div>
+          </div>
+        </div>
+      </div>
+    `;
+    
+    let str, imp, sug;
+    if (accVal >= 80) {
+      str = getReportConfig("reportStrengthHigh", "Excellent accuracy and attention to detail maintained.");
+      imp = getReportConfig("reportImprovementHigh", "Minor mistakes - review before saving next time.");
+      sug = getReportConfig("reportSuggestionHigh", "You are ready for live tasks. Purchase a plan to start earning!");
+    } else if (accVal >= 60) {
+      str = getReportConfig("reportStrengthMedium", "Good consistency - you completed all items.");
+      imp = getReportConfig("reportImprovementMedium", "Accuracy needs improvement. Read reference data carefully.");
+      sug = getReportConfig("reportSuggestionMedium", `Practice 2-3 more demo rounds to reach ${threshold}%+ accuracy.`);
+    } else {
+      str = getReportConfig("reportStrengthLow", "You attempted all items - that's a great start!");
+      imp = getReportConfig("reportImprovementLow", "Low accuracy. Take time to read reference data.");
+      sug = getReportConfig("reportSuggestionLow", "Focus on one task type. Practice makes perfect.");
+    }
+    
+    const analysisGridHtml = `
+      <div class="ac strength"><h5>✔ Strength</h5><p>${str}</p></div>
+      <div class="ac improve"><h5>⚠ Improvement Area</h5><p>${imp}</p></div>
+      <div class="ac suggest"><h5>💡 Suggestion</h5><p>${sug}</p></div>
+    `;
+    
+    const fullErrSectionHtml = `
+      <div style="background:#F8FAFF;border:1.5px solid #D1E2FF;border-radius:12px;padding:14px;text-align:center;color:#1E40AF;font-weight:700;font-size:0.8rem;">
+        ℹ️ Historical Report: Itemized mistake logs are stored permanently for newly completed tasks only.
+      </div>
+    `;
+    
+    const summaryBodyHtml = `
+      <tr>
+        <td>${taskEmoji} ${r.taskName}</td>
+        <td>10/10</td>
+        <td><span class="acc-pill ${accVal>=80?'acc-high':accVal>=60?'acc-mid':'acc-low'}">${accVal}%</span></td>
+        <td>${isApproved?'Approved':'Rejected'}</td>
+      </tr>
+    `;
+    
+    r = {
+      overallStatsHtml,
+      analysisGridHtml,
+      fullErrSectionHtml,
+      summaryBodyHtml,
+      gradeText: grade,
+      gradeColor: gc,
+      gradeBorderColor: gc + '88',
+      modalHeroTitle: getReportConfig("reportTitle", "Demo Performance Report"),
+      modalHeroSub: getReportConfig("reportSub", "Your performance has been evaluated based on real task parameters.")
+    };
+  }
+
+  // Inject report HTML strings directly into the report elements
   document.getElementById('overallStats').innerHTML = r.overallStatsHtml;
   document.getElementById('analysisGrid').innerHTML = r.analysisGridHtml;
   document.getElementById('fullErrSection').innerHTML = r.fullErrSectionHtml;
