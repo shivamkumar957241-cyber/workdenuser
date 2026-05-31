@@ -9,10 +9,16 @@ export async function GET() {
     const docRef = doc(db, "website", "content");
     const docSnap = await getDoc(docRef);
 
+    const headers = {
+      "Cache-Control": "no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0",
+      "Pragma": "no-cache",
+      "Expires": "0"
+    };
+
     if (docSnap.exists()) {
-      return NextResponse.json({ success: true, data: docSnap.data() });
+      return NextResponse.json({ success: true, data: docSnap.data() }, { headers });
     } else {
-      return NextResponse.json({ success: true, data: {} });
+      return NextResponse.json({ success: true, data: {} }, { headers });
     }
   } catch (error) {
     console.error("Error fetching content:", error);

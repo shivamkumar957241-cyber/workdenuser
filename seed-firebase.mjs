@@ -47,7 +47,7 @@ const defaultData = {
         { title: "Data Entry", desc: "Input data into databases from reference sheets. Simple copy-enter tasks with clear reference material.", icon: "fas fa-table", bg: "#f5f3ff", color: "#7c3aed" },
         { title: "Email Support", desc: "Handle customer emails using predefined templates. Template-based, easy to follow responses.", icon: "fas fa-envelope", bg: "#f0fdf4", color: "var(--green)" },
         { title: "Chat Support", desc: "Respond to live chat queries from the dashboard with guided answer templates.", icon: "fas fa-message", bg: "#fff7ed", color: "#ea580c" },
-        { title: "Grammar Correction", desc: "Fix highlighted errors in short text documents. Clear visual indicators shown in portal.", icon: "fas fa-spellcheck", bg: "#fef2f2", color: "#e11d48" },
+        { title: "Grammar Correction", desc: "Fix highlighted errors in short text documents. Clear visual indicators shown in portal.", icon: "fas fa-spell-check", bg: "#fef2f2", color: "#e11d48" },
         { title: "Typing Tasks", desc: "Type the text shown in the dashboard into the input box. Perfect for beginners with basic typing.", icon: "fas fa-keyboard", bg: "#fffbeb", color: "var(--gold)" }
       ],
       steps: [
@@ -163,7 +163,7 @@ const defaultData = {
         { title: "Data Entry", desc: "Enter structured spreadsheet data into a secure database. Straightforward copy-and-enter tasks with clear reference materials provided in the dashboard.", icon: "fas fa-table", bg: "#f5f3ff", color: "#7c3aed", level: "Easy · Basic Typing", badges: ["High Volume", "Beginner"] },
         { title: "Email Support", desc: "Handle basic customer email queries using predefined templates. Templates are provided — you select and send the appropriate response to each query.", icon: "fas fa-envelope", bg: "#f0fdf4", color: "var(--green)", level: "Medium · Template Based", badges: ["Intermediate"] },
         { title: "Chat Support", desc: "Respond to live chat queries from the dashboard using guided templates. Quick responses with clear guidelines provided for each type of customer query.", icon: "fas fa-message", bg: "#fff7ed", color: "#ea580c", level: "Medium · Communication", badges: ["Intermediate"] },
-        { title: "Grammar Correction", desc: "Edit and correct short text documents for grammatical errors. Clear error indicators are shown in the portal — you identify and fix what's highlighted.", icon: "fas fa-spellcheck", bg: "#fef2f2", color: "#dc2626", level: "Medium · Accuracy", badges: ["Intermediate"] },
+        { title: "Grammar Correction", desc: "Edit and correct short text documents for grammatical errors. Clear error indicators are shown in the portal — you identify and fix what's highlighted.", icon: "fas fa-spell-check", bg: "#fef2f2", color: "#dc2626", level: "Medium · Accuracy", badges: ["Intermediate"] },
         { title: "Typing Tasks", desc: "Type the same text shown in the dashboard into the input box. Simple and straightforward — perfect for anyone with basic typing skills and a phone or laptop.", icon: "fas fa-keyboard", bg: "#fffbeb", color: "var(--gold)", level: "Easy · Basic Typing", badges: ["Beginner"] },
         { title: "Captcha Filling", desc: "Enter captcha codes displayed in the dashboard into the designated input field. Simple, repeatable task — ideal for those just starting with online work.", icon: "fas fa-hashtag", bg: "#eff6ff", color: "var(--brand)", level: "Easy · Repeatable", badges: ["Beginner"] }
       ]

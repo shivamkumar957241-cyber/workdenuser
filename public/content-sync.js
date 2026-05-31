@@ -597,11 +597,24 @@ function applyWebsiteContent(data) {
 
 // ── DOM DOMContentLoaded IMPLEMENTATION ────────────────────────────────────
 document.addEventListener("DOMContentLoaded", async () => {
-  // Directly hide dynamic elements during loading to prevent static flash
+  let cachedData = null;
+  try {
+    const cached = localStorage.getItem("website_content");
+    if (cached) {
+      cachedData = JSON.parse(cached);
+      applyWebsiteContent(cachedData);
+    }
+  } catch (cacheErr) {
+    console.info("Cache load failed:", cacheErr);
+  }
+
+  // Directly hide dynamic elements during loading to prevent static flash ONLY IF we don't have cached data!
   const style = document.createElement('style');
   style.id = 'sync-fade-hide';
-  style.innerHTML = '[data-content-id] { opacity: 0 !important; }';
-  document.head.appendChild(style);
+  if (!cachedData) {
+    style.innerHTML = '[data-content-id] { opacity: 0 !important; }';
+    document.head.appendChild(style);
+  }
 
   try {
     let data = null;
@@ -634,6 +647,13 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 
     if (data) {
+      // Save to localStorage for next time
+      try {
+        localStorage.setItem("website_content", JSON.stringify(data));
+      } catch (saveErr) {
+        console.info("Failed to cache fresh data:", saveErr);
+      }
+      
       // Apply fresh data immediately
       applyWebsiteContent(data);
     }
@@ -648,6 +668,11 @@ document.addEventListener("DOMContentLoaded", async () => {
         el.style.opacity = '1';
       });
       setTimeout(() => hideStyle.remove(), 300);
+    } else {
+      // Make sure all dynamic elements are visible since we used cached data
+      document.querySelectorAll('[data-content-id]').forEach(el => {
+        el.style.opacity = '1';
+      });
     }
   }
 });

@@ -265,7 +265,7 @@ const DEFAULT_CONTENT: Record<string, any> = {
       { title: "Data Entry", desc: "Input data into databases from reference sheets. Simple copy-enter tasks.", icon: "fas fa-table", bg: "#f5f3ff", color: "#7c3aed" },
       { title: "Email Support", desc: "Handle customer emails using predefined templates. Template-based replies.", icon: "fas fa-envelope", bg: "#f0fdf4", color: "var(--green)" },
       { title: "Chat Support", desc: "Respond to live chat queries from the dashboard with guided answer templates.", icon: "fas fa-message", bg: "#fff7ed", color: "#ea580c" },
-      { title: "Grammar Correction", desc: "Fix highlighted errors in short text documents. Clear indicators shown.", icon: "fas fa-spellcheck", bg: "#fef2f2", color: "#e11d48" },
+      { title: "Grammar Correction", desc: "Fix highlighted errors in short text documents. Clear indicators shown.", icon: "fas fa-spell-check", bg: "#fef2f2", color: "#e11d48" },
       { title: "Typing Tasks", desc: "Type the text shown in the dashboard into the input box. Perfect for beginners.", icon: "fas fa-keyboard", bg: "#fffbeb", color: "var(--gold)" }
     ],
     steps: [
@@ -381,7 +381,7 @@ const DEFAULT_CONTENT: Record<string, any> = {
       { title: "Data Entry", desc: "Enter structured spreadsheet data into a secure database. Straightforward copy-and-enter tasks.", icon: "fas fa-table", bg: "#f5f3ff", color: "#7c3aed", level: "Easy · Basic Typing", badges: ["High Volume", "Beginner"] },
       { title: "Email Support", desc: "Handle basic customer email queries using predefined templates. Templates are provided.", icon: "fas fa-envelope", bg: "#f0fdf4", color: "var(--green)", level: "Medium · Template Based", badges: ["Intermediate"] },
       { title: "Chat Support", desc: "Respond to live chat queries from the dashboard using guided templates. Quick responses.", icon: "fas fa-message", bg: "#fff7ed", color: "#ea580c", level: "Medium · Communication", badges: ["Intermediate"] },
-      { title: "Grammar Correction", desc: "Edit and correct short text documents for grammatical errors. Clear error indicators shown.", icon: "fas fa-spellcheck", bg: "#fef2f2", color: "#dc2626", level: "Medium · Accuracy", badges: ["Intermediate"] },
+      { title: "Grammar Correction", desc: "Edit and correct short text documents for grammatical errors. Clear error indicators shown.", icon: "fas fa-spell-check", bg: "#fef2f2", color: "#dc2626", level: "Medium · Accuracy", badges: ["Intermediate"] },
       { title: "Typing Tasks", desc: "Type the same text shown in the dashboard into the input box. Simple and straightforward.", icon: "fas fa-keyboard", bg: "#fffbeb", color: "var(--gold)", level: "Easy · Basic Typing", badges: ["Beginner"] },
       { title: "Captcha Filling", desc: "Enter captcha codes displayed in the dashboard into the designated input field. Simple, repeatable task.", icon: "fas fa-hashtag", bg: "#eff6ff", color: "var(--brand)", level: "Easy · Repeatable", badges: ["Beginner"] }
     ]
@@ -493,7 +493,7 @@ export default function AdminDashboard() {
   useEffect(() => {
     (async () => {
       try {
-        const res = await fetch("/api/content/get");
+        const res = await fetch("/api/content/get?t=" + Date.now(), { cache: "no-store" });
         const json = await res.json();
         if (json.success && json.data) {
           if (json.data.website) setContent(json.data.website);
