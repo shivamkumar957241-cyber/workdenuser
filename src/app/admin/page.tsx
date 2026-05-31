@@ -2,23 +2,59 @@
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { Loader2, Save, Plus, Trash2, LogOut, LayoutDashboard, MessageSquareQuote, FileText } from "lucide-react";
+import { Loader2, Save, Plus, Trash2, LogOut, LayoutDashboard, MessageSquareQuote, FileText, Globe } from "lucide-react";
+
+const pageSchema: Record<string, { label: string, fields: {key: string, label: string, type: 'text'|'textarea'}[] }> = {
+  home: {
+    label: "Home Page",
+    fields: [
+      { key: "heroTitle", label: "Hero Title", type: "text" },
+      { key: "heroSubtitle", label: "Hero Subtitle", type: "textarea" },
+      { key: "aboutTitle", label: "About Section Title", type: "text" },
+      { key: "aboutDesc", label: "About Section Text", type: "textarea" },
+    ]
+  },
+  plans: {
+    label: "Plans Page",
+    fields: [
+      { key: "plansTitle", label: "Plans Title", type: "text" },
+      { key: "plansSubtitle", label: "Plans Subtitle", type: "textarea" },
+    ]
+  },
+  about: {
+    label: "About Page",
+    fields: [
+      { key: "pageTitle", label: "Main Title", type: "text" },
+      { key: "pageDesc", label: "Main Description", type: "textarea" },
+    ]
+  },
+  projects: {
+    label: "Projects Page",
+    fields: [
+      { key: "pageTitle", label: "Projects Title", type: "text" },
+      { key: "pageDesc", label: "Projects Description", type: "textarea" },
+    ]
+  },
+  blogs: {
+    label: "Blogs Page",
+    fields: [
+      { key: "pageTitle", label: "Blogs Title", type: "text" },
+      { key: "pageDesc", label: "Blogs Description", type: "textarea" },
+    ]
+  }
+};
 
 export default function AdminDashboard() {
   const router = useRouter();
-  const [activeTab, setActiveTab] = useState("content");
+  const [activeTab, setActiveTab] = useState("home");
   const [loading, setLoading] = useState(false);
+  const [fetching, setFetching] = useState(true);
   
   const [testimonials, setTestimonials] = useState<any[]>([]);
-  const [siteContent, setSiteContent] = useState<any>({
-    heroTitle: "Start Working from Home Today",
-    heroSubtitle: "Earn money by completing simple verified digital tasks.",
-    plansTitle: "Plans that work best for you",
-    plansSubtitle: "Trusted by thousands of workers across India. Transparent pricing, no hidden fees."
-  });
+  // siteContent represents { home: {...}, plans: {...}, about: {...} }
+  const [siteContent, setSiteContent] = useState<any>({});
 
   useEffect(() => {
-    // Fetch initial data
     const fetchData = async () => {
       try {
         const res = await fetch("/api/content/get");
@@ -29,6 +65,8 @@ export default function AdminDashboard() {
         }
       } catch (err) {
         console.error("Failed to load initial data", err);
+      } finally {
+        setFetching(false);
       }
     };
     fetchData();
@@ -48,7 +86,7 @@ export default function AdminDashboard() {
         body: JSON.stringify({ type: "content", data: { website: siteContent, testimonials } }),
       });
       if (!res.ok) throw new Error("Failed to save");
-      alert("Content saved successfully!");
+      alert("Changes Saved Successfully! The live website will reflect these changes immediately.");
     } catch (e) {
       alert("Error saving content. Ensure Firebase rules allow read/write.");
     } finally {
@@ -56,18 +94,25 @@ export default function AdminDashboard() {
     }
   };
 
+  const updateField = (pageKey: string, fieldKey: string, value: string) => {
+    setSiteContent({
+      ...siteContent,
+      [pageKey]: {
+        ...(siteContent[pageKey] || {}),
+        [fieldKey]: value
+      }
+    });
+  };
+
   const addTestimonial = () => {
-    setTestimonials([
-      {
-        id: Date.now().toString(),
-        name: "",
-        city: "",
-        text: "",
-        initials: "AB",
-        gradient: "linear-gradient(135deg, #3b82f6, #14b8a6)"
-      },
-      ...testimonials
-    ]);
+    setTestimonials([{
+      id: Date.now().toString(),
+      name: "",
+      city: "",
+      text: "",
+      initials: "AB",
+      gradient: "linear-gradient(135deg, #3b82f6, #14b8a6)"
+    }, ...testimonials]);
   };
 
   const removeTestimonial = (id: string) => {
@@ -78,30 +123,42 @@ export default function AdminDashboard() {
     setTestimonials(testimonials.map(t => (t.id === id ? { ...t, [field]: value } : t)));
   };
 
+  if (fetching) {
+    return <div className="min-h-screen flex items-center justify-center bg-slate-50"><Loader2 className="w-8 h-8 text-blue-500 animate-spin" /></div>;
+  }
+
   return (
     <div className="min-h-screen bg-slate-50 flex">
       {/* Sidebar */}
-      <div className="w-64 bg-slate-900 text-slate-300 flex flex-col">
+      <div className="w-64 bg-slate-900 text-slate-300 flex flex-col h-screen sticky top-0 overflow-y-auto custom-scrollbar">
         <div className="p-6 border-b border-slate-800">
           <h1 className="text-xl font-bold text-white flex items-center gap-2">
-            <LayoutDashboard className="w-5 h-5 text-blue-500" />
-            WorkDen Admin
+            <Globe className="w-5 h-5 text-blue-500" />
+            WorkDen Control
           </h1>
         </div>
-        <div className="flex-1 py-6 space-y-1">
-          <button 
-            onClick={() => setActiveTab("content")}
-            className={`w-full flex items-center gap-3 px-6 py-3 text-sm font-medium transition-colors ${activeTab === 'content' ? 'bg-blue-600 text-white' : 'hover:bg-slate-800 hover:text-white'}`}
-          >
-            <FileText className="w-4 h-4" /> Website Content
-          </button>
+        
+        <div className="flex-1 py-4 space-y-1">
+          <div className="px-6 py-2 text-xs font-bold uppercase tracking-wider text-slate-500">Website Pages</div>
+          {Object.keys(pageSchema).map(key => (
+            <button 
+              key={key}
+              onClick={() => setActiveTab(key)}
+              className={`w-full flex items-center gap-3 px-6 py-2.5 text-sm font-medium transition-colors ${activeTab === key ? 'bg-blue-600 text-white' : 'hover:bg-slate-800 hover:text-white'}`}
+            >
+              <FileText className="w-4 h-4" /> {pageSchema[key].label}
+            </button>
+          ))}
+
+          <div className="px-6 py-2 mt-4 text-xs font-bold uppercase tracking-wider text-slate-500">Components</div>
           <button 
             onClick={() => setActiveTab("testimonials")}
-            className={`w-full flex items-center gap-3 px-6 py-3 text-sm font-medium transition-colors ${activeTab === 'testimonials' ? 'bg-blue-600 text-white' : 'hover:bg-slate-800 hover:text-white'}`}
+            className={`w-full flex items-center gap-3 px-6 py-2.5 text-sm font-medium transition-colors ${activeTab === 'testimonials' ? 'bg-blue-600 text-white' : 'hover:bg-slate-800 hover:text-white'}`}
           >
             <MessageSquareQuote className="w-4 h-4" /> Testimonials
           </button>
         </div>
+
         <div className="p-4 border-t border-slate-800">
           <button onClick={handleLogout} className="flex items-center gap-2 text-sm text-slate-400 hover:text-white transition-colors w-full px-2 py-2">
             <LogOut className="w-4 h-4" /> Sign Out
@@ -114,7 +171,7 @@ export default function AdminDashboard() {
         <div className="max-w-4xl mx-auto">
           <div className="flex items-center justify-between mb-8">
             <h2 className="text-2xl font-bold text-slate-800">
-              {activeTab === 'content' ? 'Manage Website Sections' : 'Manage Testimonials'}
+              {activeTab === 'testimonials' ? 'Manage Testimonials' : `Manage ${pageSchema[activeTab]?.label}`}
             </h2>
             <div className="flex gap-3">
               {activeTab === 'testimonials' && (
@@ -133,54 +190,32 @@ export default function AdminDashboard() {
             </div>
           </div>
           
-          {activeTab === "content" && (
+          {activeTab !== "testimonials" && pageSchema[activeTab] && (
             <div className="space-y-6">
               <div className="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 space-y-6">
-                <div>
-                  <h3 className="text-lg font-bold text-slate-800 mb-4 border-b pb-2">Hero Section</h3>
-                  <div className="space-y-4">
-                    <div>
-                      <label className="block text-sm font-semibold text-slate-700 mb-1">Hero Title</label>
+                {pageSchema[activeTab].fields.map((field) => (
+                  <div key={field.key}>
+                    <label className="block text-sm font-semibold text-slate-700 mb-1">{field.label}</label>
+                    {field.type === 'text' ? (
                       <input 
                         type="text" 
-                        value={siteContent.heroTitle || ""}
-                        onChange={(e) => setSiteContent({...siteContent, heroTitle: e.target.value})}
+                        value={siteContent[activeTab]?.[field.key] || ""}
+                        onChange={(e) => updateField(activeTab, field.key, e.target.value)}
                         className="w-full border border-slate-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 outline-none"
                       />
-                    </div>
-                    <div>
-                      <label className="block text-sm font-semibold text-slate-700 mb-1">Hero Subtitle</label>
+                    ) : (
                       <textarea 
-                        value={siteContent.heroSubtitle || ""}
-                        onChange={(e) => setSiteContent({...siteContent, heroSubtitle: e.target.value})}
-                        className="w-full border border-slate-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 outline-none h-24"
+                        value={siteContent[activeTab]?.[field.key] || ""}
+                        onChange={(e) => updateField(activeTab, field.key, e.target.value)}
+                        className="w-full border border-slate-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 outline-none h-24 font-mono text-sm"
                       />
-                    </div>
+                    )}
+                    <p className="text-xs text-slate-400 mt-1">HTML tags like &lt;br&gt; or &lt;span&gt; are supported.</p>
                   </div>
-                </div>
-
-                <div>
-                  <h3 className="text-lg font-bold text-slate-800 mb-4 border-b pb-2">Plans Section</h3>
-                  <div className="space-y-4">
-                    <div>
-                      <label className="block text-sm font-semibold text-slate-700 mb-1">Plans Title</label>
-                      <input 
-                        type="text" 
-                        value={siteContent.plansTitle || ""}
-                        onChange={(e) => setSiteContent({...siteContent, plansTitle: e.target.value})}
-                        className="w-full border border-slate-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 outline-none"
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-sm font-semibold text-slate-700 mb-1">Plans Subtitle</label>
-                      <textarea 
-                        value={siteContent.plansSubtitle || ""}
-                        onChange={(e) => setSiteContent({...siteContent, plansSubtitle: e.target.value})}
-                        className="w-full border border-slate-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 outline-none h-20"
-                      />
-                    </div>
-                  </div>
-                </div>
+                ))}
+                {pageSchema[activeTab].fields.length === 0 && (
+                  <p className="text-slate-500 text-center py-8">No editable fields configured for this page yet.</p>
+                )}
               </div>
             </div>
           )}

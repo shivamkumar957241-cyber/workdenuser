@@ -9,23 +9,31 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (json.success && json.data) {
       const { website, testimonials } = json.data;
       
+      // Determine current page key
+      let path = window.location.pathname.split("/").pop();
+      if (!path || path === "" || path === "index.html") path = "home";
+      else path = path.replace(".html", "");
+
       // 1. Update text elements based on data-content-id attribute
-      if (website) {
+      if (website && website[path]) {
+        const pageData = website[path];
         const elements = document.querySelectorAll("[data-content-id]");
         elements.forEach(el => {
           const key = el.getAttribute("data-content-id");
-          if (website[key]) {
+          if (pageData[key] !== undefined && pageData[key] !== null) {
             if (el.tagName === "IMG") {
-              el.src = website[key];
+              el.src = pageData[key];
             } else {
-              el.innerHTML = website[key];
+              el.innerHTML = pageData[key];
             }
           }
         });
       }
 
       // 2. Dynamically inject Testimonials without breaking CSS Marquee
-      if (testimonials && Array.isArray(testimonials) && testimonials.length > 0) {
+      // This is global for any page that has .testi-group
+      const groups = document.querySelectorAll(".testi-group");
+      if (groups.length > 0 && testimonials && Array.isArray(testimonials) && testimonials.length > 0) {
         // Generate the exact HTML structure for the cards
         const cardsHTML = testimonials.map(t => `
           <div class="testi-card">
@@ -43,8 +51,6 @@ document.addEventListener("DOMContentLoaded", async () => {
           </div>
         `).join("");
 
-        // Find the marquee groups and inject the HTML
-        const groups = document.querySelectorAll(".testi-group");
         groups.forEach(group => {
           group.innerHTML = cardsHTML;
         });
