@@ -5,12 +5,37 @@
  */
 document.addEventListener("DOMContentLoaded", async () => {
   try {
-    const res = await fetch("/api/content/get");
-    if (!res.ok) return;
-    const json = await res.json();
-    if (!json.success || !json.data) return;
+    let data = null;
 
-    const { website, testimonials } = json.data;
+    // 1. Try local Next.js API first
+    try {
+      const res = await fetch("/api/content/get");
+      if (res.ok) {
+        const json = await res.json();
+        if (json.success && json.data) {
+          data = json.data;
+        }
+      }
+    } catch (apiErr) {
+      console.info("Local API fetch failed, falling back to direct Firestore...", apiErr);
+    }
+
+    // 2. Fallback: Query Firestore REST API directly from the client
+    if (!data) {
+      try {
+        const firestoreUrl = "https://firestore.googleapis.com/v1/projects/workdenuser/databases/(default)/documents/website/content";
+        const res = await fetch(firestoreUrl);
+        if (res.ok) {
+          const json = await res.json();
+          data = parseFirestoreDoc(json);
+        }
+      } catch (fsErr) {
+        console.error("Direct Firestore REST fetch failed:", fsErr);
+      }
+    }
+
+    if (!data || !data.website) return;
+    const { website, testimonials } = data;
 
     // ── Detect current page ────────────────────────────────────────────────────
     let pageName = window.location.pathname.split("/").pop() || "index.html";
@@ -161,4 +186,35 @@ function escHtml(str) {
 function escJs(str) {
   if (!str) return "";
   return str.replace(/'/g, "\\'");
+}
+
+// ── Helper to parse Firestore REST Protobuf-JSON into simple JS objects ──────
+function parseFirestoreValue(val) {
+  if (!val || typeof val !== "object") return val;
+  if ("stringValue" in val) return val.stringValue;
+  if ("booleanValue" in val) return val.booleanValue;
+  if ("integerValue" in val) return parseInt(val.integerValue, 10);
+  if ("doubleValue" in val) return parseFloat(val.doubleValue);
+  if ("mapValue" in val) {
+    const fields = val.mapValue.fields || {};
+    const res = {};
+    for (const k in fields) {
+      res[k] = parseFirestoreValue(fields[k]);
+    }
+    return res;
+  }
+  if ("arrayValue" in val) {
+    const values = val.arrayValue.values || [];
+    return values.map(v => parseFirestoreValue(v));
+  }
+  return val;
+}
+
+function parseFirestoreDoc(doc) {
+  const fields = doc.fields || {};
+  const res = {};
+  for (const k in fields) {
+    res[k] = parseFirestoreValue(fields[k]);
+  }
+  return res;
 }
