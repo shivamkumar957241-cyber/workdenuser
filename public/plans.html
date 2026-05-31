@@ -558,8 +558,8 @@ body{
 
     <!-- Header — matches <article className="text-center mb-6 pt-32 ..."> -->
     <div class="pricing-header">
-      <h2>Plans that work best for you</h2>
-      <p>Trusted by thousands of workers across India. Transparent pricing, no hidden fees.</p>
+      <h2 data-content-id="plansTitle">Plans that work best for you</h2>
+      <p data-content-id="plansSubtitle">Trusted by thousands of workers across India. Transparent pricing, no hidden fees.</p>
       <!-- Toggle switch -->
       <div class="pricing-toggle">
         <div class="toggle-inner" id="toggleWrap">
@@ -913,5 +913,6 @@ _planStyle.textContent = `
 document.head.appendChild(_planStyle);
 </script>
 
+<script src="content-sync.js"></script>
 </body>
 </html>
