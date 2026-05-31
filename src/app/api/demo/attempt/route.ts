@@ -5,7 +5,7 @@ import { collection, addDoc } from "firebase/firestore";
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    const { email, taskName, taskCategory, totalEntries, correctEntries, wrongEntries, accuracy, status } = body;
+    const { email, taskName, taskCategory, totalEntries, correctEntries, wrongEntries, accuracy, status, reportData } = body;
 
     if (!email || !taskName || !taskCategory || totalEntries === undefined || correctEntries === undefined || wrongEntries === undefined || accuracy === undefined || !status) {
       return NextResponse.json({ success: false, message: "Missing attempt details" }, { status: 400 });
@@ -20,7 +20,8 @@ export async function POST(request: Request) {
       wrongEntries: parseInt(wrongEntries, 10),
       accuracy: parseFloat(accuracy),
       status,
-      timestamp: new Date().toISOString()
+      timestamp: new Date().toISOString(),
+      reportData: reportData || null
     };
 
     const attemptsRef = collection(db, "demo_attempts");

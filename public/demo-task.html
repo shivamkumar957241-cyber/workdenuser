@@ -1130,6 +1130,22 @@ document.body.addEventListener('input', function(e){
     <p data-content-id="pageHeroDesc">Choose your skill and try a demo task</p>
     <div class="menu-badge" data-content-id="demoBadge">🔴 LIVE DEMO – Try All Tasks</div>
   </div>
+
+  <!-- Amber Payment Disclaimer Banner -->
+  <div class="max-w-[1100px] mx-auto mt-6 px-5 w-full animate-fade-in">
+    <div class="bg-amber-50 border-2 border-amber-200/80 rounded-2xl p-4 flex gap-3.5 items-start shadow-sm">
+      <div class="w-8 h-8 rounded-xl bg-amber-500/10 text-amber-600 flex items-center justify-center shrink-0 text-sm">
+        <i class="fa-solid fa-circle-exclamation"></i>
+      </div>
+      <div>
+        <h4 class="text-xs font-black text-amber-900 uppercase tracking-wider mb-0.5">Disclaimer Note</h4>
+        <p class="text-xs text-amber-800 leading-relaxed font-semibold" data-content-id="demoPaymentDisclaimer">
+          Demo tasks are only for practice. No payment will be provided for demo tasks. Payment is applicable only for live tasks.
+        </p>
+      </div>
+    </div>
+  </div>
+
   <div class="task-cards" id="taskCards"></div>
 
   <!-- Side Drawer Styles -->
@@ -1270,11 +1286,17 @@ document.body.addEventListener('input', function(e){
 </div>
 
 <div id="taskArea">
-  <div class="task-topbar">
-    <button class="back-btn" onclick="goBack()">←</button>
-    <div>
-      <div id="taskTitle" style="font-size:1.1rem;font-weight:900;color:var(--purple);"></div>
-      <div id="taskSubtitle" style="font-size:0.75rem;color:var(--text-muted);"></div>
+  <div class="task-topbar flex items-center justify-between">
+    <div class="flex items-center gap-3.5">
+      <button class="back-btn" onclick="goBack()">←</button>
+      <div>
+        <div id="taskTitle" style="font-size:1.1rem;font-weight:900;color:var(--purple);"></div>
+        <div id="taskSubtitle" style="font-size:0.75rem;color:var(--text-muted);"></div>
+      </div>
+    </div>
+    <div class="hidden sm:flex items-center gap-2 bg-amber-50 border border-amber-200 text-amber-800 px-3.5 py-1.5 rounded-xl text-[10px] font-black uppercase tracking-wider max-w-xs text-right shadow-sm">
+      <i class="fa-solid fa-circle-exclamation text-amber-500 shrink-0"></i>
+      <span data-content-id="taskDisclaimerDuringTask">This is a demo task. No payout is provided for demo tasks. It is only for practice.</span>
     </div>
   </div>
   <div style="padding:12px 16px 0;">
@@ -1587,35 +1609,7 @@ const GRAMMAR=[
   {wrong:"One of the most important factor in achieving success are having a clear goal and working hardly every day. A person who work hard and are dedicated to their aim will surely achieve great heights in their life. Success does not comes easily and one have to face many challenges before they reaches their goal. The peoples who have achieve great things in life always say that patient and hard work is the key. Everyone should try their best and never loose hope even in the most difficult situations. A student who study regular and maintain a disciplined routine always perform better than those who waste their times. The teachers and the school has an important role to play in the development of a child's character and abilities. Each of the successful person in the world have at some point failed and have learn from their mistakes. Hard work, when it is combine with smart planning and a positive attitude, always lead to long-term achievements. The society as a whole need to encourage young peoples to pursue their dreams with confidence and never allow failures to define their future potential.",errors:["Subject-verb agreement","adverb form","plural noun","verb form","preposition"],correct:"One of the most important factors in achieving success is having a clear goal and working hard every day. A person who works hard and is dedicated to their aim will surely achieve great heights in their life. Success does not come easily and one has to face many challenges before they reach their goal. The people who have achieved great things in life always say that patience and hard work are the key. Everyone should try their best and never lose hope even in the most difficult situations. A student who studies regularly and maintains a disciplined routine always performs better than those who waste their time. The teachers and the school have an important role to play in the development of a child's character and abilities. Each of the successful people in the world has at some point failed and has learned from their mistakes. Hard work, when it is combined with smart planning and a positive attitude, always leads to long-term achievements. The society as a whole needs to encourage young people to pursue their dreams with confidence and never allow failures to define their future potential.",errorPositions:["'factor' → 'factors'","'are having' → 'is having'","'working hardly' → 'working hard'","'who work hard' → 'who works hard'","'does not comes' → 'does not come'","'one have' → 'one has'","'before they reaches' → 'before they reach'","'The peoples' → 'The people'","'have achieve' → 'have achieved'","'never loose hope' → 'never lose hope'"]}
 ];
 
-const UPPER='ABCDEFGHJKLMNPQRSTUVWXYZ';
-const LOWER='abcdefghjkmnpqrstuvwxyz';
-const DIGITS='23456789';
-const ALLCHARS=UPPER+LOWER+DIGITS;
 
-function rStr(len,chars){let s='';for(let i=0;i<len;i++)s+=chars[rn(0,chars.length-1)];return s;}
-function rMixed(len){let s=rStr(1,UPPER)+rStr(1,LOWER)+rStr(1,DIGITS);s+=rStr(len-3,ALLCHARS);return shuffle(s.split('')).join('');}
-
-const CAPTCHA_GENERATORS=[
-  function(){const txt=rMixed(rn(5,7));return{captchaType:'normal',display:txt,question:'Type the exact characters shown above (case-sensitive).',answer:txt,hint:'Copy each character exactly — watch uppercase/lowercase!'};},
-  function(){const txt=rMixed(rn(5,7));const rev=txt.split('').reverse().join('');return{captchaType:'reverse',display:txt,question:'Enter this text in REVERSE ORDER.',answer:rev,hint:`Reversed: read the text right to left.`};},
-  function(){const txt=rMixed(rn(5,8));const ans=txt.split('').filter(c=>c>='A'&&c<='Z').join('');return{captchaType:'uppercase',display:txt,question:'Enter ONLY the UPPERCASE letters from the text above.',answer:ans,hint:`Look for capital letters only (skip numbers and lowercase).`};},
-  function(){const txt=rMixed(rn(6,8));const ans=txt.split('').filter(c=>c>='0'&&c<='9').join('');return{captchaType:'filter_num',display:txt,question:'Enter ONLY the NUMBERS from the text above.',answer:ans,hint:`Pick out only digit characters.`};},
-  function(){const txt=rMixed(rn(6,8));const ans=txt.split('').filter(c=>(c>='A'&&c<='Z')||(c>='a'&&c<='z')).join('');return{captchaType:'filter_alpha',display:txt,question:'Enter ONLY the ALPHABET letters (no numbers) from the text above.',answer:ans,hint:`Remove all digit characters, keep all letters.`};},
-  function(){const txt=rMixed(rn(5,8));const nums=txt.split('').filter(c=>c>='0'&&c<='9').map(Number);const sum=nums.reduce((a,b)=>a+b,0);return{captchaType:'math_text',display:txt,question:'Add all numbers found in the text and enter the result.',answer:String(sum),hint:`Find digits: ${nums.join(', ')} → Sum = ${sum}`};},
-  function(){const txt=rStr(rn(6,8),UPPER+DIGITS);const ans=txt.split('').filter((_,i)=>i%2===0).join('');return{captchaType:'alternate',display:txt,question:'Enter ALTERNATE characters starting from 1st (positions 1, 3, 5…).',answer:ans,hint:`Take every other character starting from position 1.`};},
-  function(){const txt=rMixed(rn(7,9));const p2=txt[1]||'',p4=txt[3]||'',p6=txt[5]||'';const ans=p2+p4+p6;return{captchaType:'position',display:txt,question:'Enter the 2nd, 4th, and 6th characters of the text above.',answer:ans,hint:`Char 2="${p2}", Char 4="${p4}", Char 6="${p6}"`};},
-  function(){const letters=rStr(rn(4,6),UPPER);const ans=letters.split('').sort().join('');return{captchaType:'sort',display:letters,question:'Arrange the letters in ALPHABETICAL ORDER.',answer:ans,hint:`Sort A→Z: ${ans}`};},
-  function(){const txt=rMixed(rn(5,7));const rev=txt.split('').reverse().join('');const ans=rev.split('').filter(c=>!(c>='0'&&c<='9')).join('');return{captchaType:'advanced',display:txt,question:'Step 1: Reverse the text. Step 2: Remove all numbers from the reversed text. Enter the result.',answer:ans,hint:`Reversed="${rev}" → Remove digits → "${ans}"`};},
-  function(){const confusables='O0l1IA8B5S2Z';let txt='';for(let i=0;i<rn(5,7);i++)txt+=confusables[rn(0,confusables.length-1)];const ans=txt.split('').filter(c=>(c>='A'&&c<='Z')||(c>='a'&&c<='z')).join('');return{captchaType:'confuse',display:txt,question:'Enter ONLY the ALPHABET characters (letters only, no digits).',answer:ans,hint:`O, l, I, A, B, S, Z are letters. 0, 1, 2, 5, 8 are numbers.`};},
-  function(){const ops=['+','-','*'];const numCount=rn(4,5);const nums=[];for(let i=0;i<numCount;i++)nums.push(rn(2,15));const opList=[];for(let i=0;i<numCount-1;i++)opList.push(ops[rn(0,2)]);let result=nums[0];let exprParts=[String(nums[0])];for(let i=0;i<opList.length;i++){const op=opList[i];let nextNum=nums[i+1];if(op==='-'&&result-nextNum<0)nextNum=rn(1,result);if(op==='+')result=result+nextNum;else if(op==='-')result=result-nextNum;else if(op==='*')result=result*nextNum;exprParts.push(op,String(nextNum));}const expr=exprParts.join(' ');return{captchaType:'long_calc',display:expr,question:'Solve this calculation and enter the final result.',answer:String(result),hint:`Solve step by step: ${exprParts.join(' ')} = ${result}`};}
-];
-
-const CAPTCHA_TYPE_LABELS={normal:'🔤 Distorted Text',reverse:'🔄 Reverse Text',uppercase:'🔀 Mixed Case',filter_num:'🔢 Filter Numbers',filter_alpha:'🔡 Filter Alphabets',math_text:'➕ Math + Text',alternate:'🔁 Alternate Characters',position:'🔍 Position-Based',sort:'🔃 Alphabetical Sort',advanced:'🧠 Advanced Multi-Step',confuse:'👁️ Similar Characters',long_calc:'🧮 Long Calculation'};
-
-let captchaPool=[];let captchaIdx=0;
-function genOneCaptcha(){const roll=Math.random();let gen;if(roll<0.12)gen=CAPTCHA_GENERATORS[0];else if(roll<0.22)gen=CAPTCHA_GENERATORS[1];else if(roll<0.32)gen=CAPTCHA_GENERATORS[2];else{const idx=rn(3,11);gen=CAPTCHA_GENERATORS[Math.min(idx,CAPTCHA_GENERATORS.length-1)];}return gen();}
-function resetCaptchaPool(){captchaPool=[];let lastType='';for(let i=0;i<100;i++){let c,tries=0;do{c=genOneCaptcha();tries++;}while(c.captchaType===lastType&&tries<8);lastType=c.captchaType;captchaPool.push(c);}captchaIdx=0;}
-function gCap(){if(captchaIdx>=captchaPool.length){resetCaptchaPool();}return captchaPool[captchaIdx++];}
 
 // =====================================================
 // ===== TASK DEFINITIONS =====
@@ -1629,7 +1623,6 @@ let TDEFS=[
 
 let HOWTO={
   typing:["Read the content shown in the yellow box carefully.","Type the exact same content in the text box below — word for word.","You must type at least 100 words to pass this item.","Do NOT copy-paste — type manually using the keyboard.","Spelling and accuracy matter — type carefully."],
-  captcha:["10 different CAPTCHA types appear randomly — read the question carefully each time.","For text captcha: type exact characters shown (case-sensitive).","For reverse/filter/sort: follow the specific instruction shown in the yellow box.","For Long Calculation: solve the full expression (with +, −, ×) and enter only the final number.","For advanced captcha: complete each step in the exact order given.","Live color feedback shows if your answer is correct before saving."],
   form:["Read all reference data in the blue box at the top.","Fill each field exactly as shown in the reference (spelling, spacing, case).","Do not skip any field marked with a red asterisk (*).","Type manually — copy-paste is disabled.","Click Save when all fields are filled to see your score."],
   data:["Study the reference data card at the top of each item.","Type each value exactly as shown — including spaces and formats.","Pay special attention to Aadhar, PAN, DOB, and PIN formats.","All fields are required — do not leave any blank.","Click Save to check your accuracy for that item."],
   grammar:["Read the incorrect paragraph carefully — error types are shown below.","Identify all grammatical mistakes.","Type the fully corrected paragraph in the text box below.","Do not change the meaning — only fix grammar errors.","Your answer must be at least 13 characters to be accepted."]
@@ -1661,7 +1654,6 @@ function renderMenu(){
 function openTask(id){
   CT=TDEFS.find(t=>t.id===id);if(!CT)return;
   SI={};ID=[];TN=CT.items;SL=CT.timeMin*60;ST=Date.now();ERR_LOG={};
-  if(CT.id==='captcha')resetCaptchaPool();
   if(CT.id==='typing')buildTypingTexts();
   document.getElementById('taskTitle').textContent=CT.name;
   document.getElementById('taskSubtitle').textContent=`Demo Task • ${CT.items} Items`;
@@ -1707,7 +1699,6 @@ function renderItems(){
     if(CT.id==='data'){const d=gDE();ID[i]=d;body=bDE(i,d);}
     else if(CT.id==='form'){const d=gFF();ID[i]=d;body=bFF(i,d);}
     else if(CT.id==='grammar'){const d=rand(GRAMMAR);ID[i]=d;body=bGR(i,d);}
-    else if(CT.id==='captcha'){const d=gCap();ID[i]=d;body=bCAP(i,d);}
     else if(CT.id==='typing'){const d=TTEXTS[i%TTEXTS.length];ID[i]=d;body=bTY(i,d);}
     w.innerHTML=hdr+`<div class="item-body">${body}</div>`;c.appendChild(w);
     
@@ -1783,37 +1774,17 @@ function bFF(i,d){
   </div>`;}
 
 function bGR(i,d){
-  return `<div class="grammar-wrong"><div class="grammar-wrong-title">❌ Incorrect Text:</div><p style="line-height:1.9;">${d.wrong}</p>
-    <div style="display:flex;flex-wrap:wrap;gap:5px;margin-top:8px;"><span style="color:var(--red);font-size:0.73rem;font-weight:700;">Error Types:</span>${d.errors.map(e=>`<span class="error-tag">${e}</span>`).join('')}</div></div>
+  const mistakeCount = d.errorPositions ? d.errorPositions.length : 0;
+  return `<div class="grammar-wrong">
+    <div class="grammar-wrong-title flex justify-between items-center w-full">
+      <span class="flex items-center gap-2">❌ Incorrect Text:</span>
+      <span class="bg-red-100 text-red-700 border border-red-300 px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider">Grammar Mistakes: ${mistakeCount}</span>
+    </div>
+    <p style="line-height:1.9; margin-top:8px;">${d.wrong}</p>
+    <div style="display:flex;flex-wrap:wrap;gap:5px;margin-top:10px;"><span style="color:var(--red);font-size:0.73rem;font-weight:700;">Error Types:</span>${d.errors.map(e=>`<span class="error-tag">${e}</span>`).join('')}</div>
+  </div>
   <div style="color:var(--purple);font-weight:700;font-size:0.78rem;margin-bottom:6px;">✅ Write the fully corrected version below:</div>
   <textarea class="grammar-textarea" id="gr${i}" placeholder="Type the corrected paragraph here..."></textarea>`;}
-
-function bCAP(i,d){
-  const typeLabel=CAPTCHA_TYPE_LABELS[d.captchaType]||'🔐 CAPTCHA';
-  const typeColors={normal:'#7C3AED',reverse:'#0891B2',uppercase:'#059669',filter_num:'#EA580C',filter_alpha:'#D97706',math_text:'#DC2626',alternate:'#0D9488',position:'#6D28D9',sort:'#BE185D',advanced:'#1E40AF',confuse:'#B45309',long_calc:'#047857'};
-  const bgCol=typeColors[d.captchaType]||'#7C3AED';
-  let stepsHtml='';
-  if(d.captchaType==='advanced'){stepsHtml=`<div style="background:#EFF6FF;border:1.5px solid #BFDBFE;border-radius:9px;padding:10px 12px;margin-bottom:10px;font-size:0.75rem;color:#1E40AF;font-weight:700;"><div style="margin-bottom:4px;">📌 Step 1: Reverse the text shown above.</div><div>📌 Step 2: Remove all number digits from the reversed result.</div></div>`;}
-  if(d.captchaType==='sort'){stepsHtml=`<div style="background:#FDF4FF;border:1.5px solid #E9D5FF;border-radius:9px;padding:10px 12px;margin-bottom:10px;font-size:0.75rem;color:#6D28D9;font-weight:700;">📌 Sort all letters from A to Z in alphabetical order.</div>`;}
-  if(d.captchaType==='long_calc'){stepsHtml=`<div style="background:#ECFDF5;border:1.5px solid #6EE7B7;border-radius:9px;padding:10px 12px;margin-bottom:10px;font-size:0.75rem;color:#065F46;font-weight:700;">📌 Solve left to right. Enter only the final number.</div>`;}
-  const isCalc=d.captchaType==='long_calc';
-  return `
-  <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px;align-items:center;">
-    <span style="background:${bgCol};color:#fff;padding:4px 12px;border-radius:7px;font-size:0.73rem;font-weight:800;">${typeLabel}</span>
-    <span class="badge badge-red">Case Sensitive</span>
-    <span style="background:#F1F5F9;color:var(--text-muted);padding:4px 10px;border-radius:7px;font-size:0.7rem;font-weight:700;">Item ${i+1} of ${TN}</span>
-  </div>
-  <div class="captcha-box" style="${isCalc?'background:linear-gradient(135deg,#ECFDF5,#D1FAE5);border-color:#6EE7B7;':''}">
-    <div style="position:absolute;inset:0;background:repeating-linear-gradient(${rn(30,60)}deg,transparent,transparent 6px,rgba(0,0,0,0.025) 6px,rgba(0,0,0,0.025) 12px);pointer-events:none;"></div>
-    <div style="position:absolute;top:8px;right:10px;font-size:0.62rem;color:${bgCol};font-weight:800;opacity:0.6;text-transform:uppercase;letter-spacing:0.5px;">${typeLabel.replace(/[^\w\s]/g,'').trim()}</div>
-    <div class="captcha-text" style="letter-spacing:${isCalc?'4px':d.captchaType==='sort'?'6px':'8px'};text-decoration:none;font-size:${isCalc?'1.55rem':d.display.length>7?'1.6rem':'2rem'};color:${isCalc?'#065F46':'var(--text)'};filter:none;">${d.display}</div>
-  </div>
-  ${stepsHtml}
-  <div style="background:#FFFBEB;border:1.5px solid #FCD34D;border-radius:9px;padding:10px 14px;margin-bottom:10px;">
-    <div style="font-size:0.8rem;font-weight:800;color:#92400E;">❓ ${d.question}</div>
-  </div>
-  <input type="text" id="cp${i}" placeholder="Type your answer here..." style="width:100%;padding:11px 14px;border:2px solid var(--border);border-radius:10px;font-family:'Space Mono',monospace;font-size:1rem;outline:none;letter-spacing:2px;transition:border-color 0.15s;" autocomplete="off" oninput="liveCheckCap(${i})">
-  <div id="cph${i}" style="font-size:0.72rem;color:var(--text-muted);margin-top:5px;font-weight:600;"></div>`;}
 
 function bTY(i,d){
   const lines=d.text.split('\n');
@@ -1919,33 +1890,6 @@ function saveItem(i){
     if(t){t.readOnly=true;t.style.background='#F1F5F9';t.style.cursor='not-allowed';}
     lbl="Answer";
 
-  } else if(CT.id==='captcha'){
-    tot=1;const t=document.getElementById('cp'+i);
-    if(t){
-      const got=t.value.trim();
-      const ok=got===d.answer;// Captcha: exact match (case-sensitive, no normalization)
-      if(ok){cor=1;}
-      else{
-        const typeLabel=CAPTCHA_TYPE_LABELS[d.captchaType]||'CAPTCHA';
-        let hint='Check your answer carefully. Answer is case-sensitive.';
-        if(d.captchaType==='reverse')hint='Reverse the text — read it right to left.';
-        else if(d.captchaType==='uppercase')hint='Enter ONLY the capital (UPPERCASE) letters from the text.';
-        else if(d.captchaType==='filter_num')hint='Extract only the digit characters (0-9).';
-        else if(d.captchaType==='filter_alpha')hint='Extract only the alphabet characters (A-Z, a-z).';
-        else if(d.captchaType==='math_text')hint='Add up all the digit numbers found in the text.';
-        else if(d.captchaType==='alternate')hint='Pick every 2nd character: 1st, 3rd, 5th…';
-        else if(d.captchaType==='position')hint='Enter the 2nd, 4th, and 6th characters only.';
-        else if(d.captchaType==='sort')hint='Sort the letters A to Z alphabetically.';
-        else if(d.captchaType==='advanced')hint='Step1: reverse the text. Step2: remove all digits from the reversed result.';
-        else if(d.captchaType==='confuse')hint='Look carefully: O,l,I,A,B,S,Z are letters. 0,1,2,5,8 are numbers.';
-        errors.push({field:'Captcha Answer ('+typeLabel+')',got:got||'(empty)',expected:d.answer,hint:hint+' Correct answer: '+d.answer});
-      }
-      t.readOnly=true;t.style.background='#F1F5F9';t.style.cursor='not-allowed';
-      const hint2=document.getElementById('cph'+i);
-      if(hint2){hint2.style.color=ok?'var(--green)':'var(--red)';hint2.textContent=ok?'✅ Correct!':'❌ Wrong answer — see report for correct answer.';}
-    }
-    lbl='Captcha';
-
   } else if(CT.id==='typing'){
     tot=1;const t=document.getElementById('tt'+i);wds=t?t.value.trim().split(/\s+/).filter(x=>x.length>0).length:0;
     if(wds>=100){cor=1;}
@@ -1973,7 +1917,7 @@ function saveItem(i){
 // =====================================================
 function showMM(idx,cor,tot,lbl,wds,errors){
   const acc=tot>0?Math.round((cor/tot)*100):0;
-  const icons={typing:"⌨️",data:"📊",form:"🧾",grammar:"✍️",captcha:"🔢"};
+  const icons={typing:"⌨️",data:"📊",form:"🧾",grammar:"✍️"};
   const ic=document.getElementById('mmIcon');
   ic.textContent=icons[CT.id]||"📋";
   ic.style.background=acc>=80?"#DCFCE7":acc>=60?"#FEF3C7":"#FEE2E2";
@@ -2036,6 +1980,14 @@ function submitAll(){
 // =====================================================
 // ===== BUILD REPORT =====
 // =====================================================
+// Helper to fetch dynamic report configuration from CMS or use fallbacks
+function getReportConfig(key, fallback) {
+  if (window.REPORT_CONFIG && window.REPORT_CONFIG[key] !== undefined && window.REPORT_CONFIG[key] !== "") {
+    return window.REPORT_CONFIG[key];
+  }
+  return fallback;
+}
+
 function buildReport(){
   let tCor=0,tTot=0;
   Object.values(SI).forEach(s=>{tCor+=s.cor;tTot+=s.tot;});
@@ -2052,7 +2004,7 @@ function buildReport(){
   const incorrectEntries=incorrectEntryCount;
   const tCorForDisplay=correctEntryCount;
 
-  let spellingErrs=0,formatErrs=0,missingErrs=0,captchaErrs=0;
+  let spellingErrs=0,formatErrs=0,missingErrs=0;
   let totalWords=0,correctChars=0,totalChars=0;
   Object.entries(ERR_LOG).forEach(([idx,errs])=>{
     if(!errs)return;
@@ -2060,8 +2012,7 @@ function buildReport(){
       const f=(e.field||'').toLowerCase();
       const g=(e.got||'').toLowerCase();
       const ex=(e.expected||'').toLowerCase();
-      if(CT.id==='captcha'){captchaErrs++;}
-      else if(g===''||g==='(empty)'){missingErrs++;}
+      if(g===''||g==='(empty)'){missingErrs++;}
       else if(f.includes('email')||f.includes('aadhar')||f.includes('pan')||f.includes('pin')||f.includes('dob')||f.includes('phone')){formatErrs++;}
       else{spellingErrs++;}
       const minLen=Math.min(g.length,ex.length);
@@ -2084,31 +2035,52 @@ function buildReport(){
   const wpm=timUsedSec>0?Math.round((totalTypedWords/(timUsedSec/60))):0;
   const completionRate=TN>0?Math.round((comp/TN)*100):0;
 
+  // Retrieve dynamic configuration or fallbacks
+  const threshold = parseInt(getReportConfig("reportApprovalThreshold", "95"), 10);
+  const isApproved = overallAcc >= threshold;
+
   let qualityLabel,qualityStars,qualityColor;
   if(overallAcc>=90){qualityLabel='Excellent';qualityStars='⭐ Excellent';qualityColor='#059669';}
   else if(overallAcc>=80){qualityLabel='Good';qualityStars='⭐ Good';qualityColor='#0891B2';}
   else if(overallAcc>=70){qualityLabel='Average';qualityStars='⭐ Average';qualityColor='#D97706';}
   else{qualityLabel='Needs Improvement';qualityStars='⚠️ Needs Improvement';qualityColor='#DC2626';}
 
-  const isApproved=overallAcc>=70;
-  const statusText=isApproved?'✅ Approved':'❌ Rejected';
+  const statusText = isApproved
+    ? getReportConfig("reportStatusApprovedText", "Task Status: Approved")
+    : getReportConfig("reportStatusRejectedText", "Task Status: Rejected");
   const statusColor=isApproved?'#059669':'#DC2626';
   const statusBg=isApproved?'linear-gradient(135deg,#F0FDF4,#DCFCE7)':'linear-gradient(135deg,#FEF2F2,#FEE2E2)';
   const statusBorder=isApproved?'#86EFAC':'#FCA5A5';
+  
+  const statusDesc = isApproved
+    ? getReportConfig("reportApprovedDesc", "You are eligible for live tasks! Start real work now and start earning.")
+    : getReportConfig("reportRejectedDesc", `Score ${threshold}%+ accuracy to get your task approved for live work.`);
 
   let grade,gc;
-  if(overallAcc>=90){grade='A+';gc='#059669';}
-  else if(overallAcc>=80){grade='A';gc='#0891B2';}
-  else if(overallAcc>=70){grade='B';gc='#D97706';}
+  if(overallAcc>=95){grade='A+';gc='#059669';}
+  else if(overallAcc>=85){grade='A';gc='#0891B2';}
+  else if(overallAcc>=75){grade='B';gc='#D97706';}
   else{grade='C';gc='#DC2626';}
   const gcEl=document.getElementById('gradeCircle');gcEl.textContent=grade;gcEl.style.borderColor=gc+'88';
 
-  const emo={typing:"⌨️",data:"📊",form:"🧾",grammar:"✍️",captcha:"🔢"};
+  const emo={typing:"⌨️",data:"📊",form:"🧾",grammar:"✍️"};
   const taskEmoji=emo[CT.id]||"📋";
 
-  const eligibilityBanner=overallAcc>=95
-    ?`<div style="grid-column:1/-1;background:linear-gradient(135deg,#ECFDF5,#D1FAE5);border:2.5px solid #34D399;border-radius:16px;padding:18px 20px;display:flex;align-items:center;gap:16px;margin-bottom:4px;box-shadow:0 4px 16px rgba(52,211,153,0.2);"><div style="font-size:2.2rem;flex-shrink:0;">🎉</div><div><div style="font-weight:900;font-size:1.08rem;color:#065F46;letter-spacing:0.2px;">You are eligible for this work.</div><div style="font-weight:700;font-size:0.88rem;color:#047857;margin-top:3px;">Please purchase a subscription plan to start earning real money!</div></div></div>`
-    :`<div style="grid-column:1/-1;background:linear-gradient(135deg,#FEF2F2,#FEE2E2);border:2.5px solid #F87171;border-radius:16px;padding:18px 20px;display:flex;align-items:center;gap:16px;margin-bottom:4px;box-shadow:0 4px 16px rgba(248,113,113,0.2);"><div style="font-size:2.2rem;flex-shrink:0;">❌</div><div><div style="font-weight:900;font-size:1.08rem;color:#991B1B;letter-spacing:0.2px;">You are not eligible for this work.</div><div style="font-weight:700;font-size:0.88rem;color:#B91C1C;margin-top:3px;">Please try again to become eligible. You need 95%+ accuracy.</div></div></div>`;
+  const eligibleHeading = getReportConfig("reportEligibleHeading", "You are eligible for this work.");
+  const eligibleSub = getReportConfig("reportEligibleSub", "Please purchase a subscription plan to start earning real money!");
+  const notEligibleHeading = getReportConfig("reportNotEligibleHeading", "You are not eligible for this work.");
+  const notEligibleSub = getReportConfig("reportNotEligibleSub", `Please try again to become eligible. You need ${threshold}%+ accuracy.`);
+
+  const eligibilityBanner=isApproved
+    ?`<div style="grid-column:1/-1;background:linear-gradient(135deg,#ECFDF5,#D1FAE5);border:2.5px solid #34D399;border-radius:16px;padding:18px 20px;display:flex;align-items:center;gap:16px;margin-bottom:4px;box-shadow:0 4px 16px rgba(52,211,153,0.2);"><div style="font-size:2.2rem;flex-shrink:0;">🎉</div><div><div style="font-weight:900;font-size:1.08rem;color:#065F46;letter-spacing:0.2px;">${escHtml(eligibleHeading)}</div><div style="font-weight:700;font-size:0.88rem;color:#047857;margin-top:3px;">${escHtml(eligibleSub)}</div></div></div>`
+    :`<div style="grid-column:1/-1;background:linear-gradient(135deg,#FEF2F2,#FEE2E2);border:2.5px solid #F87171;border-radius:16px;padding:18px 20px;display:flex;align-items:center;gap:16px;margin-bottom:4px;box-shadow:0 4px 16px rgba(248,113,113,0.2);"><div style="font-size:2.2rem;flex-shrink:0;">❌</div><div><div style="font-weight:900;font-size:1.08rem;color:#991B1B;letter-spacing:0.2px;">${escHtml(notEligibleHeading)}</div><div style="font-weight:700;font-size:0.88rem;color:#B91C1C;margin-top:3px;">${escHtml(notEligibleSub)}</div></div></div>`;
+
+  // Apply dynamic modal titles
+  const modalTitle = getReportConfig("reportTitle", "Demo Performance Report");
+  const modalSub = getReportConfig("reportSub", "Your performance has been evaluated based on real task parameters.");
+  document.querySelector('.modal-hero h2').textContent = modalTitle;
+  document.querySelector('.modal-hero p').textContent = modalSub;
+  document.querySelector('.trust-line').textContent = `"${modalSub}"`;
 
   document.getElementById('overallStats').innerHTML=`
   <div style="grid-column:1/-1;">
@@ -2134,7 +2106,6 @@ function buildReport(){
       <div class="rpt-kv"><span class="rpt-k">📋 Formatting Errors</span><span class="rpt-v" style="color:${formatErrs>0?'var(--red)':'var(--green)'};">${formatErrs}</span></div>
       <div class="rpt-kv"><span class="rpt-k">🚫 Missing Data Errors</span><span class="rpt-v" style="color:${missingErrs>0?'var(--red)':'var(--green)'};">${missingErrs}</span></div>
       <div class="rpt-kv"><span class="rpt-k">🔁 Duplicate Entries</span><span class="rpt-v" style="color:var(--text-muted);">0</span></div>
-      <div class="rpt-kv"><span class="rpt-k">🔢 Invalid Captcha</span><span class="rpt-v" style="color:${captchaErrs>0?'var(--red)':'var(--green)'};">${captchaErrs}</span></div>
       <div class="rpt-kv"><span class="rpt-k">📊 Total Errors</span><span class="rpt-v" style="color:${incorrectEntries>0?'var(--red)':'var(--green)'};">${incorrectEntries}</span></div>
     </div></div>
     <div class="rpt-section"><div class="rpt-sec-title">4️⃣ Speed Performance</div><div class="rpt-grid-3">
@@ -2171,8 +2142,8 @@ function buildReport(){
     <div style="border-radius:14px;padding:16px 18px;display:flex;align-items:center;gap:14px;background:${statusBg};border:2px solid ${statusBorder};">
       <div style="font-size:2rem;">${isApproved?'✅':'❌'}</div>
       <div>
-        <div style="font-weight:900;font-size:1.05rem;color:${statusColor};">Task Status: ${statusText}</div>
-        <div style="font-size:0.78rem;color:var(--text-muted);margin-top:3px;">${isApproved?'🎯 You are eligible for live tasks! Start real work now and start earning.':'Score 70%+ accuracy to get your task approved for live work.'}</div>
+        <div style="font-weight:900;font-size:1.05rem;color:${statusColor};">${statusText}</div>
+        <div style="font-size:0.78rem;color:var(--text-muted);margin-top:3px;">${statusDesc}</div>
       </div>
     </div>
   </div>`;
@@ -2180,9 +2151,19 @@ function buildReport(){
   document.getElementById('breakdownList').innerHTML='';
 
   let str,imp,sug;
-  if(overallAcc>=80){str="Excellent accuracy and attention to detail maintained throughout.";imp="Minor mistakes in a few items — review before saving next time.";sug="You are ready for live tasks. Start real work to earn rewards!";}
-  else if(overallAcc>=60){str="Good consistency — you completed all items.";imp="Accuracy needs improvement in some areas. Read data more carefully.";sug="Practice 2–3 more demo rounds to reach 80%+ accuracy.";}
-  else{str="You attempted all items — that's a great start!";imp="Low accuracy. Take time to read reference data before typing.";sug="Focus on one task type at a time. Practice makes perfect.";}
+  if(overallAcc>=80){
+    str=getReportConfig("reportStrengthHigh","Excellent accuracy and attention to detail maintained throughout.");
+    imp=getReportConfig("reportImprovementHigh","Minor mistakes in a few items — review before saving next time.");
+    sug=getReportConfig("reportSuggestionHigh","You are ready for live tasks. Start real work to earn rewards!");
+  } else if(overallAcc>=60){
+    str=getReportConfig("reportStrengthMedium","Good consistency — you completed all items.");
+    imp=getReportConfig("reportImprovementMedium","Accuracy needs improvement in some areas. Read data more carefully.");
+    sug=getReportConfig("reportSuggestionMedium",`Practice 2–3 more demo rounds to reach ${threshold}%+ accuracy.`);
+  } else {
+    str=getReportConfig("reportStrengthLow","You attempted all items — that's a great start!");
+    imp=getReportConfig("reportImprovementLow","Low accuracy. Take time to read reference data before typing.");
+    sug=getReportConfig("reportSuggestionLow","Focus on one task type at a time. Practice makes perfect.");
+  }
   document.getElementById('analysisGrid').innerHTML=`
     <div class="ac strength"><h5>✔ Strength</h5><p>${str}</p></div>
     <div class="ac improve"><h5>⚠ Improvement Area</h5><p>${imp}</p></div>
@@ -2211,7 +2192,18 @@ function buildReport(){
       correctEntries: tCorForDisplay,
       wrongEntries: incorrectEntries,
       accuracy: overallAcc,
-      status: isApproved ? "Approved" : "Rejected"
+      status: isApproved ? "Approved" : "Rejected",
+      reportData: {
+        overallStatsHtml: document.getElementById('overallStats').innerHTML,
+        analysisGridHtml: document.getElementById('analysisGrid').innerHTML,
+        fullErrSectionHtml: document.getElementById('fullErrSection').innerHTML,
+        summaryBodyHtml: document.getElementById('summaryBody').innerHTML,
+        gradeText: document.getElementById('gradeCircle').textContent,
+        gradeColor: document.getElementById('gradeCircle').style.color || gc,
+        gradeBorderColor: document.getElementById('gradeCircle').style.borderColor,
+        modalHeroTitle: document.querySelector('.modal-hero h2').textContent,
+        modalHeroSub: document.querySelector('.modal-hero p').textContent
+      }
     });
   }
 
@@ -2236,8 +2228,6 @@ function buildReport(){
         el.className=ok?'correct':'wrong';el.style.background='';el.style.cursor='';
       });
     });
-  }else if(CT.id==='captcha'){
-    Object.keys(SI).forEach(idx=>{const d=ID[idx];if(!d)return;const t=document.getElementById('cp'+idx);if(!t)return;const ok=t.value.trim()===d.answer;t.style.borderColor=ok?'var(--green)':'var(--red)';t.style.background=ok?'#F0FDF4':'#FEF2F2';t.style.cursor='';});
   }else if(CT.id==='grammar'){
     Object.keys(SI).forEach(idx=>{const t=document.getElementById('gr'+idx);if(!t)return;const ok=t.value.trim().length>12;t.style.borderColor=ok?'var(--green)':'var(--red)';t.style.background=ok?'#F0FDF4':'#FEF2F2';t.style.cursor='';});
   }else if(CT.id==='typing'){
@@ -2643,7 +2633,8 @@ async function saveAttemptToServer(attemptData) {
       correctEntries: attemptData.correctEntries,
       wrongEntries: attemptData.wrongEntries,
       accuracy: attemptData.accuracy,
-      status: attemptData.status
+      status: attemptData.status,
+      reportData: attemptData.reportData || null
     };
 
     const res = await fetch('/api/demo/attempt', {
@@ -2752,7 +2743,6 @@ function renderHistory(attempts) {
     let categoryName = 'Practice';
     let categoryEmoji = '📋';
     if (att.taskCategory === 'data') { categoryName = 'Data Entry'; categoryEmoji = '📊'; }
-    else if (att.taskCategory === 'captcha') { categoryName = 'Captcha Entry'; categoryEmoji = '🔢'; }
     else if (att.taskCategory === 'form') { categoryName = 'Form Filling'; categoryEmoji = '🧾'; }
     else if (att.taskCategory === 'grammar') { categoryName = 'Grammar Checking'; categoryEmoji = '✍️'; }
     else if (att.taskCategory === 'typing') { categoryName = 'Typing Speed'; categoryEmoji = '⌨️'; }
@@ -2785,6 +2775,20 @@ function renderHistory(attempts) {
     if (drawerAttemptsList) {
       const card = document.createElement('div');
       card.className = "drawer-card flex flex-col gap-2.5 p-4 border border-slate-200/70 rounded-2xl bg-white shadow-sm hover:shadow-md transition-all duration-200";
+      
+      const hasReport = !!att.reportData;
+      let buttonHtml = '';
+      if (hasReport) {
+        if (!window.SAVED_REPORTS) window.SAVED_REPORTS = {};
+        const reportKey = "rep_" + att.timestamp.replace(/[^a-zA-Z0-9]/g, '') + "_" + Math.floor(Math.random() * 1000);
+        window.SAVED_REPORTS[reportKey] = att.reportData;
+        buttonHtml = `
+          <button onclick="showSavedReport('${reportKey}')" class="mt-2.5 w-full bg-slate-50 hover:bg-slate-100 border border-slate-200 text-blue-600 hover:text-blue-700 font-black text-[10px] uppercase tracking-wider py-2 rounded-xl transition-all cursor-pointer flex items-center justify-center gap-1.5">
+            <i class="fa-solid fa-file-invoice"></i> View Performance Report
+          </button>
+        `;
+      }
+
       card.innerHTML = `
         <div class="flex justify-between items-start">
           <div class="flex items-center gap-2">
@@ -2803,6 +2807,7 @@ function renderHistory(attempts) {
           <span>Entries: <strong class="text-slate-700">${att.totalEntries}</strong></span>
           <span>Precision: <strong class="text-slate-700">${att.correctEntries} Cor / <span class="text-red-400">${att.wrongEntries} Err</span></strong></span>
         </div>
+        ${buttonHtml}
       `;
       drawerAttemptsList.appendChild(card);
     }
@@ -2842,6 +2847,37 @@ function renderHistory(attempts) {
   updateStats(statsTotal, statsAccuracy, statsApproved, statsRejected);
   updateStats(dStatsTotal, dStatsAccuracy, dStatsApproved, dStatsRejected);
 }
+
+window.showSavedReport = function(reportKey) {
+  if (!window.SAVED_REPORTS || !window.SAVED_REPORTS[reportKey]) {
+    showToast("⚠️ Report data not found.");
+    return;
+  }
+  const r = window.SAVED_REPORTS[reportKey];
+  
+  // Inject saved HTML strings directly into the report elements
+  document.getElementById('overallStats').innerHTML = r.overallStatsHtml;
+  document.getElementById('analysisGrid').innerHTML = r.analysisGridHtml;
+  document.getElementById('fullErrSection').innerHTML = r.fullErrSectionHtml;
+  document.getElementById('summaryBody').innerHTML = r.summaryBodyHtml;
+  
+  // Inject grade details
+  const gcEl = document.getElementById('gradeCircle');
+  gcEl.textContent = r.gradeText;
+  gcEl.style.color = r.gradeColor;
+  gcEl.style.borderColor = r.gradeBorderColor || r.gradeColor + '88';
+  
+  // Inject titles
+  document.querySelector('.modal-hero h2').textContent = r.modalHeroTitle;
+  document.querySelector('.modal-hero p').textContent = r.modalHeroSub;
+  document.querySelector('.trust-line').textContent = `"${r.modalHeroSub}"`;
+  
+  // Open the modal
+  document.getElementById('resultModal').classList.add('show');
+  
+  // Close the drawer so it closes neatly when opening the report
+  toggleProfileDrawer();
+};
 
 renderMenu();
 checkDemoSession();

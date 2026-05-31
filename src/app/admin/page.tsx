@@ -158,6 +158,32 @@ const PAGES: Record<string, PageDef> = {
         { key: "formCardTitle",     label: "Form Card Title",          type: "text" },
         { key: "formCardEncryption",label: "Form Encryption Pill",     type: "text" },
         { key: "loginCompliance",   label: "Compliance Policy Text",   type: "textarea" },
+      ]},
+      { title: "Demo Task Disclaimer Banner", fields: [
+        { key: "demoPaymentDisclaimer", label: "Demo Payment Disclaimer (Banner on Menu)", type: "textarea" },
+        { key: "taskDisclaimerDuringTask", label: "Disclaimer During Active Task (Topbar)", type: "textarea" },
+      ]},
+      { title: "Demo Task Report Configuration", fields: [
+        { key: "reportTitle", label: "Report Modal Title", type: "text" },
+        { key: "reportSub", label: "Report Modal Subtitle", type: "textarea" },
+        { key: "reportApprovalThreshold", label: "Approval Threshold Accuracy % (e.g. 95)", type: "text" },
+        { key: "reportEligibleHeading", label: "Eligible Alert Heading", type: "text" },
+        { key: "reportEligibleSub", label: "Eligible Alert Subtitle", type: "textarea" },
+        { key: "reportNotEligibleHeading", label: "Not Eligible Alert Heading", type: "text" },
+        { key: "reportNotEligibleSub", label: "Not Eligible Alert Subtitle", type: "textarea" },
+        { key: "reportStatusApprovedText", label: "Task Approved Status Label", type: "text" },
+        { key: "reportStatusRejectedText", label: "Task Rejected Status Label", type: "text" },
+        { key: "reportApprovedDesc", label: "Approved Description Text", type: "textarea" },
+        { key: "reportRejectedDesc", label: "Rejected Description Text", type: "textarea" },
+        { key: "reportStrengthHigh", label: "Strength Text (Accuracy >= 80%)", type: "textarea" },
+        { key: "reportImprovementHigh", label: "Improvement Text (Accuracy >= 80%)", type: "textarea" },
+        { key: "reportSuggestionHigh", label: "Suggestion Text (Accuracy >= 80%)", type: "textarea" },
+        { key: "reportStrengthMedium", label: "Strength Text (60% <= Accuracy < 80%)", type: "textarea" },
+        { key: "reportImprovementMedium", label: "Improvement Text (60% <= Accuracy < 80%)", type: "textarea" },
+        { key: "reportSuggestionMedium", label: "Suggestion Text (60% <= Accuracy < 80%)", type: "textarea" },
+        { key: "reportStrengthLow", label: "Strength Text (Accuracy < 60%)", type: "textarea" },
+        { key: "reportImprovementLow", label: "Improvement Text (Accuracy < 60%)", type: "textarea" },
+        { key: "reportSuggestionLow", label: "Suggestion Text (Accuracy < 60%)", type: "textarea" },
       ]}
     ],
   },
@@ -396,12 +422,33 @@ const DEFAULT_CONTENT: Record<string, any> = {
     formCardTitle: "Secure Portal Access",
     formCardEncryption: "AES-256 bits",
     loginCompliance: "WorkDen Data Protection Compliance System • ISO/IEC 27001 Certified Standards",
+    demoPaymentDisclaimer: "Demo tasks are only for practice. No payment will be provided for demo tasks. Payment is applicable only for live tasks.",
+    taskDisclaimerDuringTask: "This is a demo task. No payout is provided for demo tasks. It is only for practice.",
+    reportTitle: "Demo Performance Report",
+    reportSub: "Your performance has been evaluated based on real task parameters.",
+    reportApprovalThreshold: "95",
+    reportEligibleHeading: "You are eligible for this work.",
+    reportEligibleSub: "Please purchase a subscription plan to start earning real money!",
+    reportNotEligibleHeading: "You are not eligible for this work.",
+    reportNotEligibleSub: "Please try again to become eligible. You need 95%+ accuracy.",
+    reportStatusApprovedText: "Task Status: Approved",
+    reportStatusRejectedText: "Task Status: Rejected",
+    reportApprovedDesc: "You are eligible for live tasks! Start real work now and start earning.",
+    reportRejectedDesc: "Score 95%+ accuracy to get your task approved for live work.",
+    reportStrengthHigh: "Excellent accuracy and attention to detail maintained throughout.",
+    reportImprovementHigh: "Minor mistakes in a few items — review before saving next time.",
+    reportSuggestionHigh: "You are ready for live tasks. Start real work to earn rewards!",
+    reportStrengthMedium: "Good consistency — you completed all items.",
+    reportImprovementMedium: "Accuracy needs improvement in some areas. Read data more carefully.",
+    reportSuggestionMedium: "Practice 2–3 more demo rounds to reach 95%+ accuracy.",
+    reportStrengthLow: "You attempted all items — that's a great start!",
+    reportImprovementLow: "Low accuracy. Take time to read reference data before typing.",
+    reportSuggestionLow: "Focus on one task type at a time. Practice makes perfect.",
     tasksList: [
       { id: "typing",  name: "PDF to Word Typing",  emoji: "⌨️", items: 10,  timeMin: 60, desc: "Read the 8-10 line content shown on each page and type it exactly in the box below. Minimum 100 words per page required.", color: "#7C3AED", num: 1, hcls: "", howto: ["Read the content shown in the yellow box carefully.","Type the exact same content in the text box below — word for word.","You must type at least 100 words to pass this item.","Do NOT copy-paste — type manually using the keyboard.","Spelling and accuracy matter — type carefully."] },
-      { id: "captcha", name: "Captcha Filling",     emoji: "🔢", items: 100, timeMin: 60, desc: "Solve 100 dynamic CAPTCHA challenges — 10 types including reverse, filter, sort, position, math & more!", color: "#0891B2", num: 2, hcls: "blue", howto: ["10 different CAPTCHA types appear randomly — read the question carefully each time.","For text captcha: type exact characters shown (case-sensitive).","For reverse/filter/sort: follow the specific instruction shown in the yellow box.","For Long Calculation: solve the full expression (with +, −, ×) and enter only the final number.","For advanced captcha: complete each step in the exact order given.","Live color feedback shows if your answer is correct before saving."] },
-      { id: "form",    name: "Form Filling",        emoji: "🧾", items: 10,  timeMin: 60, desc: "Complete 10 online forms with the provided reference data carefully and accurately.", color: "#059669", num: 3, hcls: "green", howto: ["Read all reference data in the blue box at the top.","Fill each field exactly as shown in the reference (spelling, spacing, case).","Do not skip any field marked with a red asterisk (*).","Type manually — copy-paste is disabled.","Click Save when all fields are filled to see your score."] },
-      { id: "data",    name: "Data Entry",          emoji: "📊", items: 10,  timeMin: 60, desc: "Fill in 10 data entry forms accurately by typing the required information in each field.", color: "#EA580C", num: 4, hcls: "orange", howto: ["Study the reference data card at the top of each item.","Type each value exactly as shown — including spaces and formats.","Pay special attention to Aadhar, PAN, DOB, and PIN formats.","All fields are required — do not leave any blank.","Click Save to check your accuracy for that item."] },
-      { id: "grammar", name: "Grammar Correction",  emoji: "✍️", items: 10,  timeMin: 60, desc: "Read 10 paragraphs with grammatical errors and type the fully corrected versions.", color: "#7C3AED", num: 5, hcls: "", howto: ["Read the incorrect paragraph carefully — error types are shown below.","Identify all grammatical mistakes.","Type the fully corrected paragraph in the text box below.","Do not change the meaning — only fix grammar errors.","Your answer must be at least 13 characters to be accepted."] }
+      { id: "form",    name: "Form Filling",        emoji: "🧾", items: 10,  timeMin: 60, desc: "Complete 10 online forms with the provided reference data carefully and accurately.", color: "#059669", num: 2, hcls: "green", howto: ["Read all reference data in the blue box at the top.","Fill each field exactly as shown in the reference (spelling, spacing, case).","Do not skip any field marked with a red asterisk (*).","Type manually — copy-paste is disabled.","Click Save when all fields are filled to see your score."] },
+      { id: "data",    name: "Data Entry",          emoji: "📊", items: 10,  timeMin: 60, desc: "Fill in 10 data entry forms accurately by typing the required information in each field.", color: "#EA580C", num: 3, hcls: "orange", howto: ["Study the reference data card at the top of each item.","Type each value exactly as shown — including spaces and formats.","Pay special attention to Aadhar, PAN, DOB, and PIN formats.","All fields are required — do not leave any blank.","Click Save to check your accuracy for that item."] },
+      { id: "grammar", name: "Grammar Correction",  emoji: "✍️", items: 10,  timeMin: 60, desc: "Read 10 paragraphs with grammatical errors and type the fully corrected versions.", color: "#7C3AED", num: 4, hcls: "", howto: ["Read the incorrect paragraph carefully — error types are shown below.","Identify all grammatical mistakes.","Type the fully corrected paragraph in the text box below.","Do not change the meaning — only fix grammar errors.","Your answer must be at least 13 characters to be accepted."] }
     ]
   },
   header: {
@@ -530,8 +577,8 @@ export default function AdminDashboard() {
       id: Date.now().toString(),
       type: testiTypeFilter,
       name: "",
-      city: testiTypeFilter === "video" ? "" : "Pune, India",
-      role: testiTypeFilter === "video" ? "Content Moderator" : "",
+      city: "Pune, India",
+      role: "",
       text: testiTypeFilter === "written" ? "Write review here..." : "",
       initials: "AB",
       gradient: "linear-gradient(135deg,#1d4ed8,#2563eb)",
@@ -1285,21 +1332,12 @@ export default function AdminDashboard() {
                           placeholder="e.g. Priya Kapoor"
                           className="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all" />
                       </div>
-                      {testiTypeFilter === "video" ? (
-                        <div>
-                          <label className="block text-xs font-semibold text-slate-400 mb-1">Author Role / Badge</label>
-                          <input value={t.role || ""} onChange={e => updateTesti(t.id, "role", e.target.value)}
-                            placeholder="e.g. Operations Head"
-                            className="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all" />
-                        </div>
-                      ) : (
-                        <div>
-                          <label className="block text-xs font-semibold text-slate-400 mb-1">City / Location</label>
-                          <input value={t.city || ""} onChange={e => updateTesti(t.id, "city", e.target.value)}
-                            placeholder="e.g. Pune, India"
-                            className="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all" />
-                        </div>
-                      )}
+                      <div>
+                        <label className="block text-xs font-semibold text-slate-400 mb-1">City / Location</label>
+                        <input value={t.city || ""} onChange={e => updateTesti(t.id, "city", e.target.value)}
+                          placeholder="e.g. Pune, India"
+                          className="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all" />
+                      </div>
                     </div>
 
                     {testiTypeFilter === "written" && (
@@ -1380,7 +1418,7 @@ export default function AdminDashboard() {
                             ) : <p className="text-xs italic text-slate-500">Paste video link above...</p>
                           )}
                           <p className="text-slate-400 font-bold text-xs mt-1">
-                            {t.name || "Author Name"} — {testiTypeFilter === "video" ? (t.role || "Role") : (t.city || "City")}
+                            {t.name || "Author Name"} — {t.city || "City"}
                           </p>
                         </div>
                       </div>

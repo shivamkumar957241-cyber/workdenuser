@@ -85,17 +85,27 @@ function syncList(containerSelector, childSelector, list, populateFn) {
   const container = document.querySelector(containerSelector);
   if (!container) return;
   
+  // FAIL-SAFE FALLBACK: If the list is empty, keep static HTML elements intact!
+  if (!Array.isArray(list) || list.length === 0) return;
+  
   const template = getTemplate(container, childSelector);
   if (!template) return;
   
-  // Delete only dynamic child nodes, leaving headers or wrappers intact
-  container.querySelectorAll(childSelector).forEach(el => el.remove());
+  // Save any static CTA card (e.g., "View All Projects" button) to re-append at the end
+  let ctaCard = null;
+  container.querySelectorAll(childSelector).forEach(el => {
+    if (el.textContent.includes("View All Projects") || el.style.background.includes("var(--brand)")) {
+      ctaCard = el.cloneNode(true);
+    }
+  });
   
-  if (!Array.isArray(list) || list.length === 0) return;
+  // Delete only dynamic child nodes
+  container.querySelectorAll(childSelector).forEach(el => el.remove());
   
   list.forEach((item, index) => {
     const clone = template.cloneNode(true);
     clone.classList.remove("revealed");
+    clone.classList.remove("proj-visible");
     
     populateFn(clone, item, index);
     
@@ -106,6 +116,40 @@ function syncList(containerSelector, childSelector, list, populateFn) {
     clone.style.transitionDelay = (index * 60) + "ms";
     clone.classList.add("revealed");
   });
+
+  // Re-append the CTA card at the end of the grid if it was saved
+  if (ctaCard) {
+    ctaCard.classList.remove("revealed");
+    ctaCard.classList.remove("proj-visible");
+    container.appendChild(ctaCard);
+    ctaCard.style.animationDelay = (list.length * 120) + "ms";
+    ctaCard.style.transitionDelay = (list.length * 60) + "ms";
+    ctaCard.classList.add("revealed");
+  }
+}
+
+// Re-initialize intersection observer for category cards to make them visible and animate on scroll/load
+function initProjCardObserver() {
+  const cards = document.querySelectorAll('.proj-card');
+  if (!cards.length) return;
+  
+  // Reset visibility classes so they trigger fresh animations
+  cards.forEach(c => c.classList.remove('proj-visible'));
+  
+  const delays = [0, 70, 140, 210, 280, 350, 420, 490];
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        const idx = Array.from(cards).indexOf(entry.target);
+        setTimeout(() => {
+          entry.target.classList.add('proj-visible');
+        }, delays[idx] || 0);
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  
+  cards.forEach(c => io.observe(c));
 }
 
 // ── CORE SYNC ENGINE FUNCTION (EXPORTS/APPLIES FIREBASE CONTENT) ───────────
@@ -201,6 +245,9 @@ function applyWebsiteContent(data) {
         if (desc) desc.innerHTML = item.desc || "";
       });
     }
+    
+    // Re-initialize intersection observer for category cards to make them visible and animate on scroll/load
+    initProjCardObserver();
   }
 
   else if (pageName === "plans") {
@@ -223,7 +270,7 @@ function applyWebsiteContent(data) {
             cardPriceRow.innerHTML = `
               <span class="card-currency">₹</span>
               <span class="card-amount">${item.price}</span>
-              <span class="card-period">/one-time</span>
+              <span class="card-period">/1 Year</span>
             `;
           }
         }
@@ -422,6 +469,9 @@ function applyWebsiteContent(data) {
       HOWTO = pageData.howto;
     }
     
+    // Overwrite report configuration globally
+    window.REPORT_CONFIG = pageData;
+    
     // Re-trigger layout render
     if (typeof renderMenu === "function") {
       renderMenu();
@@ -445,7 +495,7 @@ function applyWebsiteContent(data) {
                 <div class="vid-avatar" style="background:${escHtml(t.gradient || 'linear-gradient(135deg,#1d4ed8,#2563eb)')};">${escHtml(initials)}</div>
                 <div>
                   <div class="vid-name">${escHtml(t.name)}</div>
-                  <div class="vid-role">${escHtml(t.role || 'User')}</div>
+                  <div class="vid-role">${escHtml(t.city || 'Delhi, India')}</div>
                 </div>
               </div>
             </div>
