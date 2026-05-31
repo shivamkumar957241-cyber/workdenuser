@@ -298,6 +298,15 @@ function applyWebsiteContent(data) {
           }
         }
         
+        const detailsBtn = clone.querySelector(".card-details-btn");
+        if (detailsBtn) {
+          if (item.isPaid) {
+            detailsBtn.style.display = "inline-flex";
+          } else {
+            detailsBtn.style.display = "none";
+          }
+        }
+        
         clone.querySelectorAll('.feat-dot').forEach((dot, idx) => {
           dot.style.animation = 'featDotPulse 2.4s ease-in-out infinite';
           dot.style.animationDelay = (idx * 120 % 800) + 'ms';
