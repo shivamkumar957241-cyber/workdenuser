@@ -268,9 +268,9 @@ body{
 
     <div class="nav-ctas">
 
-      <a href="#" onclick="showVersionModal(event)" class="btn btn-ghost">User Login</a>
+      <a href="#" onclick="showVersionModal(event)" class="btn btn-ghost" data-content-id="nav_userLoginBtn">User Login</a>
 
-      <a href="https://workdenteam2.base44.app/" class="btn btn-primary">Employee Login</a>
+      <a href="https://workdenteam2.base44.app/" class="btn btn-primary" data-content-id="nav_employeeLoginBtn" data-content-href="nav_employeeLoginUrl">Employee Login</a>
 
     </div>
 
@@ -304,9 +304,9 @@ body{
 
   <div class="mobile-nav-ctas" style="margin-top:12px;">
 
-    <a href="#" onclick="showVersionModal(event)" class="btn btn-ghost">User Login</a>
+    <a href="#" onclick="showVersionModal(event)" class="btn btn-ghost" data-content-id="nav_userLoginBtn">User Login</a>
 
-    <a href="https://workdenteam2.base44.app/" class="btn btn-primary">Employee Login</a>
+    <a href="https://workdenteam2.base44.app/" class="btn btn-primary" data-content-id="nav_employeeLoginBtn" data-content-href="nav_employeeLoginUrl">Employee Login</a>
 
   </div>
 
@@ -320,8 +320,8 @@ body{
 <div class="page-hero">
   <div class="page-hero-inner">
     <span class="section-label"><i class="fas fa-building"></i> About Us</span>
-    <h1>About WorkDen</h1>
-    <p>Building a transparent, structured, and secure digital task ecosystem across India since 2024.</p>
+    <h1 data-content-id="pageHeroTitle">About WorkDen</h1>
+    <p data-content-id="pageHeroDesc">Building a transparent, structured, and secure digital task ecosystem across India since 2024.</p>
     <div class="about-power-strip reveal-up">
       
     </div>
@@ -334,11 +334,11 @@ body{
     <div class="two-col reveal-up">
       <div class="two-col-text">
         <span class="section-label"><i class="fas fa-info-circle"></i> Company Overview</span>
-        <h2>Who We Are</h2>
-        <p>Founded in 2024, WorkDen is a structured digital task facilitation platform designed to connect individuals with skill-based, remote task opportunities across India.</p>
-        <p>Our platform focuses on accuracy, transparency, and responsible digital participation. We provide users with access to a professional task portal where work is assigned based on eligibility, project demand, and performance compliance.</p>
-        <p>WorkDen is fully registered under Indian law — GSTIN and MSME certified — making us one of the few verified WFH platforms in the country.</p>
-        <div class="blockquote">WorkDen operates on a task-based performance model. The platform does not provide employment contracts or guaranteed income — we connect skilled individuals with digital work opportunities.</div>
+        <h2 data-content-id="whoTitle">Who We Are</h2>
+        <p data-content-id="whoP1">Founded in 2024, WorkDen is a structured digital task facilitation platform designed to connect individuals with skill-based, remote task opportunities across India.</p>
+        <p data-content-id="whoP2">Our platform focuses on accuracy, transparency, and responsible digital participation. We provide users with access to a professional task portal where work is assigned based on eligibility, project demand, and performance compliance.</p>
+        <p data-content-id="whoP3">WorkDen is fully registered under Indian law — GSTIN and MSME certified — making us one of the few verified WFH platforms in the country.</p>
+        <div class="blockquote" data-content-id="whoQuote">WorkDen operates on a task-based performance model. The platform does not provide employment contracts or guaranteed income — we connect skilled individuals with digital work opportunities.</div>
       </div>
       <div class="info-panel reveal-up">
         <div class="info-panel-title">Platform at a Glance</div>
@@ -397,11 +397,11 @@ body{
     <div class="mv-grid reveal-up">
       <div class="mv-card mission reveal-up">
         <div class="mv-tag"><i class="fas fa-bullseye"></i> Mission</div>
-        <p class="mv-text">To establish a secure and transparent digital task platform that upholds professional standards, structured workflows, and responsible user participation across India.</p>
+        <p class="mv-text" data-content-id="missionText">To establish a secure and transparent digital task platform that upholds professional standards, structured workflows, and responsible user participation across India.</p>
       </div>
       <div class="mv-card vision reveal-up">
         <div class="mv-tag" style="color:#7c3aed;"><i class="fas fa-eye"></i> Vision</div>
-        <p class="mv-text">To become a trusted and recognized name in India's digital task ecosystem by enabling skill-based remote participation through structured and ethical operations.</p>
+        <p class="mv-text" data-content-id="visionText">To become a trusted and recognized name in India's digital task ecosystem by enabling skill-based remote participation through structured and ethical operations.</p>
       </div>
     </div>
   </div>
@@ -417,18 +417,18 @@ body{
     <div class="team-grid reveal-up">
       <div class="team-card reveal-up">
         <img src="director.png" class="team-avatar" alt="Shivam Mishra">
-        <div class="team-name">Shivam Mishra</div>
-        <div class="team-role">Managing Director</div>
+        <div class="team-name" data-content-id="team1Name">Shivam Mishra</div>
+        <div class="team-role" data-content-id="team1Role">Managing Director</div>
       </div>
       <div class="team-card reveal-up">
         <img src="manager.png" class="team-avatar" alt="Rajesh Tripathi">
-        <div class="team-name">Rajesh Tripathi</div>
-        <div class="team-role">Operations Head</div>
+        <div class="team-name" data-content-id="team2Name">Rajesh Tripathi</div>
+        <div class="team-role" data-content-id="team2Role">Operations Head</div>
       </div>
       <div class="team-card reveal-up">
         <img src="support.png" class="team-avatar" alt="Utsav Tiwari">
-        <div class="team-name">Utsav Tiwari</div>
-        <div class="team-role">Recruitment Lead</div>
+        <div class="team-name" data-content-id="team3Name">Utsav Tiwari</div>
+        <div class="team-role" data-content-id="team3Role">Recruitment Lead</div>
       </div>
     </div>
   </div>
@@ -445,25 +445,25 @@ body{
       <div class="cred-grid">
         <div class="cred-col reveal-up">
           <div class="cred-col-title">Registration Details</div>
-          <div class="cred-item"><div class="cred-label">Registered Name</div><div class="cred-val">WorkDen</div></div>
-          <div class="cred-item"><div class="cred-label">Established</div><div class="cred-val">2024</div></div>
+          <div class="cred-item"><div class="cred-label">Registered Name</div><div class="cred-val" data-content-id="companyName">WorkDen</div></div>
+          <div class="cred-item"><div class="cred-label">Established</div><div class="cred-val" data-content-id="establishedYear">2024</div></div>
           <div class="cred-item"><div class="cred-label">Category</div><div class="cred-val">Digital Task Platform</div></div>
-          <div class="cred-item"><div class="cred-label">GSTIN</div><div class="cred-val">10KEJPM6504N1Z7</div><a href="https://drive.google.com/file/d/1lDqxLP5AAFvfiGAMfcOtqVOSGc80_9Dg/view?usp=drive_link" target="_blank" class="cred-link">View Certificate</a></div>
-          <div class="cred-item"><div class="cred-label">MSME (Udyam)</div><div class="cred-val">UDYAM-KR-03-0640514</div><a href="https://drive.google.com/file/d/1vyHb_CaIFMMU9jRKau1QZNHbkLJ0Rnjx/view?usp=drive_link" target="_blank" class="cred-link">View Certificate</a></div>
+          <div class="cred-item"><div class="cred-label">GSTIN</div><div class="cred-val" data-content-id="gstinNumber">10KEJPM6504N1Z7</div><a href="https://drive.google.com/file/d/1lDqxLP5AAFvfiGAMfcOtqVOSGc80_9Dg/view?usp=drive_link" target="_blank" class="cred-link">View Certificate</a></div>
+          <div class="cred-item"><div class="cred-label">MSME (Udyam)</div><div class="cred-val" data-content-id="msmeNumber">UDYAM-KR-03-0640514</div><a href="https://drive.google.com/file/d/1vyHb_CaIFMMU9jRKau1QZNHbkLJ0Rnjx/view?usp=drive_link" target="_blank" class="cred-link">View Certificate</a></div>
         </div>
         <div class="cred-col reveal-up">
           <div class="cred-col-title">Office Locations</div>
           <div class="cred-item" style="margin-bottom:20px;">
             <div class="cred-label">Primary Office</div>
-            <div class="cred-val" style="font-size:0.875rem;font-weight:600;line-height:1.6;">Ashok Nagar, Bangalore – 560001</div>
+            <div class="cred-val" style="font-size:0.875rem;font-weight:600;line-height:1.6;" data-content-id="office1">Ashok Nagar, Bangalore – 560001</div>
           </div>
           <div class="cred-item">
             <div class="cred-label">Secondary Office</div>
-            <div class="cred-val" style="font-size:0.875rem;font-weight:600;line-height:1.6;">Parsuram Pur, Motihari – 845416</div>
+            <div class="cred-val" style="font-size:0.875rem;font-weight:600;line-height:1.6;" data-content-id="office2">Parsuram Pur, Motihari – 845416</div>
           </div>
           <div style="margin-top:20px;background:var(--brand-pale);border:1px solid #bfdbfe;border-radius:10px;padding:14px 16px;">
             <div style="font-size:0.72rem;font-weight:700;color:var(--brand);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:6px;">Operational Since</div>
-            <div style="font-size:1.3rem;font-weight:900;color:var(--brand);letter-spacing:-0.03em;">2024</div>
+            <div style="font-size:1.3rem;font-weight:900;color:var(--brand);letter-spacing:-0.03em;" data-content-id="establishedYear">2024</div>
             <div style="font-size:0.78rem;color:var(--text);">Pan-India digital task operations</div>
           </div>
         </div>
@@ -487,11 +487,11 @@ body{
           <img src="workden-logo.png" alt="WorkDen">
           <span>WorkDen</span>
         </div>
-        <p>A verified digital task platform delivering structured online work opportunities with transparency, secure workflow, and compliance. GSTIN & MSME registered.</p>
+        <p data-content-id="brandDesc">A verified digital task platform delivering structured online work opportunities with transparency, secure workflow, and compliance. GSTIN & MSME registered.</p>
         <div class="simple-footer-badges">
           <span><i class="fas fa-circle-check"></i> GSTIN Verified</span>
           <span><i class="fas fa-circle-check"></i> MSME Registered</span>
-          <span><i class="fas fa-circle-check"></i> Est. 2024</span>
+          <span data-content-id="tagline"><i class="fas fa-circle-check"></i> Est. 2024</span>
         </div>
       </div>
 
@@ -514,28 +514,28 @@ body{
         <a href="refund.html">Refund Policy</a>
         <div class="simple-footer-verify">
           <strong>Business Verification</strong>
-          <span>GSTIN: 10KEJPM6504N1Z7</span>
-          <span>MSME: UDYAM-KR-03-0640514</span>
+          <span data-content-id="gstinNumber">GSTIN: 10KEJPM6504N1Z7</span>
+          <span data-content-id="msmeNumber">MSME: UDYAM-KR-03-0640514</span>
         </div>
       </div>
 
       <div class="simple-footer-col simple-footer-contact">
         <h4>Contact</h4>
-        <a href="mailto:info@workden.online"><i class="fas fa-envelope"></i> info@workden.online</a>
-        <a href="mailto:support@workden.online"><i class="fas fa-headset"></i> support@workden.online</a>
-        <p><i class="fas fa-location-dot"></i> Ashok Nagar, Bangalore – 560001</p>
-        <p><i class="fas fa-location-dot"></i> Parsuram Pur, Motihari – 845416</p>
+        <a href="mailto:info@workden.online" data-content-id="emailGeneral"><i class="fas fa-envelope"></i> info@workden.online</a>
+        <a href="mailto:support@workden.online" data-content-id="emailSupport"><i class="fas fa-headset"></i> support@workden.online</a>
+        <p data-content-id="address1"><i class="fas fa-location-dot"></i> Ashok Nagar, Bangalore – 560001</p>
+        <p data-content-id="address2"><i class="fas fa-location-dot"></i> Parsuram Pur, Motihari – 845416</p>
         <div class="simple-socials">
-          <a href="https://www.facebook.com/people/Workden-India/61583820256534/" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-          <a href="https://www.instagram.com/workden_wfh" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-          <a href="https://www.linkedin.com/in/workden-india-315391383/" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-          <a href="https://t.me/+f_s3cLM1WwYxNjE1" target="_blank" aria-label="Telegram"><i class="fab fa-telegram-plane"></i></a>
+          <a href="https://www.facebook.com/people/Workden-India/61583820256534/" target="_blank" aria-label="Facebook" data-content-href="facebookUrl"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://www.instagram.com/workden_wfh" target="_blank" aria-label="Instagram" data-content-href="instagramUrl"><i class="fab fa-instagram"></i></a>
+          <a href="https://www.linkedin.com/in/workden-india-315391383/" target="_blank" aria-label="LinkedIn" data-content-href="linkedinUrl"><i class="fab fa-linkedin-in"></i></a>
+          <a href="https://t.me/+f_s3cLM1WwYxNjE1" target="_blank" aria-label="Telegram" data-content-href="telegramUrl"><i class="fab fa-telegram-plane"></i></a>
         </div>
       </div>
     </div>
 
     <div class="simple-footer-bottom">
-      <span>© 2026 WorkDen. All rights reserved.</span>
+      <span data-content-id="copyright">© 2026 WorkDen. All rights reserved.</span>
       <span>Structured Digital Task Platform</span>
     </div>
   </div>
@@ -550,18 +550,18 @@ function toggleNav(){document.getElementById('mobNav').classList.toggle('open');
   <div style="background:white;border-radius:20px;padding:40px 32px 32px;max-width:440px;width:92%;box-shadow:0 24px 80px rgba(0,0,0,0.22);text-align:center;position:relative;">
     <button onclick="document.getElementById('verOverlay').style.display='none'" style="position:absolute;top:14px;right:18px;background:#f1f5f9;border:none;cursor:pointer;width:32px;height:32px;border-radius:50%;font-size:1.1rem;color:#64748b;">✕</button>
     <div style="display:inline-flex;align-items:center;gap:6px;background:#eff6ff;color:#1d4ed8;font-size:0.72rem;font-weight:700;text-transform:uppercase;padding:5px 12px;border-radius:20px;margin-bottom:14px;">Select Version</div>
-    <div style="font-size:1.35rem;font-weight:800;color:#0f172a;margin-bottom:8px;">Choose Your Login Portal</div>
-    <div style="font-size:0.9rem;color:#64748b;margin-bottom:28px;line-height:1.5;">WorkDen ke do version available hain. Apna version select karein.</div>
+    <div style="font-size:1.35rem;font-weight:800;color:#0f172a;margin-bottom:8px;" data-content-id="modal_title">Choose Your Login Portal</div>
+    <div style="font-size:0.9rem;color:#64748b;margin-bottom:28px;line-height:1.5;" data-content-id="modal_desc">WorkDen ke do version available hain. Apna version select karein.</div>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
-      <a href="https://workden-4.base44.app" target="_blank" style="border:2px solid #bfdbfe;border-radius:14px;padding:22px 16px 18px;text-decoration:none;display:flex;flex-direction:column;align-items:center;gap:8px;">
+      <a href="https://workden-4.base44.app" target="_blank" style="border:2px solid #bfdbfe;border-radius:14px;padding:22px 16px 18px;text-decoration:none;display:flex;flex-direction:column;align-items:center;gap:8px;" data-content-href="v1_url">
         <div style="font-size:2rem;font-weight:900;color:#1d4ed8;">4.0</div>
-        <div style="font-size:0.8rem;font-weight:700;color:#475569;">WorkDen 4.0</div>
+        <div style="font-size:0.8rem;font-weight:700;color:#475569;" data-content-id="v1_label">WorkDen 4.0</div>
         <div style="font-size:0.75rem;color:#94a3b8;">Latest version — upgraded features</div>
         <div style="margin-top:6px;padding:7px 18px;border-radius:8px;font-size:0.8rem;font-weight:700;background:#1d4ed8;color:white;width:100%;box-sizing:border-box;">Login 4.0</div>
       </a>
-      <a href="https://workden-3.base44.app" target="_blank" style="border:2px solid #ddd6fe;border-radius:14px;padding:22px 16px 18px;text-decoration:none;display:flex;flex-direction:column;align-items:center;gap:8px;">
+      <a href="https://workden-3.base44.app" target="_blank" style="border:2px solid #ddd6fe;border-radius:14px;padding:22px 16px 18px;text-decoration:none;display:flex;flex-direction:column;align-items:center;gap:8px;" data-content-href="v2_url">
         <div style="font-size:2rem;font-weight:900;color:#7c3aed;">3.0</div>
-        <div style="font-size:0.8rem;font-weight:700;color:#475569;">WorkDen 3.0</div>
+        <div style="font-size:0.8rem;font-weight:700;color:#475569;" data-content-id="v2_label">WorkDen 3.0</div>
         <div style="font-size:0.75rem;color:#94a3b8;">Previous version — stable interface</div>
         <div style="margin-top:6px;padding:7px 18px;border-radius:8px;font-size:0.8rem;font-weight:700;background:#7c3aed;color:white;width:100%;box-sizing:border-box;">Login 3.0</div>
       </a>
@@ -601,6 +601,6 @@ function closeVersionModal(e){if(e.target===document.getElementById("verOverlay"
   });
 })();
 </script>
-
+<script src="content-sync.js"></script>
 </body>
 </html>

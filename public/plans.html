@@ -511,8 +511,8 @@ body{
       <li><a href="blogs.html">Blogs</a></li>
     </ul>
     <div class="nav-ctas">
-      <a href="#" onclick="showVersionModal(event)" class="btn btn-ghost">User Login</a>
-      <a href="https://workdenteam2.base44.app/" class="btn btn-primary">Employee Login</a>
+      <a href="#" onclick="showVersionModal(event)" class="btn btn-ghost" data-content-id="nav_userLoginBtn">User Login</a>
+      <a href="https://workdenteam2.base44.app/" class="btn btn-primary" data-content-id="nav_employeeLoginBtn" data-content-href="nav_employeeLoginUrl">Employee Login</a>
     </div>
     <button class="hamburger" onclick="toggleNav()"><i class="fas fa-bars"></i></button>
   </div>
@@ -528,16 +528,16 @@ body{
   <a href="testimonials.html">Testimonials</a>
   <a href="blogs.html">Blogs</a>
   <div style="margin-top:12px;display:flex;flex-direction:column;gap:8px;">
-    <a href="#" onclick="showVersionModal(event)" class="btn btn-ghost">User Login</a>
-    <a href="https://workdenteam2.base44.app/" class="btn btn-primary">Employee Login</a>
+    <a href="#" onclick="showVersionModal(event)" class="btn btn-ghost" data-content-id="nav_userLoginBtn">User Login</a>
+    <a href="https://workdenteam2.base44.app/" class="btn btn-primary" data-content-id="nav_employeeLoginBtn" data-content-href="nav_employeeLoginUrl">Employee Login</a>
   </div>
 </div>
 
 <header class="page-hero">
   <div class="page-hero-inner">
     <span class="section-label"><i class="fas fa-crown"></i> WorkDen Plans</span>
-    <h1>Choose Your <span class="gradient-text">WorkDen Access</span> Plan</h1>
-    <p>Online task work start karna ho ya WorkDen ke saath freelance telecalling/affiliate marketing opportunity join karni ho — dono options clear, simple aur professional way me available hain.</p>
+    <h1 data-content-id="pageHeroTitle">Choose Your <span class="gradient-text">WorkDen Access</span> Plan</h1>
+    <p data-content-id="pageHeroDesc">Online task work start karna ho ya WorkDen ke saath freelance telecalling/affiliate marketing opportunity join karni ho — dono options clear, simple aur professional way me available hain.</p>
     <div class="hero-pills">
       <span><i class="fas fa-shield-halved" style="color:#16a34a"></i> GSTIN &amp; MSME Verified</span>
       <span><i class="fas fa-bolt" style="color:#f59e0b"></i> Fast Onboarding</span>
@@ -565,8 +565,8 @@ body{
       <div class="pricing-toggle">
         <div class="toggle-inner" id="toggleWrap">
           <div class="toggle-pill" id="togglePill"></div>
-          <button class="toggle-btn active" id="btnPaid" onclick="switchPlan('paid')">₹999 Plan</button>
-          <button class="toggle-btn" id="btnFree" onclick="switchPlan('free')">Free Plan</button>
+          <button class="toggle-btn active" id="btnPaid" onclick="switchPlan('paid')" data-content-id="togglePaidBtn">₹999 Plan</button>
+          <button class="toggle-btn" id="btnFree" onclick="switchPlan('free')" data-content-id="toggleFreeBtn">Free Plan</button>
         </div>
       </div>
     </div>
@@ -577,28 +577,28 @@ body{
       <!-- ─── CARD 1: Online Typing Work (₹999) — popular, blue glow ─── -->
       <article class="plan-card popular" id="card-paid-1">
         <div class="card-header">
-          <h3 class="card-plan-name">Online Typing Work</h3>
+          <h3 class="card-plan-name" data-content-id="plan1Name">Online Typing Work</h3>
           <div class="card-price-row">
             <span class="card-currency">₹</span>
-            <span class="card-amount">999</span>
+            <span class="card-amount" data-content-id="plan1Price">999</span>
             <span class="card-period">/one-time</span>
           </div>
-          <p class="card-desc">Task portal access ke saath training, VIP ID card aur priority support included. Ghar baithe kaam shuru karo.</p>
+          <p class="card-desc" data-content-id="plan1Desc">Task portal access ke saath training, VIP ID card aur priority support included. Ghar baithe kaam shuru karo.</p>
         </div>
         <div class="card-content">
           <hr class="card-divider">
           <h4 class="card-feat-title">What's included:</h4>
           <ul class="card-feat-list">
-            <li><span class="feat-dot"></span> Full Access to All Tasks</li>
-            <li><span class="feat-dot"></span> Professional VIP ID Card</li>
-            <li><span class="feat-dot"></span> Complete Training + Live Webinar</li>
-            <li><span class="feat-dot"></span> Live + Priority Support</li>
-            <li><span class="feat-dot"></span> Easy &amp; Less Tasks Daily</li>
-            <li><span class="feat-dot"></span> Fast Task Approval</li>
-            <li><span class="feat-dot"></span> Min. Withdrawal: ₹500</li>
-            <li><span class="feat-dot"></span> No Maximum Earning Limit</li>
+            <li data-content-id="plan1Feat1"><span class="feat-dot"></span> Full Access to All Tasks</li>
+            <li data-content-id="plan1Feat2"><span class="feat-dot"></span> Professional VIP ID Card</li>
+            <li data-content-id="plan1Feat3"><span class="feat-dot"></span> Complete Training + Live Webinar</li>
+            <li data-content-id="plan1Feat4"><span class="feat-dot"></span> Live + Priority Support</li>
+            <li data-content-id="plan1Feat5"><span class="feat-dot"></span> Easy &amp; Less Tasks Daily</li>
+            <li data-content-id="plan1Feat6"><span class="feat-dot"></span> Fast Task Approval</li>
+            <li data-content-id="plan1Feat7"><span class="feat-dot"></span> Min. Withdrawal: ₹500</li>
+            <li data-content-id="plan1Feat8"><span class="feat-dot"></span> No Maximum Earning Limit</li>
           </ul>
-          <div class="card-refund-note">
+          <div class="card-refund-note" data-content-id="plan1RefundNote">
             ⚠️ <strong>Note:</strong> Refund is not available once the ID is activated. Please read all terms before purchasing.
           </div>
         </div>
@@ -607,24 +607,24 @@ body{
       <!-- ─── CARD 2: Freelance Telecaller (Free) ─── -->
       <article class="plan-card" id="card-free-1">
         <div class="card-header">
-          <h3 class="card-plan-name">Freelance Telecaller</h3>
+          <h3 class="card-plan-name" data-content-id="plan2Name">Freelance Telecaller</h3>
           <div class="card-price-row">
-            <span class="card-free">Free</span>
+            <span class="card-free" data-content-id="plan2Price">Free</span>
           </div>
-          <p class="card-desc">Calling, follow-up aur affiliate promotion ke through WorkDen opportunity explain karo. Zero investment required.</p>
+          <p class="card-desc" data-content-id="plan2Desc">Calling, follow-up aur affiliate promotion ke through WorkDen opportunity explain karo. Zero investment required.</p>
         </div>
         <div class="card-content">
           <hr class="card-divider">
           <h4 class="card-feat-title">What's included:</h4>
           <ul class="card-feat-list">
-            <li><span class="feat-dot"></span> Free Registration — ₹0</li>
-            <li><span class="feat-dot"></span> Work From Home Calling</li>
-            <li><span class="feat-dot"></span> Affiliate Marketing Support</li>
-            <li><span class="feat-dot"></span> Basic Platform Training</li>
-            <li><span class="feat-dot"></span> Flexible Working Hours</li>
-            <li><span class="feat-dot"></span> Performance-Based Growth</li>
-            <li><span class="feat-dot"></span> Weekly Payout via UPI/Bank</li>
-            <li><span class="feat-dot"></span> Community Access &amp; Support</li>
+            <li data-content-id="plan2Feat1"><span class="feat-dot"></span> Free Registration — ₹0</li>
+            <li data-content-id="plan2Feat2"><span class="feat-dot"></span> Work From Home Calling</li>
+            <li data-content-id="plan2Feat3"><span class="feat-dot"></span> Affiliate Marketing Support</li>
+            <li data-content-id="plan2Feat4"><span class="feat-dot"></span> Basic Platform Training</li>
+            <li data-content-id="plan2Feat5"><span class="feat-dot"></span> Flexible Working Hours</li>
+            <li data-content-id="plan2Feat6"><span class="feat-dot"></span> Performance-Based Growth</li>
+            <li data-content-id="plan2Feat7"><span class="feat-dot"></span> Weekly Payout via UPI/Bank</li>
+            <li data-content-id="plan2Feat8"><span class="feat-dot"></span> Community Access &amp; Support</li>
           </ul>
         </div>
       </article>
@@ -632,24 +632,24 @@ body{
       <!-- ─── CARD 3: Affiliate Marketer (Free) ─── -->
       <article class="plan-card" id="card-free-2">
         <div class="card-header">
-          <h3 class="card-plan-name">Affiliate Marketer</h3>
+          <h3 class="card-plan-name" data-content-id="plan3Name">Affiliate Marketer</h3>
           <div class="card-price-row">
-            <span class="card-free">Free</span>
+            <span class="card-free" data-content-id="plan3Price">Free</span>
           </div>
-          <p class="card-desc">WorkDen ke products promote karo aur har successful referral par commission kamao. No targets, no pressure.</p>
+          <p class="card-desc" data-content-id="plan3Desc">WorkDen ke products promote karo aur har successful referral par commission kamao. No targets, no pressure.</p>
         </div>
         <div class="card-content">
           <hr class="card-divider">
           <h4 class="card-feat-title">What's included:</h4>
           <ul class="card-feat-list">
-            <li><span class="feat-dot"></span> Referral Commission on Every Sale</li>
-            <li><span class="feat-dot"></span> Dedicated Affiliate Dashboard</li>
-            <li><span class="feat-dot"></span> Marketing Materials Provided</li>
-            <li><span class="feat-dot"></span> Social Media Promotion Tools</li>
-            <li><span class="feat-dot"></span> No Target Pressure</li>
-            <li><span class="feat-dot"></span> Work Anytime, Anywhere</li>
-            <li><span class="feat-dot"></span> Instant Payout on Approval</li>
-            <li><span class="feat-dot"></span> Dedicated Affiliate Support</li>
+            <li data-content-id="plan3Feat1"><span class="feat-dot"></span> Referral Commission on Every Sale</li>
+            <li data-content-id="plan3Feat2"><span class="feat-dot"></span> Dedicated Affiliate Dashboard</li>
+            <li data-content-id="plan3Feat3"><span class="feat-dot"></span> Marketing Materials Provided</li>
+            <li data-content-id="plan3Feat4"><span class="feat-dot"></span> Social Media Promotion Tools</li>
+            <li data-content-id="plan3Feat5"><span class="feat-dot"></span> No Target Pressure</li>
+            <li data-content-id="plan3Feat6"><span class="feat-dot"></span> Work Anytime, Anywhere</li>
+            <li data-content-id="plan3Feat7"><span class="feat-dot"></span> Instant Payout on Approval</li>
+            <li data-content-id="plan3Feat8"><span class="feat-dot"></span> Dedicated Affiliate Support</li>
           </ul>
         </div>
       </article>
@@ -664,23 +664,23 @@ body{
     <div class="value-strip reveal-up">
       <div class="value-grid">
         <div class="value-title">
-          <h2>Why choose WorkDen plans?</h2>
-          <p>Har plan ko clear role ke according design kiya gaya hai — task work ke liye paid access aur freelance marketing/calling ke liye free joining option.</p>
+          <h2 data-content-id="valueTitle">Why choose WorkDen plans?</h2>
+          <p data-content-id="valueDesc">Har plan ko clear role ke according design kiya gaya hai — task work ke liye paid access aur freelance marketing/calling ke liye free joining option.</p>
         </div>
         <div class="value-mini">
           <i class="fas fa-layer-group"></i>
-          <strong>Structured System</strong>
-          <span>Portal, tasks, support aur training ek proper flow me available.</span>
+          <strong data-content-id="value1Title">Structured System</strong>
+          <span data-content-id="value1Desc">Portal, tasks, support aur training ek proper flow me available.</span>
         </div>
         <div class="value-mini">
           <i class="fas fa-user-shield"></i>
-          <strong>Verified Platform</strong>
-          <span>GSTIN, MSME aur transparent policies ke saath professional setup.</span>
+          <strong data-content-id="value2Title">Verified Platform</strong>
+          <span data-content-id="value2Desc">GSTIN, MSME aur transparent policies ke saath professional setup.</span>
         </div>
         <div class="value-mini">
           <i class="fas fa-headset"></i>
-          <strong>Support Focused</strong>
-          <span>Training, live support aur guidance se users ko clarity milti hai.</span>
+          <strong data-content-id="value3Title">Support Focused</strong>
+          <span data-content-id="value3Desc">Training, live support aur guidance se users ko clarity milti hai.</span>
         </div>
       </div>
     </div>
@@ -696,11 +696,11 @@ body{
           <img src="workden-logo.png" alt="WorkDen">
           <span>WorkDen</span>
         </div>
-        <p>A verified digital task platform delivering structured online work opportunities with transparency, secure workflow, and compliance. GSTIN &amp; MSME registered.</p>
+        <p data-content-id="brandDesc">A verified digital task platform delivering structured online work opportunities with transparency, secure workflow, and compliance. GSTIN &amp; MSME registered.</p>
         <div class="simple-footer-badges">
           <span><i class="fas fa-circle-check"></i> GSTIN Verified</span>
           <span><i class="fas fa-circle-check"></i> MSME Registered</span>
-          <span><i class="fas fa-circle-check"></i> Est. 2024</span>
+          <span data-content-id="tagline"><i class="fas fa-circle-check"></i> Est. 2024</span>
         </div>
       </div>
       <div class="simple-footer-col">
@@ -721,26 +721,26 @@ body{
         <a href="refund.html">Refund Policy</a>
         <div class="simple-footer-verify">
           <strong>Business Verification</strong>
-          <span>GSTIN: 10KEJPM6504N1Z7</span>
-          <span>MSME: UDYAM-KR-03-0640514</span>
+          <span data-content-id="gstinNumber">GSTIN: 10KEJPM6504N1Z7</span>
+          <span data-content-id="msmeNumber">MSME: UDYAM-KR-03-0640514</span>
         </div>
       </div>
       <div class="simple-footer-col simple-footer-contact">
         <h4>Contact</h4>
-        <a href="mailto:info@workden.online"><i class="fas fa-envelope"></i> info@workden.online</a>
-        <a href="mailto:support@workden.online"><i class="fas fa-headset"></i> support@workden.online</a>
-        <p><i class="fas fa-location-dot"></i> Ashok Nagar, Bangalore – 560001</p>
-        <p><i class="fas fa-location-dot"></i> Parsuram Pur, Motihari – 845416</p>
+        <a href="mailto:info@workden.online" data-content-id="emailGeneral"><i class="fas fa-envelope"></i> info@workden.online</a>
+        <a href="mailto:support@workden.online" data-content-id="emailSupport"><i class="fas fa-headset"></i> support@workden.online</a>
+        <p data-content-id="address1"><i class="fas fa-location-dot"></i> Ashok Nagar, Bangalore – 560001</p>
+        <p data-content-id="address2"><i class="fas fa-location-dot"></i> Parsuram Pur, Motihari – 845416</p>
         <div class="simple-socials">
-          <a href="https://www.facebook.com/people/Workden-India/61583820256534/" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-          <a href="https://www.instagram.com/workden_wfh" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-          <a href="https://www.linkedin.com/in/workden-india-315391383/" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-          <a href="https://t.me/+f_s3cLM1WwYxNjE1" target="_blank" aria-label="Telegram"><i class="fab fa-telegram-plane"></i></a>
+          <a href="https://www.facebook.com/people/Workden-India/61583820256534/" target="_blank" aria-label="Facebook" data-content-href="facebookUrl"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://www.instagram.com/workden_wfh" target="_blank" aria-label="Instagram" data-content-href="instagramUrl"><i class="fab fa-instagram"></i></a>
+          <a href="https://www.linkedin.com/in/workden-india-315391383/" target="_blank" aria-label="LinkedIn" data-content-href="linkedinUrl"><i class="fab fa-linkedin-in"></i></a>
+          <a href="https://t.me/+f_s3cLM1WwYxNjE1" target="_blank" aria-label="Telegram" data-content-href="telegramUrl"><i class="fab fa-telegram-plane"></i></a>
         </div>
       </div>
     </div>
     <div class="simple-footer-bottom">
-      <span>© 2026 WorkDen. All rights reserved.</span>
+      <span data-content-id="copyright">© 2026 WorkDen. All rights reserved.</span>
       <span>Structured Digital Task Platform</span>
     </div>
   </div>
@@ -748,21 +748,21 @@ body{
 
 <!-- VERSION MODAL -->
 <div id="verOverlay" onclick="closeVersionModal(event)" style="display:none;position:fixed;inset:0;z-index:9999;background:rgba(10,20,40,0.72);backdrop-filter:blur(4px);align-items:center;justify-content:center;">
-  <div class="ver-modal-card" style="background:white;border-radius:20px;padding:40px 32px 32px;max-width:440px;width:92%;box-shadow:0 24px 80px rgba(0,0,0,0.22);text-align:center;position:relative;">
+  <div style="background:white;border-radius:20px;padding:40px 32px 32px;max-width:440px;width:92%;box-shadow:0 24px 80px rgba(0,0,0,0.22);text-align:center;position:relative;" class="ver-modal-card">
     <button onclick="document.getElementById('verOverlay').style.display='none'" style="position:absolute;top:14px;right:18px;background:#f1f5f9;border:none;cursor:pointer;width:32px;height:32px;border-radius:50%;font-size:1.1rem;color:#64748b;">✕</button>
     <div style="display:inline-flex;align-items:center;gap:6px;background:#eff6ff;color:#1d4ed8;font-size:0.72rem;font-weight:700;text-transform:uppercase;padding:5px 12px;border-radius:20px;margin-bottom:14px;">Select Version</div>
-    <div style="font-size:1.35rem;font-weight:800;color:#0f172a;margin-bottom:8px;">Choose Your Login Portal</div>
-    <div style="font-size:0.9rem;color:#64748b;margin-bottom:28px;line-height:1.5;">WorkDen ke do version available hain. Apna version select karein.</div>
+    <div style="font-size:1.35rem;font-weight:800;color:#0f172a;margin-bottom:8px;" data-content-id="modal_title">Choose Your Login Portal</div>
+    <div style="font-size:0.9rem;color:#64748b;margin-bottom:28px;line-height:1.5;" data-content-id="modal_desc">WorkDen ke do version available hain. Apna version select karein.</div>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
-      <a href="https://workden-4.base44.app" target="_blank" style="border:2px solid #bfdbfe;border-radius:14px;padding:22px 16px 18px;text-decoration:none;display:flex;flex-direction:column;align-items:center;gap:8px;">
+      <a href="https://workden-4.base44.app" target="_blank" style="border:2px solid #bfdbfe;border-radius:14px;padding:22px 16px 18px;text-decoration:none;display:flex;flex-direction:column;align-items:center;gap:8px;" data-content-href="v1_url">
         <div style="font-size:2rem;font-weight:900;color:#1d4ed8;">4.0</div>
-        <div style="font-size:0.8rem;font-weight:700;color:#475569;">WorkDen 4.0</div>
+        <div style="font-size:0.8rem;font-weight:700;color:#475569;" data-content-id="v1_label">WorkDen 4.0</div>
         <div style="font-size:0.75rem;color:#94a3b8;">Latest version — upgraded features</div>
         <div style="margin-top:6px;padding:7px 18px;border-radius:8px;font-size:0.8rem;font-weight:700;background:#1d4ed8;color:white;width:100%;box-sizing:border-box;">Login 4.0</div>
       </a>
-      <a href="https://workden-3.base44.app" target="_blank" style="border:2px solid #ddd6fe;border-radius:14px;padding:22px 16px 18px;text-decoration:none;display:flex;flex-direction:column;align-items:center;gap:8px;">
+      <a href="https://workden-3.base44.app" target="_blank" style="border:2px solid #ddd6fe;border-radius:14px;padding:22px 16px 18px;text-decoration:none;display:flex;flex-direction:column;align-items:center;gap:8px;" data-content-href="v2_url">
         <div style="font-size:2rem;font-weight:900;color:#7c3aed;">3.0</div>
-        <div style="font-size:0.8rem;font-weight:700;color:#475569;">WorkDen 3.0</div>
+        <div style="font-size:0.8rem;font-weight:700;color:#475569;" data-content-id="v2_label">WorkDen 3.0</div>
         <div style="font-size:0.75rem;color:#94a3b8;">Previous version — stable interface</div>
         <div style="margin-top:6px;padding:7px 18px;border-radius:8px;font-size:0.8rem;font-weight:700;background:#7c3aed;color:white;width:100%;box-sizing:border-box;">Login 3.0</div>
       </a>
@@ -771,26 +771,6 @@ body{
 </div>
 
 <script>
-/* ── Navbar scroll ── */
-window.addEventListener('scroll',()=>{
-  document.getElementById('navbar').classList.toggle('scrolled',window.scrollY>20);
-});
-function toggleNav(){
-  document.getElementById('mobNav').classList.toggle('open');
-}
-function showVersionModal(e){
-  if(e)e.preventDefault();
-  document.getElementById("verOverlay").style.display="flex";
-}
-function closeVersionModal(e){
-  if(e.target===document.getElementById("verOverlay")){
-    document.getElementById("verOverlay").style.display="none";
-  }
-}
-
-/* ── Toggle switch ── */
-function switchPlan(type){
-  const pill = document.getElementById('togglePill');
   const btnPaid = document.getElementById('btnPaid');
   const btnFree = document.getElementById('btnFree');
   const card1 = document.getElementById('card-paid-1');

@@ -794,8 +794,8 @@ body{
     </ul>
 
     <div class="wd-ctas">
-      <a href="#" onclick="showVersionModal(event)" class="wd-btn-ghost">User Login</a>
-      <a href="https://workdenteam2.base44.app/" class="wd-btn-primary">Employee Login</a>
+      <a href="#" onclick="showVersionModal(event)" class="wd-btn-ghost" data-content-id="nav_userLoginBtn">User Login</a>
+      <a href="https://workdenteam2.base44.app/" class="wd-btn-primary" data-content-id="nav_employeeLoginBtn" data-content-href="nav_employeeLoginUrl">Employee Login</a>
     </div>
 
     <button class="wd-ham" onclick="wdToggle()"><i class="fas fa-bars"></i></button>
@@ -812,8 +812,8 @@ body{
   <a href="testimonials.html">Testimonials</a>
   <a href="blogs.html">Blogs</a>
   <div class="wd-mob-ctas">
-    <a href="#" onclick="showVersionModal(event)" class="wd-btn-ghost">User Login</a>
-    <a href="https://workdenteam2.base44.app/" class="wd-btn-primary">Employee Login</a>
+    <a href="#" onclick="showVersionModal(event)" class="wd-btn-ghost" data-content-id="nav_userLoginBtn">User Login</a>
+    <a href="https://workdenteam2.base44.app/" class="wd-btn-primary" data-content-id="nav_employeeLoginBtn" data-content-href="nav_employeeLoginUrl">Employee Login</a>
   </div>
 </div>
 
@@ -822,18 +822,18 @@ body{
   <div style="background:white;border-radius:22px;padding:40px 32px 32px;max-width:440px;width:92%;box-shadow:0 24px 80px rgba(0,0,0,0.22);text-align:center;position:relative;animation:popIn 0.24s ease;">
     <button onclick="document.getElementById('verOverlay').style.display='none'" style="position:absolute;top:14px;right:18px;background:#f1f5f9;border:none;cursor:pointer;width:34px;height:34px;border-radius:50%;font-size:1.1rem;color:#64748b;">✕</button>
     <div style="display:inline-flex;align-items:center;gap:6px;background:#faf5ff;color:#6D28D9;font-size:0.72rem;font-weight:800;text-transform:uppercase;padding:5px 12px;border-radius:20px;margin-bottom:14px;">Select Version</div>
-    <div style="font-size:1.35rem;font-weight:900;color:#0f172a;margin-bottom:8px;">Choose Your Login Portal</div>
-    <div style="font-size:0.9rem;color:#64748b;margin-bottom:28px;line-height:1.5;">WorkDen ke do version available hain. Apna version select karein.</div>
+    <div style="font-size:1.35rem;font-weight:900;color:#0f172a;margin-bottom:8px;" data-content-id="modal_title">Choose Your Login Portal</div>
+    <div style="font-size:0.9rem;color:#64748b;margin-bottom:28px;line-height:1.5;" data-content-id="modal_desc">WorkDen ke do version available hain. Apna version select karein.</div>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
-      <a href="https://workden-4.base44.app" target="_blank" style="border:2px solid #e9d5ff;border-radius:16px;padding:22px 16px 18px;text-decoration:none;display:flex;flex-direction:column;align-items:center;gap:8px;transition:.2s;">
+      <a href="https://workden-4.base44.app" target="_blank" style="border:2px solid #e9d5ff;border-radius:16px;padding:22px 16px 18px;text-decoration:none;display:flex;flex-direction:column;align-items:center;gap:8px;transition:.2s;" data-content-href="v1_url">
         <div style="font-size:2rem;font-weight:900;color:#6D28D9;">4.0</div>
-        <div style="font-size:0.8rem;font-weight:800;color:#475569;">WorkDen 4.0</div>
+        <div style="font-size:0.8rem;font-weight:800;color:#475569;" data-content-id="v1_label">WorkDen 4.0</div>
         <div style="font-size:0.75rem;color:#94a3b8;">Latest version — upgraded features</div>
         <div style="margin-top:6px;padding:8px 18px;border-radius:999px;font-size:0.8rem;font-weight:800;background:linear-gradient(135deg,#6D28D9,#A855F7);color:white;width:100%;box-sizing:border-box;">Login 4.0</div>
       </a>
-      <a href="https://workden-3.base44.app" target="_blank" style="border:2px solid #dbeafe;border-radius:16px;padding:22px 16px 18px;text-decoration:none;display:flex;flex-direction:column;align-items:center;gap:8px;transition:.2s;">
+      <a href="https://workden-3.base44.app" target="_blank" style="border:2px solid #dbeafe;border-radius:16px;padding:22px 16px 18px;text-decoration:none;display:flex;flex-direction:column;align-items:center;gap:8px;transition:.2s;" data-content-href="v2_url">
         <div style="font-size:2rem;font-weight:900;color:#1d4ed8;">3.0</div>
-        <div style="font-size:0.8rem;font-weight:800;color:#475569;">WorkDen 3.0</div>
+        <div style="font-size:0.8rem;font-weight:800;color:#475569;" data-content-id="v2_label">WorkDen 3.0</div>
         <div style="font-size:0.75rem;color:#94a3b8;">Previous version — stable interface</div>
         <div style="margin-top:6px;padding:8px 18px;border-radius:999px;font-size:0.8rem;font-weight:800;background:#1d4ed8;color:white;width:100%;box-sizing:border-box;">Login 3.0</div>
       </a>
@@ -873,9 +873,9 @@ document.body.addEventListener('input', function(e){
 <div id="mainMenu">
   <div class="menu-header">
     <div style="font-size:2rem;margin-bottom:8px;">💼</div>
-    <h1>WorkDen Demo Tasks</h1>
-    <p>Choose your skill and try a demo task</p>
-    <div class="menu-badge">🔴 LIVE DEMO – Try All Tasks</div>
+    <h1 data-content-id="pageHeroTitle">WorkDen Demo Tasks</h1>
+    <p data-content-id="pageHeroDesc">Choose your skill and try a demo task</p>
+    <div class="menu-badge" data-content-id="demoBadge">🔴 LIVE DEMO – Try All Tasks</div>
   </div>
   <div class="task-cards" id="taskCards"></div>
 </div>
@@ -1847,11 +1847,11 @@ window.addEventListener('scroll',()=>{const nb=document.getElementById('wdNav');
           <img src="workden-logo.png" alt="WorkDen">
           <span>WorkDen</span>
         </div>
-        <p>A verified digital task platform delivering structured online work opportunities with transparency, secure workflow, and compliance. GSTIN & MSME registered.</p>
+        <p data-content-id="brandDesc">A verified digital task platform delivering structured online work opportunities with transparency, secure workflow, and compliance. GSTIN & MSME registered.</p>
         <div class="simple-footer-badges">
           <span><i class="fas fa-circle-check"></i> GSTIN Verified</span>
           <span><i class="fas fa-circle-check"></i> MSME Registered</span>
-          <span><i class="fas fa-circle-check"></i> Est. 2024</span>
+          <span data-content-id="tagline"><i class="fas fa-circle-check"></i> Est. 2024</span>
         </div>
       </div>
 
@@ -1874,31 +1874,32 @@ window.addEventListener('scroll',()=>{const nb=document.getElementById('wdNav');
         <a href="refund.html">Refund Policy</a>
         <div class="simple-footer-verify">
           <strong>Business Verification</strong>
-          <span>GSTIN: 10KEJPM6504N1Z7</span>
-          <span>MSME: UDYAM-KR-03-0640514</span>
+          <span data-content-id="gstinNumber">GSTIN: 10KEJPM6504N1Z7</span>
+          <span data-content-id="msmeNumber">MSME: UDYAM-KR-03-0640514</span>
         </div>
       </div>
 
       <div class="simple-footer-col simple-footer-contact">
         <h4>Contact</h4>
-        <a href="mailto:info@workden.online"><i class="fas fa-envelope"></i> info@workden.online</a>
-        <a href="mailto:support@workden.online"><i class="fas fa-headset"></i> support@workden.online</a>
-        <p><i class="fas fa-location-dot"></i> Ashok Nagar, Bangalore – 560001</p>
-        <p><i class="fas fa-location-dot"></i> Parsuram Pur, Motihari – 845416</p>
+        <a href="mailto:info@workden.online" data-content-id="emailGeneral"><i class="fas fa-envelope"></i> info@workden.online</a>
+        <a href="mailto:support@workden.online" data-content-id="emailSupport"><i class="fas fa-headset"></i> support@workden.online</a>
+        <p data-content-id="address1"><i class="fas fa-location-dot"></i> Ashok Nagar, Bangalore – 560001</p>
+        <p data-content-id="address2"><i class="fas fa-location-dot"></i> Parsuram Pur, Motihari – 845416</p>
         <div class="simple-socials">
-          <a href="https://www.facebook.com/people/Workden-India/61583820256534/" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-          <a href="https://www.instagram.com/workden_wfh" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-          <a href="https://www.linkedin.com/in/workden-india-315391383/" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-          <a href="https://t.me/+f_s3cLM1WwYxNjE1" target="_blank" aria-label="Telegram"><i class="fab fa-telegram-plane"></i></a>
+          <a href="https://www.facebook.com/people/Workden-India/61583820256534/" target="_blank" aria-label="Facebook" data-content-href="facebookUrl"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://www.instagram.com/workden_wfh" target="_blank" aria-label="Instagram" data-content-href="instagramUrl"><i class="fab fa-instagram"></i></a>
+          <a href="https://www.linkedin.com/in/workden-india-315391383/" target="_blank" aria-label="LinkedIn" data-content-href="linkedinUrl"><i class="fab fa-linkedin-in"></i></a>
+          <a href="https://t.me/+f_s3cLM1WwYxNjE1" target="_blank" aria-label="Telegram" data-content-href="telegramUrl"><i class="fab fa-telegram-plane"></i></a>
         </div>
       </div>
     </div>
 
     <div class="simple-footer-bottom">
-      <span>© 2026 WorkDen. All rights reserved.</span>
+      <span data-content-id="copyright">© 2026 WorkDen. All rights reserved.</span>
       <span>Structured Digital Task Platform</span>
     </div>
   </div>
 </footer>
+<script src="content-sync.js"></script>
 </body>
 </html>

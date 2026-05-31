@@ -276,8 +276,8 @@ body::before{
       <li><a href="testimonials.html">Testimonials</a></li><li><a href="blogs.html">Blogs</a></li>
     </ul>
     <div class="nav-ctas">
-      <a href="#" onclick="showVersionModal(event)" class="btn btn-ghost">User Login</a>
-      <a href="https://workdenteam2.base44.app/" class="btn btn-primary">Employee Login</a>
+      <a href="#" onclick="showVersionModal(event)" class="btn btn-ghost" data-content-id="nav_userLoginBtn">User Login</a>
+      <a href="https://workdenteam2.base44.app/" class="btn btn-primary" data-content-id="nav_employeeLoginBtn" data-content-href="nav_employeeLoginUrl">Employee Login</a>
     </div>
     <button class="hamburger" onclick="toggleNav()"><i class="fas fa-bars"></i></button>
   </div>
@@ -287,16 +287,16 @@ body::before{
   <a href="index.html">Home</a><a href="about.html">About Us</a><a href="projects.html" class="active">Projects</a>
   <a href="plans.html">Plans</a><a href="demo-task.html">Demo Task</a><a href="testimonials.html">Testimonials</a><a href="blogs.html">Blogs</a>
   <div class="mobile-nav-ctas" style="margin-top:12px;">
-    <a href="#" onclick="showVersionModal(event)" class="btn btn-ghost">User Login</a>
-    <a href="https://workdenteam2.base44.app/" class="btn btn-primary">Employee Login</a>
+    <a href="#" onclick="showVersionModal(event)" class="btn btn-ghost" data-content-id="nav_userLoginBtn">User Login</a>
+    <a href="https://workdenteam2.base44.app/" class="btn btn-primary" data-content-id="nav_employeeLoginBtn" data-content-href="nav_employeeLoginUrl">Employee Login</a>
   </div>
 </div>
 
 <div class="page-hero">
   <div class="page-hero-inner">
     <span class="section-label"><i class="fas fa-briefcase"></i> Work Categories</span>
-    <h1>Available Projects</h1>
-    <p>All tasks have clear step-by-step instructions inside the portal. No prior experience needed for most categories.</p>
+    <h1 data-content-id="pageHeroTitle">Available Projects</h1>
+    <p data-content-id="pageHeroDesc">All tasks have clear step-by-step instructions inside the portal. No prior experience needed for most categories.</p>
   </div>
 </div>
 
@@ -308,8 +308,8 @@ body::before{
         <div class="proj-card-top">
           <div class="proj-icon-wrap" style="background:#eff6ff;color:var(--brand);"><i class="fas fa-file-pen"></i></div>
           <div class="proj-badge-row"><span class="badge badge-blue">Most Popular</span><span class="badge badge-green">Beginner</span></div>
-          <div class="proj-title">Form Filling</div>
-          <p class="proj-desc">Fill structured online forms with given instructions. Data is pre-provided — you simply enter it accurately into the designated fields in the portal.</p>
+          <div class="proj-title" data-content-id="proj1Title">Form Filling</div>
+          <p class="proj-desc" data-content-id="proj1Desc">Fill structured online forms with given instructions. Data is pre-provided — you simply enter it accurately into the designated fields in the portal.</p>
         </div>
         <div class="proj-card-footer">
           <span class="proj-level"><i class="fas fa-signal"></i> Easy · No Experience Needed</span>
@@ -321,8 +321,8 @@ body::before{
         <div class="proj-card-top">
           <div class="proj-icon-wrap" style="background:#f5f3ff;color:#7c3aed;"><i class="fas fa-table"></i></div>
           <div class="proj-badge-row"><span class="badge badge-blue">High Volume</span><span class="badge badge-green">Beginner</span></div>
-          <div class="proj-title">Data Entry</div>
-          <p class="proj-desc">Enter structured spreadsheet data into a secure database. Straightforward copy-and-enter tasks with clear reference materials provided in the dashboard.</p>
+          <div class="proj-title" data-content-id="proj2Title">Data Entry</div>
+          <p class="proj-desc" data-content-id="proj2Desc">Enter structured spreadsheet data into a secure database. Straightforward copy-and-enter tasks with clear reference materials provided in the dashboard.</p>
         </div>
         <div class="proj-card-footer">
           <span class="proj-level"><i class="fas fa-signal"></i> Easy · Basic Typing</span>
@@ -334,8 +334,8 @@ body::before{
         <div class="proj-card-top">
           <div class="proj-icon-wrap" style="background:#f0fdf4;color:var(--green);"><i class="fas fa-envelope"></i></div>
           <div class="proj-badge-row"><span class="badge badge-amber">Intermediate</span></div>
-          <div class="proj-title">Email Support</div>
-          <p class="proj-desc">Handle basic customer email queries using predefined templates. Templates are provided — you select and send the appropriate response to each query.</p>
+          <div class="proj-title" data-content-id="proj3Title">Email Support</div>
+          <p class="proj-desc" data-content-id="proj3Desc">Handle basic customer email queries using predefined templates. Templates are provided — you select and send the appropriate response to each query.</p>
         </div>
         <div class="proj-card-footer">
           <span class="proj-level"><i class="fas fa-signal"></i> Medium · Template Based</span>
@@ -347,8 +347,8 @@ body::before{
         <div class="proj-card-top">
           <div class="proj-icon-wrap" style="background:#fff7ed;color:#ea580c;"><i class="fas fa-message"></i></div>
           <div class="proj-badge-row"><span class="badge badge-amber">Intermediate</span></div>
-          <div class="proj-title">Chat Support</div>
-          <p class="proj-desc">Respond to live chat queries from the dashboard using guided templates. Quick responses with clear guidelines provided for each type of customer query.</p>
+          <div class="proj-title" data-content-id="proj4Title">Chat Support</div>
+          <p class="proj-desc" data-content-id="proj4Desc">Respond to live chat queries from the dashboard using guided templates. Quick responses with clear guidelines provided for each type of customer query.</p>
         </div>
         <div class="proj-card-footer">
           <span class="proj-level"><i class="fas fa-signal"></i> Medium · Communication</span>
@@ -360,8 +360,8 @@ body::before{
         <div class="proj-card-top">
           <div class="proj-icon-wrap" style="background:#fdf4ff;color:#9333ea;"><i class="fas fa-spell-check"></i></div>
           <div class="proj-badge-row"><span class="badge badge-amber">Intermediate</span></div>
-          <div class="proj-title">Grammar Correction</div>
-          <p class="proj-desc">Edit and correct short text documents for grammatical errors. Clear error indicators are shown in the portal — you identify and fix what's highlighted.</p>
+          <div class="proj-title" data-content-id="proj5Title">Grammar Correction</div>
+          <p class="proj-desc" data-content-id="proj5Desc">Edit and correct short text documents for grammatical errors. Clear error indicators are shown in the portal — you identify and fix what's highlighted.</p>
         </div>
         <div class="proj-card-footer">
           <span class="proj-level"><i class="fas fa-signal"></i> Medium · English Knowledge</span>
@@ -373,8 +373,8 @@ body::before{
         <div class="proj-card-top">
           <div class="proj-icon-wrap" style="background:#f0f9ff;color:#0284c7;"><i class="fas fa-keyboard"></i></div>
           <div class="proj-badge-row"><span class="badge badge-blue">Easy Start</span><span class="badge badge-green">Beginner</span></div>
-          <div class="proj-title">Typing Tasks</div>
-          <p class="proj-desc">Type the same text shown in the dashboard into the input box. Simple and straightforward — perfect for anyone with basic typing skills and a phone or laptop.</p>
+          <div class="proj-title" data-content-id="proj6Title">Typing Tasks</div>
+          <p class="proj-desc" data-content-id="proj6Desc">Type the same text shown in the dashboard into the input box. Simple and straightforward — perfect for anyone with basic typing skills and a phone or laptop.</p>
         </div>
         <div class="proj-card-footer">
           <span class="proj-level"><i class="fas fa-signal"></i> Easy · Basic Typing</span>
@@ -386,8 +386,8 @@ body::before{
         <div class="proj-card-top">
           <div class="proj-icon-wrap" style="background:#fefce8;color:#ca8a04;"><i class="fas fa-lock"></i></div>
           <div class="proj-badge-row"><span class="badge badge-blue">Entry Level</span><span class="badge badge-green">No Experience</span></div>
-          <div class="proj-title">Captcha Filling</div>
-          <p class="proj-desc">Enter captcha codes displayed in the dashboard into the designated input field. Simple, repeatable task — ideal for those just starting with online work.</p>
+          <div class="proj-title" data-content-id="proj7Title">Captcha Filling</div>
+          <p class="proj-desc" data-content-id="proj7Desc">Enter captcha codes displayed in the dashboard into the designated input field. Simple, repeatable task — ideal for those just starting with online work.</p>
         </div>
         <div class="proj-card-footer">
           <span class="proj-level"><i class="fas fa-signal"></i> Very Easy · Anyone</span>
@@ -398,8 +398,8 @@ body::before{
     </div>
 
     <div class="bottom-cta">
-      <h3>Not sure where to start?</h3>
-      <p>Try our free demo task — experience the portal before making any decisions. No payment needed.</p>
+      <h3 data-content-id="ctaTitle">Not sure where to start?</h3>
+      <p data-content-id="ctaDesc">Try our free demo task — experience the portal before making any decisions. No payment needed.</p>
       <div class="bottom-cta-btns">
         <a href="demo-task.html" class="btn btn-gold btn-lg"><i class="fas fa-play"></i> Try Free Demo</a>
         <a href="#" onclick="showVersionModal(event)" class="btn" style="background:rgba(255,255,255,0.1);color:white;border:1.5px solid rgba(255,255,255,0.3);">User Login <i class="fas fa-arrow-right"></i></a>
@@ -417,11 +417,11 @@ body::before{
           <img src="workden-logo.png" alt="WorkDen">
           <span>WorkDen</span>
         </div>
-        <p>A verified digital task platform delivering structured online work opportunities with transparency, secure workflow, and compliance. GSTIN & MSME registered.</p>
+        <p data-content-id="brandDesc">A verified digital task platform delivering structured online work opportunities with transparency, secure workflow, and compliance. GSTIN & MSME registered.</p>
         <div class="simple-footer-badges">
           <span><i class="fas fa-circle-check"></i> GSTIN Verified</span>
           <span><i class="fas fa-circle-check"></i> MSME Registered</span>
-          <span><i class="fas fa-circle-check"></i> Est. 2024</span>
+          <span data-content-id="tagline"><i class="fas fa-circle-check"></i> Est. 2024</span>
         </div>
       </div>
 
@@ -444,28 +444,28 @@ body::before{
         <a href="refund.html">Refund Policy</a>
         <div class="simple-footer-verify">
           <strong>Business Verification</strong>
-          <span>GSTIN: 10KEJPM6504N1Z7</span>
-          <span>MSME: UDYAM-KR-03-0640514</span>
+          <span data-content-id="gstinNumber">GSTIN: 10KEJPM6504N1Z7</span>
+          <span data-content-id="msmeNumber">MSME: UDYAM-KR-03-0640514</span>
         </div>
       </div>
 
       <div class="simple-footer-col simple-footer-contact">
         <h4>Contact</h4>
-        <a href="mailto:info@workden.online"><i class="fas fa-envelope"></i> info@workden.online</a>
-        <a href="mailto:support@workden.online"><i class="fas fa-headset"></i> support@workden.online</a>
-        <p><i class="fas fa-location-dot"></i> Ashok Nagar, Bangalore – 560001</p>
-        <p><i class="fas fa-location-dot"></i> Parsuram Pur, Motihari – 845416</p>
+        <a href="mailto:info@workden.online" data-content-id="emailGeneral"><i class="fas fa-envelope"></i> info@workden.online</a>
+        <a href="mailto:support@workden.online" data-content-id="emailSupport"><i class="fas fa-headset"></i> support@workden.online</a>
+        <p data-content-id="address1"><i class="fas fa-location-dot"></i> Ashok Nagar, Bangalore – 560001</p>
+        <p data-content-id="address2"><i class="fas fa-location-dot"></i> Parsuram Pur, Motihari – 845416</p>
         <div class="simple-socials">
-          <a href="https://www.facebook.com/people/Workden-India/61583820256534/" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-          <a href="https://www.instagram.com/workden_wfh" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-          <a href="https://www.linkedin.com/in/workden-india-315391383/" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-          <a href="https://t.me/+f_s3cLM1WwYxNjE1" target="_blank" aria-label="Telegram"><i class="fab fa-telegram-plane"></i></a>
+          <a href="https://www.facebook.com/people/Workden-India/61583820256534/" target="_blank" aria-label="Facebook" data-content-href="facebookUrl"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://www.instagram.com/workden_wfh" target="_blank" aria-label="Instagram" data-content-href="instagramUrl"><i class="fab fa-instagram"></i></a>
+          <a href="https://www.linkedin.com/in/workden-india-315391383/" target="_blank" aria-label="LinkedIn" data-content-href="linkedinUrl"><i class="fab fa-linkedin-in"></i></a>
+          <a href="https://t.me/+f_s3cLM1WwYxNjE1" target="_blank" aria-label="Telegram" data-content-href="telegramUrl"><i class="fab fa-telegram-plane"></i></a>
         </div>
       </div>
     </div>
 
     <div class="simple-footer-bottom">
-      <span>© 2026 WorkDen. All rights reserved.</span>
+      <span data-content-id="copyright">© 2026 WorkDen. All rights reserved.</span>
       <span>Structured Digital Task Platform</span>
     </div>
   </div>
@@ -480,18 +480,18 @@ function toggleNav(){document.getElementById('mobNav').classList.toggle('open');
   <div style="background:white;border-radius:20px;padding:40px 32px 32px;max-width:440px;width:92%;box-shadow:0 24px 80px rgba(0,0,0,0.22);text-align:center;position:relative;">
     <button onclick="document.getElementById('verOverlay').style.display='none'" style="position:absolute;top:14px;right:18px;background:#f1f5f9;border:none;cursor:pointer;width:32px;height:32px;border-radius:50%;font-size:1.1rem;color:#64748b;">✕</button>
     <div style="display:inline-flex;align-items:center;gap:6px;background:#eff6ff;color:#1d4ed8;font-size:0.72rem;font-weight:700;text-transform:uppercase;padding:5px 12px;border-radius:20px;margin-bottom:14px;">Select Version</div>
-    <div style="font-size:1.35rem;font-weight:800;color:#0f172a;margin-bottom:8px;">Choose Your Login Portal</div>
-    <div style="font-size:0.9rem;color:#64748b;margin-bottom:28px;line-height:1.5;">WorkDen ke do version available hain. Apna version select karein.</div>
+    <div style="font-size:1.35rem;font-weight:800;color:#0f172a;margin-bottom:8px;" data-content-id="modal_title">Choose Your Login Portal</div>
+    <div style="font-size:0.9rem;color:#64748b;margin-bottom:28px;line-height:1.5;" data-content-id="modal_desc">WorkDen ke do version available hain. Apna version select karein.</div>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
-      <a href="https://workden-4.base44.app" target="_blank" style="border:2px solid #bfdbfe;border-radius:14px;padding:22px 16px 18px;text-decoration:none;display:flex;flex-direction:column;align-items:center;gap:8px;">
+      <a href="https://workden-4.base44.app" target="_blank" style="border:2px solid #bfdbfe;border-radius:14px;padding:22px 16px 18px;text-decoration:none;display:flex;flex-direction:column;align-items:center;gap:8px;" data-content-href="v1_url">
         <div style="font-size:2rem;font-weight:900;color:#1d4ed8;">4.0</div>
-        <div style="font-size:0.8rem;font-weight:700;color:#475569;">WorkDen 4.0</div>
+        <div style="font-size:0.8rem;font-weight:700;color:#475569;" data-content-id="v1_label">WorkDen 4.0</div>
         <div style="font-size:0.75rem;color:#94a3b8;">Latest version — upgraded features</div>
         <div style="margin-top:6px;padding:7px 18px;border-radius:8px;font-size:0.8rem;font-weight:700;background:#1d4ed8;color:white;width:100%;box-sizing:border-box;">Login 4.0</div>
       </a>
-      <a href="https://workden-3.base44.app" target="_blank" style="border:2px solid #ddd6fe;border-radius:14px;padding:22px 16px 18px;text-decoration:none;display:flex;flex-direction:column;align-items:center;gap:8px;">
+      <a href="https://workden-3.base44.app" target="_blank" style="border:2px solid #ddd6fe;border-radius:14px;padding:22px 16px 18px;text-decoration:none;display:flex;flex-direction:column;align-items:center;gap:8px;" data-content-href="v2_url">
         <div style="font-size:2rem;font-weight:900;color:#7c3aed;">3.0</div>
-        <div style="font-size:0.8rem;font-weight:700;color:#475569;">WorkDen 3.0</div>
+        <div style="font-size:0.8rem;font-weight:700;color:#475569;" data-content-id="v2_label">WorkDen 3.0</div>
         <div style="font-size:0.75rem;color:#94a3b8;">Previous version — stable interface</div>
         <div style="margin-top:6px;padding:7px 18px;border-radius:8px;font-size:0.8rem;font-weight:700;background:#7c3aed;color:white;width:100%;box-sizing:border-box;">Login 3.0</div>
       </a>
@@ -534,6 +534,6 @@ function closeVersionModal(e){if(e.target===document.getElementById("verOverlay"
   });
 })();
 </script>
-
+<script src="content-sync.js"></script>
 </body>
 </html>
