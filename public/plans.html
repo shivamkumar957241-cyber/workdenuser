@@ -430,7 +430,9 @@ body{
 .value-mini span{color:rgba(255,255,255,.68);font-size:.8rem;line-height:1.55;}
 
 /* ===== FOOTER ===== */
+/* Simple real-website footer */
 .simple-footer{background:#0f172a!important;color:#cbd5e1!important;border-top:none!important;padding:0!important;overflow:hidden;position:relative;}
+.simple-footer::before{display:none!important;}
 .simple-footer-inner{max-width:1200px;margin:0 auto;padding:52px 28px 22px;}
 .simple-footer-top{display:grid;grid-template-columns:1.45fr .8fr .9fr 1.05fr;gap:34px;}
 .simple-footer-logo{display:flex;align-items:center;gap:10px;margin-bottom:14px;}
@@ -552,10 +554,7 @@ body{
     <div class="pricing-sparkles">
       <canvas id="sparkleCanvas"></canvas>
     </div>
-    <!-- Blue ellipse glow -->
-    <div class="pricing-ellipse"></div>
-    <!-- Radial glow -->
-    <div class="pricing-glow"></div>
+    </div>
 
     <!-- Header — matches <article className="text-center mb-6 pt-32 ..."> -->
     <div class="pricing-header">
