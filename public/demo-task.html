@@ -909,8 +909,8 @@ document.body.addEventListener('input', function(e){
 
         <!-- Headline -->
         <div class="space-y-3">
-          <h3 class="text-xl font-black text-white leading-tight">Official Candidate Practice Portal</h3>
-          <p class="text-xs text-slate-400 font-semibold leading-relaxed">
+          <h3 class="text-xl font-black text-white leading-tight" data-content-id="loginHeroTitle">Official Candidate Practice Portal</h3>
+          <p class="text-xs text-slate-400 font-semibold leading-relaxed" data-content-id="loginHeroDesc">
             Welcome to the WorkDen Demo Tasks workspace. Register or login to access your interactive mock task database and refine your digital skills.
           </p>
         </div>
@@ -922,8 +922,8 @@ document.body.addEventListener('input', function(e){
               <i class="fa-solid fa-keyboard"></i>
             </div>
             <div>
-              <h4 class="text-xs font-black text-white">Mock Practice Tasks</h4>
-              <p class="text-[10px] text-slate-400 font-semibold leading-relaxed mt-0.5">Gain hands-on experience with Typing, Form Filling, Data Entry, and Grammar tasks under real-time conditions.</p>
+              <h4 class="text-xs font-black text-white" data-content-id="loginFeat1Title">Mock Practice Tasks</h4>
+              <p class="text-[10px] text-slate-400 font-semibold leading-relaxed mt-0.5" data-content-id="loginFeat1Desc">Gain hands-on experience with Typing, Form Filling, Data Entry, and Grammar tasks under real-time conditions.</p>
             </div>
           </div>
 
@@ -932,8 +932,8 @@ document.body.addEventListener('input', function(e){
               <i class="fa-solid fa-chart-simple"></i>
             </div>
             <div>
-              <h4 class="text-xs font-black text-white">Live Accuracy Engine</h4>
-              <p class="text-[10px] text-slate-400 font-semibold leading-relaxed mt-0.5">Calculates precision ratings, spelling metrics, and character comparisons on-the-fly to show where you need to improve.</p>
+              <h4 class="text-xs font-black text-white" data-content-id="loginFeat2Title">Live Accuracy Engine</h4>
+              <p class="text-[10px] text-slate-400 font-semibold leading-relaxed mt-0.5" data-content-id="loginFeat2Desc">Calculates precision ratings, spelling metrics, and character comparisons on-the-fly to show where you need to improve.</p>
             </div>
           </div>
 
@@ -942,8 +942,8 @@ document.body.addEventListener('input', function(e){
               <i class="fa-solid fa-clock-rotate-left"></i>
             </div>
             <div>
-              <h4 class="text-xs font-black text-white">Sync History & Progress Drawer</h4>
-              <p class="text-[10px] text-slate-400 font-semibold leading-relaxed mt-0.5">All mock attempts are permanently saved on the cloud. Sync and track your accuracy history inside your personal dashboard drawer.</p>
+              <h4 class="text-xs font-black text-white" data-content-id="loginFeat3Title">Sync History & Progress Drawer</h4>
+              <p class="text-[10px] text-slate-400 font-semibold leading-relaxed mt-0.5" data-content-id="loginFeat3Desc">All mock attempts are permanently saved on the cloud. Sync and track your accuracy history inside your personal dashboard drawer.</p>
             </div>
           </div>
         </div>
@@ -956,11 +956,11 @@ document.body.addEventListener('input', function(e){
             <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
             <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
           </span>
-          <span class="text-[9px] font-extrabold uppercase tracking-widest text-emerald-400">Practice Node Online</span>
+          <span class="text-[9px] font-extrabold uppercase tracking-widest text-emerald-400" data-content-id="loginStatusText">Practice Node Online</span>
         </div>
         <div class="flex flex-wrap gap-x-4 gap-y-1.5 text-slate-500 text-[10px] font-bold">
-          <span class="text-slate-400"><i class="fa-solid fa-circle-check text-blue-400 mr-1"></i> 100% Free Demo</span>
-          <span class="text-slate-400"><i class="fa-solid fa-shield text-indigo-400 mr-1"></i> Secure Session</span>
+          <span class="text-slate-400"><i class="fa-solid fa-circle-check text-blue-400 mr-1"></i> <span data-content-id="loginBadge1">100% Free Demo</span></span>
+          <span class="text-slate-400"><i class="fa-solid fa-shield text-indigo-400 mr-1"></i> <span data-content-id="loginBadge2">Secure Session</span></span>
         </div>
       </div>
     </div>
@@ -973,9 +973,9 @@ document.body.addEventListener('input', function(e){
         <!-- Secure Header -->
         <div class="flex justify-between items-center border-b border-slate-100 pb-4">
           <h2 class="text-lg font-black text-slate-800 tracking-tight flex items-center gap-2">
-            <i class="fa-solid fa-shield-lock text-blue-600 text-sm"></i> Secure Portal Access
+            <i class="fa-solid fa-shield-lock text-blue-600 text-sm"></i> <span data-content-id="formCardTitle">Secure Portal Access</span>
           </h2>
-          <span class="text-[10px] font-extrabold text-slate-400 uppercase tracking-wider">AES-256 bits</span>
+          <span class="text-[10px] font-extrabold text-slate-400 uppercase tracking-wider" data-content-id="formCardEncryption">AES-256 bits</span>
         </div>
 
         <!-- Switcher Pills -->
@@ -1117,7 +1117,7 @@ document.body.addEventListener('input', function(e){
       <!-- Compliance Statement -->
       <div class="text-[9px] text-slate-400 font-bold text-center border-t border-slate-100 pt-4 flex items-center justify-center gap-1.5">
         <i class="fa-solid fa-lock text-[8px]"></i>
-        <span>WorkDen Data Protection Compliance System • ISO/IEC 27001 Certified Standards</span>
+        <span data-content-id="loginCompliance">WorkDen Data Protection Compliance System • ISO/IEC 27001 Certified Standards</span>
       </div>
     </div>
   </div>
