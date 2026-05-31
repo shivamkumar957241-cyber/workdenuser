@@ -804,11 +804,10 @@ body{
     </div>
 
     <div id="navUserProfile" style="display:none;" class="flex items-center gap-3 mr-4">
-      <div class="flex flex-col text-right">
-        <span class="text-xs font-black text-slate-800" id="navUserName">Welcome, Guest</span>
-        <span class="text-[10px] text-slate-500 font-bold" id="navUserEmail">email@gmail.com</span>
-      </div>
-      <button onclick="logoutDemoAccount()" class="bg-red-50 hover:bg-red-100 text-red-600 px-3 py-1.5 rounded-full text-xs font-black border border-red-200 transition-all">Logout</button>
+      <button onclick="toggleProfileDrawer()" class="flex items-center gap-2 bg-slate-50 hover:bg-slate-100 border border-slate-200 text-slate-700 px-3.5 py-2 rounded-xl text-xs font-black transition-all shadow-sm cursor-pointer">
+        <i class="fa-solid fa-bars text-blue-600"></i>
+        <span>Menu & History</span>
+      </button>
     </div>
 
     <button class="wd-ham" onclick="wdToggle()"><i class="fas fa-bars"></i></button>
@@ -830,11 +829,10 @@ body{
   </div>
 
   <div id="navUserProfileMobile" style="display:none;" class="flex-col gap-3 mt-4 p-4 bg-slate-50 border border-slate-200 rounded-2xl">
-    <div class="flex flex-col text-left">
-      <span class="text-xs font-black text-slate-800" id="navUserNameMobile">Welcome, Guest</span>
-      <span class="text-[10px] text-slate-500 font-bold mt-0.5" id="navUserEmailMobile">email@gmail.com</span>
-    </div>
-    <button onclick="logoutDemoAccount()" class="w-full bg-red-600 hover:bg-red-500 text-white py-2 rounded-xl text-xs font-black transition-all">Logout</button>
+    <button onclick="toggleProfileDrawer(); wdToggle();" class="w-full flex items-center justify-center gap-2 bg-slate-100 hover:bg-slate-200 border border-slate-300 text-slate-700 py-2.5 rounded-xl text-xs font-black transition-all cursor-pointer">
+      <i class="fa-solid fa-bars text-blue-600"></i>
+      <span>Menu & History</span>
+    </button>
   </div>
 </div>
 
@@ -912,9 +910,9 @@ document.body.addEventListener('input', function(e){
 
         <!-- Headline -->
         <div class="space-y-3">
-          <h3 class="text-xl font-black text-white leading-tight">Official Candidate Training System</h3>
+          <h3 class="text-xl font-black text-white leading-tight">Official Candidate Practice Portal</h3>
           <p class="text-xs text-slate-400 font-semibold leading-relaxed">
-            Welcome to the WorkDen secure training workspace. Please complete mock registration to initialize your dedicated practice database.
+            Welcome to the WorkDen Demo Tasks workspace. Register or login to access your interactive mock task database and refine your digital skills.
           </p>
         </div>
 
@@ -922,31 +920,31 @@ document.body.addEventListener('input', function(e){
         <div class="space-y-4 pt-2">
           <div class="flex items-start gap-3">
             <div class="w-7 h-7 rounded-lg bg-blue-500/20 text-blue-400 flex items-center justify-center shrink-0 mt-0.5 text-xs">
-              <i class="fa-solid fa-chart-line"></i>
+              <i class="fa-solid fa-keyboard"></i>
             </div>
             <div>
-              <h4 class="text-xs font-black text-white">Real-Time Metrics Engine</h4>
-              <p class="text-[10px] text-slate-400 font-semibold leading-relaxed mt-0.5">Calculates precision matching percentage, words per minute (WPM), and formatting accuracy on-the-fly.</p>
+              <h4 class="text-xs font-black text-white">Mock Practice Tasks</h4>
+              <p class="text-[10px] text-slate-400 font-semibold leading-relaxed mt-0.5">Gain hands-on experience with Typing, Form Filling, Data Entry, and Grammar tasks under real-time conditions.</p>
             </div>
           </div>
 
           <div class="flex items-start gap-3">
             <div class="w-7 h-7 rounded-lg bg-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0 mt-0.5 text-xs">
-              <i class="fa-solid fa-cloud-arrow-up"></i>
+              <i class="fa-solid fa-chart-simple"></i>
             </div>
             <div>
-              <h4 class="text-xs font-black text-white">Permanent Progress Sync</h4>
-              <p class="text-[10px] text-slate-400 font-semibold leading-relaxed mt-0.5">All practice runs are permanently stored on cloud server. View history logs and speed growth metrics anytime.</p>
+              <h4 class="text-xs font-black text-white">Live Accuracy Engine</h4>
+              <p class="text-[10px] text-slate-400 font-semibold leading-relaxed mt-0.5">Calculates precision ratings, spelling metrics, and character comparisons on-the-fly to show where you need to improve.</p>
             </div>
           </div>
 
           <div class="flex items-start gap-3">
             <div class="w-7 h-7 rounded-lg bg-purple-500/20 text-purple-400 flex items-center justify-center shrink-0 mt-0.5 text-xs">
-              <i class="fa-solid fa-award"></i>
+              <i class="fa-solid fa-clock-rotate-left"></i>
             </div>
             <div>
-              <h4 class="text-xs font-black text-white">Live Qualification Check</h4>
-              <p class="text-[10px] text-slate-400 font-semibold leading-relaxed mt-0.5">Reach 70%+ accuracy in practice tasks to automatically pre-qualify for verified paid remote assignments.</p>
+              <h4 class="text-xs font-black text-white">Sync History & Progress Drawer</h4>
+              <p class="text-[10px] text-slate-400 font-semibold leading-relaxed mt-0.5">All mock attempts are permanently saved on the cloud. Sync and track your accuracy history inside your personal dashboard drawer.</p>
             </div>
           </div>
         </div>
@@ -959,11 +957,11 @@ document.body.addEventListener('input', function(e){
             <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
             <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
           </span>
-          <span class="text-[9px] font-extrabold uppercase tracking-widest text-emerald-400">Secure Live Node Online</span>
+          <span class="text-[9px] font-extrabold uppercase tracking-widest text-emerald-400">Practice Node Online</span>
         </div>
         <div class="flex flex-wrap gap-x-4 gap-y-1.5 text-slate-500 text-[10px] font-bold">
-          <span class="text-slate-400"><i class="fa-solid fa-shield-halved text-blue-400 mr-1"></i> SSL Protected</span>
-          <span class="text-slate-400"><i class="fa-solid fa-building-circle-check text-indigo-400 mr-1"></i> Government Registered</span>
+          <span class="text-slate-400"><i class="fa-solid fa-circle-check text-blue-400 mr-1"></i> 100% Free Demo</span>
+          <span class="text-slate-400"><i class="fa-solid fa-shield text-indigo-400 mr-1"></i> Secure Session</span>
         </div>
       </div>
     </div>
@@ -1135,61 +1133,95 @@ document.body.addEventListener('input', function(e){
   </div>
   <div class="task-cards" id="taskCards"></div>
 
-  <!-- PERSISTENT TASK HISTORY PANEL -->
-  <div id="historyPanel" class="max-w-[1100px] mx-auto px-5 pb-16 space-y-6">
-    <div class="border-t border-slate-200 pt-8">
-      <div class="flex flex-wrap justify-between items-center gap-3 mb-6">
-        <div>
-          <h3 class="text-sm font-black text-slate-800 flex items-center gap-2"><i class="fas fa-chart-line text-blue-600"></i> Practice Performance Summary</h3>
-          <p class="text-xs text-slate-500 font-semibold mt-0.5">Real-time statistics of all your demo task attempts saved permanently.</p>
+  <!-- Side Drawer Styles -->
+  <style>
+  #profileDrawerOverlay {
+    transition: opacity 0.25s ease-in-out;
+  }
+  #profileDrawer {
+    transition: right 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .drawer-card {
+    background: #ffffff;
+    border: 1px solid rgba(226, 232, 240, 0.8);
+    border-radius: 14px;
+    padding: 12px 14px;
+    box-shadow: 0 2px 8px rgba(148, 163, 184, 0.05);
+    transition: all 0.2s ease;
+  }
+  .drawer-card:hover {
+    border-color: #cbd5e1;
+    box-shadow: 0 4px 16px rgba(148, 163, 184, 0.08);
+  }
+  </style>
+
+  <!-- PERSISTENT PROFILE & PRACTICE HISTORY DRAWER (THREE-LINE MENU TYPE) -->
+  <div id="profileDrawerOverlay" onclick="toggleProfileDrawer()" style="display: none; position: fixed; inset: 0; z-index: 9999; background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(4px);">
+    <div id="profileDrawer" onclick="event.stopPropagation()" style="position: fixed; top: 0; right: -450px; bottom: 0; width: 90%; max-width: 450px; background: white; z-index: 10000; box-shadow: -10px 0 40px rgba(0,0,0,0.15); display: flex; flex-direction: column; transition: right 0.3s cubic-bezier(0.16, 1, 0.3, 1); box-sizing: border-box;">
+      
+      <!-- Drawer Header -->
+      <div style="padding: 24px; border-bottom: 1px solid #f1f5f9; display: flex; justify-content: space-between; align-items: center; background: linear-gradient(135deg, #0f172a, #1e1b4b); color: white;">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-xl bg-white/10 text-blue-400 flex items-center justify-center text-sm font-bold shrink-0">
+            <i class="fa-solid fa-user-tie"></i>
+          </div>
+          <div>
+            <h3 class="text-sm font-black tracking-tight" id="drawerUserName" style="margin: 0; font-family: 'Sora', sans-serif;">Welcome, Guest</h3>
+            <p class="text-[10px] text-slate-300 font-bold" id="drawerUserEmail" style="margin: 2px 0 0; font-family: 'Nunito', sans-serif;">email@gmail.com</p>
+          </div>
         </div>
-        <button onclick="refreshHistoryFromServer()" class="bg-white border border-slate-200 hover:bg-slate-50 text-slate-700 px-3 py-1.5 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 shadow-sm">
-          <i class="fas fa-arrows-rotate"></i> Refresh History
+        <button onclick="toggleProfileDrawer()" class="text-slate-300 hover:text-white text-base bg-white/10 w-8 h-8 rounded-full flex items-center justify-center transition-all border border-white/10 cursor-pointer">✕</button>
+      </div>
+
+      <!-- Drawer Body -->
+      <div style="padding: 24px; flex: 1; overflow-y: auto; box-sizing: border-box;" class="space-y-6">
+        <!-- Stats Section -->
+        <div class="space-y-3">
+          <h4 class="text-xs font-black text-slate-800 uppercase tracking-wider flex items-center gap-1.5"><i class="fa-solid fa-chart-pie text-blue-600"></i> Practice Metrics</h4>
+          <div class="grid grid-cols-2 gap-3">
+            <div class="bg-slate-50 border border-slate-200/60 rounded-xl p-3 shadow-inner">
+              <span class="text-[9px] font-bold text-slate-400 uppercase block">Total Runs</span>
+              <strong class="text-base font-black text-slate-800" id="drawerStatsTotal">0</strong>
+            </div>
+            <div class="bg-slate-50 border border-slate-200/60 rounded-xl p-3 shadow-inner">
+              <span class="text-[9px] font-bold text-slate-400 uppercase block">Avg Accuracy</span>
+              <strong class="text-base font-black text-blue-600" id="drawerStatsAccuracy">0%</strong>
+            </div>
+            <div class="bg-slate-50 border border-slate-200/60 rounded-xl p-3 shadow-inner">
+              <span class="text-[9px] font-bold text-slate-400 uppercase block">Approved</span>
+              <strong class="text-base font-black text-emerald-600" id="drawerStatsApproved">0</strong>
+            </div>
+            <div class="bg-slate-50 border border-slate-200/60 rounded-xl p-3 shadow-inner">
+              <span class="text-[9px] font-bold text-slate-400 uppercase block">Rejected</span>
+              <strong class="text-base font-black text-red-500" id="drawerStatsRejected">0</strong>
+            </div>
+          </div>
+        </div>
+
+        <!-- Attempts List Section -->
+        <div class="space-y-3">
+          <div class="flex justify-between items-center">
+            <h4 class="text-xs font-black text-slate-800 uppercase tracking-wider flex items-center gap-1.5"><i class="fa-solid fa-clock-rotate-left text-blue-600"></i> Attempts Log</h4>
+            <button onclick="refreshHistoryFromServer()" class="text-blue-600 hover:text-blue-700 text-[10px] font-extrabold flex items-center gap-1 bg-none border-none p-0 cursor-pointer">
+              <i class="fa-solid fa-arrows-rotate"></i> Sync History
+            </button>
+          </div>
+          
+          <div id="drawerAttemptsList" class="space-y-3 pr-1">
+            <div class="text-xs text-slate-400 italic text-center py-8">
+              <i class="fa-solid fa-folder-open text-slate-300 text-lg block mb-1.5"></i>
+              No practice attempts recorded yet.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Drawer Footer -->
+      <div style="padding: 20px 24px; border-t: 1px solid #f1f5f9; background: #fafafa; box-sizing: border-box;">
+        <button onclick="logoutDemoAccount()" class="w-full bg-red-600 hover:bg-red-500 text-white font-black text-xs py-3 rounded-xl transition-all shadow-md shadow-red-500/10 active:scale-[0.98] flex items-center justify-center gap-2 cursor-pointer border-none">
+          <i class="fa-solid fa-right-from-bracket"></i>
+          <span>Logout Practice Session</span>
         </button>
-      </div>
-
-      <!-- Summary statistics grid -->
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
-        <div class="bg-white border border-slate-200 rounded-2xl p-4 shadow-sm space-y-1">
-          <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider block">Total Attempts</span>
-          <strong class="text-xl font-black text-slate-800 block" id="statsTotal">0</strong>
-        </div>
-        <div class="bg-white border border-slate-200 rounded-2xl p-4 shadow-sm space-y-1">
-          <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider block">Approved Tasks</span>
-          <strong class="text-xl font-black text-emerald-600 block" id="statsApproved">0</strong>
-        </div>
-        <div class="bg-white border border-slate-200 rounded-2xl p-4 shadow-sm space-y-1">
-          <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider block">Rejected Tasks</span>
-          <strong class="text-xl font-black text-red-500 block" id="statsRejected">0</strong>
-        </div>
-        <div class="bg-white border border-slate-200 rounded-2xl p-4 shadow-sm space-y-1">
-          <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider block">Avg Accuracy</span>
-          <strong class="text-xl font-black text-blue-600 block" id="statsAccuracy">0%</strong>
-        </div>
-      </div>
-
-      <!-- History attempts list -->
-      <div class="bg-white border border-slate-200 rounded-2xl shadow-sm overflow-hidden">
-        <div class="overflow-x-auto">
-          <table class="w-full text-left border-collapse">
-            <thead>
-              <tr class="bg-slate-50/75 border-b border-slate-200 text-[10px] font-bold text-slate-500 uppercase tracking-wider">
-                <th class="py-3 px-4">Task Name</th>
-                <th class="py-3 px-4">Category</th>
-                <th class="py-3 px-4">Date & Time</th>
-                <th class="py-3 px-4 text-center">Entries</th>
-                <th class="py-3 px-4 text-center">Score (C / W)</th>
-                <th class="py-3 px-4 text-center">Accuracy</th>
-                <th class="py-3 px-4 text-center">Status</th>
-              </tr>
-            </thead>
-            <tbody id="historyTableBody" class="divide-y divide-slate-100 text-xs font-semibold text-slate-700">
-              <tr>
-                <td colspan="7" class="py-12 text-center text-slate-400 italic">No practice attempts recorded. Open a task above to start practicing!</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
       </div>
     </div>
   </div>
@@ -2397,6 +2429,13 @@ function applyDemoSession(user, history) {
   if (navUserProfileMobile) navUserProfileMobile.style.setProperty('display', 'flex', 'important');
   if (navNormalCtasMobile) navNormalCtasMobile.style.setProperty('display', 'none', 'important');
 
+  // Show Header and Footer when logged in
+  const navBar = document.getElementById('wdNav');
+  const footer = document.querySelector('.simple-footer');
+  if (navBar) navBar.style.setProperty('display', 'block', 'important');
+  if (footer) footer.style.setProperty('display', 'block', 'important');
+  document.body.style.setProperty('padding-top', '', ''); // Restore stylesheet padding
+
   // Render practice attempts history
   renderHistory(history || []);
 }
@@ -2428,15 +2467,30 @@ function checkDemoSession() {
       });
 
       document.getElementById('demoAuthArea').style.display = 'none';
-      document.getElementById('mainMenu').style.display = 'block';
+      document.getElementById('mainMenu').style.display = 'flex';
+      
+      const navBar = document.getElementById('wdNav');
+      const footer = document.querySelector('.simple-footer');
+      if (navBar) navBar.style.setProperty('display', 'block', 'important');
+      if (footer) footer.style.setProperty('display', 'block', 'important');
+      document.body.style.setProperty('padding-top', '', '');
     } catch (e) {
       console.error("Error parsing stored session", e);
       logoutDemoAccount();
     }
   } else {
-    // Show auth portal
+    // Show only auth portal, hide everything else completely
     document.getElementById('demoAuthArea').style.display = 'block';
     document.getElementById('mainMenu').style.display = 'none';
+    document.getElementById('taskArea').style.display = 'none';
+    document.getElementById('resultModal').classList.remove('show');
+    document.getElementById('miniModal').classList.remove('show');
+    
+    const navBar = document.getElementById('wdNav');
+    const footer = document.querySelector('.simple-footer');
+    if (navBar) navBar.style.setProperty('display', 'none', 'important');
+    if (footer) footer.style.setProperty('display', 'none', 'important');
+    document.body.style.setProperty('padding-top', '0px', 'important');
   }
 }
 
@@ -2455,99 +2509,94 @@ function logoutDemoAccount() {
   if (navUserProfileMobile) navUserProfileMobile.style.setProperty('display', 'none', 'important');
   if (navNormalCtasMobile) navNormalCtasMobile.style.setProperty('display', 'flex', 'important');
 
+  // Reset task state completely and clear intervals to prevent leaks
+  clearInterval(TI);
+  
+  // Hide active tasks and modals completely
+  document.getElementById('taskArea').style.display = 'none';
+  document.getElementById('resultModal').classList.remove('show');
+  document.getElementById('miniModal').classList.remove('show');
+
+  // Close the drawer if it's open
+  const overlay = document.getElementById('profileDrawerOverlay');
+  const drawer = document.getElementById('profileDrawer');
+  if (overlay && drawer) {
+    drawer.style.right = '-450px';
+    overlay.style.display = 'none';
+  }
+
   // Go back to main authentication card
   document.getElementById('demoAuthArea').style.display = 'block';
   document.getElementById('mainMenu').style.display = 'none';
-  
-  // If in a task, go back to main screen
-  if (typeof goBack === "function") {
-    goBack();
-  }
+
+  // Center the auth card by removing body padding
+  const navBar = document.getElementById('wdNav');
+  const footer = document.querySelector('.simple-footer');
+  if (navBar) navBar.style.setProperty('display', 'none', 'important');
+  if (footer) footer.style.setProperty('display', 'none', 'important');
+  document.body.style.setProperty('padding-top', '0px', 'important');
 
   showToast("Logged out successfully.");
 }
 
-async function saveAttemptToServer(attemptData) {
-  const storedUser = localStorage.getItem('demo_user');
-  if (!storedUser) return;
+function toggleProfileDrawer() {
+  const overlay = document.getElementById('profileDrawerOverlay');
+  const drawer = document.getElementById('profileDrawer');
+  if (!overlay || !drawer) return;
 
-  try {
-    const user = JSON.parse(storedUser);
-    const payload = {
-      email: user.email,
-      taskName: attemptData.taskName,
-      taskCategory: attemptData.taskCategory,
-      totalEntries: attemptData.totalEntries,
-      correctEntries: attemptData.correctEntries,
-      wrongEntries: attemptData.wrongEntries,
-      accuracy: attemptData.accuracy,
-      status: attemptData.status
-    };
-
-    const res = await fetch('/api/demo/attempt', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload)
-    });
-
-    const data = await res.json();
-    if (!res.ok || !data.success) {
-      console.error("Save attempt failed on server:", data.message);
-    } else {
-      showToast("Practice attempt saved permanently!");
-    }
-  } catch (error) {
-    console.error("Failed to save attempt to server:", error);
-  } finally {
-    // Refresh history logs to include the newly added task attempt
-    refreshHistoryFromServer();
-  }
-}
-
-async function refreshHistoryFromServer() {
-  const storedUser = localStorage.getItem('demo_user');
-  if (!storedUser) return;
-
-  try {
-    const user = JSON.parse(storedUser);
-    const res = await fetch('/api/demo/login', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email: user.email, mobile: user.mobile })
-    });
-
-    const data = await res.json();
-    if (res.ok && data.success) {
-      renderHistory(data.history || []);
-      showToast("Practice history updated!");
-    }
-  } catch (error) {
-    console.error("Failed to refresh history:", error);
+  if (overlay.style.display === 'none') {
+    overlay.style.display = 'block';
+    setTimeout(() => {
+      drawer.style.right = '0';
+    }, 10);
+  } else {
+    drawer.style.right = '-450px';
+    setTimeout(() => {
+      overlay.style.display = 'none';
+    }, 300);
   }
 }
 
 function renderHistory(attempts) {
+  // Try to find the old table body if it ever exists
   const tbody = document.getElementById('historyTableBody');
-  const statsTotal = document.getElementById('statsTotal');
-  const statsApproved = document.getElementById('statsApproved');
-  const statsRejected = document.getElementById('statsRejected');
-  const statsAccuracy = document.getElementById('statsAccuracy');
+  if (tbody) {
+    tbody.innerHTML = '';
+  }
 
-  if (!tbody) return;
+  // Target drawer attempts card container
+  const drawerAttemptsList = document.getElementById('drawerAttemptsList');
+  const statsTotal = document.getElementById('statsTotal') || document.getElementById('drawerStatsTotal');
+  const statsApproved = document.getElementById('statsApproved') || document.getElementById('drawerStatsApproved');
+  const statsRejected = document.getElementById('statsRejected') || document.getElementById('drawerStatsRejected');
+  const statsAccuracy = document.getElementById('statsAccuracy') || document.getElementById('drawerStatsAccuracy');
 
-  // Clear existing logs
-  tbody.innerHTML = '';
+  // Drawer-specific explicit references if available
+  const dStatsTotal = document.getElementById('drawerStatsTotal');
+  const dStatsAccuracy = document.getElementById('drawerStatsAccuracy');
+  const dStatsApproved = document.getElementById('drawerStatsApproved');
+  const dStatsRejected = document.getElementById('drawerStatsRejected');
 
   if (!attempts || attempts.length === 0) {
-    tbody.innerHTML = `
-      <tr>
-        <td colspan="7" class="py-12 text-center text-slate-400 italic">No practice attempts recorded. Open a task above to start practicing!</td>
-      </tr>`;
-    
-    if (statsTotal) statsTotal.textContent = '0';
-    if (statsApproved) statsApproved.textContent = '0';
-    if (statsRejected) statsRejected.textContent = '0';
-    if (statsAccuracy) statsAccuracy.textContent = '0%';
+    if (drawerAttemptsList) {
+      drawerAttemptsList.innerHTML = `
+        <div class="text-xs text-slate-400 italic text-center py-8">
+          <i class="fa-solid fa-folder-open text-slate-300 text-lg block mb-1.5"></i>
+          No practice attempts recorded yet.
+        </div>`;
+    }
+    if (tbody) {
+      tbody.innerHTML = `<tr><td colspan="7" class="py-12 text-center text-slate-400 italic">No practice attempts recorded. Open a task above to start practicing!</td></tr>`;
+    }
+
+    const resetStats = (t, a, ap, r) => {
+      if (t) t.textContent = '0';
+      if (a) a.textContent = '0%';
+      if (ap) ap.textContent = '0';
+      if (r) r.textContent = '0';
+    };
+    resetStats(statsTotal, statsAccuracy, statsApproved, statsRejected);
+    resetStats(dStatsTotal, dStatsAccuracy, dStatsApproved, dStatsRejected);
     return;
   }
 
@@ -2557,18 +2606,25 @@ function renderHistory(attempts) {
   let rejected = 0;
   let totalAcc = 0;
 
+  // Clear drawer attempts container
+  if (drawerAttemptsList) {
+    drawerAttemptsList.innerHTML = '';
+  }
+
   attempts.forEach(att => {
-    if (att.status === 'Approved') approved++;
+    const isApproved = att.status === 'Approved';
+    if (isApproved) approved++;
     else rejected++;
     totalAcc += parseFloat(att.accuracy || 0);
 
     // Format category nicely
     let categoryName = 'Practice';
-    if (att.taskCategory === 'data') categoryName = 'Data Entry';
-    else if (att.taskCategory === 'captcha') categoryName = 'Captcha Entry';
-    else if (att.taskCategory === 'form') categoryName = 'Form Filling';
-    else if (att.taskCategory === 'grammar') categoryName = 'Grammar Checking';
-    else if (att.taskCategory === 'typing') categoryName = 'Typing Speed';
+    let categoryEmoji = '📋';
+    if (att.taskCategory === 'data') { categoryName = 'Data Entry'; categoryEmoji = '📊'; }
+    else if (att.taskCategory === 'captcha') { categoryName = 'Captcha Entry'; categoryEmoji = '🔢'; }
+    else if (att.taskCategory === 'form') { categoryName = 'Form Filling'; categoryEmoji = '🧾'; }
+    else if (att.taskCategory === 'grammar') { categoryName = 'Grammar Checking'; categoryEmoji = '✍️'; }
+    else if (att.taskCategory === 'typing') { categoryName = 'Typing Speed'; categoryEmoji = '⌨️'; }
 
     // Format date string beautifully
     let formattedDate = 'N/A';
@@ -2585,36 +2641,75 @@ function renderHistory(attempts) {
       });
     }
 
-    // Status Pill
-    const statusPill = att.status === 'Approved'
-      ? `<span class="bg-emerald-50 text-emerald-700 border border-emerald-200 px-2.5 py-1 rounded-full text-[10px] font-extrabold uppercase">Approved</span>`
-      : `<span class="bg-red-50 text-red-600 border border-red-200 px-2.5 py-1 rounded-full text-[10px] font-extrabold uppercase">Rejected</span>`;
-
-    // Accuracy style
+    // Accuracy colors
     const accVal = parseFloat(att.accuracy || 0);
-    const accClass = accVal >= 80 ? 'text-emerald-600' : accVal >= 60 ? 'text-amber-500' : 'text-red-500';
+    const accColor = accVal >= 80 ? 'text-emerald-600' : accVal >= 60 ? 'text-amber-500' : 'text-red-500';
 
-    const row = document.createElement('tr');
-    row.className = "border-b border-slate-100/80 hover:bg-slate-50/50 transition-colors";
-    row.innerHTML = `
-      <td class="py-3 px-4 font-bold text-slate-800">${att.taskName}</td>
-      <td class="py-3 px-4 text-slate-500 font-bold">${categoryName}</td>
-      <td class="py-3 px-4 text-slate-400 font-medium">${formattedDate}</td>
-      <td class="py-3 px-4 text-center font-bold text-slate-600">${att.totalEntries}</td>
-      <td class="py-3 px-4 text-center font-bold text-slate-600">${att.correctEntries} <span class="text-slate-400 font-normal">/</span> <span class="text-red-400">${att.wrongEntries}</span></td>
-      <td class="py-3 px-4 text-center font-black ${accClass}">${accVal}%</td>
-      <td class="py-3 px-4 text-center">${statusPill}</td>
-    `;
-    tbody.appendChild(row);
+    // Status Badge HTML (Emerald for Approved, Crimson/Red for Rejected)
+    const statusBadge = isApproved
+      ? `<span class="bg-emerald-50 text-emerald-700 border border-emerald-200/80 px-2 py-0.5 rounded-full text-[9px] font-black uppercase tracking-wider">Approved</span>`
+      : `<span class="bg-rose-50 text-rose-600 border border-rose-200/80 px-2 py-0.5 rounded-full text-[9px] font-black uppercase tracking-wider">Rejected</span>`;
+
+    // 1. Populating the drawer items list with beautiful cards
+    if (drawerAttemptsList) {
+      const card = document.createElement('div');
+      card.className = "drawer-card flex flex-col gap-2.5 p-4 border border-slate-200/70 rounded-2xl bg-white shadow-sm hover:shadow-md transition-all duration-200";
+      card.innerHTML = `
+        <div class="flex justify-between items-start">
+          <div class="flex items-center gap-2">
+            <span class="w-8 h-8 rounded-xl bg-slate-50 flex items-center justify-center border border-slate-100 text-sm">${categoryEmoji}</span>
+            <div>
+              <h5 class="text-xs font-black text-slate-800">${att.taskName}</h5>
+              <span class="text-[9px] text-slate-400 font-bold block mt-0.5">${formattedDate}</span>
+            </div>
+          </div>
+          <div class="flex flex-col items-end gap-1.5">
+            <span class="text-xs font-black ${accColor}">${accVal}%</span>
+            ${statusBadge}
+          </div>
+        </div>
+        <div class="flex justify-between items-center border-t border-slate-50 pt-2 text-[10px] font-bold text-slate-500">
+          <span>Entries: <strong class="text-slate-700">${att.totalEntries}</strong></span>
+          <span>Precision: <strong class="text-slate-700">${att.correctEntries} Cor / <span class="text-red-400">${att.wrongEntries} Err</span></strong></span>
+        </div>
+      `;
+      drawerAttemptsList.appendChild(card);
+    }
+
+    // 2. Old Table support just in case
+    if (tbody) {
+      const statusPill = isApproved
+        ? `<span class="bg-emerald-50 text-emerald-700 border border-emerald-200 px-2.5 py-1 rounded-full text-[10px] font-extrabold uppercase">Approved</span>`
+        : `<span class="bg-red-50 text-red-600 border border-red-200 px-2.5 py-1 rounded-full text-[10px] font-extrabold uppercase">Rejected</span>`;
+      
+      const accClass = accVal >= 80 ? 'text-emerald-600' : accVal >= 60 ? 'text-amber-500' : 'text-red-500';
+      const row = document.createElement('tr');
+      row.className = "border-b border-slate-100/80 hover:bg-slate-50/50 transition-colors";
+      row.innerHTML = `
+        <td class="py-3 px-4 font-bold text-slate-800">${att.taskName}</td>
+        <td class="py-3 px-4 text-slate-500 font-bold">${categoryName}</td>
+        <td class="py-3 px-4 text-slate-400 font-medium">${formattedDate}</td>
+        <td class="py-3 px-4 text-center font-bold text-slate-600">${att.totalEntries}</td>
+        <td class="py-3 px-4 text-center font-bold text-slate-600">${att.correctEntries} <span class="text-slate-400 font-normal">/</span> <span class="text-red-400">${att.wrongEntries}</span></td>
+        <td class="py-3 px-4 text-center font-black ${accClass}">${accVal}%</td>
+        <td class="py-3 px-4 text-center">${statusPill}</td>
+      `;
+      tbody.appendChild(row);
+    }
   });
 
   // Calculate and display averages
   const avgAcc = total > 0 ? Math.round(totalAcc / total) : 0;
   
-  if (statsTotal) statsTotal.textContent = String(total);
-  if (statsApproved) statsApproved.textContent = String(approved);
-  if (statsRejected) statsRejected.textContent = String(rejected);
-  if (statsAccuracy) statsAccuracy.textContent = `${avgAcc}%`;
+  const updateStats = (t, a, ap, r) => {
+    if (t) t.textContent = String(total);
+    if (a) a.textContent = `${avgAcc}%`;
+    if (ap) ap.textContent = String(approved);
+    if (r) r.textContent = String(rejected);
+  };
+
+  updateStats(statsTotal, statsAccuracy, statsApproved, statsRejected);
+  updateStats(dStatsTotal, dStatsAccuracy, dStatsApproved, dStatsRejected);
 }
 
 renderMenu();
