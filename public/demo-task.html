@@ -892,180 +892,236 @@ document.body.addEventListener('input', function(e){
 </script>
 
 <!-- DEMO AUTHENTICATION PORTAL CARD -->
-<div id="demoAuthArea" class="max-w-xl mx-auto my-12 px-6" style="display: block;">
-  <div class="bg-white rounded-3xl border border-slate-200/80 p-8 md:p-10 shadow-2xl shadow-slate-200/60 space-y-6 relative overflow-hidden">
+<div id="demoAuthArea" class="max-w-4xl mx-auto my-12 px-6" style="display: block;">
+  <div class="bg-white rounded-3xl border border-slate-200/80 shadow-2xl shadow-slate-200/40 grid grid-cols-1 lg:grid-cols-12 overflow-hidden relative min-h-[600px]">
     
-    <!-- Background subtle glows for premium appeal -->
-    <div class="absolute -top-24 -left-24 w-48 h-48 bg-blue-500/5 rounded-full blur-3xl pointer-events-none"></div>
-    <div class="absolute -bottom-24 -right-24 w-48 h-48 bg-purple-500/5 rounded-full blur-3xl pointer-events-none"></div>
-
-    <!-- Security Status Pulsing Badge -->
-    <div class="flex items-center justify-between border-b border-slate-100 pb-5">
-      <div class="flex items-center gap-2">
-        <span class="relative flex h-2.5 w-2.5">
-          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-          <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
-        </span>
-        <span class="text-[10px] font-black uppercase tracking-wider text-emerald-600">SECURE DEMO HOST v1.2</span>
-      </div>
-      <div class="flex items-center gap-1.5 text-slate-400 text-xs">
-        <i class="fa-solid fa-shield-halved text-blue-500 text-[10px]"></i>
-        <span class="text-[10px] font-bold text-slate-500">AES-256 SSL Encrypted</span>
-      </div>
-    </div>
-
-    <!-- Main Title & Desc -->
-    <div class="text-center space-y-2">
-      <div class="w-14 h-14 rounded-2xl bg-gradient-to-tr from-blue-600 to-indigo-500 text-white flex items-center justify-center mx-auto shadow-md shadow-blue-500/20 text-xl font-bold">
-        <i class="fa-solid fa-laptop-code"></i>
-      </div>
-      <h2 class="text-2xl font-black text-slate-800 tracking-tight flex items-center justify-center gap-2 mt-3">
-        <span>Practice System Portal</span>
-      </h2>
-      <p class="text-xs text-slate-500 max-w-sm mx-auto leading-relaxed font-semibold">
-        Create an official practice account or sign in to track entry accuracy, calculate typing speed, and view permanent performance history.
-      </p>
-    </div>
-
-    <!-- Toggle Switcher Pills -->
-    <div class="bg-slate-100 p-1.5 rounded-2xl flex gap-1 border border-slate-200/60 shadow-inner">
-      <button onclick="setAuthTab('login')" id="tabBtnLogin" class="flex-1 text-xs font-black py-2.5 rounded-xl transition-all duration-300 bg-white text-blue-600 shadow-sm border border-slate-200/40">
-        <i class="fa-solid fa-right-to-bracket mr-1.5"></i>Login Portal
-      </button>
-      <button onclick="setAuthTab('register')" id="tabBtnRegister" class="flex-1 text-xs font-black py-2.5 rounded-xl transition-all duration-300 text-slate-500 hover:text-slate-800">
-        <i class="fa-solid fa-user-plus mr-1.5"></i>Create Account
-      </button>
-    </div>
-
-    <!-- Live Alerts -->
-    <div id="authAlert" class="hidden bg-red-50 text-red-600 border border-red-200 rounded-xl p-3.5 text-xs font-semibold flex items-start gap-2">
-      <i class="fa-solid fa-circle-exclamation mt-0.5 animate-pulse"></i>
-      <span class="flex-1" id="authAlertMsg"></span>
-    </div>
-
-    <!-- FORM 1: LOGIN -->
-    <form id="loginForm" onsubmit="handleDemoLogin(event)" class="space-y-4">
-      <div class="space-y-1.5">
-        <label class="block text-[10px] font-extrabold text-slate-500 uppercase tracking-wider">User ID (Registered Gmail)</label>
-        <div class="relative">
-          <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
-            <i class="fa-regular fa-envelope"></i>
-          </span>
-          <input type="email" id="loginEmail" required class="w-full bg-slate-50 border border-slate-200 rounded-xl pl-10 pr-4 py-3 text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 focus:bg-white transition-all duration-200 text-slate-800" placeholder="e.g. shivam@gmail.com" />
-        </div>
-      </div>
-      <div class="space-y-1.5">
-        <label class="block text-[10px] font-extrabold text-slate-500 uppercase tracking-wider">Password (10-Digit Mobile)</label>
-        <div class="relative">
-          <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
-            <i class="fa-solid fa-lock"></i>
-          </span>
-          <input type="password" id="loginMobile" required class="w-full bg-slate-50 border border-slate-200 rounded-xl pl-10 pr-4 py-3 text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 focus:bg-white transition-all duration-200 text-slate-800" placeholder="Enter your 10-digit number" />
-        </div>
-      </div>
-      <button type="submit" id="btnLoginSubmit" class="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-black text-xs py-3.5 rounded-xl transition-all shadow-lg shadow-blue-500/15 active:scale-[0.98] flex items-center justify-center gap-2 cursor-pointer mt-2">
-        <i class="fa-solid fa-shield-check"></i>
-        <span>Secure Sign In</span>
-      </button>
-    </form>
-
-    <!-- FORM 2: CREATE ACCOUNT -->
-    <form id="registerForm" onsubmit="handleDemoRegister(event)" class="hidden space-y-4">
-      <div class="space-y-1.5">
-        <label class="block text-[10px] font-extrabold text-slate-500 uppercase tracking-wider">Full Name</label>
-        <div class="relative">
-          <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
-            <i class="fa-regular fa-user"></i>
-          </span>
-          <input type="text" id="regName" required class="w-full bg-slate-50 border border-slate-200 rounded-xl pl-10 pr-4 py-3 text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 focus:bg-white transition-all duration-200 text-slate-800" placeholder="e.g. Shivam Mishra" />
-        </div>
-      </div>
+    <!-- LEFT SIDE: BRANDING & SECURE STATS PANEL -->
+    <div class="lg:col-span-5 bg-gradient-to-br from-slate-900 via-slate-950 to-indigo-950 p-8 text-white flex flex-col justify-between relative overflow-hidden">
+      <!-- Background subtle elements -->
+      <div class="absolute -top-12 -left-12 w-32 h-32 bg-blue-500/10 rounded-full blur-2xl pointer-events-none"></div>
+      <div class="absolute -bottom-16 -right-16 w-36 h-36 bg-purple-500/10 rounded-full blur-2xl pointer-events-none"></div>
       
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div class="space-y-1.5">
-          <label class="block text-[10px] font-extrabold text-slate-500 uppercase tracking-wider">Mobile Number</label>
-          <div class="relative">
-            <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
-              <i class="fa-solid fa-phone"></i>
-            </span>
-            <input type="tel" pattern="[0-9]{10}" id="regMobile" required class="w-full bg-slate-50 border border-slate-200 rounded-xl pl-10 pr-4 py-3 text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 focus:bg-white transition-all duration-200 text-slate-800" placeholder="10-digit number" />
+      <div class="space-y-8 relative">
+        <!-- Logo -->
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-xl bg-white/10 backdrop-blur-md flex items-center justify-center border border-white/20">
+            <img src="workden-logo.png" alt="WorkDen Logo" class="w-6 h-6">
           </div>
+          <span class="font-extrabold text-lg tracking-wider text-white">WorkDen <span class="text-blue-400 font-bold text-xs uppercase tracking-widest block">Practice Host</span></span>
         </div>
-        <div class="space-y-1.5">
-          <label class="block text-[10px] font-extrabold text-slate-500 uppercase tracking-wider">Gmail Address</label>
-          <div class="relative">
-            <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
-              <i class="fa-regular fa-envelope"></i>
-            </span>
-            <input type="email" id="regEmail" required class="w-full bg-slate-50 border border-slate-200 rounded-xl pl-10 pr-4 py-3 text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 focus:bg-white transition-all duration-200 text-slate-800" placeholder="e.g. shivam@gmail.com" />
+
+        <!-- Headline -->
+        <div class="space-y-3">
+          <h3 class="text-xl font-black text-white leading-tight">Official Candidate Training System</h3>
+          <p class="text-xs text-slate-400 font-semibold leading-relaxed">
+            Welcome to the WorkDen secure training workspace. Please complete mock registration to initialize your dedicated practice database.
+          </p>
+        </div>
+
+        <!-- Features list -->
+        <div class="space-y-4 pt-2">
+          <div class="flex items-start gap-3">
+            <div class="w-7 h-7 rounded-lg bg-blue-500/20 text-blue-400 flex items-center justify-center shrink-0 mt-0.5 text-xs">
+              <i class="fa-solid fa-chart-line"></i>
+            </div>
+            <div>
+              <h4 class="text-xs font-black text-white">Real-Time Metrics Engine</h4>
+              <p class="text-[10px] text-slate-400 font-semibold leading-relaxed mt-0.5">Calculates precision matching percentage, words per minute (WPM), and formatting accuracy on-the-fly.</p>
+            </div>
+          </div>
+
+          <div class="flex items-start gap-3">
+            <div class="w-7 h-7 rounded-lg bg-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0 mt-0.5 text-xs">
+              <i class="fa-solid fa-cloud-arrow-up"></i>
+            </div>
+            <div>
+              <h4 class="text-xs font-black text-white">Permanent Progress Sync</h4>
+              <p class="text-[10px] text-slate-400 font-semibold leading-relaxed mt-0.5">All practice runs are permanently stored on cloud server. View history logs and speed growth metrics anytime.</p>
+            </div>
+          </div>
+
+          <div class="flex items-start gap-3">
+            <div class="w-7 h-7 rounded-lg bg-purple-500/20 text-purple-400 flex items-center justify-center shrink-0 mt-0.5 text-xs">
+              <i class="fa-solid fa-award"></i>
+            </div>
+            <div>
+              <h4 class="text-xs font-black text-white">Live Qualification Check</h4>
+              <p class="text-[10px] text-slate-400 font-semibold leading-relaxed mt-0.5">Reach 70%+ accuracy in practice tasks to automatically pre-qualify for verified paid remote assignments.</p>
+            </div>
           </div>
         </div>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div class="space-y-1.5">
-          <label class="block text-[10px] font-extrabold text-slate-500 uppercase tracking-wider">City</label>
-          <div class="relative">
-            <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
-              <i class="fa-solid fa-location-dot"></i>
-            </span>
-            <input type="text" id="regCity" required class="w-full bg-slate-50 border border-slate-200 rounded-xl pl-10 pr-4 py-3 text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 focus:bg-white transition-all duration-200 text-slate-800" placeholder="e.g. Pune" />
-          </div>
-        </div>
-        <div class="space-y-1.5">
-          <label class="block text-[10px] font-extrabold text-slate-500 uppercase tracking-wider">Qualification</label>
-          <div class="relative">
-            <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
-              <i class="fa-solid fa-graduation-cap"></i>
-            </span>
-            <input type="text" id="regQual" required class="w-full bg-slate-50 border border-slate-200 rounded-xl pl-10 pr-4 py-3 text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 focus:bg-white transition-all duration-200 text-slate-800" placeholder="e.g. Graduate" />
-          </div>
-        </div>
-      </div>
-
-      <button type="submit" id="btnRegisterSubmit" class="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-black text-xs py-3.5 rounded-xl transition-all shadow-lg shadow-blue-500/15 active:scale-[0.98] flex items-center justify-center gap-2 cursor-pointer mt-2">
-        <i class="fa-solid fa-id-card"></i>
-        <span>Create Practice Profile</span>
-      </button>
-    </form>
-
-    <!-- VIEW 3: CREDENTIALS SUCCESS DISPLAY -->
-    <div id="successView" class="hidden space-y-5">
-      <div class="bg-gradient-to-r from-emerald-50 to-teal-50 text-emerald-800 border border-emerald-100 rounded-2xl p-5 text-center space-y-1.5 shadow-sm">
-        <div class="text-2xl animate-bounce">🎉</div>
-        <h4 class="font-black text-sm text-emerald-900">Official Practice Profile Generated!</h4>
-        <p class="text-[11px] text-emerald-600 font-semibold">Your server-side account credentials have been provisioned successfully.</p>
-      </div>
-
-      <div class="bg-slate-50 border border-slate-200/80 rounded-2xl p-5 space-y-3.5 shadow-inner">
-        <div class="flex justify-between items-center text-xs border-b border-slate-200/40 pb-2">
-          <span class="font-bold text-slate-500 flex items-center gap-1.5">
-            <i class="fa-regular fa-envelope text-blue-500"></i> User ID / Gmail:
+      <!-- Trust Badges & Server status -->
+      <div class="pt-8 border-t border-white/10 space-y-3 relative">
+        <div class="flex items-center gap-2">
+          <span class="relative flex h-2 w-2">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
           </span>
-          <span class="font-black text-slate-800 select-all font-mono" id="successUserId">email@gmail.com</span>
+          <span class="text-[9px] font-extrabold uppercase tracking-widest text-emerald-400">Secure Live Node Online</span>
         </div>
-        <div class="flex justify-between items-center text-xs">
-          <span class="font-bold text-slate-500 flex items-center gap-1.5">
-            <i class="fa-solid fa-key text-blue-500"></i> Password / Mobile:
-          </span>
-          <span class="font-black text-slate-800 select-all font-mono" id="successPassword">1234567890</span>
+        <div class="flex flex-wrap gap-x-4 gap-y-1.5 text-slate-500 text-[10px] font-bold">
+          <span class="text-slate-400"><i class="fa-solid fa-shield-halved text-blue-400 mr-1"></i> SSL Protected</span>
+          <span class="text-slate-400"><i class="fa-solid fa-building-circle-check text-indigo-400 mr-1"></i> Government Registered</span>
         </div>
       </div>
-
-      <div class="bg-amber-50 text-amber-800 border border-amber-200/60 rounded-xl p-3.5 text-[10px] font-bold leading-relaxed flex gap-2">
-        <i class="fa-solid fa-circle-info mt-0.5 text-amber-600 animate-pulse"></i>
-        <span>Please write down or copy these credentials. You can use these exact credentials to login from any device to continue your practice history.</span>
-      </div>
-
-      <button onclick="autoLoginAfterRegister()" class="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-black text-xs py-3.5 rounded-xl transition-all shadow-lg shadow-blue-500/15 active:scale-[0.98] flex items-center justify-center gap-2 cursor-pointer">
-        <span>Proceed to Secure Workspace →</span>
-      </button>
     </div>
 
-    <!-- Security compliance trust text -->
-    <div class="text-[9px] text-slate-400 font-bold text-center pt-2 flex items-center justify-center gap-1">
-      <i class="fa-solid fa-lock text-[8px]"></i>
-      <span>GDPR & ISO-27001 Data Security Standards Compliant</span>
+    <!-- RIGHT SIDE: FORM CONTROL PANEL -->
+    <div class="lg:col-span-7 p-8 md:p-10 space-y-6 flex flex-col justify-between">
+      
+      <!-- Top Section -->
+      <div class="space-y-6">
+        <!-- Secure Header -->
+        <div class="flex justify-between items-center border-b border-slate-100 pb-4">
+          <h2 class="text-lg font-black text-slate-800 tracking-tight flex items-center gap-2">
+            <i class="fa-solid fa-shield-lock text-blue-600 text-sm"></i> Secure Portal Access
+          </h2>
+          <span class="text-[10px] font-extrabold text-slate-400 uppercase tracking-wider">AES-256 bits</span>
+        </div>
+
+        <!-- Switcher Pills -->
+        <div class="bg-slate-100 p-1.5 rounded-2xl flex gap-1 border border-slate-200/60 shadow-inner">
+          <button onclick="setAuthTab('login')" id="tabBtnLogin" class="flex-1 text-xs font-black py-2.5 rounded-xl transition-all duration-300 bg-white text-blue-600 shadow-sm border border-slate-200/40">
+            <i class="fa-solid fa-right-to-bracket mr-1.5"></i>Login Portal
+          </button>
+          <button onclick="setAuthTab('register')" id="tabBtnRegister" class="flex-1 text-xs font-black py-2.5 rounded-xl transition-all duration-300 text-slate-500 hover:text-slate-800">
+            <i class="fa-solid fa-user-plus mr-1.5"></i>Create Account
+          </button>
+        </div>
+
+        <!-- Alerts -->
+        <div id="authAlert" class="hidden bg-red-50 text-red-600 border border-red-200 rounded-xl p-3.5 text-xs font-semibold flex items-start gap-2">
+          <i class="fa-solid fa-circle-exclamation mt-0.5 animate-pulse text-red-500"></i>
+          <span class="flex-1" id="authAlertMsg"></span>
+        </div>
+
+        <!-- LOGIN FORM -->
+        <form id="loginForm" onsubmit="handleDemoLogin(event)" class="space-y-4">
+          <div class="space-y-1.5">
+            <label class="block text-[10px] font-extrabold text-slate-500 uppercase tracking-wider">User ID (Registered Gmail)</label>
+            <div class="relative">
+              <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+                <i class="fa-regular fa-envelope"></i>
+              </span>
+              <input type="email" id="loginEmail" required class="w-full bg-slate-50 border border-slate-200 rounded-xl pl-10 pr-4 py-3 text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 focus:bg-white transition-all duration-200 text-slate-800" placeholder="Enter your registered email address" />
+            </div>
+          </div>
+          <div class="space-y-1.5">
+            <label class="block text-[10px] font-extrabold text-slate-500 uppercase tracking-wider">Password (10-Digit Mobile)</label>
+            <div class="relative">
+              <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+                <i class="fa-solid fa-lock"></i>
+              </span>
+              <input type="password" id="loginMobile" required class="w-full bg-slate-50 border border-slate-200 rounded-xl pl-10 pr-4 py-3 text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 focus:bg-white transition-all duration-200 text-slate-800" placeholder="Enter your password (mobile number)" />
+            </div>
+          </div>
+          <button type="submit" id="btnLoginSubmit" class="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-black text-xs py-3.5 rounded-xl transition-all shadow-lg shadow-blue-500/15 active:scale-[0.98] flex items-center justify-center gap-2 cursor-pointer mt-4">
+            <i class="fa-solid fa-shield-check"></i>
+            <span>Secure Sign In</span>
+          </button>
+        </form>
+
+        <!-- REGISTER FORM -->
+        <form id="registerForm" onsubmit="handleDemoRegister(event)" class="hidden space-y-4">
+          <div class="space-y-1.5">
+            <label class="block text-[10px] font-extrabold text-slate-500 uppercase tracking-wider">Full Name</label>
+            <div class="relative">
+              <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+                <i class="fa-regular fa-user"></i>
+              </span>
+              <input type="text" id="regName" required class="w-full bg-slate-50 border border-slate-200 rounded-xl pl-10 pr-4 py-3 text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 focus:bg-white transition-all duration-200 text-slate-800" placeholder="Enter your full name" />
+            </div>
+          </div>
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="space-y-1.5">
+              <label class="block text-[10px] font-extrabold text-slate-500 uppercase tracking-wider">Mobile Number</label>
+              <div class="relative">
+                <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+                  <i class="fa-solid fa-phone"></i>
+                </span>
+                <input type="tel" pattern="[0-9]{10}" id="regMobile" required class="w-full bg-slate-50 border border-slate-200 rounded-xl pl-10 pr-4 py-3 text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 focus:bg-white transition-all duration-200 text-slate-800" placeholder="Enter your 10-digit mobile number" />
+              </div>
+            </div>
+            <div class="space-y-1.5">
+              <label class="block text-[10px] font-extrabold text-slate-500 uppercase tracking-wider">Gmail Address</label>
+              <div class="relative">
+                <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+                  <i class="fa-regular fa-envelope"></i>
+                </span>
+                <input type="email" id="regEmail" required class="w-full bg-slate-50 border border-slate-200 rounded-xl pl-10 pr-4 py-3 text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 focus:bg-white transition-all duration-200 text-slate-800" placeholder="Enter your Gmail address" />
+              </div>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="space-y-1.5">
+              <label class="block text-[10px] font-extrabold text-slate-500 uppercase tracking-wider">City</label>
+              <div class="relative">
+                <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+                  <i class="fa-solid fa-location-dot"></i>
+                </span>
+                <input type="text" id="regCity" required class="w-full bg-slate-50 border border-slate-200 rounded-xl pl-10 pr-4 py-3 text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 focus:bg-white transition-all duration-200 text-slate-800" placeholder="Enter your current city" />
+              </div>
+            </div>
+            <div class="space-y-1.5">
+              <label class="block text-[10px] font-extrabold text-slate-500 uppercase tracking-wider">Qualification</label>
+              <div class="relative">
+                <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+                  <i class="fa-solid fa-graduation-cap"></i>
+                </span>
+                <input type="text" id="regQual" required class="w-full bg-slate-50 border border-slate-200 rounded-xl pl-10 pr-4 py-3 text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 focus:bg-white transition-all duration-200 text-slate-800" placeholder="Enter your highest qualification" />
+              </div>
+            </div>
+          </div>
+
+          <button type="submit" id="btnRegisterSubmit" class="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-black text-xs py-3.5 rounded-xl transition-all shadow-lg shadow-blue-500/15 active:scale-[0.98] flex items-center justify-center gap-2 cursor-pointer mt-4">
+            <i class="fa-solid fa-id-card"></i>
+            <span>Create Practice Profile</span>
+          </button>
+        </form>
+
+        <!-- SUCCESS VIEW -->
+        <div id="successView" class="hidden space-y-5">
+          <div class="bg-gradient-to-r from-emerald-50 to-teal-50 text-emerald-800 border border-emerald-100 rounded-2xl p-5 text-center space-y-1.5 shadow-sm">
+            <div class="text-2xl animate-bounce">🎉</div>
+            <h4 class="font-black text-sm text-emerald-900">Official Practice Profile Generated!</h4>
+            <p class="text-[11px] text-emerald-600 font-semibold">Your server-side account credentials have been provisioned successfully.</p>
+          </div>
+
+          <div class="bg-slate-50 border border-slate-200/80 rounded-2xl p-5 space-y-3.5 shadow-inner font-semibold">
+            <div class="flex justify-between items-center text-xs border-b border-slate-200/40 pb-2">
+              <span class="font-bold text-slate-500 flex items-center gap-1.5">
+                <i class="fa-regular fa-envelope text-blue-500"></i> User ID / Gmail:
+              </span>
+              <span class="font-black text-slate-800 select-all font-mono" id="successUserId">email@gmail.com</span>
+            </div>
+            <div class="flex justify-between items-center text-xs">
+              <span class="font-bold text-slate-500 flex items-center gap-1.5">
+                <i class="fa-solid fa-key text-blue-500"></i> Password / Mobile:
+              </span>
+              <span class="font-black text-slate-800 select-all font-mono" id="successPassword">1234567890</span>
+            </div>
+          </div>
+
+          <div class="bg-amber-50 text-amber-800 border border-amber-200/60 rounded-xl p-3.5 text-[10px] font-bold leading-relaxed flex gap-2">
+            <i class="fa-solid fa-circle-info mt-0.5 text-amber-600 animate-pulse"></i>
+            <span>Please write down or copy these credentials. You can use these exact credentials to login from any device to continue your practice history.</span>
+          </div>
+
+          <button onclick="autoLoginAfterRegister()" class="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-black text-xs py-3.5 rounded-xl transition-all shadow-lg shadow-blue-500/15 active:scale-[0.98] flex items-center justify-center gap-2 cursor-pointer">
+            <span>Proceed to Secure Workspace →</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Compliance Statement -->
+      <div class="text-[9px] text-slate-400 font-bold text-center border-t border-slate-100 pt-4 flex items-center justify-center gap-1.5">
+        <i class="fa-solid fa-lock text-[8px]"></i>
+        <span>WorkDen Data Protection Compliance System • ISO/IEC 27001 Certified Standards</span>
+      </div>
     </div>
   </div>
 </div>
@@ -1492,10 +1548,9 @@ function gCap(){if(captchaIdx>=captchaPool.length){resetCaptchaPool();}return ca
 // =====================================================
 let TDEFS=[
   {id:"typing",  name:"PDF to Word Typing",  emoji:"⌨️",items:10,timeMin:60,desc:"Read the 8-10 line content shown on each page and type it exactly in the box below. Minimum 100 words per page required.",color:"#7C3AED",num:1,hcls:""},
-  {id:"captcha", name:"Captcha Filling",     emoji:"🔢",items:100,timeMin:60,desc:"Solve 100 dynamic CAPTCHA challenges — 10 types including reverse, filter, sort, position, math & more!",color:"#0891B2",num:2,hcls:"blue"},
-  {id:"form",    name:"Form Filling",        emoji:"🧾",items:10,timeMin:60,desc:"Complete 10 online forms with the provided reference data carefully and accurately.",color:"#059669",num:3,hcls:"green"},
-  {id:"data",    name:"Data Entry",          emoji:"📊",items:10,timeMin:60,desc:"Fill in 10 data entry forms accurately by typing the required information in each field.",color:"#EA580C",num:4,hcls:"orange"},
-  {id:"grammar", name:"Grammar Correction",  emoji:"✍️",items:10,timeMin:60,desc:"Read 10 paragraphs with grammatical errors and type the fully corrected versions.",color:"#7C3AED",num:5,hcls:""},
+  {id:"form",    name:"Form Filling",        emoji:"🧾",items:10,timeMin:60,desc:"Complete 10 online forms with the provided reference data carefully and accurately.",color:"#059669",num:2,hcls:"green"},
+  {id:"data",    name:"Data Entry",          emoji:"📊",items:10,timeMin:60,desc:"Fill in 10 data entry forms accurately by typing the required information in each field.",color:"#EA580C",num:3,hcls:"orange"},
+  {id:"grammar", name:"Grammar Correction",  emoji:"✍️",items:10,timeMin:60,desc:"Read 10 paragraphs with grammatical errors and type the fully corrected versions.",color:"#7C3AED",num:4,hcls:""},
 ];
 
 let HOWTO={
@@ -1692,21 +1747,21 @@ function bTY(i,d){
   return `
   <div class="typing-split-container" style="display: grid; grid-template-columns: 1fr; gap: 20px; align-items: start;">
     <!-- LEFT SIDE: REFERENCE CONTENT -->
-    <div style="background:#FFFBEB;border:2px solid #FCD34D;border-radius:12px;padding:0;overflow:hidden;height:100%;display:flex;flex-direction:column;">
-      <div style="background:#FCD34D;padding:8px 14px;display:flex;align-items:center;gap:8px;flex-shrink:0;">
+    <div style="background:#FFFBEB;border:2px solid #FCD34D;border-radius:12px;padding:0;overflow:hidden;">
+      <div style="background:#FCD34D;padding:8px 14px;display:flex;align-items:center;gap:8px;">
         <span style="font-size:0.82rem;">📋</span>
         <span style="font-size:0.78rem;font-weight:800;color:#92400E;">PDF / Reference Document (Strict Copy):</span>
       </div>
-      <div style="padding:14px 16px;flex:1;overflow-y:auto;max-height:400px;background:#fffdf6;">${linesHtml}</div>
+      <div style="padding:14px 16px;background:#fffdf6;">${linesHtml}</div>
     </div>
     
     <!-- RIGHT SIDE: INPUT TEXTAREA -->
-    <div style="display:flex;flex-direction:column;height:100%;">
+    <div style="display:flex;flex-direction:column;">
       <div style="color:var(--purple);font-weight:800;font-size:0.78rem;margin-bottom:6px;display:flex;align-items:center;gap:6px;">
         <span>✍️</span>
         <span>Word Processor Input (Type exactly as shown on Left):</span>
       </div>
-      <textarea class="typing-textarea" id="tt${i}" placeholder="Start typing the content exactly here..." style="flex:1;min-height:220px;font-size:0.86rem;line-height:1.7;padding:12px;border:2px solid var(--border);border-radius:12px;outline:none;transition:all 0.15s;font-family:'Space Mono',monospace;" autocomplete="off"></textarea>
+      <textarea class="typing-textarea" id="tt${i}" placeholder="Start typing the content exactly here..." style="width:100%;min-height:280px;font-size:0.86rem;line-height:1.7;padding:12px;border:2px solid var(--border);border-radius:12px;outline:none;transition:all 0.15s;font-family:'Space Mono',monospace;" autocomplete="off"></textarea>
       <div style="display:flex;justify-content:space-between;align-items:center;margin-top:6px;">
         <span style="font-size:0.67rem;color:var(--text-muted);font-weight:700;display:flex;align-items:center;gap:4px;">
           <i class="fas fa-keyboard"></i> Manual entry required. Copy-paste is blocklisted.
