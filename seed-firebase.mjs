@@ -233,11 +233,25 @@ const defaultData = {
     { id: "v4", type: "video", name: "Priya Singh", role: "Operations Executive", videoUrl: "https://drive.google.com/file/d/1uSjJiSWYrCn3FMXpJSXpfl4n3Hk3PNch/view?usp=sharing", initials: "PS", gradient: "linear-gradient(135deg,#7c3aed,#ec4899)" },
     { id: "v5", type: "video", name: "Amit Patel", role: "Backend Support", videoUrl: "https://drive.google.com/file/d/1gCnbQb8TZetJpcCaXn2i6_r8Jp-_9ciL/view?usp=sharing", initials: "AP", gradient: "linear-gradient(135deg,#f59e0b,#ef4444)" },
 
-    // 📸 Screenshots Reviews
+    // 📸 Screenshots Reviews (All 18)
     { id: "s1", type: "screenshot", name: "Aarav Sharma", city: "Delhi, India", imageUrl: "https://drive.google.com/file/d/17FLZiJbzPWndzUbIo4NhRM3M-LghjCaP/view?usp=sharing" },
     { id: "s2", type: "screenshot", name: "Pooja Patel", city: "Ahmedabad, Gujarat", imageUrl: "https://drive.google.com/file/d/1oRyTXN7nOWpuH_Re7clKMq0qjhZnKBHY/view?usp=sharing" },
     { id: "s3", type: "screenshot", name: "Ravi Kumar", city: "Hyderabad, Telangana", imageUrl: "https://drive.google.com/file/d/14w2itsxlNSi_-QwbbhLzD3oIOEWqGHas/view?usp=sharing" },
-    { id: "s4", type: "screenshot", name: "Priya Nair", city: "Kochi, Kerala", imageUrl: "https://drive.google.com/file/d/19TkyC7w1Z8s5UssM6iZkRscQy2uM89wD/view?usp=sharing" },
+    { id: "s4", type: "screenshot", name: "Sneha Joshi", city: "Pune, Maharashtra", imageUrl: "https://drive.google.com/file/d/1L0mvZmBgJXzzDESnTCj9z-GDu9WY5Km8/view?usp=sharing" },
+    { id: "s5", type: "screenshot", name: "Mohit Yadav", city: "Lucknow, UP", imageUrl: "https://drive.google.com/file/d/1Dp7HowTJWav60reJoNy5aBVoehecO6oJ/view?usp=sharing" },
+    { id: "s6", type: "screenshot", name: "Divya Mishra", city: "Bhopal, MP", imageUrl: "https://drive.google.com/file/d/1AzNVMtUka9jUkleIxYWnQwqEOtT1bLNY/view?usp=sharing" },
+    { id: "s7", type: "screenshot", name: "Suresh Reddy", city: "Chennai, Tamil Nadu", imageUrl: "https://drive.google.com/file/d/1blG5-vo0px8ke_xR9Zf_6-XW5lF6wbDp/view?usp=sharing" },
+    { id: "s8", type: "screenshot", name: "Rohan Verma", city: "Lucknow, Uttar Pradesh", imageUrl: "https://drive.google.com/file/d/18Vx4eqOoi3Pc7FVFo5V9I4MhdYk-bIQL/view?usp=sharing" },
+    { id: "s9", type: "screenshot", name: "Priya Sharma", city: "Indore, Madhya Pradesh", imageUrl: "https://drive.google.com/file/d/1fnxNxaj6AQUURCzR-eGIC2VhsVInQGth/view?usp=sharing" },
+    { id: "s10", type: "screenshot", name: "Kavya Singh", city: "Jaipur, Rajasthan", imageUrl: "https://drive.google.com/file/d/1gaDk9evdh01Hsv2209gdjDMbsA1mTto0/view?usp=sharing" },
+    { id: "s11", type: "screenshot", name: "Aman Raj", city: "Patna, Bihar", imageUrl: "https://drive.google.com/file/d/1tMp-bXz73OOBJ9TRe05AXUUv5z7p5Wvs/view?usp=sharing" },
+    { id: "s12", type: "screenshot", name: "Sneha Kapoor", city: "Chandigarh, Punjab", imageUrl: "https://drive.google.com/file/d/1YgAHUs42hl_OyOwB6_OwzrUjxVm6aVbM/view?usp=sharing" },
+    { id: "s13", type: "screenshot", name: "Rahul Meena", city: "Kota, Rajasthan", imageUrl: "https://drive.google.com/file/d/132aft4symoWWwKJHEfoE9hpHL87rsRic/view?usp=sharing" },
+    { id: "s14", type: "screenshot", name: "Neha Yadav", city: "Bhopal, Madhya Pradesh", imageUrl: "https://drive.google.com/file/d/1LRHWjP5JLcKwCMSf-knbxTop-M4SaKee/view?usp=sharing" },
+    { id: "s15", type: "screenshot", name: "Arjun Patel", city: "Surat, Gujarat", imageUrl: "https://drive.google.com/file/d/1zAJJn4FGKxWrIkluVo6ZiWHuS6d_PQ6Z/view?usp=sharing" },
+    { id: "s16", type: "screenshot", name: "Pooja Malhotra", city: "Delhi, India", imageUrl: "https://drive.google.com/file/d/1Bzz9hU72or1_XVTL4rsVOqa6IK-jX8jK/view?usp=sharing" },
+    { id: "s17", type: "screenshot", name: "Sahanawaz", city: "Kota, Rajasthan", imageUrl: "https://drive.google.com/file/d/162_3CEIZlQPhPPKeRGqbbIeex1KGdc7V/view?usp=sharing" },
+    { id: "s18", type: "screenshot", name: "Umesh Nagar", city: "Kota, Rajasthan", imageUrl: "https://drive.google.com/file/d/1WHhZP8vtl5LWeuPhvFAnZwzzPQzaLkQa/view?usp=sharing" },
 
     // ✍️ Written Reviews
     { id: "w1", type: "written", name: "Rohit Sharma", city: "Delhi, India", text: "The portal interface is simple and structured. Task tracking and submission workflow is easy to understand even as a first-timer.", initials: "RS", gradient: "linear-gradient(135deg,#1d4ed8,#6366f1)" },

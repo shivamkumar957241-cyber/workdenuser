@@ -793,9 +793,17 @@ body{
       <li><a href="blogs.html">Blogs</a></li>
     </ul>
 
-    <div class="wd-ctas">
+    <div class="wd-ctas" id="navNormalCtas">
       <a href="#" onclick="showVersionModal(event)" class="wd-btn-ghost" data-content-id="nav_userLoginBtn">User Login</a>
       <a href="https://workdenteam2.base44.app/" class="wd-btn-primary" data-content-id="nav_employeeLoginBtn" data-content-href="nav_employeeLoginUrl">Employee Login</a>
+    </div>
+
+    <div id="navUserProfile" style="display:none;" class="flex items-center gap-3 mr-4">
+      <div class="flex flex-col text-right">
+        <span class="text-xs font-black text-slate-800" id="navUserName">Welcome, Guest</span>
+        <span class="text-[10px] text-slate-500 font-bold" id="navUserEmail">email@gmail.com</span>
+      </div>
+      <button onclick="logoutDemoAccount()" class="bg-red-50 hover:bg-red-100 text-red-600 px-3 py-1.5 rounded-full text-xs font-black border border-red-200 transition-all">Logout</button>
     </div>
 
     <button class="wd-ham" onclick="wdToggle()"><i class="fas fa-bars"></i></button>
@@ -811,9 +819,17 @@ body{
   <a href="demo-task.html" class="active">Demo Task</a>
   <a href="testimonials.html">Testimonials</a>
   <a href="blogs.html">Blogs</a>
-  <div class="wd-mob-ctas">
+  <div class="wd-mob-ctas" id="navNormalCtasMobile">
     <a href="#" onclick="showVersionModal(event)" class="wd-btn-ghost" data-content-id="nav_userLoginBtn">User Login</a>
     <a href="https://workdenteam2.base44.app/" class="wd-btn-primary" data-content-id="nav_employeeLoginBtn" data-content-href="nav_employeeLoginUrl">Employee Login</a>
+  </div>
+
+  <div id="navUserProfileMobile" style="display:none;" class="flex-col gap-3 mt-4 p-4 bg-slate-50 border border-slate-200 rounded-2xl">
+    <div class="flex flex-col text-left">
+      <span class="text-xs font-black text-slate-800" id="navUserNameMobile">Welcome, Guest</span>
+      <span class="text-[10px] text-slate-500 font-bold mt-0.5" id="navUserEmailMobile">email@gmail.com</span>
+    </div>
+    <button onclick="logoutDemoAccount()" class="w-full bg-red-600 hover:bg-red-500 text-white py-2 rounded-xl text-xs font-black transition-all">Logout</button>
   </div>
 </div>
 
@@ -870,7 +886,97 @@ document.body.addEventListener('input', function(e){
 });
 </script>
 
-<div id="mainMenu">
+<!-- DEMO AUTHENTICATION PORTAL CARD -->
+<div id="demoAuthArea" class="max-w-md mx-auto my-12 px-6" style="display: block;">
+  <div class="bg-white rounded-3xl border border-slate-200 p-8 shadow-xl shadow-slate-200/50 space-y-6">
+    <div class="text-center space-y-2">
+      <div class="w-12 h-12 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center mx-auto text-xl font-bold">💼</div>
+      <h2 class="text-xl font-black text-slate-800 tracking-tight">Demo Practice Portal</h2>
+      <p class="text-xs text-slate-500 leading-relaxed font-semibold">Verify your credentials or create a permanent demo account to track practice progress.</p>
+    </div>
+
+    <!-- Toggle Switcher Pills -->
+    <div class="bg-slate-100 p-1 rounded-xl flex gap-1 border border-slate-200">
+      <button onclick="setAuthTab('login')" id="tabBtnLogin" class="flex-1 text-xs font-black py-2 rounded-lg transition-all bg-white text-blue-600 shadow-sm border border-slate-200/40">Login Account</button>
+      <button onclick="setAuthTab('register')" id="tabBtnRegister" class="flex-1 text-xs font-black py-2 rounded-lg transition-all text-slate-500 hover:text-slate-800">Create Account</button>
+    </div>
+
+    <!-- Live Alerts -->
+    <div id="authAlert" class="hidden bg-red-50 text-red-600 border border-red-200 rounded-xl p-3 text-xs font-semibold"></div>
+
+    <!-- FORM 1: LOGIN -->
+    <form id="loginForm" onsubmit="handleDemoLogin(event)" class="space-y-4">
+      <div>
+        <label class="block text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-1">User ID (Gmail Address)</label>
+        <input type="email" id="loginEmail" required class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all text-slate-800" placeholder="e.g. shivam@gmail.com" />
+      </div>
+      <div>
+        <label class="block text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-1">Password (Mobile Number)</label>
+        <input type="password" id="loginMobile" required class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all text-slate-800" placeholder="e.g. 10-digit number" />
+      </div>
+      <button type="submit" id="btnLoginSubmit" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-black text-xs py-3 rounded-xl transition-all shadow-lg shadow-blue-500/20 active:scale-[0.98] flex items-center justify-center gap-2">
+        <span>Sign In</span>
+      </button>
+    </form>
+
+    <!-- FORM 2: CREATE ACCOUNT -->
+    <form id="registerForm" onsubmit="handleDemoRegister(event)" class="hidden space-y-4">
+      <div>
+        <label class="block text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-1">Full Name</label>
+        <input type="text" id="regName" required class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all text-slate-800" placeholder="e.g. Shivam Mishra" />
+      </div>
+      <div class="grid grid-cols-2 gap-3">
+        <div>
+          <label class="block text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-1">Mobile Number</label>
+          <input type="tel" pattern="[0-9]{10}" id="regMobile" required class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all text-slate-800" placeholder="10-digit number" />
+        </div>
+        <div>
+          <label class="block text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-1">Gmail Address</label>
+          <input type="email" id="regEmail" required class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all text-slate-800" placeholder="e.g. shivam@gmail.com" />
+        </div>
+      </div>
+      <div class="grid grid-cols-2 gap-3">
+        <div>
+          <label class="block text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-1">City</label>
+          <input type="text" id="regCity" required class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all text-slate-800" placeholder="e.g. Pune" />
+        </div>
+        <div>
+          <label class="block text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-1">Qualification</label>
+          <input type="text" id="regQual" required class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all text-slate-800" placeholder="e.g. Graduate" />
+        </div>
+      </div>
+      <button type="submit" id="btnRegisterSubmit" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-black text-xs py-3 rounded-xl transition-all shadow-lg shadow-blue-500/20 active:scale-[0.98] flex items-center justify-center gap-2">
+        <span>Create Account</span>
+      </button>
+    </form>
+
+    <!-- VIEW 3: CREDENTIALS SUCCESS DISPLAY -->
+    <div id="successView" class="hidden space-y-4">
+      <div class="bg-emerald-50 text-emerald-800 border border-emerald-200 rounded-2xl p-4 text-center space-y-1">
+        <div class="text-xl">🎉</div>
+        <h4 class="font-black text-sm">Demo Account Created!</h4>
+        <p class="text-[11px] text-emerald-600 font-semibold">Your login credentials have been generated instantly.</p>
+      </div>
+
+      <div class="bg-amber-50 border border-amber-200 rounded-2xl p-4 space-y-2">
+        <div class="flex justify-between items-center text-xs">
+          <span class="font-bold text-slate-500">User ID:</span>
+          <span class="font-black text-slate-800 select-all" id="successUserId">email@gmail.com</span>
+        </div>
+        <div class="flex justify-between items-center text-xs">
+          <span class="font-bold text-slate-500">Password:</span>
+          <span class="font-black text-slate-800 select-all" id="successPassword">1234567890</span>
+        </div>
+      </div>
+
+      <button onclick="autoLoginAfterRegister()" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-black text-xs py-3 rounded-xl transition-all shadow-lg shadow-blue-500/20 active:scale-[0.98] flex items-center justify-center gap-2">
+        <span>Sign In Automatically →</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<div id="mainMenu" style="display: none;">
   <div class="menu-header">
     <div style="font-size:2rem;margin-bottom:8px;">💼</div>
     <h1 data-content-id="pageHeroTitle">WorkDen Demo Tasks</h1>
@@ -878,6 +984,65 @@ document.body.addEventListener('input', function(e){
     <div class="menu-badge" data-content-id="demoBadge">🔴 LIVE DEMO – Try All Tasks</div>
   </div>
   <div class="task-cards" id="taskCards"></div>
+
+  <!-- PERSISTENT TASK HISTORY PANEL -->
+  <div id="historyPanel" class="max-w-[1100px] mx-auto px-5 pb-16 space-y-6">
+    <div class="border-t border-slate-200 pt-8">
+      <div class="flex flex-wrap justify-between items-center gap-3 mb-6">
+        <div>
+          <h3 class="text-sm font-black text-slate-800 flex items-center gap-2"><i class="fas fa-chart-line text-blue-600"></i> Practice Performance Summary</h3>
+          <p class="text-xs text-slate-500 font-semibold mt-0.5">Real-time statistics of all your demo task attempts saved permanently.</p>
+        </div>
+        <button onclick="refreshHistoryFromServer()" class="bg-white border border-slate-200 hover:bg-slate-50 text-slate-700 px-3 py-1.5 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 shadow-sm">
+          <i class="fas fa-arrows-rotate"></i> Refresh History
+        </button>
+      </div>
+
+      <!-- Summary statistics grid -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+        <div class="bg-white border border-slate-200 rounded-2xl p-4 shadow-sm space-y-1">
+          <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider block">Total Attempts</span>
+          <strong class="text-xl font-black text-slate-800 block" id="statsTotal">0</strong>
+        </div>
+        <div class="bg-white border border-slate-200 rounded-2xl p-4 shadow-sm space-y-1">
+          <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider block">Approved Tasks</span>
+          <strong class="text-xl font-black text-emerald-600 block" id="statsApproved">0</strong>
+        </div>
+        <div class="bg-white border border-slate-200 rounded-2xl p-4 shadow-sm space-y-1">
+          <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider block">Rejected Tasks</span>
+          <strong class="text-xl font-black text-red-500 block" id="statsRejected">0</strong>
+        </div>
+        <div class="bg-white border border-slate-200 rounded-2xl p-4 shadow-sm space-y-1">
+          <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider block">Avg Accuracy</span>
+          <strong class="text-xl font-black text-blue-600 block" id="statsAccuracy">0%</strong>
+        </div>
+      </div>
+
+      <!-- History attempts list -->
+      <div class="bg-white border border-slate-200 rounded-2xl shadow-sm overflow-hidden">
+        <div class="overflow-x-auto">
+          <table class="w-full text-left border-collapse">
+            <thead>
+              <tr class="bg-slate-50/75 border-b border-slate-200 text-[10px] font-bold text-slate-500 uppercase tracking-wider">
+                <th class="py-3 px-4">Task Name</th>
+                <th class="py-3 px-4">Category</th>
+                <th class="py-3 px-4">Date & Time</th>
+                <th class="py-3 px-4 text-center">Entries</th>
+                <th class="py-3 px-4 text-center">Score (C / W)</th>
+                <th class="py-3 px-4 text-center">Accuracy</th>
+                <th class="py-3 px-4 text-center">Status</th>
+              </tr>
+            </thead>
+            <tbody id="historyTableBody" class="divide-y divide-slate-100 text-xs font-semibold text-slate-700">
+              <tr>
+                <td colspan="7" class="py-12 text-center text-slate-400 italic">No practice attempts recorded. Open a task above to start practicing!</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
 <div id="taskArea">
@@ -1798,6 +1963,19 @@ function buildReport(){
   document.getElementById('summaryBody').innerHTML=`<tr><td>${taskEmoji} ${CT.name}</td><td>${comp}/${TN}</td><td><span class="acc-pill ${overallAcc>=80?'acc-high':overallAcc>=60?'acc-mid':'acc-low'}">${overallAcc}%</span></td><td>${statusText}</td></tr>`;
   document.getElementById('statusBanner').innerHTML='';
 
+  // Hook to save practice attempt to server permanently
+  if (typeof saveAttemptToServer === "function") {
+    saveAttemptToServer({
+      taskName: CT.name,
+      taskCategory: CT.id,
+      totalEntries: comp,
+      correctEntries: tCorForDisplay,
+      wrongEntries: incorrectEntries,
+      accuracy: overallAcc,
+      status: isApproved ? "Approved" : "Rejected"
+    });
+  }
+
   // Reveal colors on saved fields
   if(CT.id==='data'||CT.id==='form'){
     Object.entries(SI).forEach(([idx,s])=>{
@@ -1834,7 +2012,445 @@ function showToast(m){const t=document.getElementById('toast');t.textContent=m;t
 document.addEventListener('contextmenu',e=>{if(e.target.tagName!=='INPUT'&&e.target.tagName!=='TEXTAREA')e.preventDefault();});
 document.addEventListener('keydown',e=>{if((e.ctrlKey||e.metaKey)&&['c','v','x','a','u'].includes(e.key.toLowerCase())&&e.target.tagName!=='INPUT'&&e.target.tagName!=='TEXTAREA')e.preventDefault();});
 
-renderMenu();upTimer();
+// --- Practice Portal Authorization and Session Management ---
+
+let currentAuthTab = 'login';
+let pendingRegisterDetails = null; // Stores email/password temporarily for auto-login after creation
+
+function setAuthTab(tab) {
+  currentAuthTab = tab;
+  const loginForm = document.getElementById('loginForm');
+  const registerForm = document.getElementById('registerForm');
+  const successView = document.getElementById('successView');
+  const tabBtnLogin = document.getElementById('tabBtnLogin');
+  const tabBtnRegister = document.getElementById('tabBtnRegister');
+  const alertEl = document.getElementById('authAlert');
+
+  if (alertEl) alertEl.classList.add('hidden');
+
+  if (tab === 'login') {
+    if (loginForm) loginForm.classList.remove('hidden');
+    if (registerForm) registerForm.classList.add('hidden');
+    if (successView) successView.classList.add('hidden');
+
+    tabBtnLogin.className = "flex-1 text-xs font-black py-2 rounded-lg transition-all bg-white text-blue-600 shadow-sm border border-slate-200/40";
+    tabBtnRegister.className = "flex-1 text-xs font-black py-2 rounded-lg transition-all text-slate-500 hover:text-slate-800";
+  } else if (tab === 'register') {
+    if (loginForm) loginForm.classList.add('hidden');
+    if (registerForm) registerForm.classList.remove('hidden');
+    if (successView) successView.classList.add('hidden');
+
+    tabBtnRegister.className = "flex-1 text-xs font-black py-2 rounded-lg transition-all bg-white text-blue-600 shadow-sm border border-slate-200/40";
+    tabBtnLogin.className = "flex-1 text-xs font-black py-2 rounded-lg transition-all text-slate-500 hover:text-slate-800";
+  }
+}
+
+async function handleDemoRegister(event) {
+  if (event) event.preventDefault();
+  
+  const name = document.getElementById('regName').value.trim();
+  const mobile = document.getElementById('regMobile').value.trim();
+  const email = document.getElementById('regEmail').value.trim().toLowerCase();
+  const city = document.getElementById('regCity').value.trim();
+  const qualification = document.getElementById('regQual').value.trim();
+  const alertEl = document.getElementById('authAlert');
+  const submitBtn = document.getElementById('btnRegisterSubmit');
+
+  if (!name || !mobile || !email || !city || !qualification) {
+    if (alertEl) {
+      alertEl.textContent = "Please fill in all fields.";
+      alertEl.classList.remove('hidden');
+    }
+    return;
+  }
+
+  try {
+    if (submitBtn) {
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = `<span>Creating Account...</span>`;
+    }
+    if (alertEl) alertEl.classList.add('hidden');
+
+    const res = await fetch('/api/demo/create', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name, mobile, email, city, qualification })
+    });
+
+    const data = await res.json();
+    if (!res.ok || !data.success) {
+      throw new Error(data.message || "Failed to create demo account.");
+    }
+
+    // Success! Show success view
+    pendingRegisterDetails = { email, mobile };
+    
+    document.getElementById('successUserId').textContent = email;
+    document.getElementById('successPassword').textContent = mobile;
+
+    document.getElementById('registerForm').classList.add('hidden');
+    document.getElementById('successView').classList.remove('hidden');
+    
+    showToast("Demo Account Created Successfully!");
+  } catch (error) {
+    console.error("Registration error:", error);
+    if (alertEl) {
+      alertEl.textContent = error.message || "An error occurred during account creation.";
+      alertEl.classList.remove('hidden');
+    }
+  } finally {
+    if (submitBtn) {
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = `<span>Create Account</span>`;
+    }
+  }
+}
+
+async function autoLoginAfterRegister() {
+  if (!pendingRegisterDetails) return;
+  const { email, mobile } = pendingRegisterDetails;
+  
+  const alertEl = document.getElementById('authAlert');
+  if (alertEl) alertEl.classList.add('hidden');
+
+  try {
+    const res = await fetch('/api/demo/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, mobile })
+    });
+
+    const data = await res.json();
+    if (!res.ok || !data.success) {
+      throw new Error(data.message || "Failed to login automatically.");
+    }
+
+    localStorage.setItem('demo_user', JSON.stringify({
+      email: data.user.email,
+      mobile: data.user.mobile,
+      name: data.user.name
+    }));
+
+    applyDemoSession(data.user, data.history || []);
+    
+    document.getElementById('demoAuthArea').style.display = 'none';
+    document.getElementById('mainMenu').style.display = 'block';
+    
+    showToast(`Welcome, ${data.user.name}!`);
+    pendingRegisterDetails = null;
+  } catch (error) {
+    console.error("Auto login error:", error);
+    showToast(error.message || "Auto-login failed. Please sign in manually.");
+    setAuthTab('login');
+  }
+}
+
+async function handleDemoLogin(event) {
+  if (event) event.preventDefault();
+
+  const email = document.getElementById('loginEmail').value.trim().toLowerCase();
+  const mobile = document.getElementById('loginMobile').value.trim();
+  const alertEl = document.getElementById('authAlert');
+  const submitBtn = document.getElementById('btnLoginSubmit');
+
+  if (!email || !mobile) {
+    if (alertEl) {
+      alertEl.textContent = "Please fill in all fields.";
+      alertEl.classList.remove('hidden');
+    }
+    return;
+  }
+
+  try {
+    if (submitBtn) {
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = `<span>Signing In...</span>`;
+    }
+    if (alertEl) alertEl.classList.add('hidden');
+
+    const res = await fetch('/api/demo/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, mobile })
+    });
+
+    const data = await res.json();
+    if (!res.ok || !data.success) {
+      throw new Error(data.message || "Invalid credentials.");
+    }
+
+    localStorage.setItem('demo_user', JSON.stringify({
+      email: data.user.email,
+      mobile: data.user.mobile,
+      name: data.user.name
+    }));
+
+    applyDemoSession(data.user, data.history || []);
+    
+    document.getElementById('demoAuthArea').style.display = 'none';
+    document.getElementById('mainMenu').style.display = 'block';
+    
+    showToast(`Welcome back, ${data.user.name}!`);
+  } catch (error) {
+    console.error("Login error:", error);
+    if (alertEl) {
+      alertEl.textContent = error.message || "An error occurred during sign-in.";
+      alertEl.classList.remove('hidden');
+    }
+  } finally {
+    if (submitBtn) {
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = `<span>Sign In</span>`;
+    }
+  }
+}
+
+function applyDemoSession(user, history) {
+  // Update desktop navbar user profile details
+  const navUserName = document.getElementById('navUserName');
+  const navUserEmail = document.getElementById('navUserEmail');
+  const navUserProfile = document.getElementById('navUserProfile');
+  const navNormalCtas = document.getElementById('navNormalCtas');
+
+  if (navUserName) navUserName.textContent = `Welcome, ${user.name}`;
+  if (navUserEmail) navUserEmail.textContent = user.email;
+  if (navUserProfile) navUserProfile.style.setProperty('display', 'flex', 'important');
+  if (navNormalCtas) navNormalCtas.style.setProperty('display', 'none', 'important');
+
+  // Update mobile navbar user profile details
+  const navUserNameMobile = document.getElementById('navUserNameMobile');
+  const navUserEmailMobile = document.getElementById('navUserEmailMobile');
+  const navUserProfileMobile = document.getElementById('navUserProfileMobile');
+  const navNormalCtasMobile = document.getElementById('navNormalCtasMobile');
+
+  if (navUserNameMobile) navUserNameMobile.textContent = `Welcome, ${user.name}`;
+  if (navUserEmailMobile) navUserEmailMobile.textContent = user.email;
+  if (navUserProfileMobile) navUserProfileMobile.style.setProperty('display', 'flex', 'important');
+  if (navNormalCtasMobile) navNormalCtasMobile.style.setProperty('display', 'none', 'important');
+
+  // Render practice attempts history
+  renderHistory(history || []);
+}
+
+function checkDemoSession() {
+  const storedUser = localStorage.getItem('demo_user');
+  if (storedUser) {
+    try {
+      const user = JSON.parse(storedUser);
+      // Fetch latest updates and list of attempts from server in background
+      fetch('/api/demo/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: user.email, mobile: user.mobile })
+      })
+      .then(res => res.json())
+      .then(data => {
+        if (data.success) {
+          applyDemoSession(data.user, data.history || []);
+        } else {
+          // If credentials became invalid or deleted on server, clear
+          logoutDemoAccount();
+        }
+      })
+      .catch(err => {
+        console.error("Session sync failed:", err);
+        // Fallback to offline render with empty history
+        applyDemoSession(user, []);
+      });
+
+      document.getElementById('demoAuthArea').style.display = 'none';
+      document.getElementById('mainMenu').style.display = 'block';
+    } catch (e) {
+      console.error("Error parsing stored session", e);
+      logoutDemoAccount();
+    }
+  } else {
+    // Show auth portal
+    document.getElementById('demoAuthArea').style.display = 'block';
+    document.getElementById('mainMenu').style.display = 'none';
+  }
+}
+
+function logoutDemoAccount() {
+  localStorage.removeItem('demo_user');
+
+  // Reset desktop navbar
+  const navUserProfile = document.getElementById('navUserProfile');
+  const navNormalCtas = document.getElementById('navNormalCtas');
+  if (navUserProfile) navUserProfile.style.setProperty('display', 'none', 'important');
+  if (navNormalCtas) navNormalCtas.style.setProperty('display', 'flex', 'important');
+
+  // Reset mobile navbar
+  const navUserProfileMobile = document.getElementById('navUserProfileMobile');
+  const navNormalCtasMobile = document.getElementById('navNormalCtasMobile');
+  if (navUserProfileMobile) navUserProfileMobile.style.setProperty('display', 'none', 'important');
+  if (navNormalCtasMobile) navNormalCtasMobile.style.setProperty('display', 'flex', 'important');
+
+  // Go back to main authentication card
+  document.getElementById('demoAuthArea').style.display = 'block';
+  document.getElementById('mainMenu').style.display = 'none';
+  
+  // If in a task, go back to main screen
+  if (typeof goBack === "function") {
+    goBack();
+  }
+
+  showToast("Logged out successfully.");
+}
+
+async function saveAttemptToServer(attemptData) {
+  const storedUser = localStorage.getItem('demo_user');
+  if (!storedUser) return;
+
+  try {
+    const user = JSON.parse(storedUser);
+    const payload = {
+      email: user.email,
+      taskName: attemptData.taskName,
+      taskCategory: attemptData.taskCategory,
+      totalEntries: attemptData.totalEntries,
+      correctEntries: attemptData.correctEntries,
+      wrongEntries: attemptData.wrongEntries,
+      accuracy: attemptData.accuracy,
+      status: attemptData.status
+    };
+
+    const res = await fetch('/api/demo/attempt', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+
+    const data = await res.json();
+    if (!res.ok || !data.success) {
+      console.error("Save attempt failed on server:", data.message);
+    } else {
+      showToast("Practice attempt saved permanently!");
+    }
+  } catch (error) {
+    console.error("Failed to save attempt to server:", error);
+  } finally {
+    // Refresh history logs to include the newly added task attempt
+    refreshHistoryFromServer();
+  }
+}
+
+async function refreshHistoryFromServer() {
+  const storedUser = localStorage.getItem('demo_user');
+  if (!storedUser) return;
+
+  try {
+    const user = JSON.parse(storedUser);
+    const res = await fetch('/api/demo/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email: user.email, mobile: user.mobile })
+    });
+
+    const data = await res.json();
+    if (res.ok && data.success) {
+      renderHistory(data.history || []);
+      showToast("Practice history updated!");
+    }
+  } catch (error) {
+    console.error("Failed to refresh history:", error);
+  }
+}
+
+function renderHistory(attempts) {
+  const tbody = document.getElementById('historyTableBody');
+  const statsTotal = document.getElementById('statsTotal');
+  const statsApproved = document.getElementById('statsApproved');
+  const statsRejected = document.getElementById('statsRejected');
+  const statsAccuracy = document.getElementById('statsAccuracy');
+
+  if (!tbody) return;
+
+  // Clear existing logs
+  tbody.innerHTML = '';
+
+  if (!attempts || attempts.length === 0) {
+    tbody.innerHTML = `
+      <tr>
+        <td colspan="7" class="py-12 text-center text-slate-400 italic">No practice attempts recorded. Open a task above to start practicing!</td>
+      </tr>`;
+    
+    if (statsTotal) statsTotal.textContent = '0';
+    if (statsApproved) statsApproved.textContent = '0';
+    if (statsRejected) statsRejected.textContent = '0';
+    if (statsAccuracy) statsAccuracy.textContent = '0%';
+    return;
+  }
+
+  // Calculate statistics counts
+  const total = attempts.length;
+  let approved = 0;
+  let rejected = 0;
+  let totalAcc = 0;
+
+  attempts.forEach(att => {
+    if (att.status === 'Approved') approved++;
+    else rejected++;
+    totalAcc += parseFloat(att.accuracy || 0);
+
+    // Format category nicely
+    let categoryName = 'Practice';
+    if (att.taskCategory === 'data') categoryName = 'Data Entry';
+    else if (att.taskCategory === 'captcha') categoryName = 'Captcha Entry';
+    else if (att.taskCategory === 'form') categoryName = 'Form Filling';
+    else if (att.taskCategory === 'grammar') categoryName = 'Grammar Checking';
+    else if (att.taskCategory === 'typing') categoryName = 'Typing Speed';
+
+    // Format date string beautifully
+    let formattedDate = 'N/A';
+    if (att.timestamp) {
+      const dt = new Date(att.timestamp);
+      formattedDate = dt.toLocaleDateString('en-IN', {
+        day: '2-digit',
+        month: 'short',
+        year: 'numeric'
+      }) + ', ' + dt.toLocaleTimeString('en-IN', {
+        hour: '2-digit',
+        minute: '2-digit',
+        hour12: true
+      });
+    }
+
+    // Status Pill
+    const statusPill = att.status === 'Approved'
+      ? `<span class="bg-emerald-50 text-emerald-700 border border-emerald-200 px-2.5 py-1 rounded-full text-[10px] font-extrabold uppercase">Approved</span>`
+      : `<span class="bg-red-50 text-red-600 border border-red-200 px-2.5 py-1 rounded-full text-[10px] font-extrabold uppercase">Rejected</span>`;
+
+    // Accuracy style
+    const accVal = parseFloat(att.accuracy || 0);
+    const accClass = accVal >= 80 ? 'text-emerald-600' : accVal >= 60 ? 'text-amber-500' : 'text-red-500';
+
+    const row = document.createElement('tr');
+    row.className = "border-b border-slate-100/80 hover:bg-slate-50/50 transition-colors";
+    row.innerHTML = `
+      <td class="py-3 px-4 font-bold text-slate-800">${att.taskName}</td>
+      <td class="py-3 px-4 text-slate-500 font-bold">${categoryName}</td>
+      <td class="py-3 px-4 text-slate-400 font-medium">${formattedDate}</td>
+      <td class="py-3 px-4 text-center font-bold text-slate-600">${att.totalEntries}</td>
+      <td class="py-3 px-4 text-center font-bold text-slate-600">${att.correctEntries} <span class="text-slate-400 font-normal">/</span> <span class="text-red-400">${att.wrongEntries}</span></td>
+      <td class="py-3 px-4 text-center font-black ${accClass}">${accVal}%</td>
+      <td class="py-3 px-4 text-center">${statusPill}</td>
+    `;
+    tbody.appendChild(row);
+  });
+
+  // Calculate and display averages
+  const avgAcc = total > 0 ? Math.round(totalAcc / total) : 0;
+  
+  if (statsTotal) statsTotal.textContent = String(total);
+  if (statsApproved) statsApproved.textContent = String(approved);
+  if (statsRejected) statsRejected.textContent = String(rejected);
+  if (statsAccuracy) statsAccuracy.textContent = `${avgAcc}%`;
+}
+
+renderMenu();
+checkDemoSession();
+upTimer();
 window.addEventListener('scroll',()=>{const nb=document.getElementById('wdNav');if(nb)nb.classList.toggle('scrolled',window.scrollY>20);});
 </script>
 
