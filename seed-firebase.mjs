@@ -262,11 +262,11 @@ const defaultData = {
   },
   testimonials: [
     // 🎥 Videos Reviews
-    { id: "v1", type: "video", name: "Rahul Sharma", role: "Content Moderator", videoUrl: "https://drive.google.com/file/d/1TfgX3JHS3dr-aoNM6MfVNFzdTiqe4zDy/view?usp=sharing", initials: "RS", gradient: "linear-gradient(135deg,#1d4ed8,#6366f1)" },
-    { id: "v2", type: "video", name: "Anjali Verma", role: "Data Specialist", videoUrl: "https://drive.google.com/file/d/1WOQP62KcC0EeVufQl4mCDrKK-K7cxNT3/view?usp=sharing", initials: "AV", gradient: "linear-gradient(135deg,#ec4899,#f97316)" },
-    { id: "v3", type: "video", name: "Vikas Gupta", role: "Translator", videoUrl: "https://drive.google.com/file/d/1H8ziVfY7GlJMd5SQ3nTwVhNhWx2p2czl/view?usp=sharing", initials: "VG", gradient: "linear-gradient(135deg,#10b981,#0891b2)" },
-    { id: "v4", type: "video", name: "Priya Singh", role: "Operations Executive", videoUrl: "https://drive.google.com/file/d/1uSjJiSWYrCn3FMXpJSXpfl4n3Hk3PNch/view?usp=sharing", initials: "PS", gradient: "linear-gradient(135deg,#7c3aed,#ec4899)" },
-    { id: "v5", type: "video", name: "Amit Patel", role: "Backend Support", videoUrl: "https://drive.google.com/file/d/1gCnbQb8TZetJpcCaXn2i6_r8Jp-_9ciL/view?usp=sharing", initials: "AP", gradient: "linear-gradient(135deg,#f59e0b,#ef4444)" },
+    { id: "v1", type: "video", name: "Rahul Sharma", city: "Delhi, India", videoUrl: "https://drive.google.com/file/d/1TfgX3JHS3dr-aoNM6MfVNFzdTiqe4zDy/view?usp=sharing", initials: "RS", gradient: "linear-gradient(135deg,#1d4ed8,#6366f1)" },
+    { id: "v2", type: "video", name: "Anjali Verma", city: "Mumbai, Maharashtra", videoUrl: "https://drive.google.com/file/d/1WOQP62KcC0EeVufQl4mCDrKK-K7cxNT3/view?usp=sharing", initials: "AV", gradient: "linear-gradient(135deg,#ec4899,#f97316)" },
+    { id: "v3", type: "video", name: "Vikas Gupta", city: "Bengaluru, Karnataka", videoUrl: "https://drive.google.com/file/d/1H8ziVfY7GlJMd5SQ3nTwVhNhWx2p2czl/view?usp=sharing", initials: "VG", gradient: "linear-gradient(135deg,#10b981,#0891b2)" },
+    { id: "v4", type: "video", name: "Priya Singh", city: "Lucknow, Uttar Pradesh", videoUrl: "https://drive.google.com/file/d/1uSjJiSWYrCn3FMXpJSXpfl4n3Hk3PNch/view?usp=sharing", initials: "PS", gradient: "linear-gradient(135deg,#7c3aed,#ec4899)" },
+    { id: "v5", type: "video", name: "Amit Patel", city: "Ahmedabad, Gujarat", videoUrl: "https://drive.google.com/file/d/1gCnbQb8TZetJpcCaXn2i6_r8Jp-_9ciL/view?usp=sharing", initials: "AP", gradient: "linear-gradient(135deg,#f59e0b,#ef4444)" },
 
     // 📸 Screenshots Reviews (All 18)
     { id: "s1", type: "screenshot", name: "Aarav Sharma", city: "Delhi, India", imageUrl: "https://drive.google.com/file/d/17FLZiJbzPWndzUbIo4NhRM3M-LghjCaP/view?usp=sharing" },

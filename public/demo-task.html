@@ -1788,7 +1788,7 @@ function bGR(i,d){
 
 function bTY(i,d){
   const lines=d.text.split('\n');
-  const linesHtml=lines.map(l=>l.trim()===''?'<br>':`<div style="margin:1px 0;font-size:0.82rem;color:#1E293B;font-family:'Space Mono',monospace;line-height:1.65;word-break:break-word;">${escHtml(l)}</div>`).join('');
+  const linesHtml=lines.map(l=>l.trim()===''?'<br>':`<div style="margin:1px 0;font-size:0.73rem;color:#1E293B;font-family:'Space Mono',monospace;line-height:1.65;word-break:break-word;">${escHtml(l)}</div>`).join('');
   return `
   <div class="typing-split-container" style="display: grid; grid-template-columns: 1fr; gap: 20px; align-items: start;">
     <!-- LEFT SIDE: REFERENCE CONTENT -->

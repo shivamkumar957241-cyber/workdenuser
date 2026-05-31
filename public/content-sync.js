@@ -300,7 +300,7 @@ function applyWebsiteContent(data) {
         
         const detailsBtn = clone.querySelector(".card-details-btn");
         if (detailsBtn) {
-          if (item.isPaid) {
+          if (item.isPaid === true || item.isPaid === "true") {
             detailsBtn.style.display = "inline-flex";
           } else {
             detailsBtn.style.display = "none";
