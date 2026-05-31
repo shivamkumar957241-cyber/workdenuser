@@ -24,13 +24,12 @@ const ITrash   = () => <Icon d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0
 const ILogout  = () => <Icon d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />;
 const ILoad    = () => <svg className="w-5 h-5 animate-spin" fill="none" viewBox="0 0 24 24"><circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"/><path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"/></svg>;
 
-// ─── Types ────────────────────────────────────────────────────────────────────
+// ─── Schema Configurations ───────────────────────────────────────────────────
 type FType = "text" | "textarea" | "richtext" | "url";
 type Field = { key: string; label: string; type: FType; hint?: string };
 type Section = { title: string; fields: Field[] };
 type PageDef = { label: string; icon: React.FC; sections: Section[] };
 
-// ─── Full Page Schema ─────────────────────────────────────────────────────────
 const PAGES: Record<string, PageDef> = {
   home: {
     label: "Home Page", icon: IHome,
@@ -45,33 +44,17 @@ const PAGES: Record<string, PageDef> = {
         { key: "heroTrust2",   label: "Trust Line 2",              type: "text" },
         { key: "heroTrust3",   label: "Trust Line 3",              type: "text" },
       ]},
-      { title: "Why WorkDen Section", fields: [
+      { title: "Why WorkDen Header", fields: [
         { key: "whyTitle",    label: "Section Title",   type: "text" },
         { key: "whySubtitle", label: "Section Subtitle", type: "textarea" },
-        { key: "feat1Title",  label: "Feature 1 Title", type: "text" }, { key: "feat1Desc", label: "Feature 1 Description", type: "textarea" },
-        { key: "feat2Title",  label: "Feature 2 Title", type: "text" }, { key: "feat2Desc", label: "Feature 2 Description", type: "textarea" },
-        { key: "feat3Title",  label: "Feature 3 Title", type: "text" }, { key: "feat3Desc", label: "Feature 3 Description", type: "textarea" },
-        { key: "feat4Title",  label: "Feature 4 Title", type: "text" }, { key: "feat4Desc", label: "Feature 4 Description", type: "textarea" },
-        { key: "feat5Title",  label: "Feature 5 Title", type: "text" }, { key: "feat5Desc", label: "Feature 5 Description", type: "textarea" },
-        { key: "feat6Title",  label: "Feature 6 Title", type: "text" }, { key: "feat6Desc", label: "Feature 6 Description", type: "textarea" },
       ]},
-      { title: "Work Categories Section", fields: [
+      { title: "Work Categories Header", fields: [
         { key: "catTitle",   label: "Section Title",    type: "text" },
         { key: "catSubtitle",label: "Section Subtitle", type: "textarea" },
-        { key: "cat1Title",  label: "Category 1 Title", type: "text" }, { key: "cat1Desc", label: "Category 1 Description", type: "textarea" },
-        { key: "cat2Title",  label: "Category 2 Title", type: "text" }, { key: "cat2Desc", label: "Category 2 Description", type: "textarea" },
-        { key: "cat3Title",  label: "Category 3 Title", type: "text" }, { key: "cat3Desc", label: "Category 3 Description", type: "textarea" },
-        { key: "cat4Title",  label: "Category 4 Title", type: "text" }, { key: "cat4Desc", label: "Category 4 Description", type: "textarea" },
-        { key: "cat5Title",  label: "Category 5 Title", type: "text" }, { key: "cat5Desc", label: "Category 5 Description", type: "textarea" },
-        { key: "cat6Title",  label: "Category 6 Title", type: "text" }, { key: "cat6Desc", label: "Category 6 Description", type: "textarea" },
       ]},
-      { title: "How It Works Section", fields: [
+      { title: "How It Works Header", fields: [
         { key: "howTitle",   label: "Section Title",    type: "text" },
         { key: "howSubtitle",label: "Section Subtitle", type: "textarea" },
-        { key: "step1Title", label: "Step 1 Title",     type: "text" }, { key: "step1Desc", label: "Step 1 Description", type: "textarea" },
-        { key: "step2Title", label: "Step 2 Title",     type: "text" }, { key: "step2Desc", label: "Step 2 Description", type: "textarea" },
-        { key: "step3Title", label: "Step 3 Title",     type: "text" }, { key: "step3Desc", label: "Step 3 Description", type: "textarea" },
-        { key: "step4Title", label: "Step 4 Title",     type: "text" }, { key: "step4Desc", label: "Step 4 Description", type: "textarea" },
       ]},
       { title: "CTA Section", fields: [
         { key: "ctaTitle",   label: "CTA Heading",        type: "text" },
@@ -92,55 +75,9 @@ const PAGES: Record<string, PageDef> = {
         { key: "togglePaidBtn",   label: "Paid Toggle Button Label", type: "text" },
         { key: "toggleFreeBtn",   label: "Free Toggle Button Label", type: "text" },
       ]},
-      { title: "Plan 1: Online Typing Work (Paid)", fields: [
-        { key: "plan1Name",       label: "Plan 1 Name",         type: "text" },
-        { key: "plan1Price",      label: "Plan 1 Price (₹)",    type: "text" },
-        { key: "plan1Desc",       label: "Plan 1 Description",  type: "textarea" },
-        { key: "plan1RefundNote", label: "Refund Warning Note", type: "textarea" },
-        { key: "plan1Feat1",      label: "Feature 1", type: "text" },
-        { key: "plan1Feat2",      label: "Feature 2", type: "text" },
-        { key: "plan1Feat3",      label: "Feature 3", type: "text" },
-        { key: "plan1Feat4",      label: "Feature 4", type: "text" },
-        { key: "plan1Feat5",      label: "Feature 5", type: "text" },
-        { key: "plan1Feat6",      label: "Feature 6", type: "text" },
-        { key: "plan1Feat7",      label: "Feature 7", type: "text" },
-        { key: "plan1Feat8",      label: "Feature 8", type: "text" },
-      ]},
-      { title: "Plan 2: Freelance Telecaller (Free)", fields: [
-        { key: "plan2Name",  label: "Plan 2 Name",         type: "text" },
-        { key: "plan2Price", label: "Plan 2 Price (e.g. Free)", type: "text" },
-        { key: "plan2Desc",  label: "Plan 2 Description",  type: "textarea" },
-        { key: "plan2Feat1", label: "Feature 1", type: "text" },
-        { key: "plan2Feat2", label: "Feature 2", type: "text" },
-        { key: "plan2Feat3", label: "Feature 3", type: "text" },
-        { key: "plan2Feat4", label: "Feature 4", type: "text" },
-        { key: "plan2Feat5", label: "Feature 5", type: "text" },
-        { key: "plan2Feat6", label: "Feature 6", type: "text" },
-        { key: "plan2Feat7", label: "Feature 7", type: "text" },
-        { key: "plan2Feat8", label: "Feature 8", type: "text" },
-      ]},
-      { title: "Plan 3: Affiliate Marketer (Free)", fields: [
-        { key: "plan3Name",  label: "Plan 3 Name",         type: "text" },
-        { key: "plan3Price", label: "Plan 3 Price (e.g. Free)", type: "text" },
-        { key: "plan3Desc",  label: "Plan 3 Description",  type: "textarea" },
-        { key: "plan3Feat1", label: "Feature 1", type: "text" },
-        { key: "plan3Feat2", label: "Feature 2", type: "text" },
-        { key: "plan3Feat3", label: "Feature 3", type: "text" },
-        { key: "plan3Feat4", label: "Feature 4", type: "text" },
-        { key: "plan3Feat5", label: "Feature 5", type: "text" },
-        { key: "plan3Feat6", label: "Feature 6", type: "text" },
-        { key: "plan3Feat7", label: "Feature 7", type: "text" },
-        { key: "plan3Feat8", label: "Feature 8", type: "text" },
-      ]},
-      { title: "Value Proposition Strip", fields: [
+      { title: "Value Proposition Strip Header", fields: [
         { key: "valueTitle",  label: "Value Strip Title",   type: "text" },
         { key: "valueDesc",   label: "Value Strip Description", type: "textarea" },
-        { key: "value1Title", label: "Value Card 1 Title",  type: "text" },
-        { key: "value1Desc",  label: "Value Card 1 Desc",   type: "textarea" },
-        { key: "value2Title", label: "Value Card 2 Title",  type: "text" },
-        { key: "value2Desc",  label: "Value Card 2 Desc",   type: "textarea" },
-        { key: "value3Title", label: "Value Card 3 Title",  type: "text" },
-        { key: "value3Desc",  label: "Value Card 3 Desc",   type: "textarea" },
       ]},
     ],
   },
@@ -162,14 +99,6 @@ const PAGES: Record<string, PageDef> = {
         { key: "missionText", label: "Mission Text", type: "textarea" },
         { key: "visionText",  label: "Vision Text",  type: "textarea" },
       ]},
-      { title: "Team Members", fields: [
-        { key: "team1Name", label: "Team Member 1 Name", type: "text" },
-        { key: "team1Role", label: "Team Member 1 Role", type: "text" },
-        { key: "team2Name", label: "Team Member 2 Name", type: "text" },
-        { key: "team2Role", label: "Team Member 2 Role", type: "text" },
-        { key: "team3Name", label: "Team Member 3 Name", type: "text" },
-        { key: "team3Role", label: "Team Member 3 Role", type: "text" },
-      ]},
       { title: "Office & Contact Credentials", fields: [
         { key: "companyName",     label: "Registered Company Name",  type: "text" },
         { key: "establishedYear", label: "Established Year",         type: "text" },
@@ -187,15 +116,6 @@ const PAGES: Record<string, PageDef> = {
         { key: "pageHeroTitle", label: "Page Title",      type: "text" },
         { key: "pageHeroDesc",  label: "Page Subtitle",   type: "textarea" },
       ]},
-      { title: "Projects List", fields: [
-        { key: "proj1Title", label: "Project 1 Title", type: "text" }, { key: "proj1Desc", label: "Project 1 Description", type: "textarea" },
-        { key: "proj2Title", label: "Project 2 Title", type: "text" }, { key: "proj2Desc", label: "Project 2 Description", type: "textarea" },
-        { key: "proj3Title", label: "Project 3 Title", type: "text" }, { key: "proj3Desc", label: "Project 3 Description", type: "textarea" },
-        { key: "proj4Title", label: "Project 4 Title", type: "text" }, { key: "proj4Desc", label: "Project 4 Description", type: "textarea" },
-        { key: "proj5Title", label: "Project 5 Title", type: "text" }, { key: "proj5Desc", label: "Project 5 Description", type: "textarea" },
-        { key: "proj6Title", label: "Project 6 Title", type: "text" }, { key: "proj6Desc", label: "Project 6 Description", type: "textarea" },
-        { key: "proj7Title", label: "Project 7 Title", type: "text" }, { key: "proj7Desc", label: "Project 7 Description", type: "textarea" },
-      ]},
       { title: "Projects Page CTA", fields: [
         { key: "ctaTitle", label: "Bottom CTA Heading",     type: "text" },
         { key: "ctaDesc",  label: "Bottom CTA Description", type: "textarea" },
@@ -208,22 +128,6 @@ const PAGES: Record<string, PageDef> = {
       { title: "Page Hero", fields: [
         { key: "pageHeroTitle", label: "Page Title",    type: "text" },
         { key: "pageHeroDesc",  label: "Page Subtitle", type: "textarea" },
-      ]},
-      { title: "Blog Posts (1-6)", fields: [
-        { key: "blog1Title", label: "Blog 1 Title", type: "text" }, { key: "blog1Desc", label: "Blog 1 Description", type: "textarea" }, { key: "blog1Tag", label: "Blog 1 Tag", type: "text" },
-        { key: "blog2Title", label: "Blog 2 Title", type: "text" }, { key: "blog2Desc", label: "Blog 2 Description", type: "textarea" }, { key: "blog2Tag", label: "Blog 2 Tag", type: "text" },
-        { key: "blog3Title", label: "Blog 3 Title", type: "text" }, { key: "blog3Desc", label: "Blog 3 Description", type: "textarea" }, { key: "blog3Tag", label: "Blog 3 Tag", type: "text" },
-        { key: "blog4Title", label: "Blog 4 Title", type: "text" }, { key: "blog4Desc", label: "Blog 4 Description", type: "textarea" }, { key: "blog4Tag", label: "Blog 4 Tag", type: "text" },
-        { key: "blog5Title", label: "Blog 5 Title", type: "text" }, { key: "blog5Desc", label: "Blog 5 Description", type: "textarea" }, { key: "blog5Tag", label: "Blog 5 Tag", type: "text" },
-        { key: "blog6Title", label: "Blog 6 Title", type: "text" }, { key: "blog6Desc", label: "Blog 6 Description", type: "textarea" }, { key: "blog6Tag", label: "Blog 6 Tag", type: "text" },
-      ]},
-      { title: "Blog Posts (7-12)", fields: [
-        { key: "blog7Title", label: "Blog 7 Title", type: "text" }, { key: "blog7Desc", label: "Blog 7 Description", type: "textarea" }, { key: "blog7Tag", label: "Blog 7 Tag", type: "text" },
-        { key: "blog8Title", label: "Blog 8 Title", type: "text" }, { key: "blog8Desc", label: "Blog 8 Description", type: "textarea" }, { key: "blog8Tag", label: "Blog 8 Tag", type: "text" },
-        { key: "blog9Title", label: "Blog 9 Title", type: "text" }, { key: "blog9Desc", label: "Blog 9 Description", type: "textarea" }, { key: "blog9Tag", label: "Blog 9 Tag", type: "text" },
-        { key: "blog10Title", label: "Blog 10 Title", type: "text" }, { key: "blog10Desc", label: "Blog 10 Description", type: "textarea" }, { key: "blog10Tag", label: "Blog 10 Tag", type: "text" },
-        { key: "blog11Title", label: "Blog 11 Title", type: "text" }, { key: "blog11Desc", label: "Blog 11 Description", type: "textarea" }, { key: "blog11Tag", label: "Blog 11 Tag", type: "text" },
-        { key: "blog12Title", label: "Blog 12 Title", type: "text" }, { key: "blog12Desc", label: "Blog 12 Description", type: "textarea" }, { key: "blog12Tag", label: "Blog 12 Tag", type: "text" },
       ]},
     ],
   },
@@ -268,8 +172,8 @@ const PAGES: Record<string, PageDef> = {
         { key: "msmeNumber",   label: "MSME Number Text",   type: "text" },
       ]},
       { title: "Footer Contact & Socials", fields: [
-        { key: "emailGeneral", label: "General Email",            type: "text" },
-        { key: "emailSupport", label: "Support Email",            type: "text" },
+        { key: "emailGeneral", label: "General Email (e.g. info@workden.online)", type: "text" },
+        { key: "emailSupport", label: "Support Email (e.g. support@workden.online)", type: "text" },
         { key: "address1",     label: "Office Address 1",         type: "text" },
         { key: "address2",     label: "Office Address 2",         type: "text" },
         { key: "facebookUrl",  label: "Facebook URL",             type: "url" },
@@ -281,226 +185,219 @@ const PAGES: Record<string, PageDef> = {
   },
 };
 
-const DEFAULT_CONTENT: Record<string, Record<string, string>> = {
-  "home": {
-    "heroTitle": "Work From Home.<br><span class=\"hl\">Simple Tasks.</span><br>Real Income.",
-    "heroSubtitle": "Complete simple online tasks - data entry, form filling, typing, chat support - through a secure, government-registered platform. Trusted by 1.34 lakh+ users across India.",
-    "heroBadge": "India's Verified WFH Platform",
-    "heroCta1": "Start Working Now",
-    "heroCta2": "Try Free Demo",
-    "heroTrust1": "GSTIN: 10KEJPM6504N1Z7 — Government Verified",
-    "heroTrust2": "MSME: UDYAM-KR-03-0640514",
-    "heroTrust3": "Free demo — no commitment, no payment required",
-    "whyTitle": "Why People Trust WorkDen",
-    "whySubtitle": "Built for secure, structured, transparent digital task work — from anywhere in India.",
-    "feat1Title": "Government Registered",
-    "feat1Desc": "GSTIN & MSME certified business. Fully compliant with Indian regulations. You can verify our credentials independently online.",
-    "feat2Title": "Free Demo First",
-    "feat2Desc": "Try a real demo task before committing anything. See exactly how the platform works — zero risk, no payment required.",
-    "feat3Title": "Multiple Task Types",
-    "feat3Desc": "Data entry, form filling, typing, captcha, grammar correction, chat support — pick what suits your skills best.",
-    "feat4Title": "Work From Anywhere",
-    "feat4Desc": "Just a phone or laptop is enough. Flexible hours, no commute, no dress code — work whenever it suits you.",
-    "feat5Title": "Dedicated Support",
-    "feat5Desc": "Recruiter teams assist you through onboarding, task completion, and any doubts. You are never left without help.",
-    "feat6Title": "Clear Policies",
-    "feat6Desc": "All terms, payment structure, and review policies are published openly. No hidden surprises or confusing fine print.",
-    "catTitle": "Available Work Categories",
-    "catSubtitle": "All tasks have step-by-step instructions inside the portal. Most require no prior experience.",
-    "cat1Title": "Form Filling",
-    "cat1Desc": "Fill structured forms using given data. Easy, guided, and clearly defined inside the portal.",
-    "cat2Title": "Data Entry",
-    "cat2Desc": "Input data into databases from reference sheets. Simple copy-enter tasks with clear reference material.",
-    "cat3Title": "Email Support",
-    "cat3Desc": "Handle customer emails using predefined templates. Template-based, easy to follow responses.",
-    "cat4Title": "Chat Support",
-    "cat4Desc": "Respond to live chat queries from the dashboard with guided answer templates.",
-    "cat5Title": "Grammar Correction",
-    "cat5Desc": "Fix highlighted errors in short text documents. Clear visual indicators shown in portal.",
-    "cat6Title": "Typing Tasks",
-    "cat6Desc": "Type the text shown in the dashboard into the input box. Perfect for beginners with basic typing.",
-    "howTitle": "How to Get Started",
-    "howSubtitle": "4 clear steps from demo to earning. No shortcuts, no confusion.",
-    "step1Title": "Try the Free Demo",
-    "step1Desc": "Experience the platform firsthand — completely free. No payment, no commitment needed.",
-    "step2Title": "Register & Verify",
-    "step2Desc": "Complete a simple registration and verification to access the task portal.",
-    "step3Title": "Get Tasks Assigned",
-    "step3Desc": "Tasks are allocated based on project availability and your profile eligibility.",
-    "step4Title": "Submit & Earn",
-    "step4Desc": "Submitted work is quality-reviewed. Earnings depend on accuracy and guideline compliance.",
-    "ctaTitle": "Ready to Start Earning from Home?",
-    "ctaSubtitle": "Join 1.34 lakh+ users already working on WorkDen. Try the free demo first — no payment required.",
-    "ctaBtn1": "Try Free Demo",
-    "ctaBtn2": "User Login"
+// ─── Default Content Array Structures ──────────────────────────────────────────
+const DEFAULT_CONTENT: Record<string, any> = {
+  home: {
+    heroTitle: "Work From Home.<br><span class=\"hl\">Simple Tasks.</span><br>Real Income.",
+    heroSubtitle: "Complete simple online tasks - data entry, form filling, typing, chat support - through a secure, government-registered platform. Trusted by 1.34 lakh+ users across India.",
+    heroBadge: "India's Verified WFH Platform",
+    heroCta1: "Start Working Now",
+    heroCta2: "Try Free Demo",
+    heroTrust1: "GSTIN: 10KEJPM6504N1Z7 — Government Verified",
+    heroTrust2: "MSME: UDYAM-KR-03-0640514",
+    heroTrust3: "Free demo — no commitment, no payment required",
+    whyTitle: "Why People Trust WorkDen",
+    whySubtitle: "Built for secure, structured, transparent digital task work — from anywhere in India.",
+    catTitle: "Available Work Categories",
+    catSubtitle: "All tasks have step-by-step instructions inside the portal. Most require no prior experience.",
+    howTitle: "How to Get Started",
+    howSubtitle: "4 clear steps from demo to earning. No shortcuts, no confusion.",
+    ctaTitle: "Ready to Start Earning from Home?",
+    ctaSubtitle: "Join 1.34 lakh+ users already working on WorkDen. Try the free demo first — no payment required.",
+    ctaBtn1: "Try Free Demo",
+    ctaBtn2: "User Login",
+    features: [
+      { title: "Government Registered", desc: "GSTIN & MSME certified business. Fully compliant with Indian regulations.", icon: "fas fa-shield-halved", bg: "#eff6ff", color: "var(--brand)" },
+      { title: "Free Demo First", desc: "Try a real demo task before committing anything. See exactly how the platform works.", icon: "fas fa-circle-play", bg: "#f0fdf4", color: "var(--green)" },
+      { title: "Multiple Task Types", desc: "Data entry, form filling, typing, captcha, grammar correction, chat support.", icon: "fas fa-layer-group", bg: "#fdf4ff", color: "#9333ea" },
+      { title: "Work From Anywhere", desc: "Just a phone or laptop is enough. Flexible hours, no commute, no dress code.", icon: "fas fa-mobile-screen", bg: "#fff7ed", color: "#ea580c" },
+      { title: "Dedicated Support", desc: "Recruiter teams assist you through onboarding, task completion, and any doubts.", icon: "fas fa-headset", bg: "#fffbeb", color: "var(--gold)" },
+      { title: "Clear Policies", desc: "All terms, payment structure, and review policies are published openly.", icon: "fas fa-file-contract", bg: "#fef2f2", color: "#dc2626" }
+    ],
+    categories: [
+      { title: "Form Filling", desc: "Fill structured forms using given data. Easy, guided, and clearly defined.", icon: "fas fa-file-pen", bg: "#eff6ff", color: "var(--brand)" },
+      { title: "Data Entry", desc: "Input data into databases from reference sheets. Simple copy-enter tasks.", icon: "fas fa-table", bg: "#f5f3ff", color: "#7c3aed" },
+      { title: "Email Support", desc: "Handle customer emails using predefined templates. Template-based replies.", icon: "fas fa-envelope", bg: "#f0fdf4", color: "var(--green)" },
+      { title: "Chat Support", desc: "Respond to live chat queries from the dashboard with guided answer templates.", icon: "fas fa-message", bg: "#fff7ed", color: "#ea580c" },
+      { title: "Grammar Correction", desc: "Fix highlighted errors in short text documents. Clear indicators shown.", icon: "fas fa-spellcheck", bg: "#fef2f2", color: "#e11d48" },
+      { title: "Typing Tasks", desc: "Type the text shown in the dashboard into the input box. Perfect for beginners.", icon: "fas fa-keyboard", bg: "#fffbeb", color: "var(--gold)" }
+    ],
+    steps: [
+      { title: "Try the Free Demo", desc: "Experience the platform firsthand — completely free. No payment, no commitment needed." },
+      { title: "Register & Verify", desc: "Complete a simple registration and verification to access the task portal." },
+      { title: "Get Tasks Assigned", desc: "Tasks are allocated based on project availability and your profile eligibility." },
+      { title: "Submit & Earn", desc: "Submitted work is quality-reviewed. Earnings depend on accuracy and guideline compliance." }
+    ]
   },
-  "plans": {
-    "pageHeroTitle": "Choose Your <span class=\"gradient-text\">WorkDen Access</span> Plan",
-    "pageHeroDesc": "Online task work start karna ho ya WorkDen ke saath freelance telecalling/affiliate marketing opportunity join karni ho — dono options clear, simple aur professional way me available hain.",
-    "plansTitle": "Plans that work best for you",
-    "plansSubtitle": "Trusted by thousands of workers across India. Transparent pricing, no hidden fees.",
-    "togglePaidBtn": "₹999 Plan",
-    "toggleFreeBtn": "Free Plan",
-    "plan1Name": "Online Typing Work",
-    "plan1Price": "999",
-    "plan1Desc": "Task portal access ke saath training, VIP ID card aur priority support included. Ghar baithe kaam shuru karo.",
-    "plan1RefundNote": "⚠️ <strong>Note:</strong> Refund is not available once the ID is activated. Please read all terms before purchasing.",
-    "plan1Feat1": "<span class=\"feat-dot\"></span> Full Access to All Tasks",
-    "plan1Feat2": "<span class=\"feat-dot\"></span> Professional VIP ID Card",
-    "plan1Feat3": "<span class=\"feat-dot\"></span> Complete Training + Live Webinar",
-    "plan1Feat4": "<span class=\"feat-dot\"></span> Live + Priority Support",
-    "plan1Feat5": "<span class=\"feat-dot\"></span> Easy &amp; Less Tasks Daily",
-    "plan1Feat6": "<span class=\"feat-dot\"></span> Fast Task Approval",
-    "plan1Feat7": "<span class=\"feat-dot\"></span> Min. Withdrawal: ₹500",
-    "plan1Feat8": "<span class=\"feat-dot\"></span> No Maximum Earning Limit",
-    "plan2Name": "Freelance Telecaller",
-    "plan2Price": "Free",
-    "plan2Desc": "Calling, follow-up aur affiliate promotion ke through WorkDen opportunity explain karo. Zero investment required.",
-    "plan2Feat1": "<span class=\"feat-dot\"></span> Free Registration — ₹0",
-    "plan2Feat2": "<span class=\"feat-dot\"></span> Work From Home Calling",
-    "plan2Feat3": "<span class=\"feat-dot\"></span> Affiliate Marketing Support",
-    "plan2Feat4": "<span class=\"feat-dot\"></span> Basic Platform Training",
-    "plan2Feat5": "<span class=\"feat-dot\"></span> Flexible Working Hours",
-    "plan2Feat6": "<span class=\"feat-dot\"></span> Performance-Based Growth",
-    "plan2Feat7": "<span class=\"feat-dot\"></span> Weekly Payout via UPI/Bank",
-    "plan2Feat8": "<span class=\"feat-dot\"></span> Community Access &amp; Support",
-    "plan3Name": "Affiliate Marketer",
-    "plan3Price": "Free",
-    "plan3Desc": "WorkDen ke products promote karo aur har successful referral par commission kamao. No targets, no pressure.",
-    "plan3Feat1": "<span class=\"feat-dot\"></span> Referral Commission on Every Sale",
-    "plan3Feat2": "<span class=\"feat-dot\"></span> Dedicated Affiliate Dashboard",
-    "plan3Feat3": "<span class=\"feat-dot\"></span> Marketing Materials Provided",
-    "plan3Feat4": "<span class=\"feat-dot\"></span> Social Media Promotion Tools",
-    "plan3Feat5": "<span class=\"feat-dot\"></span> No Target Pressure",
-    "plan3Feat6": "<span class=\"feat-dot\"></span> Work Anytime, Anywhere",
-    "plan3Feat7": "<span class=\"feat-dot\"></span> Instant Payout on Approval",
-    "plan3Feat8": "<span class=\"feat-dot\"></span> Dedicated Affiliate Support",
-    "valueTitle": "Why choose WorkDen plans?",
-    "valueDesc": "Har plan ko clear role ke according design kiya gaya hai — task work ke liye paid access aur freelance marketing/calling ke liye free joining option.",
-    "value1Title": "Structured System",
-    "value1Desc": "Portal, tasks, support aur training ek proper flow me available.",
-    "value2Title": "Verified Platform",
-    "value2Desc": "GSTIN, MSME aur transparent policies ke saath professional setup.",
-    "value3Title": "Support Focused",
-    "value3Desc": "Training, live support aur guidance se users ko clarity milti hai."
+  plans: {
+    pageHeroTitle: "Choose Your <span class=\"gradient-text\">WorkDen Access</span> Plan",
+    pageHeroDesc: "Online task work start karna ho ya WorkDen ke saath freelance telecalling/affiliate marketing opportunity join karni ho — dono options clear, simple aur professional way me available hain.",
+    plansTitle: "Plans that work best for you",
+    plansSubtitle: "Trusted by thousands of workers across India. Transparent pricing, no hidden fees.",
+    togglePaidBtn: "₹999 Plan",
+    toggleFreeBtn: "Free Plan",
+    valueTitle: "Why choose WorkDen plans?",
+    valueDesc: "Har plan ko clear role ke according design kiya gaya hai — task work ke liye paid access aur freelance marketing/calling ke liye free joining option.",
+    plansList: [
+      {
+        id: "typing",
+        name: "Online Typing Work",
+        price: "999",
+        desc: "Task portal access ke saath training, VIP ID card aur priority support included. Ghar baithe kaam shuru karo.",
+        isPaid: true,
+        isPopular: true,
+        refundNote: "⚠️ <strong>Note:</strong> Refund is not available once the ID is activated. Please read all terms before purchasing.",
+        features: [
+          "Full Access to All Tasks",
+          "Professional VIP ID Card",
+          "Complete Training + Live Webinar",
+          "Live + Priority Support",
+          "Easy & Less Tasks Daily",
+          "Fast Task Approval",
+          "Min. Withdrawal: ₹500",
+          "No Earning Limit"
+        ]
+      },
+      {
+        id: "telecaller",
+        name: "Freelance Telecaller",
+        price: "Free",
+        desc: "Calling, follow-up aur affiliate promotion ke through WorkDen opportunity explain karo. Zero investment required.",
+        isPaid: false,
+        isPopular: false,
+        refundNote: "",
+        features: [
+          "Free Registration — ₹0",
+          "Work From Home Calling",
+          "Affiliate Marketing Support",
+          "Basic Platform Training",
+          "Flexible Working Hours",
+          "Performance-Based Growth",
+          "Weekly Payout via UPI/Bank",
+          "Community Access & Support"
+        ]
+      },
+      {
+        id: "affiliate",
+        name: "Affiliate Marketer",
+        price: "Free",
+        desc: "WorkDen ke products promote karo aur har successful referral par commission kamao. No targets, no pressure.",
+        isPaid: false,
+        isPopular: false,
+        refundNote: "",
+        features: [
+          "Referral Commission on Every Sale",
+          "Dedicated Affiliate Dashboard",
+          "Marketing Materials Provided",
+          "Social Media Promotion Tools",
+          "No Target Pressure",
+          "Work Anytime, Anywhere",
+          "Instant Payout on Approval",
+          "Dedicated Affiliate Support"
+        ]
+      }
+    ],
+    valueCards: [
+      { title: "Structured System", desc: "Portal, tasks, support aur training ek proper flow me available.", icon: "fas fa-layer-group" },
+      { title: "Verified Platform", desc: "GSTIN, MSME aur transparent policies ke saath professional setup.", icon: "fas fa-user-shield" },
+      { title: "Support Focused", desc: "Training, live support aur guidance se users ko clarity milti hai.", icon: "fas fa-headset" }
+    ]
   },
-  "about": {
-    "pageHeroTitle": "About WorkDen",
-    "pageHeroDesc": "Building a transparent, structured, and secure digital task ecosystem across India since 2024.",
-    "whoTitle": "Who We Are",
-    "whoP1": "Founded in 2024, WorkDen is a structured digital task facilitation platform designed to connect individuals with skill-based, remote task opportunities across India.",
-    "whoP2": "Our platform focuses on accuracy, transparency, and responsible digital participation. We provide users with access to a professional task portal where work is assigned based on eligibility, project demand, and performance compliance.",
-    "whoP3": "WorkDen is fully registered under Indian law — GSTIN and MSME certified — making us one of the few verified WFH platforms in the country.",
-    "whoQuote": "WorkDen operates on a task-based performance model. The platform does not provide employment contracts or guaranteed income — we connect skilled individuals with digital work opportunities.",
-    "missionText": "To establish a secure and transparent digital task platform that upholds professional standards, structured workflows, and responsible user participation across India.",
-    "visionText": "To become a trusted and recognized name in India's digital task ecosystem by enabling skill-based remote participation through structured and ethical operations.",
-    "team1Name": "Shivam Mishra",
-    "team1Role": "Managing Director",
-    "team2Name": "Rajesh Tripathi",
-    "team2Role": "Operations Head",
-    "team3Name": "Utsav Tiwari",
-    "team3Role": "Recruitment Lead",
-    "companyName": "WorkDen",
-    "establishedYear": "2024",
-    "office1": "Ashok Nagar, Bangalore – 560001",
-    "office2": "Parsuram Pur, Motihari – 845416",
-    "emailGeneral": "<i class=\"fas fa-envelope\"></i> info@workden.online",
-    "emailSupport": "<i class=\"fas fa-headset\"></i> support@workden.online"
+  about: {
+    pageHeroTitle: "About WorkDen",
+    pageHeroDesc: "Building a transparent, structured, and secure digital task ecosystem across India since 2024.",
+    whoTitle: "Who We Are",
+    whoP1: "Founded in 2024, WorkDen is a structured digital task facilitation platform designed to connect individuals with skill-based, remote task opportunities across India.",
+    whoP2: "Our platform focuses on accuracy, transparency, and responsible digital participation. We provide users with access to a professional task portal where work is assigned based on eligibility, project demand, and performance compliance.",
+    whoP3: "WorkDen is fully registered under Indian law — GSTIN and MSME certified — making us one of the few verified WFH platforms in the country.",
+    whoQuote: "WorkDen operates on a task-based performance model. The platform does not provide employment contracts or guaranteed income — we connect skilled individuals with digital work opportunities.",
+    missionText: "To establish a secure and transparent digital task platform that upholds professional standards, structured workflows, and responsible user participation across India.",
+    visionText: "To become a trusted and recognized name in India's digital task ecosystem by enabling skill-based remote participation through structured and ethical operations.",
+    companyName: "WorkDen",
+    establishedYear: "2024",
+    office1: "Ashok Nagar, Bangalore – 560001",
+    office2: "Parsuram Pur, Motihari – 845416",
+    emailGeneral: "<i class=\"fas fa-envelope\"></i> info@workden.online",
+    emailSupport: "<i class=\"fas fa-headset\"></i> support@workden.online",
+    teamList: [
+      { name: "Shivam Mishra", role: "Managing Director", imageUrl: "" },
+      { name: "Rajesh Tripathi", role: "Operations Head", imageUrl: "" },
+      { name: "Utsav Tiwari", role: "Recruitment Lead", imageUrl: "" }
+    ]
   },
-  "projects": {
-    "pageHeroTitle": "Available Projects",
-    "pageHeroDesc": "All tasks have clear step-by-step instructions inside the portal. No prior experience needed for most categories.",
-    "proj1Title": "Form Filling",
-    "proj1Desc": "Fill structured online forms with given instructions. Data is pre-provided — you simply enter it accurately into the designated fields in the portal.",
-    "proj2Title": "Data Entry",
-    "proj2Desc": "Enter structured spreadsheet data into a secure database. Straightforward copy-and-enter tasks with clear reference materials provided in the dashboard.",
-    "proj3Title": "Email Support",
-    "proj3Desc": "Handle basic customer email queries using predefined templates. Templates are provided — you select and send the appropriate response to each query.",
-    "proj4Title": "Chat Support",
-    "proj4Desc": "Respond to live chat queries from the dashboard using guided templates. Quick responses with clear guidelines provided for each type of customer query.",
-    "proj5Title": "Grammar Correction",
-    "proj5Desc": "Edit and correct short text documents for grammatical errors. Clear error indicators are shown in the portal — you identify and fix what's highlighted.",
-    "proj6Title": "Typing Tasks",
-    "proj6Desc": "Type the same text shown in the dashboard into the input box. Simple and straightforward — perfect for anyone with basic typing skills and a phone or laptop.",
-    "proj7Title": "Captcha Filling",
-    "proj7Desc": "Enter captcha codes displayed in the dashboard into the designated input field. Simple, repeatable task — ideal for those just starting with online work.",
-    "ctaTitle": "Not sure where to start?",
-    "ctaDesc": "Try our free demo task — experience the portal before making any decisions. No payment needed."
+  projects: {
+    pageHeroTitle: "Available Projects",
+    pageHeroDesc: "All tasks have clear step-by-step instructions inside the portal. No prior experience needed for most categories.",
+    ctaTitle: "Not sure where to start?",
+    ctaDesc: "Try our free demo task — experience the portal before making any decisions. No payment needed.",
+    projectsList: [
+      { title: "Form Filling", desc: "Fill structured online forms with given instructions. Data is pre-provided — you simply enter it accurately.", icon: "fas fa-file-pen", bg: "#eff6ff", color: "var(--brand)", level: "Easy · No Experience Needed", badges: ["Most Popular", "Beginner"] },
+      { title: "Data Entry", desc: "Enter structured spreadsheet data into a secure database. Straightforward copy-and-enter tasks.", icon: "fas fa-table", bg: "#f5f3ff", color: "#7c3aed", level: "Easy · Basic Typing", badges: ["High Volume", "Beginner"] },
+      { title: "Email Support", desc: "Handle basic customer email queries using predefined templates. Templates are provided.", icon: "fas fa-envelope", bg: "#f0fdf4", color: "var(--green)", level: "Medium · Template Based", badges: ["Intermediate"] },
+      { title: "Chat Support", desc: "Respond to live chat queries from the dashboard using guided templates. Quick responses.", icon: "fas fa-message", bg: "#fff7ed", color: "#ea580c", level: "Medium · Communication", badges: ["Intermediate"] },
+      { title: "Grammar Correction", desc: "Edit and correct short text documents for grammatical errors. Clear error indicators shown.", icon: "fas fa-spellcheck", bg: "#fef2f2", color: "#dc2626", level: "Medium · Accuracy", badges: ["Intermediate"] },
+      { title: "Typing Tasks", desc: "Type the same text shown in the dashboard into the input box. Simple and straightforward.", icon: "fas fa-keyboard", bg: "#fffbeb", color: "var(--gold)", level: "Easy · Basic Typing", badges: ["Beginner"] },
+      { title: "Captcha Filling", desc: "Enter captcha codes displayed in the dashboard into the designated input field. Simple, repeatable task.", icon: "fas fa-hashtag", bg: "#eff6ff", color: "var(--brand)", level: "Easy · Repeatable", badges: ["Beginner"] }
+    ]
   },
-  "blogs": {
-    "pageHeroTitle": "WorkDen Blog",
-    "pageHeroDesc": "Work from home, data entry aur online tasks se related genuine guides, safety tips aur real experiences.",
-    "blog1Title": "Work From Home Data Entry Job – Beginner Guide",
-    "blog1Desc": "Ghar baithe data entry kaise karein? Step by step complete beginner guide with all you need to know.",
-    "blog1Tag": "Work From Home",
-    "blog2Title": "Online Typing Job Real or Fake? – Complete Truth",
-    "blog2Desc": "Kya online typing jobs genuine hote hain? Real aur fake platforms mein fark kaise pehchanein.",
-    "blog2Tag": "Typing Jobs",
-    "blog3Title": "Captcha Work Safe or Not? – Honest Analysis",
-    "blog3Desc": "Captcha filling jobs safe hain ya nahi? Sabse common sawaal ka honest jawab with real examples.",
-    "blog3Tag": "Safety Guide",
-    "blog4Title": "Form Filling Job Real or Fake? – What to Look For",
-    "blog4Desc": "Form filling jobs ke baare mein poori sachai – kya dekhein, kya avoid karein aur safe kaise rahein.",
-    "blog4Tag": "Form Filling",
-    "blog5Title": "Work From Home Opportunity on WorkDen Platform",
-    "blog5Desc": "WorkDen par kaise kaam shuru karein? Registration, tasks aur earning process ki complete guide.",
-    "blog5Tag": "WorkDen",
-    "blog6Title": "Work From Home Jobs for Beginners – Start Here",
-    "blog6Desc": "Beginner hain aur WFH dhundh rahe hain? Yahan se shuru karein apna work-from-home journey.",
-    "blog6Tag": "Beginners",
-    "blog7Title": "Ghar Baithe Online Paise Kaise Kamaye?",
-    "blog7Desc": "India mein ghar baithe online paise kamane ke genuine tarike. Scams se bachein aur sahi platform chunein.",
-    "blog7Tag": "Earning Tips",
-    "blog8Title": "Online Earning Platforms in India – Verified List",
-    "blog8Desc": "India ke top verified online earning platforms – kaunsa safe hai, kaunsa nahi, poori comparison.",
-    "blog8Tag": "Platforms",
-    "blog9Title": "How WorkDen Helps Beginners Start Online Work",
-    "blog9Desc": "WorkDen specifically beginners ke liye kaise design kiya gaya – support, structure aur simplicity.",
-    "blog9Tag": "WorkDen",
-    "blog10Title": "Part Time Job Work From Home – Complete Guide",
-    "blog10Desc": "Part time ghar se kaam karna chahte hain? Jaanein kaise balance karein daily routine ke saath.",
-    "blog10Tag": "Part Time",
-    "blog11Title": "Work From Home for Students – Earn While You Study",
-    "blog11Desc": "College students ke liye best WFH options – flexible timing ke saath pocket money kamao.",
-    "blog11Tag": "Students",
-    "blog12Title": "Work From Home for Housewives – Best Options 2024",
-    "blog12Desc": "Grihini mahilao ke liye perfect WFH jobs – family aur work dono manage karein aasani se.",
-    "blog12Tag": "Housewives"
+  blogs: {
+    pageHeroTitle: "WorkDen Blog",
+    pageHeroDesc: "Work from home, data entry aur online tasks se related genuine guides, safety tips aur real experiences.",
+    blogsList: [
+      { title: "Work From Home Data Entry Job – Beginner Guide", desc: "Ghar baithe data entry kaise karein? Step by step complete beginner guide with all you need to know.", tag: "Work From Home", url: "blogs/work-from-home.html", date: "2024" },
+      { title: "Online Typing Job Real or Fake? – Complete Truth", desc: "Kya online typing jobs genuine hote hain? Real aur fake platforms mein fark kaise pehchanein.", tag: "Typing Jobs", url: "blogs/online-typing-job-real-or-fake.html", date: "2024" },
+      { title: "Captcha Work Safe or Not? – Honest Analysis", desc: "Captcha filling jobs safe hain ya nahi? Sabse common sawaal ka honest jawab with real examples.", tag: "Safety Guide", url: "blogs/captcha-work-safe-or-not.html", date: "2024" },
+      { title: "Form Filling Job Real or Fake? – What to Look For", desc: "Form filling jobs ke baare mein poori sachai – kya dekhein, kya avoid karein aur safe kaise rahein.", tag: "Form Filling", url: "blogs/form-filling-job-real-or-fake.html", date: "2024" },
+      { title: "Work From Home Opportunity on WorkDen Platform", desc: "WorkDen par kaise kaam shuru karein? Registration, tasks aur earning process ki complete guide.", tag: "WorkDen", url: "blogs/work-from-home-opportunity-workden.html", date: "2024" },
+      { title: "Work From Home Jobs for Beginners – Start Here", desc: "Beginner hain aur WFH dhundh rahe hain? Yahan se shuru karein apna work-from-home journey.", tag: "Beginners", url: "blogs/work-from-home-jobs-for-beginners.html", date: "2024" },
+      { title: "Ghar Baithe Online Paise Kaise Kamaye?", desc: "India mein ghar baithe online paise kamane ke genuine tarike. Scams se bachein aur sahi platform chunein.", tag: "Earning Tips", url: "blogs/ghar-baithe-online-paise-kaise-kamaye.html", date: "2024" },
+      { title: "Online Earning Platforms in India – Verified List", desc: "India ke top verified online earning platforms – kaunsa safe hai, kaunsa nahi, poori comparison.", tag: "Platforms", url: "blogs/online-earning-platforms-in-india.html", date: "2024" },
+      { title: "How WorkDen Helps Beginners Start Online Work", desc: "WorkDen specifically beginners ke liye kaise design kiya gaya – support, structure aur simplicity.", tag: "WorkDen", url: "blogs/how-workden-helps-beginners-online-work.html", date: "2024" },
+      { title: "Part Time Job Work From Home – Complete Guide", desc: "Part time ghar se kaam karna chahte hain? Jaanein kaise balance karein daily routine ke saath.", tag: "Part Time", url: "blogs/part-time-job-work-from-home.html", date: "2024" },
+      { title: "Work From Home for Students – Earn While You Study", desc: "College students ke liye best WFH options – flexible timing ke saath pocket money kamao.", tag: "Students", url: "blogs/work-from-home-for-students.html", date: "2024" },
+      { title: "Work From Home for Housewives – Best Options 2024", desc: "Grihini mahilao ke liye perfect WFH jobs – family aur work dono manage karein aasani se.", tag: "Housewives", url: "blogs/work-from-home-for-housewives.html", date: "2024" }
+    ]
   },
   "demo-task": {
-    "pageHeroTitle": "WorkDen Demo Tasks",
-    "pageHeroDesc": "Choose your skill and try a demo task",
-    "demoBadge": "🔴 LIVE DEMO – Try All Tasks"
+    pageHeroTitle: "WorkDen Demo Tasks",
+    pageHeroDesc: "Choose your skill and try a demo task",
+    demoBadge: "🔴 LIVE DEMO – Try All Tasks",
+    tasksList: [
+      { id: "typing",  name: "PDF to Word Typing",  emoji: "⌨️", items: 10,  timeMin: 60, desc: "Read the 8-10 line content shown on each page and type it exactly in the box below. Minimum 100 words per page required.", color: "#7C3AED", num: 1, hcls: "", howto: ["Read the content shown in the yellow box carefully.","Type the exact same content in the text box below — word for word.","You must type at least 100 words to pass this item.","Do NOT copy-paste — type manually using the keyboard.","Spelling and accuracy matter — type carefully."] },
+      { id: "captcha", name: "Captcha Filling",     emoji: "🔢", items: 100, timeMin: 60, desc: "Solve 100 dynamic CAPTCHA challenges — 10 types including reverse, filter, sort, position, math & more!", color: "#0891B2", num: 2, hcls: "blue", howto: ["10 different CAPTCHA types appear randomly — read the question carefully each time.","For text captcha: type exact characters shown (case-sensitive).","For reverse/filter/sort: follow the specific instruction shown in the yellow box.","For Long Calculation: solve the full expression (with +, −, ×) and enter only the final number.","For advanced captcha: complete each step in the exact order given.","Live color feedback shows if your answer is correct before saving."] },
+      { id: "form",    name: "Form Filling",        emoji: "🧾", items: 10,  timeMin: 60, desc: "Complete 10 online forms with the provided reference data carefully and accurately.", color: "#059669", num: 3, hcls: "green", howto: ["Read all reference data in the blue box at the top.","Fill each field exactly as shown in the reference (spelling, spacing, case).","Do not skip any field marked with a red asterisk (*).","Type manually — copy-paste is disabled.","Click Save when all fields are filled to see your score."] },
+      { id: "data",    name: "Data Entry",          emoji: "📊", items: 10,  timeMin: 60, desc: "Fill in 10 data entry forms accurately by typing the required information in each field.", color: "#EA580C", num: 4, hcls: "orange", howto: ["Study the reference data card at the top of each item.","Type each value exactly as shown — including spaces and formats.","Pay special attention to Aadhar, PAN, DOB, and PIN formats.","All fields are required — do not leave any blank.","Click Save to check your accuracy for that item."] },
+      { id: "grammar", name: "Grammar Correction",  emoji: "✍️", items: 10,  timeMin: 60, desc: "Read 10 paragraphs with grammatical errors and type the fully corrected versions.", color: "#7C3AED", num: 5, hcls: "", howto: ["Read the incorrect paragraph carefully — error types are shown below.","Identify all grammatical mistakes.","Type the fully corrected paragraph in the text box below.","Do not change the meaning — only fix grammar errors.","Your answer must be at least 13 characters to be accepted."] }
+    ]
   },
-  "header": {
-    "nav_userLoginBtn": "User Login",
-    "nav_employeeLoginBtn": "Employee Login",
-    "nav_employeeLoginUrl": "https://workdenteam2.base44.app/",
-    "modal_title": "Choose Your Login Portal",
-    "modal_desc": "WorkDen ke do version available hain. Apna version select karein.",
-    "v1_label": "WorkDen 4.0",
-    "v1_url": "https://workden-4.base44.app",
-    "v2_label": "WorkDen 3.0",
-    "v2_url": "https://workden-3.base44.app"
+  header: {
+    nav_userLoginBtn: "User Login",
+    nav_employeeLoginBtn: "Employee Login",
+    nav_employeeLoginUrl: "https://workdenteam2.base44.app/",
+    modal_title: "Choose Your Login Portal",
+    modal_desc: "WorkDen ke do version available hain. Apna version select karein.",
+    v1_label: "WorkDen 4.0",
+    v1_url: "https://workden-4.base44.app",
+    v2_label: "WorkDen 3.0",
+    v2_url: "https://workden-3.base44.app"
   },
-  "footer": {
-    "brandDesc": "A verified digital task platform delivering structured online work opportunities with transparency, secure workflow, and compliance. GSTIN &amp; MSME registered.",
-    "copyright": "© 2026 WorkDen. All rights reserved.",
-    "tagline": "<i class=\"fas fa-circle-check\"></i> Est. 2024",
-    "gstinNumber": "GSTIN: 10KEJPM6504N1Z7",
-    "msmeNumber": "MSME: UDYAM-KR-03-0640514",
-    "emailGeneral": "<i class=\"fas fa-envelope\"></i> info@workden.online",
-    "emailSupport": "<i class=\"fas fa-headset\"></i> support@workden.online",
-    "address1": "<i class=\"fas fa-location-dot\"></i> Ashok Nagar, Bangalore – 560001",
-    "address2": "<i class=\"fas fa-location-dot\"></i> Parsuram Pur, Motihari – 845416",
-    "facebookUrl": "https://www.facebook.com/people/Workden-India/61583820256534/",
-    "instagramUrl": "https://www.instagram.com/workden_wfh",
-    "linkedinUrl": "https://www.linkedin.com/in/workden-india-315391383/",
-    "telegramUrl": "https://t.me/+f_s3cLM1WwYxNjE1"
+  footer: {
+    brandDesc: "A verified digital task platform delivering structured online work opportunities with transparency, secure workflow, and compliance. GSTIN &amp; MSME registered.",
+    copyright: "© 2026 WorkDen. All rights reserved.",
+    tagline: "<i class=\"fas fa-circle-check\"></i> Est. 2024",
+    gstinNumber: "GSTIN: 10KEJPM6504N1Z7",
+    msmeNumber: "MSME: UDYAM-KR-03-0640514",
+    emailGeneral: "<i class=\"fas fa-envelope\"></i> info@workden.online",
+    emailSupport: "<i class=\"fas fa-headset\"></i> support@workden.online",
+    address1: "<i class=\"fas fa-location-dot\"></i> Ashok Nagar, Bangalore – 560001",
+    address2: "<i class=\"fas fa-location-dot\"></i> Parsuram Pur, Motihari – 845416",
+    facebookUrl: "https://www.facebook.com/people/Workden-India/61583820256534/",
+    instagramUrl: "https://www.instagram.com/workden_wfh",
+    linkedinUrl: "https://www.linkedin.com/in/workden-india-315391383/",
+    telegramUrl: "https://t.me/+f_s3cLM1WwYxNjE1"
   }
 };
 
-// ─── Admin Dashboard ──────────────────────────────────────────────────────────
 export default function AdminDashboard() {
   const router = useRouter();
   const [tab, setTab] = useState("home");
@@ -508,8 +405,9 @@ export default function AdminDashboard() {
   const [loading, setLoading] = useState(true);
   const [toast, setToast] = useState<{ msg: string; ok: boolean } | null>(null);
   const [testimonials, setTestimonials] = useState<any[]>([]);
-  const [content, setContent] = useState<Record<string, Record<string, string>>>({});
+  const [content, setContent] = useState<Record<string, any>>({});
   const [sidebarOpen, setSidebarOpen] = useState(true);
+  const [testiTypeFilter, setTestiTypeFilter] = useState<"video" | "screenshot" | "written">("video");
 
   useEffect(() => {
     (async () => {
@@ -530,11 +428,11 @@ export default function AdminDashboard() {
     setTimeout(() => setToast(null), 4000);
   };
 
-  const updateField = (page: string, key: string, val: string) =>
+  const updateField = (page: string, key: string, val: any) =>
     setContent(p => ({ ...p, [page]: { ...(p[page] || {}), [key]: val } }));
 
   const handleSave = async () => {
-    // 1. Validate testimonials to prevent huge base64 payload size errors
+    // 1. Validate testimonials
     for (const t of testimonials) {
       if (t.imageUrl && t.imageUrl.startsWith("data:")) {
         showToast("⚠️ Error: Please paste a Google Drive link or standard image URL instead of direct base64 data.", false);
@@ -546,7 +444,7 @@ export default function AdminDashboard() {
       }
     }
 
-    // 2. Generic validation across all website content fields to block base64 copy-paste errors
+    // 2. Generic validation
     for (const pageKey in content) {
       for (const fieldKey in content[pageKey]) {
         const val = content[pageKey][fieldKey];
@@ -563,10 +461,10 @@ export default function AdminDashboard() {
       }
     }
 
-    // 3. Check total payload size
+    // 3. Size check
     const payloadStr = JSON.stringify({ type: "content", data: { website: content, testimonials } });
-    if (payloadStr.length > 800000) { // ~800KB (Firestore limit is 1MB)
-      showToast("⚠️ Error: Total content size is too large. Please shorten texts or use Drive links for screenshots.", false);
+    if (payloadStr.length > 800000) {
+      showToast("⚠️ Error: Total content size is too large. Please shorten texts or use Drive links.", false);
       return;
     }
 
@@ -592,17 +490,29 @@ export default function AdminDashboard() {
     router.refresh();
   };
 
-  // Testimonial helpers
-  const addTesti = () => setTestimonials(p => [{
-    id: Date.now().toString(), name: "", city: "", text: "", initials: "AB",
-    gradient: "linear-gradient(135deg,#3b82f6,#14b8a6)", imageUrl: ""
-  }, ...p]);
+  // ─── Testimonials Logic ──────────────────────────────────────────────────
+  const addTesti = () => {
+    const newTesti = {
+      id: Date.now().toString(),
+      type: testiTypeFilter,
+      name: "",
+      city: testiTypeFilter === "video" ? "" : "Pune, India",
+      role: testiTypeFilter === "video" ? "Content Moderator" : "",
+      text: testiTypeFilter === "written" ? "Write review here..." : "",
+      initials: "AB",
+      gradient: "linear-gradient(135deg,#1d4ed8,#2563eb)",
+      imageUrl: "",
+      videoUrl: ""
+    };
+    setTestimonials(p => [newTesti, ...p]);
+  };
+
   const removeTesti = (id: string) => setTestimonials(p => p.filter(t => t.id !== id));
-  const updateTesti = (id: string, k: string, v: string) =>
+  
+  const updateTesti = (id: string, k: string, v: any) =>
     setTestimonials(p => p.map(t => t.id === id ? { ...t, [k]: v } : t));
 
-  // convert Google Drive share link to embed link
-  const getDriveEmbedUrl = (url: string): string => {
+  const convertDriveImageUrl = (url: string): string => {
     if (!url) return "";
     const match = url.match(/\/d\/([a-zA-Z0-9_-]+)/);
     if (match) return `https://drive.google.com/thumbnail?id=${match[1]}&sz=w400`;
@@ -615,14 +525,91 @@ export default function AdminDashboard() {
     </div>
   );
 
-  const allNavItems = [
-    ...Object.entries(PAGES).map(([key, p]) => ({ key, label: p.label, Icon: p.icon,
-      isSpecial: key === "header" || key === "footer"
-    })),
-    { key: "testimonials", label: "Testimonials", Icon: IStar, isSpecial: false },
-  ];
-
   const currentPage = PAGES[tab];
+
+  // ─── Re-order Helper Functions ─────────────────────────────────────────────
+  const moveItem = (pageKey: string, arrayKey: string, index: number, direction: "up" | "down") => {
+    const list = [...(content[pageKey]?.[arrayKey] || DEFAULT_CONTENT[pageKey]?.[arrayKey] || [])];
+    if (direction === "up" && index > 0) {
+      const temp = list[index];
+      list[index] = list[index - 1];
+      list[index - 1] = temp;
+    } else if (direction === "down" && index < list.length - 1) {
+      const temp = list[index];
+      list[index] = list[index + 1];
+      list[index + 1] = temp;
+    }
+    updateField(pageKey, arrayKey, list);
+  };
+
+  const deleteItem = (pageKey: string, arrayKey: string, index: number) => {
+    const list = [...(content[pageKey]?.[arrayKey] || DEFAULT_CONTENT[pageKey]?.[arrayKey] || [])];
+    const filtered = list.filter((_, i) => i !== index);
+    updateField(pageKey, arrayKey, filtered);
+  };
+
+  const addItem = (pageKey: string, arrayKey: string, templateObj: any) => {
+    const list = [...(content[pageKey]?.[arrayKey] || DEFAULT_CONTENT[pageKey]?.[arrayKey] || [])];
+    list.push({ ...templateObj, _localId: Date.now().toString() });
+    updateField(pageKey, arrayKey, list);
+  };
+
+  const updateItemField = (pageKey: string, arrayKey: string, index: number, field: string, val: any) => {
+    const list = [...(content[pageKey]?.[arrayKey] || DEFAULT_CONTENT[pageKey]?.[arrayKey] || [])];
+    list[index] = { ...list[index], [field]: val };
+    updateField(pageKey, arrayKey, list);
+  };
+
+  // ─── Sub-string Tag List Editor Helper ────────────────────────────────────
+  const renderStringListEditor = (
+    label: string,
+    list: string[] | undefined,
+    onChange: (newList: string[]) => void
+  ) => {
+    const arr = list || [];
+    return (
+      <div className="mt-3 bg-slate-950/60 p-3 rounded-xl border border-slate-800 space-y-2">
+        <div className="flex justify-between items-center">
+          <label className="text-[11px] font-bold text-slate-400 uppercase tracking-wider">{label}</label>
+          <button
+            type="button"
+            onClick={() => onChange([...arr, ""])}
+            className="text-[10px] font-black bg-blue-600/20 hover:bg-blue-600/30 text-blue-400 px-2 py-0.5 rounded border border-blue-500/30 transition-all"
+          >
+            + Add Line
+          </button>
+        </div>
+        {arr.length === 0 && (
+          <p className="text-[11px] text-slate-600 italic">No lines added yet. Click "+ Add Line".</p>
+        )}
+        {arr.map((val, idx) => (
+          <div key={idx} className="flex gap-2 items-center">
+            <input
+              type="text"
+              value={val}
+              onChange={(e) => {
+                const updated = [...arr];
+                updated[idx] = e.target.value;
+                onChange(updated);
+              }}
+              className="flex-1 bg-slate-900 border border-slate-700 rounded px-2 py-1 text-xs text-white placeholder-slate-600 focus:ring-1 focus:ring-blue-500 focus:outline-none"
+              placeholder="e.g. Full Access to Tasks"
+            />
+            <button
+              type="button"
+              onClick={() => {
+                const updated = arr.filter((_, i) => i !== idx);
+                onChange(updated);
+              }}
+              className="text-red-400 hover:text-red-300 text-xs px-1.5 py-0.5"
+            >
+              ✕
+            </button>
+          </div>
+        ))}
+      </div>
+    );
+  };
 
   return (
     <div className="flex h-screen bg-slate-950 overflow-hidden" style={{ fontFamily: "Inter, system-ui, sans-serif" }}>
@@ -640,13 +627,13 @@ export default function AdminDashboard() {
           </div>
         </div>
 
-        {/* Nav */}
+        {/* Navigation list */}
         <nav className="flex-1 overflow-y-auto py-3 px-2 space-y-0.5">
           <p className="text-xs font-bold text-slate-500 uppercase tracking-wider px-2 py-1.5">Pages</p>
-          {allNavItems.filter(i => !i.isSpecial && i.key !== "testimonials").map(({ key, label, Icon }) => (
+          {Object.entries(PAGES).filter(([k]) => k !== "header" && k !== "footer").map(([key, p]) => (
             <button key={key} onClick={() => setTab(key)}
               className={`w-full flex items-center gap-2 px-2.5 py-2 rounded-lg text-xs font-semibold transition-all ${tab === key ? "bg-blue-600 text-white" : "text-slate-400 hover:bg-slate-800 hover:text-white"}`}>
-              <Icon /> <span className="truncate">{label}</span>
+              {<p.icon />} <span className="truncate">{p.label}</span>
             </button>
           ))}
           <p className="text-xs font-bold text-slate-500 uppercase tracking-wider px-2 pt-3 pb-1.5">Components</p>
@@ -654,7 +641,7 @@ export default function AdminDashboard() {
             className={`w-full flex items-center gap-2 px-2.5 py-2 rounded-lg text-xs font-semibold transition-all ${tab === "testimonials" ? "bg-blue-600 text-white" : "text-slate-400 hover:bg-slate-800 hover:text-white"}`}>
             <IStar /> Testimonials
           </button>
-          <p className="text-xs font-bold text-slate-500 uppercase tracking-wider px-2 pt-3 pb-1.5">Global</p>
+          <p className="text-xs font-bold text-slate-500 uppercase tracking-wider px-2 pt-3 pb-1.5">Global Settings</p>
           <button onClick={() => setTab("header")}
             className={`w-full flex items-center gap-2 px-2.5 py-2 rounded-lg text-xs font-semibold transition-all ${tab === "header" ? "bg-blue-600 text-white" : "text-slate-400 hover:bg-slate-800 hover:text-white"}`}>
             <IHeader /> Header / Nav
@@ -665,7 +652,7 @@ export default function AdminDashboard() {
           </button>
         </nav>
 
-        {/* Logout */}
+        {/* Sign out */}
         <div className="p-3 border-t border-slate-800 flex-shrink-0">
           <button onClick={handleLogout}
             className="w-full flex items-center gap-2 px-2.5 py-2 rounded-lg text-xs text-slate-400 hover:bg-red-900/30 hover:text-red-400 transition-all">
@@ -674,9 +661,9 @@ export default function AdminDashboard() {
         </div>
       </aside>
 
-      {/* ── MAIN ────────────────────────────────────────── */}
+      {/* ── MAIN CONTENT ────────────────────────────────── */}
       <div className="flex-1 flex flex-col min-h-0 overflow-hidden">
-        {/* Header bar */}
+        {/* Top Actions bar */}
         <header className="bg-slate-900/80 backdrop-blur border-b border-slate-800 px-6 py-3 flex items-center justify-between flex-shrink-0">
           <div className="flex items-center gap-3">
             <button onClick={() => setSidebarOpen(o => !o)}
@@ -685,16 +672,16 @@ export default function AdminDashboard() {
             </button>
             <div>
               <h1 className="text-sm font-bold text-white">
-                {tab === "testimonials" ? "Manage Testimonials" : currentPage?.label || "Dashboard"}
+                {tab === "testimonials" ? "Testimonials Page" : currentPage?.label || "Settings"}
               </h1>
-              <p className="text-xs text-slate-500">Changes publish live to your website instantly after saving.</p>
+              <p className="text-xs text-slate-500">Add, edit, reorder & publish live content instantly.</p>
             </div>
           </div>
           <div className="flex items-center gap-2">
             {tab === "testimonials" && (
               <button onClick={addTesti}
                 className="flex items-center gap-1 bg-slate-700 hover:bg-slate-600 text-white px-3 py-1.5 rounded-lg text-xs font-bold transition-all">
-                <IPlus /> Add Review
+                <IPlus /> Add Testimonial
               </button>
             )}
             <button onClick={handleSave} disabled={saving}
@@ -705,18 +692,18 @@ export default function AdminDashboard() {
           </div>
         </header>
 
-        {/* Toast */}
+        {/* Live Toast alert */}
         {toast && (
           <div className={`mx-6 mt-3 px-4 py-2.5 rounded-xl text-xs font-semibold flex-shrink-0 ${toast.ok ? "bg-green-900/60 text-green-300 border border-green-700" : "bg-red-900/60 text-red-300 border border-red-700"}`}>
             {toast.msg}
           </div>
         )}
 
-        {/* Content area */}
+        {/* Editor Main Canvas */}
         <div className="flex-1 overflow-y-auto p-6">
-          <div className="max-w-3xl mx-auto space-y-5">
+          <div className="max-w-3xl mx-auto space-y-6">
 
-            {/* ── Page tabs content ─── */}
+            {/* 1. RENDER FLAT FIELDS (headings, buttons, badge text) */}
             {tab !== "testimonials" && currentPage && currentPage.sections.map(section => (
               <div key={section.title} className="bg-slate-900 rounded-2xl border border-slate-800 overflow-hidden">
                 <div className="bg-slate-800/60 px-5 py-3 border-b border-slate-700">
@@ -726,7 +713,7 @@ export default function AdminDashboard() {
                   {section.fields.map(field => (
                     <div key={field.key}>
                       <label className="block text-xs font-semibold text-slate-300 mb-1">{field.label}</label>
-                      {field.hint && <p className="text-xs text-slate-500 mb-1">{field.hint}</p>}
+                      {field.hint && <p className="text-[11px] text-slate-500 mb-1">{field.hint}</p>}
                       {field.type === "text" || field.type === "url" ? (
                         <input type={field.type === "url" ? "url" : "text"}
                           value={content[tab]?.[field.key] ?? DEFAULT_CONTENT[tab]?.[field.key] ?? ""}
@@ -749,26 +736,508 @@ export default function AdminDashboard() {
               </div>
             ))}
 
-            {/* ── Testimonials ─── */}
+            {/* 2. RENDER ARRAY EDITORS (ADD, REMOVE, SORT CARD LISTS) */}
+            {tab === "home" && (
+              <>
+                {/* Home features list */}
+                <div className="bg-slate-900 rounded-2xl border border-slate-800 overflow-hidden">
+                  <div className="bg-slate-800/60 px-5 py-3 border-b border-slate-700 flex justify-between items-center">
+                    <h2 className="text-xs font-bold text-slate-400 uppercase tracking-wider">Why WorkDen features list</h2>
+                    <button onClick={() => addItem("home", "features", { title: "", desc: "", icon: "fas fa-circle", bg: "#eff6ff", color: "var(--brand)" })}
+                      className="bg-blue-600 hover:bg-blue-500 text-white px-2.5 py-1 rounded text-xs font-bold transition-all flex items-center gap-1">
+                      <IPlus /> Add Feature
+                    </button>
+                  </div>
+                  <div className="p-5 space-y-4">
+                    {(content.home?.features || DEFAULT_CONTENT.home.features).map((feat: any, idx: number) => (
+                      <div key={idx} className="bg-slate-800/50 p-4 rounded-xl border border-slate-700 relative space-y-3">
+                        <div className="absolute top-4 right-4 flex gap-2">
+                          <button onClick={() => moveItem("home", "features", idx, "up")} disabled={idx === 0} className="text-slate-400 hover:text-white disabled:opacity-30">▲</button>
+                          <button onClick={() => moveItem("home", "features", idx, "down")} disabled={idx === (content.home?.features || DEFAULT_CONTENT.home.features).length - 1} className="text-slate-400 hover:text-white disabled:opacity-30">▼</button>
+                          <button onClick={() => deleteItem("home", "features", idx)} className="text-red-400 hover:text-red-300 ml-1"><ITrash /></button>
+                        </div>
+                        <div className="pr-20 font-semibold text-slate-300 text-xs">Feature #{idx + 1}</div>
+                        <div className="grid grid-cols-2 gap-3">
+                          <div>
+                            <label className="text-[11px] text-slate-400 font-semibold">Title</label>
+                            <input value={feat.title || ""} onChange={e => updateItemField("home", "features", idx, "title", e.target.value)} className="w-full bg-slate-900 border border-slate-700 rounded px-2 py-1 text-xs text-white" />
+                          </div>
+                          <div>
+                            <label className="text-[11px] text-slate-400 font-semibold">Icon Class</label>
+                            <input value={feat.icon || ""} onChange={e => updateItemField("home", "features", idx, "icon", e.target.value)} className="w-full bg-slate-900 border border-slate-700 rounded px-2 py-1 text-xs text-white" placeholder="fas fa-shield-halved" />
+                          </div>
+                        </div>
+                        <div>
+                          <label className="text-[11px] text-slate-400 font-semibold">Description</label>
+                          <textarea rows={2} value={feat.desc || ""} onChange={e => updateItemField("home", "features", idx, "desc", e.target.value)} className="w-full bg-slate-900 border border-slate-700 rounded px-2 py-1 text-xs text-white resize-y" />
+                        </div>
+                        <div className="grid grid-cols-2 gap-3">
+                          <div>
+                            <label className="text-[11px] text-slate-400 font-semibold">Bg Color</label>
+                            <input value={feat.bg || ""} onChange={e => updateItemField("home", "features", idx, "bg", e.target.value)} className="w-full bg-slate-900 border border-slate-700 rounded px-2 py-1 text-xs text-white" placeholder="#eff6ff" />
+                          </div>
+                          <div>
+                            <label className="text-[11px] text-slate-400 font-semibold">Icon Color</label>
+                            <input value={feat.color || ""} onChange={e => updateItemField("home", "features", idx, "color", e.target.value)} className="w-full bg-slate-900 border border-slate-700 rounded px-2 py-1 text-xs text-white" placeholder="var(--brand)" />
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Home Categories list */}
+                <div className="bg-slate-900 rounded-2xl border border-slate-800 overflow-hidden">
+                  <div className="bg-slate-800/60 px-5 py-3 border-b border-slate-700 flex justify-between items-center">
+                    <h2 className="text-xs font-bold text-slate-400 uppercase tracking-wider">Available Work Categories list</h2>
+                    <button onClick={() => addItem("home", "categories", { title: "", desc: "", icon: "fas fa-file-pen", bg: "#eff6ff", color: "var(--brand)" })}
+                      className="bg-blue-600 hover:bg-blue-500 text-white px-2.5 py-1 rounded text-xs font-bold transition-all flex items-center gap-1">
+                      <IPlus /> Add Category
+                    </button>
+                  </div>
+                  <div className="p-5 space-y-4">
+                    {(content.home?.categories || DEFAULT_CONTENT.home.categories).map((cat: any, idx: number) => (
+                      <div key={idx} className="bg-slate-800/50 p-4 rounded-xl border border-slate-700 relative space-y-3">
+                        <div className="absolute top-4 right-4 flex gap-2">
+                          <button onClick={() => moveItem("home", "categories", idx, "up")} disabled={idx === 0} className="text-slate-400 hover:text-white disabled:opacity-30">▲</button>
+                          <button onClick={() => moveItem("home", "categories", idx, "down")} disabled={idx === (content.home?.categories || DEFAULT_CONTENT.home.categories).length - 1} className="text-slate-400 hover:text-white disabled:opacity-30">▼</button>
+                          <button onClick={() => deleteItem("home", "categories", idx)} className="text-red-400 hover:text-red-300 ml-1"><ITrash /></button>
+                        </div>
+                        <div className="pr-20 font-semibold text-slate-300 text-xs">Category #{idx + 1}</div>
+                        <div className="grid grid-cols-2 gap-3">
+                          <div>
+                            <label className="text-[11px] text-slate-400 font-semibold">Title</label>
+                            <input value={cat.title || ""} onChange={e => updateItemField("home", "categories", idx, "title", e.target.value)} className="w-full bg-slate-900 border border-slate-700 rounded px-2 py-1 text-xs text-white" />
+                          </div>
+                          <div>
+                            <label className="text-[11px] text-slate-400 font-semibold">Icon Class</label>
+                            <input value={cat.icon || ""} onChange={e => updateItemField("home", "categories", idx, "icon", e.target.value)} className="w-full bg-slate-900 border border-slate-700 rounded px-2 py-1 text-xs text-white" placeholder="fas fa-file-pen" />
+                          </div>
+                        </div>
+                        <div>
+                          <label className="text-[11px] text-slate-400 font-semibold">Description</label>
+                          <textarea rows={2} value={cat.desc || ""} onChange={e => updateItemField("home", "categories", idx, "desc", e.target.value)} className="w-full bg-slate-900 border border-slate-700 rounded px-2 py-1 text-xs text-white resize-y" />
+                        </div>
+                        <div className="grid grid-cols-2 gap-3">
+                          <div>
+                            <label className="text-[11px] text-slate-400 font-semibold">Bg Color</label>
+                            <input value={cat.bg || ""} onChange={e => updateItemField("home", "categories", idx, "bg", e.target.value)} className="w-full bg-slate-900 border border-slate-700 rounded px-2 py-1 text-xs text-white" />
+                          </div>
+                          <div>
+                            <label className="text-[11px] text-slate-400 font-semibold">Icon Color</label>
+                            <input value={cat.color || ""} onChange={e => updateItemField("home", "categories", idx, "color", e.target.value)} className="w-full bg-slate-900 border border-slate-700 rounded px-2 py-1 text-xs text-white" />
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Home Steps list */}
+                <div className="bg-slate-900 rounded-2xl border border-slate-800 overflow-hidden">
+                  <div className="bg-slate-800/60 px-5 py-3 border-b border-slate-700 flex justify-between items-center">
+                    <h2 className="text-xs font-bold text-slate-400 uppercase tracking-wider">How to Get Started Steps list</h2>
+                    <button onClick={() => addItem("home", "steps", { title: "", desc: "" })}
+                      className="bg-blue-600 hover:bg-blue-500 text-white px-2.5 py-1 rounded text-xs font-bold transition-all flex items-center gap-1">
+                      <IPlus /> Add Step
+                    </button>
+                  </div>
+                  <div className="p-5 space-y-4">
+                    {(content.home?.steps || DEFAULT_CONTENT.home.steps).map((step: any, idx: number) => (
+                      <div key={idx} className="bg-slate-800/50 p-4 rounded-xl border border-slate-700 relative space-y-3">
+                        <div className="absolute top-4 right-4 flex gap-2">
+                          <button onClick={() => moveItem("home", "steps", idx, "up")} disabled={idx === 0} className="text-slate-400 hover:text-white disabled:opacity-30">▲</button>
+                          <button onClick={() => moveItem("home", "steps", idx, "down")} disabled={idx === (content.home?.steps || DEFAULT_CONTENT.home.steps).length - 1} className="text-slate-400 hover:text-white disabled:opacity-30">▼</button>
+                          <button onClick={() => deleteItem("home", "steps", idx)} className="text-red-400 hover:text-red-300 ml-1"><ITrash /></button>
+                        </div>
+                        <div className="pr-20 font-semibold text-slate-300 text-xs">Step #{idx + 1}</div>
+                        <div>
+                          <label className="text-[11px] text-slate-400 font-semibold">Title</label>
+                          <input value={step.title || ""} onChange={e => updateItemField("home", "steps", idx, "title", e.target.value)} className="w-full bg-slate-900 border border-slate-700 rounded px-2 py-1 text-xs text-white" />
+                        </div>
+                        <div>
+                          <label className="text-[11px] text-slate-400 font-semibold">Description</label>
+                          <textarea rows={2} value={step.desc || ""} onChange={e => updateItemField("home", "steps", idx, "desc", e.target.value)} className="w-full bg-slate-900 border border-slate-700 rounded px-2 py-1 text-xs text-white resize-y" />
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </>
+            )}
+
+            {tab === "plans" && (
+              <>
+                {/* Plans Page - pricing array list */}
+                <div className="bg-slate-900 rounded-2xl border border-slate-800 overflow-hidden">
+                  <div className="bg-slate-800/60 px-5 py-3 border-b border-slate-700 flex justify-between items-center">
+                    <h2 className="text-xs font-bold text-slate-400 uppercase tracking-wider">Pricing Plans list</h2>
+                    <button onClick={() => addItem("plans", "plansList", { id: "custom", name: "", price: "", desc: "", isPaid: false, isPopular: false, refundNote: "", features: [] })}
+                      className="bg-blue-600 hover:bg-blue-500 text-white px-2.5 py-1 rounded text-xs font-bold transition-all flex items-center gap-1">
+                      <IPlus /> Add Plan
+                    </button>
+                  </div>
+                  <div className="p-5 space-y-4">
+                    {(content.plans?.plansList || DEFAULT_CONTENT.plans.plansList).map((plan: any, idx: number) => (
+                      <div key={idx} className="bg-slate-800/50 p-4 rounded-xl border border-slate-700 relative space-y-3">
+                        <div className="absolute top-4 right-4 flex gap-2">
+                          <button onClick={() => moveItem("plans", "plansList", idx, "up")} disabled={idx === 0} className="text-slate-400 hover:text-white disabled:opacity-30">▲</button>
+                          <button onClick={() => moveItem("plans", "plansList", idx, "down")} disabled={idx === (content.plans?.plansList || DEFAULT_CONTENT.plans.plansList).length - 1} className="text-slate-400 hover:text-white disabled:opacity-30">▼</button>
+                          <button onClick={() => deleteItem("plans", "plansList", idx)} className="text-red-400 hover:text-red-300 ml-1"><ITrash /></button>
+                        </div>
+                        <div className="pr-20 font-semibold text-slate-300 text-xs">Plan #{idx + 1} ({plan.isPaid ? "Paid" : "Free"})</div>
+                        <div className="grid grid-cols-3 gap-3">
+                          <div>
+                            <label className="text-[11px] text-slate-400 font-semibold">Plan ID (slug)</label>
+                            <input value={plan.id || ""} onChange={e => updateItemField("plans", "plansList", idx, "id", e.target.value)} className="w-full bg-slate-900 border border-slate-700 rounded px-2 py-1 text-xs text-white" placeholder="typing" />
+                          </div>
+                          <div className="col-span-2">
+                            <label className="text-[11px] text-slate-400 font-semibold">Plan Name</label>
+                            <input value={plan.name || ""} onChange={e => updateItemField("plans", "plansList", idx, "name", e.target.value)} className="w-full bg-slate-900 border border-slate-700 rounded px-2 py-1 text-xs text-white" />
+                          </div>
+                        </div>
+                        <div className="grid grid-cols-3 gap-3">
+                          <div>
+                            <label className="text-[11px] text-slate-400 font-semibold">Price (₹ or "Free")</label>
+                            <input value={plan.price || ""} onChange={e => updateItemField("plans", "plansList", idx, "price", e.target.value)} className="w-full bg-slate-900 border border-slate-700 rounded px-2 py-1 text-xs text-white" />
+                          </div>
+                          <div className="flex items-center gap-2 pt-5">
+                            <input type="checkbox" id={`paid-${idx}`} checked={!!plan.isPaid} onChange={e => updateItemField("plans", "plansList", idx, "isPaid", e.target.checked)} />
+                            <label htmlFor={`paid-${idx}`} className="text-xs text-slate-300 font-semibold cursor-pointer">Paid Plan</label>
+                          </div>
+                          <div className="flex items-center gap-2 pt-5">
+                            <input type="checkbox" id={`pop-${idx}`} checked={!!plan.isPopular} onChange={e => updateItemField("plans", "plansList", idx, "isPopular", e.target.checked)} />
+                            <label htmlFor={`pop-${idx}`} className="text-xs text-slate-300 font-semibold cursor-pointer">Popular Card</label>
+                          </div>
+                        </div>
+                        <div>
+                          <label className="text-[11px] text-slate-400 font-semibold">Description</label>
+                          <textarea rows={2} value={plan.desc || ""} onChange={e => updateItemField("plans", "plansList", idx, "desc", e.target.value)} className="w-full bg-slate-900 border border-slate-700 rounded px-2 py-1 text-xs text-white resize-y" />
+                        </div>
+                        <div>
+                          <label className="text-[11px] text-slate-400 font-semibold">Refund Warning Label (Paid only)</label>
+                          <input value={plan.refundNote || ""} onChange={e => updateItemField("plans", "plansList", idx, "refundNote", e.target.value)} className="w-full bg-slate-900 border border-slate-700 rounded px-2 py-1 text-xs text-white" placeholder="⚠️ Note: Refund is not..." />
+                        </div>
+                        {/* Plan dynamic features list editor */}
+                        {renderStringListEditor("Plan Features List", plan.features, (newList) => {
+                          updateItemField("plans", "plansList", idx, "features", newList);
+                        })}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Plans valueProposition strip */}
+                <div className="bg-slate-900 rounded-2xl border border-slate-800 overflow-hidden">
+                  <div className="bg-slate-800/60 px-5 py-3 border-b border-slate-700 flex justify-between items-center">
+                    <h2 className="text-xs font-bold text-slate-400 uppercase tracking-wider">Value proposition cards</h2>
+                    <button onClick={() => addItem("plans", "valueCards", { title: "", desc: "", icon: "fas fa-check" })}
+                      className="bg-blue-600 hover:bg-blue-500 text-white px-2.5 py-1 rounded text-xs font-bold transition-all flex items-center gap-1">
+                      <IPlus /> Add Card
+                    </button>
+                  </div>
+                  <div className="p-5 space-y-4">
+                    {(content.plans?.valueCards || DEFAULT_CONTENT.plans.valueCards).map((card: any, idx: number) => (
+                      <div key={idx} className="bg-slate-800/50 p-4 rounded-xl border border-slate-700 relative space-y-3">
+                        <div className="absolute top-4 right-4 flex gap-2">
+                          <button onClick={() => moveItem("plans", "valueCards", idx, "up")} disabled={idx === 0} className="text-slate-400 hover:text-white disabled:opacity-30">▲</button>
+                          <button onClick={() => moveItem("plans", "valueCards", idx, "down")} disabled={idx === (content.plans?.valueCards || DEFAULT_CONTENT.plans.valueCards).length - 1} className="text-slate-400 hover:text-white disabled:opacity-30">▼</button>
+                          <button onClick={() => deleteItem("plans", "valueCards", idx)} className="text-red-400 hover:text-red-300 ml-1"><ITrash /></button>
+                        </div>
+                        <div className="pr-20 font-semibold text-slate-300 text-xs">Card #{idx + 1}</div>
+                        <div className="grid grid-cols-2 gap-3">
+                          <div>
+                            <label className="text-[11px] text-slate-400 font-semibold">Title</label>
+                            <input value={card.title || ""} onChange={e => updateItemField("plans", "valueCards", idx, "title", e.target.value)} className="w-full bg-slate-900 border border-slate-700 rounded px-2 py-1 text-xs text-white" />
+                          </div>
+                          <div>
+                            <label className="text-[11px] text-slate-400 font-semibold">Icon Class</label>
+                            <input value={card.icon || ""} onChange={e => updateItemField("plans", "valueCards", idx, "icon", e.target.value)} className="w-full bg-slate-900 border border-slate-700 rounded px-2 py-1 text-xs text-white" />
+                          </div>
+                        </div>
+                        <div>
+                          <label className="text-[11px] text-slate-400 font-semibold">Description</label>
+                          <textarea rows={2} value={card.desc || ""} onChange={e => updateItemField("plans", "valueCards", idx, "desc", e.target.value)} className="w-full bg-slate-900 border border-slate-700 rounded px-2 py-1 text-xs text-white resize-y" />
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </>
+            )}
+
+            {tab === "about" && (
+              <>
+                {/* Team Leadership List */}
+                <div className="bg-slate-900 rounded-2xl border border-slate-800 overflow-hidden">
+                  <div className="bg-slate-800/60 px-5 py-3 border-b border-slate-700 flex justify-between items-center">
+                    <h2 className="text-xs font-bold text-slate-400 uppercase tracking-wider">Leadership Team list</h2>
+                    <button onClick={() => addItem("about", "teamList", { name: "", role: "", imageUrl: "" })}
+                      className="bg-blue-600 hover:bg-blue-500 text-white px-2.5 py-1 rounded text-xs font-bold transition-all flex items-center gap-1">
+                      <IPlus /> Add Member
+                    </button>
+                  </div>
+                  <div className="p-5 space-y-4">
+                    {(content.about?.teamList || DEFAULT_CONTENT.about.teamList).map((member: any, idx: number) => (
+                      <div key={idx} className="bg-slate-800/50 p-4 rounded-xl border border-slate-700 relative space-y-3">
+                        <div className="absolute top-4 right-4 flex gap-2">
+                          <button onClick={() => moveItem("about", "teamList", idx, "up")} disabled={idx === 0} className="text-slate-400 hover:text-white disabled:opacity-30">▲</button>
+                          <button onClick={() => moveItem("about", "teamList", idx, "down")} disabled={idx === (content.about?.teamList || DEFAULT_CONTENT.about.teamList).length - 1} className="text-slate-400 hover:text-white disabled:opacity-30">▼</button>
+                          <button onClick={() => deleteItem("about", "teamList", idx)} className="text-red-400 hover:text-red-300 ml-1"><ITrash /></button>
+                        </div>
+                        <div className="pr-20 font-semibold text-slate-300 text-xs">Member #{idx + 1}</div>
+                        <div className="grid grid-cols-2 gap-3">
+                          <div>
+                            <label className="text-[11px] text-slate-400 font-semibold">Name</label>
+                            <input value={member.name || ""} onChange={e => updateItemField("about", "teamList", idx, "name", e.target.value)} className="w-full bg-slate-900 border border-slate-700 rounded px-2 py-1 text-xs text-white" />
+                          </div>
+                          <div>
+                            <label className="text-[11px] text-slate-400 font-semibold">Role / Title</label>
+                            <input value={member.role || ""} onChange={e => updateItemField("about", "teamList", idx, "role", e.target.value)} className="w-full bg-slate-900 border border-slate-700 rounded px-2 py-1 text-xs text-white" />
+                          </div>
+                        </div>
+                        <div>
+                          <label className="text-[11px] text-slate-400 font-semibold">📎 Photo Link (Google Drive share link — optional)</label>
+                          <input value={member.imageUrl || ""} onChange={e => updateItemField("about", "teamList", idx, "imageUrl", e.target.value)} className="w-full bg-slate-900 border border-slate-700 rounded px-2 py-1 text-xs text-white" placeholder="https://drive.google.com/file/d/..." />
+                          {member.imageUrl && (
+                            <div className="mt-2 flex items-center gap-2">
+                              <span className="text-[10px] text-slate-500">Live Preview:</span>
+                              <img src={convertDriveImageUrl(member.imageUrl)} alt={member.name} className="w-10 h-10 rounded-full object-cover border border-slate-700" onError={(e: any) => { e.target.style.display="none"; }} />
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </>
+            )}
+
+            {tab === "projects" && (
+              <>
+                {/* Projects Grid List */}
+                <div className="bg-slate-900 rounded-2xl border border-slate-800 overflow-hidden">
+                  <div className="bg-slate-800/60 px-5 py-3 border-b border-slate-700 flex justify-between items-center">
+                    <h2 className="text-xs font-bold text-slate-400 uppercase tracking-wider">Available Projects list</h2>
+                    <button onClick={() => addItem("projects", "projectsList", { title: "", desc: "", icon: "fas fa-check", bg: "#eff6ff", color: "var(--brand)", level: "Easy", badges: [] })}
+                      className="bg-blue-600 hover:bg-blue-500 text-white px-2.5 py-1 rounded text-xs font-bold transition-all flex items-center gap-1">
+                      <IPlus /> Add Project
+                    </button>
+                  </div>
+                  <div className="p-5 space-y-4">
+                    {(content.projects?.projectsList || DEFAULT_CONTENT.projects.projectsList).map((proj: any, idx: number) => (
+                      <div key={idx} className="bg-slate-800/50 p-4 rounded-xl border border-slate-700 relative space-y-3">
+                        <div className="absolute top-4 right-4 flex gap-2">
+                          <button onClick={() => moveItem("projects", "projectsList", idx, "up")} disabled={idx === 0} className="text-slate-400 hover:text-white disabled:opacity-30">▲</button>
+                          <button onClick={() => moveItem("projects", "projectsList", idx, "down")} disabled={idx === (content.projects?.projectsList || DEFAULT_CONTENT.projects.projectsList).length - 1} className="text-slate-400 hover:text-white disabled:opacity-30">▼</button>
+                          <button onClick={() => deleteItem("projects", "projectsList", idx)} className="text-red-400 hover:text-red-300 ml-1"><ITrash /></button>
+                        </div>
+                        <div className="pr-20 font-semibold text-slate-300 text-xs">Project #{idx + 1}</div>
+                        <div className="grid grid-cols-2 gap-3">
+                          <div>
+                            <label className="text-[11px] text-slate-400 font-semibold">Title</label>
+                            <input value={proj.title || ""} onChange={e => updateItemField("projects", "projectsList", idx, "title", e.target.value)} className="w-full bg-slate-900 border border-slate-700 rounded px-2 py-1 text-xs text-white" />
+                          </div>
+                          <div>
+                            <label className="text-[11px] text-slate-400 font-semibold">Icon Class</label>
+                            <input value={proj.icon || ""} onChange={e => updateItemField("projects", "projectsList", idx, "icon", e.target.value)} className="w-full bg-slate-900 border border-slate-700 rounded px-2 py-1 text-xs text-white" placeholder="fas fa-file-pen" />
+                          </div>
+                        </div>
+                        <div>
+                          <label className="text-[11px] text-slate-400 font-semibold">Description</label>
+                          <textarea rows={2} value={proj.desc || ""} onChange={e => updateItemField("projects", "projectsList", idx, "desc", e.target.value)} className="w-full bg-slate-900 border border-slate-700 rounded px-2 py-1 text-xs text-white resize-y" />
+                        </div>
+                        <div className="grid grid-cols-3 gap-3">
+                          <div>
+                            <label className="text-[11px] text-slate-400 font-semibold">Bg Color</label>
+                            <input value={proj.bg || ""} onChange={e => updateItemField("projects", "projectsList", idx, "bg", e.target.value)} className="w-full bg-slate-900 border border-slate-700 rounded px-2 py-1 text-xs text-white" />
+                          </div>
+                          <div>
+                            <label className="text-[11px] text-slate-400 font-semibold">Icon Color</label>
+                            <input value={proj.color || ""} onChange={e => updateItemField("projects", "projectsList", idx, "color", e.target.value)} className="w-full bg-slate-900 border border-slate-700 rounded px-2 py-1 text-xs text-white" />
+                          </div>
+                          <div>
+                            <label className="text-[11px] text-slate-400 font-semibold">Work Level</label>
+                            <input value={proj.level || ""} onChange={e => updateItemField("projects", "projectsList", idx, "level", e.target.value)} className="w-full bg-slate-900 border border-slate-700 rounded px-2 py-1 text-xs text-white" placeholder="Easy · Basic Typing" />
+                          </div>
+                        </div>
+                        {/* Dynamic project tags / badges */}
+                        {renderStringListEditor("Project Badges / Tags", proj.badges, (newList) => {
+                          updateItemField("projects", "projectsList", idx, "badges", newList);
+                        })}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </>
+            )}
+
+            {tab === "blogs" && (
+              <>
+                {/* Blogs Grid List */}
+                <div className="bg-slate-900 rounded-2xl border border-slate-800 overflow-hidden">
+                  <div className="bg-slate-800/60 px-5 py-3 border-b border-slate-700 flex justify-between items-center">
+                    <h2 className="text-xs font-bold text-slate-400 uppercase tracking-wider">Blogs List</h2>
+                    <button onClick={() => addItem("blogs", "blogsList", { title: "", desc: "", tag: "New", url: "#", date: "2026" })}
+                      className="bg-blue-600 hover:bg-blue-500 text-white px-2.5 py-1 rounded text-xs font-bold transition-all flex items-center gap-1">
+                      <IPlus /> Add Blog
+                    </button>
+                  </div>
+                  <div className="p-5 space-y-4">
+                    {(content.blogs?.blogsList || DEFAULT_CONTENT.blogs.blogsList).map((blog: any, idx: number) => (
+                      <div key={idx} className="bg-slate-800/50 p-4 rounded-xl border border-slate-700 relative space-y-3">
+                        <div className="absolute top-4 right-4 flex gap-2">
+                          <button onClick={() => moveItem("blogs", "blogsList", idx, "up")} disabled={idx === 0} className="text-slate-400 hover:text-white disabled:opacity-30">▲</button>
+                          <button onClick={() => moveItem("blogs", "blogsList", idx, "down")} disabled={idx === (content.blogs?.blogsList || DEFAULT_CONTENT.blogs.blogsList).length - 1} className="text-slate-400 hover:text-white disabled:opacity-30">▼</button>
+                          <button onClick={() => deleteItem("blogs", "blogsList", idx)} className="text-red-400 hover:text-red-300 ml-1"><ITrash /></button>
+                        </div>
+                        <div className="pr-20 font-semibold text-slate-300 text-xs">Blog #{idx + 1}</div>
+                        <div>
+                          <label className="text-[11px] text-slate-400 font-semibold">Title</label>
+                          <input value={blog.title || ""} onChange={e => updateItemField("blogs", "blogsList", idx, "title", e.target.value)} className="w-full bg-slate-900 border border-slate-700 rounded px-2 py-1 text-xs text-white" />
+                        </div>
+                        <div>
+                          <label className="text-[11px] text-slate-400 font-semibold">Description / Excerpt</label>
+                          <textarea rows={2} value={blog.desc || ""} onChange={e => updateItemField("blogs", "blogsList", idx, "desc", e.target.value)} className="w-full bg-slate-900 border border-slate-700 rounded px-2 py-1 text-xs text-white resize-y" />
+                        </div>
+                        <div className="grid grid-cols-3 gap-3">
+                          <div>
+                            <label className="text-[11px] text-slate-400 font-semibold">Tag</label>
+                            <input value={blog.tag || ""} onChange={e => updateItemField("blogs", "blogsList", idx, "tag", e.target.value)} className="w-full bg-slate-900 border border-slate-700 rounded px-2 py-1 text-xs text-white" />
+                          </div>
+                          <div>
+                            <label className="text-[11px] text-slate-400 font-semibold">Page Link / URL</label>
+                            <input value={blog.url || ""} onChange={e => updateItemField("blogs", "blogsList", idx, "url", e.target.value)} className="w-full bg-slate-900 border border-slate-700 rounded px-2 py-1 text-xs text-white" placeholder="blogs/my-page.html" />
+                          </div>
+                          <div>
+                            <label className="text-[11px] text-slate-400 font-semibold">Year / Date</label>
+                            <input value={blog.date || ""} onChange={e => updateItemField("blogs", "blogsList", idx, "date", e.target.value)} className="w-full bg-slate-900 border border-slate-700 rounded px-2 py-1 text-xs text-white" />
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </>
+            )}
+
+            {tab === "demo-task" && (
+              <>
+                {/* Demo tasksList editor */}
+                <div className="bg-slate-900 rounded-2xl border border-slate-800 overflow-hidden">
+                  <div className="bg-slate-800/60 px-5 py-3 border-b border-slate-700 flex justify-between items-center">
+                    <h2 className="text-xs font-bold text-slate-400 uppercase tracking-wider">Demo Task Levels list</h2>
+                    <button onClick={() => addItem("demo-task", "tasksList", { id: "custom", name: "", emoji: "📝", items: 10, timeMin: 60, desc: "", color: "#7C3AED", num: 1, howto: [] })}
+                      className="bg-blue-600 hover:bg-blue-500 text-white px-2.5 py-1 rounded text-xs font-bold transition-all flex items-center gap-1">
+                      <IPlus /> Add Task Level
+                    </button>
+                  </div>
+                  <div className="p-5 space-y-4">
+                    {(content["demo-task"]?.tasksList || DEFAULT_CONTENT["demo-task"].tasksList).map((task: any, idx: number) => (
+                      <div key={idx} className="bg-slate-800/50 p-4 rounded-xl border border-slate-700 relative space-y-3">
+                        <div className="absolute top-4 right-4 flex gap-2">
+                          <button onClick={() => moveItem("demo-task", "tasksList", idx, "up")} disabled={idx === 0} className="text-slate-400 hover:text-white disabled:opacity-30">▲</button>
+                          <button onClick={() => moveItem("demo-task", "tasksList", idx, "down")} disabled={idx === (content["demo-task"]?.tasksList || DEFAULT_CONTENT["demo-task"].tasksList).length - 1} className="text-slate-400 hover:text-white disabled:opacity-30">▼</button>
+                          <button onClick={() => deleteItem("demo-task", "tasksList", idx)} className="text-red-400 hover:text-red-300 ml-1"><ITrash /></button>
+                        </div>
+                        <div className="pr-20 font-semibold text-slate-300 text-xs">Task #{idx + 1} ({task.id})</div>
+                        <div className="grid grid-cols-3 gap-3">
+                          <div>
+                            <label className="text-[11px] text-slate-400 font-semibold">Task ID</label>
+                            <input value={task.id || ""} onChange={e => updateItemField("demo-task", "tasksList", idx, "id", e.target.value)} className="w-full bg-slate-900 border border-slate-700 rounded px-2 py-1 text-xs text-white" placeholder="typing" />
+                          </div>
+                          <div>
+                            <label className="text-[11px] text-slate-400 font-semibold">Emoji</label>
+                            <input value={task.emoji || ""} onChange={e => updateItemField("demo-task", "tasksList", idx, "emoji", e.target.value)} className="w-full bg-slate-900 border border-slate-700 rounded px-2 py-1 text-xs text-white" />
+                          </div>
+                          <div>
+                            <label className="text-[11px] text-slate-400 font-semibold">Task Number</label>
+                            <input type="number" value={task.num || 0} onChange={e => updateItemField("demo-task", "tasksList", idx, "num", parseInt(e.target.value, 10))} className="w-full bg-slate-900 border border-slate-700 rounded px-2 py-1 text-xs text-white" />
+                          </div>
+                        </div>
+                        <div className="grid grid-cols-3 gap-3">
+                          <div className="col-span-2">
+                            <label className="text-[11px] text-slate-400 font-semibold">Task Name</label>
+                            <input value={task.name || ""} onChange={e => updateItemField("demo-task", "tasksList", idx, "name", e.target.value)} className="w-full bg-slate-900 border border-slate-700 rounded px-2 py-1 text-xs text-white" />
+                          </div>
+                          <div>
+                            <label className="text-[11px] text-slate-400 font-semibold">Theme Color</label>
+                            <input value={task.color || ""} onChange={e => updateItemField("demo-task", "tasksList", idx, "color", e.target.value)} className="w-full bg-slate-900 border border-slate-700 rounded px-2 py-1 text-xs text-white" placeholder="#7C3AED" />
+                          </div>
+                        </div>
+                        <div className="grid grid-cols-3 gap-3">
+                          <div>
+                            <label className="text-[11px] text-slate-400 font-semibold">Total Items</label>
+                            <input type="number" value={task.items || 0} onChange={e => updateItemField("demo-task", "tasksList", idx, "items", parseInt(e.target.value, 10))} className="w-full bg-slate-900 border border-slate-700 rounded px-2 py-1 text-xs text-white" />
+                          </div>
+                          <div>
+                            <label className="text-[11px] text-slate-400 font-semibold">Time Limit (mins)</label>
+                            <input type="number" value={task.timeMin || 0} onChange={e => updateItemField("demo-task", "tasksList", idx, "timeMin", parseInt(e.target.value, 10))} className="w-full bg-slate-900 border border-slate-700 rounded px-2 py-1 text-xs text-white" />
+                          </div>
+                          <div>
+                            <label className="text-[11px] text-slate-400 font-semibold">Hcls class (blue/green/orange)</label>
+                            <input value={task.hcls || ""} onChange={e => updateItemField("demo-task", "tasksList", idx, "hcls", e.target.value)} className="w-full bg-slate-900 border border-slate-700 rounded px-2 py-1 text-xs text-white" placeholder="blue" />
+                          </div>
+                        </div>
+                        <div>
+                          <label className="text-[11px] text-slate-400 font-semibold">Short Description</label>
+                          <textarea rows={2} value={task.desc || ""} onChange={e => updateItemField("demo-task", "tasksList", idx, "desc", e.target.value)} className="w-full bg-slate-900 border border-slate-700 rounded px-2 py-1 text-xs text-white resize-y" />
+                        </div>
+                        {/* Dynamic Task How-to instructions list */}
+                        {renderStringListEditor("Task Instructions (HOWTO steps)", task.howto, (newList) => {
+                          updateItemField("demo-task", "tasksList", idx, "howto", newList);
+                        })}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </>
+            )}
+
+            {/* 3. TESTIMONIALS MANAGER VIEW */}
             {tab === "testimonials" && (
               <div className="space-y-4">
-                {/* Drive Link Instructions */}
+                {/* Toggle filters */}
+                <div className="bg-slate-900 p-2.5 rounded-2xl border border-slate-800 flex gap-2">
+                  <button onClick={() => setTestiTypeFilter("video")} className={`flex-1 text-xs font-bold py-2 rounded-xl transition-all ${testiTypeFilter === "video" ? "bg-blue-600 text-white" : "text-slate-400 hover:bg-slate-800 hover:text-white"}`}>🎥 Videos Marquee</button>
+                  <button onClick={() => setTestiTypeFilter("screenshot")} className={`flex-1 text-xs font-bold py-2 rounded-xl transition-all ${testiTypeFilter === "screenshot" ? "bg-blue-600 text-white" : "text-slate-400 hover:bg-slate-800 hover:text-white"}`}>📸 Screen Shots Grid</button>
+                  <button onClick={() => setTestiTypeFilter("written")} className={`flex-1 text-xs font-bold py-2 rounded-xl transition-all ${testiTypeFilter === "written" ? "bg-blue-600 text-white" : "text-slate-400 hover:bg-slate-800 hover:text-white"}`}>✍️ Written reviews</button>
+                </div>
+
+                {/* Instructions */}
                 <div className="bg-blue-900/30 border border-blue-700/50 rounded-2xl p-4">
-                  <p className="text-xs font-bold text-blue-300 mb-1">📸 How to add Google Drive images</p>
+                  <p className="text-xs font-bold text-blue-300 mb-1">💡 Instructions for {testiTypeFilter} testimonials</p>
                   <p className="text-xs text-blue-400 leading-relaxed">
-                    1. Upload screenshot to Google Drive → Right click → "Share" → "Anyone with link" → Copy link<br/>
-                    2. Paste that link in the "Photo URL" field below. The system will auto-convert it to display format.<br/>
-                    3. If Photo URL is filled, it will show as a full image in the testimonial card on the website. Otherwise, initials avatar is shown.
+                    {testiTypeFilter === "video" && (
+                      <>
+                        1. Upload the video to Google Drive → Share it as "Anyone with link" → Copy link<br/>
+                        2. Paste the link into the "Video URL" field below. The system converts it into a responsive iframe embed.<br/>
+                        3. Videos loop seamlessly in the marquee track on testimonials.html.
+                      </>
+                    )}
+                    {testiTypeFilter === "screenshot" && (
+                      <>
+                        1. Upload the screenshot to Google Drive → Share it as "Anyone with link" → Copy link<br/>
+                        2. Paste the link into the "Photo URL" field below. The system converts it into an instant thumbnail.<br/>
+                        3. Click-to-open lightbox functionality binds automatically.
+                      </>
+                    )}
+                    {testiTypeFilter === "written" && (
+                      <>
+                        1. Type review text, author name, initials, and gradient avatar falls.<br/>
+                        2. Written cards align in a premium responsive masonry grid.
+                      </>
+                    )}
                   </p>
                 </div>
 
-                {testimonials.length === 0 && (
+                {testimonials.filter(t => t.type === testiTypeFilter).length === 0 && (
                   <div className="bg-slate-900 rounded-2xl border border-slate-800 p-10 text-center text-slate-500 text-sm">
-                    No testimonials. Click "Add Review" to create one.
+                    No {testiTypeFilter} testimonials. Click "Add Testimonial" to create one.
                   </div>
                 )}
 
-                {testimonials.map(t => (
+                {testimonials.filter(t => t.type === testiTypeFilter).map(t => (
                   <div key={t.id} className="bg-slate-900 rounded-2xl border border-slate-800 p-5 relative">
                     <button onClick={() => removeTesti(t.id)}
                       className="absolute top-4 right-4 text-slate-600 hover:text-red-400 transition-colors">
@@ -782,62 +1251,87 @@ export default function AdminDashboard() {
                           placeholder="e.g. Priya Kapoor"
                           className="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all" />
                       </div>
-                      <div>
-                        <label className="block text-xs font-semibold text-slate-400 mb-1">City / Location</label>
-                        <input value={t.city} onChange={e => updateTesti(t.id, "city", e.target.value)}
-                          placeholder="e.g. Pune, India"
-                          className="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all" />
+                      {testiTypeFilter === "video" ? (
+                        <div>
+                          <label className="block text-xs font-semibold text-slate-400 mb-1">Author Role / Badge</label>
+                          <input value={t.role || ""} onChange={e => updateTesti(t.id, "role", e.target.value)}
+                            placeholder="e.g. Operations Head"
+                            className="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all" />
+                        </div>
+                      ) : (
+                        <div>
+                          <label className="block text-xs font-semibold text-slate-400 mb-1">City / Location</label>
+                          <input value={t.city || ""} onChange={e => updateTesti(t.id, "city", e.target.value)}
+                            placeholder="e.g. Pune, India"
+                            className="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all" />
+                        </div>
+                      )}
+                    </div>
+
+                    {testiTypeFilter === "written" && (
+                      <div className="mb-3">
+                        <label className="block text-xs font-semibold text-slate-400 mb-1">Review Text</label>
+                        <textarea value={t.text} onChange={e => updateTesti(t.id, "text", e.target.value)}
+                          rows={2} placeholder="Write the review here…"
+                          className="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all resize-y" />
                       </div>
-                    </div>
+                    )}
 
-                    <div className="mb-3">
-                      <label className="block text-xs font-semibold text-slate-400 mb-1">Review Text</label>
-                      <textarea value={t.text} onChange={e => updateTesti(t.id, "text", e.target.value)}
-                        rows={2} placeholder="Write the review here…"
-                        className="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all resize-y" />
-                    </div>
-
-                    {/* Google Drive Image URL */}
-                    <div className="mb-3">
-                      <label className="block text-xs font-semibold text-slate-400 mb-1">📎 Photo URL (Google Drive share link) — optional</label>
-                      <input value={t.imageUrl || ""} onChange={e => updateTesti(t.id, "imageUrl", e.target.value)}
-                        placeholder="https://drive.google.com/file/d/…/view?usp=sharing"
-                        className="w-full bg-slate-800 border border-blue-700/50 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all" />
-                    </div>
-
-                    <div className="grid grid-cols-2 gap-3">
-                      <div>
-                        <label className="block text-xs font-semibold text-slate-400 mb-1">Initials (Avatar fallback)</label>
-                        <input maxLength={2} value={t.initials} onChange={e => updateTesti(t.id, "initials", e.target.value)}
-                          placeholder="PK"
-                          className="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all" />
+                    {testiTypeFilter === "video" && (
+                      <div className="mb-3">
+                        <label className="block text-xs font-semibold text-slate-400 mb-1">🎥 Video URL (Google Drive share link)</label>
+                        <input value={t.videoUrl || ""} onChange={e => updateTesti(t.id, "videoUrl", e.target.value)}
+                          placeholder="https://drive.google.com/file/d/…/view?usp=sharing"
+                          className="w-full bg-slate-800 border border-blue-700/50 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all" />
                       </div>
-                      <div>
-                        <label className="block text-xs font-semibold text-slate-400 mb-1">Avatar Color</label>
-                        <select value={t.gradient} onChange={e => updateTesti(t.id, "gradient", e.target.value)}
-                          className="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all">
-                          <option value="linear-gradient(135deg,#f59e0b,#ef4444)">🟠 Orange-Red</option>
-                          <option value="linear-gradient(135deg,#8b5cf6,#d946ef)">🟣 Purple-Pink</option>
-                          <option value="linear-gradient(135deg,#14b8a6,#3b82f6)">🔵 Teal-Blue</option>
-                          <option value="linear-gradient(135deg,#10b981,#059669)">🟢 Green</option>
-                          <option value="linear-gradient(135deg,#f43f5e,#e11d48)">🔴 Red-Rose</option>
-                          <option value="linear-gradient(135deg,#1d4ed8,#6366f1)">💙 Blue-Indigo</option>
-                          <option value="linear-gradient(135deg,#ec4899,#f97316)">🌸 Pink-Orange</option>
-                        </select>
-                      </div>
-                    </div>
+                    )}
 
-                    {/* Live Preview */}
+                    {testiTypeFilter === "screenshot" && (
+                      <div className="mb-3">
+                        <label className="block text-xs font-semibold text-slate-400 mb-1">📸 Photo URL (Google Drive share link)</label>
+                        <input value={t.imageUrl || ""} onChange={e => updateTesti(t.id, "imageUrl", e.target.value)}
+                          placeholder="https://drive.google.com/file/d/…/view?usp=sharing"
+                          className="w-full bg-slate-800 border border-blue-700/50 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all" />
+                      </div>
+                    )}
+
+                    {testiTypeFilter !== "screenshot" && (
+                      <div className="grid grid-cols-2 gap-3">
+                        <div>
+                          <label className="block text-xs font-semibold text-slate-400 mb-1">Initials (Avatar fallback)</label>
+                          <input maxLength={2} value={t.initials || ""} onChange={e => updateTesti(t.id, "initials", e.target.value)}
+                            placeholder="PK"
+                            className="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all" />
+                        </div>
+                        <div>
+                          <label className="block text-xs font-semibold text-slate-400 mb-1">Avatar Color</label>
+                          <select value={t.gradient || ""} onChange={e => updateTesti(t.id, "gradient", e.target.value)}
+                            className="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all">
+                            <option value="linear-gradient(135deg,#f59e0b,#ef4444)">🟠 Orange-Red</option>
+                            <option value="linear-gradient(135deg,#8b5cf6,#d946ef)">🟣 Purple-Pink</option>
+                            <option value="linear-gradient(135deg,#14b8a6,#3b82f6)">🔵 Teal-Blue</option>
+                            <option value="linear-gradient(135deg,#10b981,#059669)">🟢 Green</option>
+                            <option value="linear-gradient(135deg,#f43f5e,#e11d48)">🔴 Red-Rose</option>
+                            <option value="linear-gradient(135deg,#1d4ed8,#6366f1)">💙 Blue-Indigo</option>
+                            <option value="linear-gradient(135deg,#ec4899,#f97316)">🌸 Pink-Orange</option>
+                          </select>
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Preview box */}
                     <div className="mt-4 pt-4 border-t border-slate-800">
-                      <p className="text-xs font-semibold text-slate-600 mb-2">Preview</p>
-                      <div className="bg-slate-800 rounded-xl p-3 flex gap-3 items-start">
-                        {t.imageUrl ? (
-                          <img
-                            src={getDriveEmbedUrl(t.imageUrl)}
-                            alt={t.name}
-                            className="w-10 h-10 rounded-full flex-shrink-0 object-cover"
-                            onError={(e: any) => { e.target.style.display = "none"; }}
-                          />
+                      <p className="text-xs font-semibold text-slate-600 mb-2">Live Preview</p>
+                      <div className="bg-slate-800 rounded-xl p-3 flex gap-3 items-start overflow-hidden">
+                        {testiTypeFilter === "screenshot" ? (
+                          t.imageUrl ? (
+                            <img
+                              src={convertDriveImageUrl(t.imageUrl)}
+                              alt={t.name}
+                              className="w-16 h-16 rounded object-cover flex-shrink-0"
+                              onError={(e: any) => { e.target.style.display = "none"; }}
+                            />
+                          ) : <div className="text-xs italic text-slate-500">Paste screenshot link above...</div>
                         ) : (
                           <div className="w-10 h-10 rounded-full flex-shrink-0 flex items-center justify-center text-white font-bold text-sm"
                             style={{ background: t.gradient }}>
@@ -845,9 +1339,15 @@ export default function AdminDashboard() {
                           </div>
                         )}
                         <div>
-                          <div className="text-yellow-400 text-xs mb-0.5">★★★★★</div>
-                          <p className="text-slate-300 text-xs">{t.text || "Review text preview."}</p>
-                          <p className="text-slate-500 text-xs mt-0.5">{t.name || "Name"} — {t.city || "City"}</p>
+                          {testiTypeFilter === "written" && <p className="text-slate-300 text-xs mb-1">{t.text || "Write review text..."}</p>}
+                          {testiTypeFilter === "video" && (
+                            t.videoUrl ? (
+                              <p className="text-blue-400 text-xs font-mono truncate max-w-xs">{t.videoUrl}</p>
+                            ) : <p className="text-xs italic text-slate-500">Paste video link above...</p>
+                          )}
+                          <p className="text-slate-400 font-bold text-xs mt-1">
+                            {t.name || "Author Name"} — {testiTypeFilter === "video" ? (t.role || "Role") : (t.city || "City")}
+                          </p>
                         </div>
                       </div>
                     </div>

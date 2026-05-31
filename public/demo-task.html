@@ -1231,7 +1231,7 @@ function gCap(){if(captchaIdx>=captchaPool.length){resetCaptchaPool();}return ca
 // =====================================================
 // ===== TASK DEFINITIONS =====
 // =====================================================
-const TDEFS=[
+let TDEFS=[
   {id:"typing",  name:"PDF to Word Typing",  emoji:"⌨️",items:10,timeMin:60,desc:"Read the 8-10 line content shown on each page and type it exactly in the box below. Minimum 100 words per page required.",color:"#7C3AED",num:1,hcls:""},
   {id:"captcha", name:"Captcha Filling",     emoji:"🔢",items:100,timeMin:60,desc:"Solve 100 dynamic CAPTCHA challenges — 10 types including reverse, filter, sort, position, math & more!",color:"#0891B2",num:2,hcls:"blue"},
   {id:"form",    name:"Form Filling",        emoji:"🧾",items:10,timeMin:60,desc:"Complete 10 online forms with the provided reference data carefully and accurately.",color:"#059669",num:3,hcls:"green"},
@@ -1239,7 +1239,7 @@ const TDEFS=[
   {id:"grammar", name:"Grammar Correction",  emoji:"✍️",items:10,timeMin:60,desc:"Read 10 paragraphs with grammatical errors and type the fully corrected versions.",color:"#7C3AED",num:5,hcls:""},
 ];
 
-const HOWTO={
+let HOWTO={
   typing:["Read the content shown in the yellow box carefully.","Type the exact same content in the text box below — word for word.","You must type at least 100 words to pass this item.","Do NOT copy-paste — type manually using the keyboard.","Spelling and accuracy matter — type carefully."],
   captcha:["10 different CAPTCHA types appear randomly — read the question carefully each time.","For text captcha: type exact characters shown (case-sensitive).","For reverse/filter/sort: follow the specific instruction shown in the yellow box.","For Long Calculation: solve the full expression (with +, −, ×) and enter only the final number.","For advanced captcha: complete each step in the exact order given.","Live color feedback shows if your answer is correct before saving."],
   form:["Read all reference data in the blue box at the top.","Fill each field exactly as shown in the reference (spelling, spacing, case).","Do not skip any field marked with a red asterisk (*).","Type manually — copy-paste is disabled.","Click Save when all fields are filled to see your score."],
