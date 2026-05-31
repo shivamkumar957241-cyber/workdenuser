@@ -534,12 +534,48 @@ export default function AdminDashboard() {
     setContent(p => ({ ...p, [page]: { ...(p[page] || {}), [key]: val } }));
 
   const handleSave = async () => {
+    // 1. Validate testimonials to prevent huge base64 payload size errors
+    for (const t of testimonials) {
+      if (t.imageUrl && t.imageUrl.startsWith("data:")) {
+        showToast("⚠️ Error: Please paste a Google Drive link or standard image URL instead of direct base64 data.", false);
+        return;
+      }
+      if (t.imageUrl && t.imageUrl.length > 2000) {
+        showToast("⚠️ Error: Image URL is too long. Please use a clean Google Drive sharing link.", false);
+        return;
+      }
+    }
+
+    // 2. Generic validation across all website content fields to block base64 copy-paste errors
+    for (const pageKey in content) {
+      for (const fieldKey in content[pageKey]) {
+        const val = content[pageKey][fieldKey];
+        if (typeof val === "string") {
+          if (val.startsWith("data:")) {
+            showToast(`⚠️ Error in ${pageKey}: Base64 data URLs are not allowed. Please use standard URLs/links.`, false);
+            return;
+          }
+          if (val.length > 20000) {
+            showToast(`⚠️ Error in ${pageKey}: Content for '${fieldKey}' is too long. Limit is 20,000 characters.`, false);
+            return;
+          }
+        }
+      }
+    }
+
+    // 3. Check total payload size
+    const payloadStr = JSON.stringify({ type: "content", data: { website: content, testimonials } });
+    if (payloadStr.length > 800000) { // ~800KB (Firestore limit is 1MB)
+      showToast("⚠️ Error: Total content size is too large. Please shorten texts or use Drive links for screenshots.", false);
+      return;
+    }
+
     setSaving(true);
     try {
       const res = await fetch("/api/content/update", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ type: "content", data: { website: content, testimonials } }),
+        body: payloadStr,
       });
       const json = await res.json();
       json.success
