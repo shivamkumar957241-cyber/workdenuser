@@ -4,8 +4,10 @@ import type { NextRequest } from 'next/server';
 export function middleware(request: NextRequest) {
   const path = request.nextUrl.pathname;
 
-  // Protect /admin routes (except /admin/login)
-  if (path.startsWith('/admin') && path !== '/admin/login') {
+  const isLogin = path === '/admin/login' || path === '/admin/login/';
+
+  // Protect /admin routes (except login)
+  if (path.startsWith('/admin') && !isLogin) {
     const session = request.cookies.get('admin_session');
     
     if (!session || session.value !== 'authenticated') {
@@ -14,7 +16,7 @@ export function middleware(request: NextRequest) {
   }
 
   // Redirect authenticated users away from login
-  if (path === '/admin/login') {
+  if (isLogin) {
     const session = request.cookies.get('admin_session');
     if (session && session.value === 'authenticated') {
       return NextResponse.redirect(new URL('/admin', request.url));
