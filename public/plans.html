@@ -40,25 +40,26 @@ body{
   position:fixed;
   top:0;left:0;right:0;
   z-index:999;
+  height:64px;
   background:rgba(255,255,255,.84)!important;
   backdrop-filter:blur(18px);
   -webkit-backdrop-filter:blur(18px);
-  border-bottom:1px solid rgba(226,232,240,.95);
-  box-shadow:0 8px 30px rgba(15,23,42,.045);
-  transition:.28s ease;
+  border-bottom:1px solid rgba(226,232,240,.92)!important;
+  box-shadow:0 8px 30px rgba(15,23,42,.04);
+  transition:.25s ease;
 }
-.navbar.scrolled{box-shadow:0 16px 45px rgba(15,23,42,.12)}
+.navbar.scrolled{box-shadow:0 16px 45px rgba(15,23,42,.10)!important;}
 .nav-inner{
-  max-width:1200px;margin:0 auto;padding:11px 28px;
-  display:flex;align-items:center;justify-content:space-between;gap:18px;
+  max-width:1200px;margin:0 auto;padding:0 28px;height:100%;
+  display:flex;align-items:center;justify-content:space-between;gap:20px;
 }
 .nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none;padding:8px 10px;border-radius:16px;transition:.25s ease;}
 .nav-logo:hover{background:#f8fafc;transform:translateY(-2px)}
 .nav-logo img{width:36px;height:36px;object-fit:contain;filter:drop-shadow(0 8px 18px rgba(29,78,216,.18))}
 .nav-logo-text{font-size:1.15rem;font-weight:900;color:#0f172a;letter-spacing:-.035em}
 .nav-links{list-style:none;display:flex;align-items:center;gap:2px;margin:0;padding:7px;background:#ffffff;border:1px solid var(--border);border-radius:999px;box-shadow:0 10px 30px rgba(15,23,42,.05);}
-.nav-links a{display:flex;align-items:center;text-decoration:none;color:#475569;font-size:.82rem;font-weight:800;border-radius:999px;padding:9px 13px;transition:.22s ease;}
-.nav-links a:hover,.nav-links a.active{background:#eff6ff;color:var(--brand);}
+.nav-links a{display:flex;align-items:center;text-decoration:none;color:#475569;font-size:0.85rem;font-weight:500;border-radius:999px;padding:9px 14px!important;transition:.22s ease;}
+.nav-links a:hover,.nav-links a.active{background:#eff6ff;color:var(--brand);font-weight:600;}
 .nav-ctas{display:flex;gap:10px;align-items:center}
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border-radius:999px;padding:10px 18px;font-size:.84rem;font-weight:850;text-decoration:none;border:none;cursor:pointer;transition:transform .22s ease,box-shadow .22s ease,background .22s ease,color .22s ease;white-space:nowrap;}
 .btn:hover{transform:translateY(-2px)}

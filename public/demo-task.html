@@ -21,17 +21,91 @@ input,textarea{-webkit-user-select:text;-moz-user-select:text;user-select:text;}
 .menu-header h1{color:#fff;font-size:1.9rem;font-weight:900;position:relative;}
 .menu-header p{color:rgba(255,255,255,0.8);margin-top:6px;font-size:0.95rem;position:relative;}
 .menu-badge{display:inline-block;background:rgba(255,255,255,0.2);color:#fff;padding:4px 16px;border-radius:20px;font-size:0.78rem;font-weight:700;margin-top:10px;border:1px solid rgba(255,255,255,0.3);position:relative;}
-.task-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:16px;padding:24px 20px;max-width:1100px;margin:0 auto;width:100%;}
-.task-card{background:#fff;border-radius:16px;overflow:hidden;box-shadow:var(--shadow);cursor:pointer;transition:transform 0.2s,box-shadow 0.2s;border:1px solid var(--border);}
-.task-card:hover{transform:translateY(-4px);box-shadow:0 12px 40px rgba(0,0,0,0.13);}
-.task-card-top{height:5px;width:100%;}
-.task-card-body{padding:20px;}
-.task-card-body h3{font-size:1.05rem;font-weight:800;margin-bottom:6px;}
-.task-card-body p{font-size:0.82rem;color:var(--text-muted);line-height:1.5;margin-bottom:16px;}
-.task-card-meta{display:flex;align-items:center;justify-content:space-between;}
-.task-num{width:42px;height:42px;border-radius:12px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:900;font-size:1.1rem;}
-.start-btn{display:flex;align-items:center;gap:6px;padding:10px 20px;border-radius:10px;border:none;color:#fff;font-weight:800;font-size:0.88rem;cursor:pointer;font-family:inherit;transition:opacity 0.15s;}
-.start-btn:hover{opacity:0.85;}
+.task-cards {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 20px !important;
+  padding: 24px 20px !important;
+  max-width: 900px !important;
+  margin: 0 auto !important;
+  width: 100% !important;
+}
+.task-card {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  background: white !important;
+  border: 1px solid rgba(226, 232, 240, 0.8) !important;
+  border-radius: 24px !important;
+  padding: 20px 24px !important;
+  box-shadow: 0 4px 20px rgba(15, 23, 42, 0.03) !important;
+  transition: all 0.25s ease !important;
+  cursor: default !important;
+  flex-direction: row !important;
+  gap: 16px !important;
+  overflow: visible !important;
+  animation: wdCardIn .48s ease both !important;
+}
+.task-card:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06) !important;
+  border-color: rgba(203, 213, 225, 0.8) !important;
+}
+.task-card-icon-wrap {
+  width: 56px !important;
+  height: 56px !important;
+  border-radius: 16px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  font-size: 1.5rem !important;
+  flex-shrink: 0 !important;
+}
+.task-card-details {
+  flex: 1 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 4px !important;
+  min-width: 0 !important;
+}
+.task-card-title {
+  font-size: 1.1rem !important;
+  font-weight: 800 !important;
+  color: #0f172a !important;
+  margin: 0 !important;
+  letter-spacing: -0.02em !important;
+}
+.task-card-desc {
+  font-size: 0.85rem !important;
+  color: #64748b !important;
+  margin: 0 !important;
+  line-height: 1.5 !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
+.task-card-action {
+  flex-shrink: 0 !important;
+}
+.task-card-btn {
+  background: #0f172a !important;
+  color: white !important;
+  font-family: inherit !important;
+  font-weight: 800 !important;
+  font-size: 0.85rem !important;
+  padding: 10px 24px !important;
+  border-radius: 999px !important;
+  border: none !important;
+  cursor: pointer !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  transition: all 0.2s ease !important;
+}
+.task-card-btn:hover {
+  background: #1e293b !important;
+  transform: scale(1.02) !important;
+}
 #taskArea{display:none;min-height:calc(100vh - 80px);flex-direction:column;max-width:1150px;margin:40px auto;background:#ffffff;box-shadow:0 12px 40px rgba(15,23,42,0.06);border:1px solid var(--border);border-radius:16px;}
 .task-topbar{padding:14px 20px;display:flex;align-items:center;gap:14px;background:#fff;border-bottom:2px solid var(--border);position:sticky;top:0;z-index:100;}
 .back-btn{width:38px;height:38px;border-radius:10px;border:2px solid var(--border);background:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1.1rem;transition:all 0.15s;}
@@ -126,7 +200,7 @@ input,textarea{-webkit-user-select:text;-moz-user-select:text;user-select:text;}
 .err-got{color:var(--red);font-weight:700;}
 .err-expected{color:var(--green);font-weight:700;}
 .mini-close-btn{width:100%;padding:11px;background:linear-gradient(135deg,var(--purple-dark),var(--purple-light));color:#fff;border:none;border-radius:11px;font-family:inherit;font-weight:800;font-size:0.9rem;cursor:pointer;}
-.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.65);z-index:999;align-items:flex-start;justify-content:center;padding:16px;overflow-y:auto;}
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(10,15,30,0.65);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);z-index:30000;align-items:flex-start;justify-content:center;padding:24px 16px;overflow-y:auto;}
 .modal-overlay.show{display:flex;}
 .modal{background:#fff;border-radius:24px;max-width:600px;width:100%;margin:auto;animation:popIn 0.3s cubic-bezier(0.34,1.56,0.64,1);box-shadow:0 24px 80px rgba(0,0,0,0.2);overflow:hidden;}
 @keyframes popIn{from{transform:scale(0.75);opacity:0;}to{transform:scale(1);opacity:1;}}
@@ -203,108 +277,145 @@ input,textarea{-webkit-user-select:text;-moz-user-select:text;user-select:text;}
 <style>
 /* ========== FINAL HEADER FIX: stable color, less bold, no disappearing effect ========== */
 body{
-  padding-top:74px!important;
+  padding-top:64px!important;
 }
 
-/* Keep header clean white always */
+/* Keep header clean white premium glassmorphic always */
 .wd-nav{
-  height:74px!important;
-  min-height:74px!important;
-  background:#ffffff!important;
-  backdrop-filter:none!important;
-  -webkit-backdrop-filter:none!important;
-  border-bottom:1px solid #e2e8f0!important;
-  box-shadow:0 6px 18px rgba(15,23,42,0.06)!important;
-  transition:box-shadow .2s ease!important;
+  height:64px!important;
+  min-height:64px!important;
+  position:fixed!important;
+  top:0!important;left:0!important;right:0!important;
+  z-index:1000!important;
+  background:rgba(255,255,255,0.84)!important;
+  backdrop-filter:blur(18px)!important;
+  -webkit-backdrop-filter:blur(18px)!important;
+  border-bottom:1px solid rgba(226,232,240,0.92)!important;
+  box-shadow:0 8px 30px rgba(15,23,42,0.04)!important;
+  transition:box-shadow .2s ease, background .2s ease!important;
 }
 .wd-nav.scrolled{
-  background:#ffffff!important;
-  box-shadow:0 8px 22px rgba(15,23,42,0.08)!important;
+  box-shadow:0 16px 45px rgba(15,23,42,0.10)!important;
 }
 .wd-nav-inner{
-  height:74px!important;
-  min-height:74px!important;
+  width:100%!important;
+  height:64px!important;
+  min-height:64px!important;
   padding:0 28px!important;
+  max-width:1200px!important;
+  margin:0 auto!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:space-between!important;
+  position:relative!important;
 }
 
 /* Logo normal, no jump/effect */
 .wd-logo{
-  padding:0!important;
-  border-radius:0!important;
-  transform:none!important;
-  background:transparent!important;
+  padding:8px 10px!important;
+  border-radius:16px!important;
+  transition:transform .25s ease, background .25s ease!important;
+  display:flex!important;
+  align-items:center!important;
+  gap:10px!important;
+  text-decoration:none!important;
 }
 .wd-logo:hover{
-  transform:none!important;
-  background:transparent!important;
+  transform:translateY(-2px)!important;
+  background:#f8fafc!important;
 }
 .wd-logo img{
-  height:34px!important;
-  filter:none!important;
+  height:36px!important;
+  width:auto!important;
+  object-fit:contain!important;
+  filter:drop-shadow(0 8px 18px rgba(29,78,216,0.18))!important;
 }
 .wd-logo-text{
   color:#0f172a!important;
-  font-weight:800!important;
-  font-size:1.08rem!important;
-  letter-spacing:-0.02em!important;
+  font-weight:900!important;
+  font-size:1.15rem!important;
+  letter-spacing:-0.035em!important;
 }
 
-/* Header links: same visible color, not over-bold */
+/* Header links: absolute centered so it remains rock stable */
 .wd-links{
+  position:absolute!important;
+  left:50%!important;
+  top:50%!important;
+  transform:translate(-50%, -50%)!important;
+  display:flex!important;
+  align-items:center!important;
+  gap:2px!important;
+  list-style:none!important;
+  padding:7px!important;
   background:#ffffff!important;
   border:1px solid #e2e8f0!important;
-  box-shadow:0 4px 14px rgba(15,23,42,0.04)!important;
-  padding:5px!important;
+  border-radius:999px!important;
+  box-shadow:0 10px 30px rgba(15,23,42,0.05)!important;
 }
 .wd-links a{
-  color:#334155!important;
-  font-weight:650!important;
-  font-size:.84rem!important;
-  padding:8px 12px!important;
-  background:transparent!important;
-  transform:none!important;
+  display:flex!important;
+  align-items:center!important;
+  text-decoration:none!important;
+  color:#475569!important;
+  font-size:0.85rem!important;
+  font-weight:500!important;
+  border-radius:999px!important;
+  padding:9px 14px!important;
+  transition:.22s ease!important;
 }
 .wd-links a:hover{
-  color:#1d4ed8!important;
   background:#eff6ff!important;
-  transform:none!important;
+  color:#1d4ed8!important;
 }
 .wd-links a.active{
-  color:#1d4ed8!important;
   background:#eff6ff!important;
-  font-weight:750!important;
+  color:#1d4ed8!important;
+  font-weight:600!important;
 }
 
 /* Header buttons stable */
 .wd-btn-ghost{
-  background:#ffffff!important;
-  color:#334155!important;
-  border:1px solid #e2e8f0!important;
-  box-shadow:none!important;
-  font-weight:650!important;
-  transform:none!important;
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  gap:8px!important;
+  border-radius:999px!important;
+  padding:10px 18px!important;
+  font-size:.84rem!important;
+  font-weight:850!important;
+  text-decoration:none!important;
+  cursor:pointer!important;
+  background:#fff!important;
+  color:#1d4ed8!important;
+  border:1px solid #dbeafe!important;
+  box-shadow:0 8px 22px rgba(15,23,42,0.05)!important;
+  transition:all 0.22s ease!important;
 }
 .wd-btn-ghost:hover{
   background:#f8fafc!important;
-  color:#1d4ed8!important;
-  border-color:#bfdbfe!important;
-  transform:none!important;
-  box-shadow:none!important;
+  transform:translateY(-2px)!important;
 }
 .wd-btn-primary{
-  background:#1d4ed8!important;
-  color:#ffffff!important;
-  border:1px solid #1d4ed8!important;
-  box-shadow:0 4px 12px rgba(29,78,216,0.22)!important;
-  font-weight:700!important;
-  transform:none!important;
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  gap:8px!important;
+  border-radius:999px!important;
+  padding:10px 18px!important;
+  font-size:.84rem!important;
+  font-weight:850!important;
+  text-decoration:none!important;
+  cursor:pointer!important;
+  background:linear-gradient(135deg,#1d4ed8,#2563eb)!important;
+  color:#fff!important;
+  border:none!important;
+  box-shadow:0 12px 30px rgba(37,99,235,0.25)!important;
+  transition:all 0.22s ease!important;
 }
 .wd-btn-primary:hover{
-  background:#1e40af!important;
-  border-color:#1e40af!important;
-  color:#ffffff!important;
-  transform:none!important;
-  box-shadow:0 5px 14px rgba(29,78,216,0.25)!important;
+  box-shadow:0 18px 42px rgba(37,99,235,0.34)!important;
+  transform:translateY(-2px)!important;
 }
 
 /* Mobile button stable */
@@ -316,26 +427,14 @@ body{
 
 /* Task sticky topbar adjust after header */
 .task-topbar{
-  top:74px!important;
-}
-
-/* Remove any header animation/shine side effects only from header */
-.wd-nav *,
-.wd-mob *{
-  animation:none!important;
-}
-.wd-nav a::before,
-.wd-nav a::after,
-.wd-links::before,
-.wd-links::after{
-  display:none!important;
+  top:64px!important;
 }
 
 @media(max-width:640px){
-  body{padding-top:68px!important;}
-  .wd-nav,.wd-nav-inner{height:68px!important;min-height:68px!important;}
+  body{padding-top:64px!important;}
+  .wd-nav,.wd-nav-inner{height:64px!important;min-height:64px!important;}
   .wd-nav-inner{padding:0 16px!important;}
-  .task-topbar{top:68px!important;}
+  .task-topbar{top:64px!important;}
   .wd-logo img{height:32px!important;}
   .wd-logo-text{font-size:1.02rem!important;}
 }
@@ -803,11 +902,7 @@ body{
       <a href="https://workdenteam2.base44.app/" class="wd-btn-primary" data-content-id="nav_employeeLoginBtn" data-content-href="nav_employeeLoginUrl">Employee Login</a>
     </div>
 
-    <div id="navUserProfile" style="display:none;" class="flex items-center gap-3 mr-4">
-      <button onclick="toggleProfileDrawer()" class="w-10 h-10 rounded-full bg-slate-50 hover:bg-slate-100 border border-slate-200 text-slate-700 flex items-center justify-center transition-all shadow-sm cursor-pointer" title="Open Menu & History">
-        <i class="fa-solid fa-bars text-blue-600 text-sm"></i>
-      </button>
-    </div>
+    <div id="navUserProfile" style="display:none;"></div>
 
     <button class="wd-ham" onclick="wdToggle()"><i class="fas fa-bars"></i></button>
   </div>
@@ -887,103 +982,113 @@ document.body.addEventListener('input', function(e){
   }
 });
 </script>
+<!-- DEMO AUTHENTICATION PORTAL -->
+<div id="demoAuthArea" class="w-full" style="display:block;position:relative;min-height:100vh;">
+  <!-- Auth wrapper: left fixed, right scrollable -->
+  <div style="display:flex;min-height:100vh;">
+    <!-- LEFT PANEL: always full viewport height, never reflowed by right side -->
+    <div style="width:42%;min-width:340px;background-image:linear-gradient(135deg,rgba(10,15,40,0.96) 0%,rgba(20,18,65,0.98) 100%),url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=1200');background-size:cover;background-position:center;position:sticky;top:0;height:100vh;flex-shrink:0;display:flex;flex-direction:column;overflow:hidden;padding:56px 52px;box-sizing:border-box;">
+      <!-- Decorative blobs -->
+      <div style="position:absolute;top:-48px;left:-48px;width:160px;height:160px;border-radius:50%;background:rgba(59,130,246,0.08);filter:blur(32px);pointer-events:none;"></div>
+      <div style="position:absolute;bottom:-60px;right:-60px;width:200px;height:200px;border-radius:50%;background:rgba(124,58,237,0.08);filter:blur(40px);pointer-events:none;"></div>
 
-<!-- DEMO AUTHENTICATION PORTAL CARD -->
-<div id="demoAuthArea" class="max-w-4xl mx-auto my-12 px-6" style="display: block;">
-  <div class="bg-white rounded-3xl border border-slate-200/80 shadow-2xl shadow-slate-200/40 grid grid-cols-1 lg:grid-cols-12 overflow-hidden relative min-h-[600px]">
-    
-    <!-- LEFT SIDE: BRANDING & SECURE STATS PANEL -->
-    <div class="lg:col-span-5 bg-gradient-to-br from-slate-900 via-slate-950 to-indigo-950 p-8 text-white flex flex-col justify-between relative overflow-hidden">
-      <!-- Background subtle elements -->
-      <div class="absolute -top-12 -left-12 w-32 h-32 bg-blue-500/10 rounded-full blur-2xl pointer-events-none"></div>
-      <div class="absolute -bottom-16 -right-16 w-36 h-36 bg-purple-500/10 rounded-full blur-2xl pointer-events-none"></div>
-      
-      <div class="space-y-8 relative">
-        <!-- Logo -->
-        <div class="flex items-center gap-3">
-          <div class="w-10 h-10 rounded-xl bg-white/10 backdrop-blur-md flex items-center justify-center border border-white/20">
-            <img src="workden-logo.png" alt="WorkDen Logo" class="w-6 h-6">
-          </div>
-          <span class="font-extrabold text-lg tracking-wider text-white">WorkDen <span class="text-blue-400 font-bold text-xs uppercase tracking-widest block">Practice Host</span></span>
+      <!-- Logo -->
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:0;">
+        <img src="workden-logo.png" alt="WorkDen" style="width:38px;height:38px;filter:drop-shadow(0 4px 12px rgba(59,130,246,0.35));">
+        <span style="font-family:'Sora',sans-serif;font-weight:800;font-size:1.35rem;letter-spacing:-0.03em;color:#fff;">WorkDen</span>
+      </div>
+
+      <!-- Main content: centered vertically -->
+      <div style="flex:1;display:flex;flex-direction:column;justify-content:center;gap:32px;padding:40px 0;">
+
+        <!-- Badge -->
+        <div style="display:inline-flex;align-items:center;gap:8px;background:rgba(99,102,241,0.18);border:1px solid rgba(165,180,252,0.25);border-radius:999px;padding:6px 16px;width:fit-content;">
+          <span style="width:7px;height:7px;border-radius:50%;background:#34d399;display:inline-block;"></span>
+          <span style="font-size:0.68rem;font-weight:800;text-transform:uppercase;letter-spacing:0.1em;color:#a5b4fc;">Free Demo Practice</span>
         </div>
 
         <!-- Headline -->
-        <div class="space-y-3">
-          <h3 class="text-xl font-black text-white leading-tight" data-content-id="loginHeroTitle">WorkDen Demo Practice Portal</h3>
-          <p class="text-xs text-slate-400 font-semibold leading-relaxed" data-content-id="loginHeroDesc">
-            Create your free demo account or login to practice real-style tasks, check your accuracy, and track your complete performance history.
-          </p>
+        <div>
+          <h1 style="font-family:'Sora',sans-serif;font-size:2.8rem;font-weight:800;color:#fff;line-height:1.12;letter-spacing:-0.03em;margin:0 0 16px;">Learn Smart,<br><span style="color:#818cf8;">Grow Faster</span></h1>
+          <p style="font-size:0.92rem;color:#94a3b8;font-weight:500;line-height:1.7;max-width:340px;margin:0;">Practice real data-entry and typing tasks in a safe demo environment. Build your skills before going live.</p>
         </div>
 
-        <!-- Features list -->
-        <div class="space-y-4 pt-2">
-          <div class="flex items-start gap-3">
-            <div class="w-7 h-7 rounded-lg bg-blue-500/20 text-blue-400 flex items-center justify-center shrink-0 mt-0.5 text-xs">
-              <i class="fa-solid fa-keyboard"></i>
+        <!-- Feature items -->
+        <div style="display:flex;flex-direction:column;gap:20px;">
+
+          <div style="display:flex;align-items:flex-start;gap:16px;">
+            <div style="width:42px;height:42px;border-radius:12px;background:rgba(129,140,248,0.15);border:1px solid rgba(129,140,248,0.2);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+              <i class="fa-solid fa-book-open" style="color:#818cf8;font-size:1rem;"></i>
             </div>
             <div>
-              <h4 class="text-xs font-black text-white" data-content-id="loginFeat1Title">Real-Style Practice Tasks</h4>
-              <p class="text-[10px] text-slate-400 font-semibold leading-relaxed mt-0.5" data-content-id="loginFeat1Desc">Practice Typing, Form Filling, Data Entry, and Grammar tasks in a clean demo workspace designed like the live task portal.</p>
+              <h4 style="font-size:0.88rem;font-weight:700;color:#e2e8f0;margin:0 0 3px;">Hands-on Practice</h4>
+              <p style="font-size:0.78rem;color:#64748b;line-height:1.6;margin:0;">Try actual task formats — data entry, form filling, typing & grammar correction</p>
             </div>
           </div>
 
-          <div class="flex items-start gap-3">
-            <div class="w-7 h-7 rounded-lg bg-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0 mt-0.5 text-xs">
-              <i class="fa-solid fa-chart-simple"></i>
+          <div style="display:flex;align-items:flex-start;gap:16px;">
+            <div style="width:42px;height:42px;border-radius:12px;background:rgba(52,211,153,0.12);border:1px solid rgba(52,211,153,0.2);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+              <i class="fa-solid fa-chart-line" style="color:#34d399;font-size:1rem;"></i>
             </div>
             <div>
-              <h4 class="text-xs font-black text-white" data-content-id="loginFeat2Title">Instant Accuracy Report</h4>
-              <p class="text-[10px] text-slate-400 font-semibold leading-relaxed mt-0.5" data-content-id="loginFeat2Desc">Get your accuracy score, correct entries, wrong entries, and task result instantly after every demo attempt.</p>
+              <h4 style="font-size:0.88rem;font-weight:700;color:#e2e8f0;margin:0 0 3px;">Instant Accuracy Report</h4>
+              <p style="font-size:0.78rem;color:#64748b;line-height:1.6;margin:0;">Get a detailed accuracy score & feedback after every task you complete</p>
             </div>
           </div>
 
-          <div class="flex items-start gap-3">
-            <div class="w-7 h-7 rounded-lg bg-purple-500/20 text-purple-400 flex items-center justify-center shrink-0 mt-0.5 text-xs">
-              <i class="fa-solid fa-clock-rotate-left"></i>
+          <div style="display:flex;align-items:flex-start;gap:16px;">
+            <div style="width:42px;height:42px;border-radius:12px;background:rgba(251,191,36,0.12);border:1px solid rgba(251,191,36,0.18);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+              <i class="fa-solid fa-star" style="color:#fbbf24;font-size:1rem;"></i>
             </div>
             <div>
-              <h4 class="text-xs font-black text-white" data-content-id="loginFeat3Title">Saved Practice History</h4>
-              <p class="text-[10px] text-slate-400 font-semibold leading-relaxed mt-0.5" data-content-id="loginFeat3Desc">Every demo attempt is saved in your account, so you can login anytime and check your progress, approved tasks, and rejected tasks.</p>
+              <h4 style="font-size:0.88rem;font-weight:700;color:#e2e8f0;margin:0 0 3px;">Ready for Live Tasks</h4>
+              <p style="font-size:0.78rem;color:#64748b;line-height:1.6;margin:0;">Master the demo and unlock real earning opportunities on WorkDen</p>
             </div>
           </div>
+
         </div>
       </div>
 
-      <!-- Trust Badges & Server status -->
-      <div class="pt-8 border-t border-white/10 space-y-3 relative">
-        <div class="flex items-center gap-2">
-          <span class="relative flex h-2 w-2">
-            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-            <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
-          </span>
-          <span class="text-[9px] font-extrabold uppercase tracking-widest text-emerald-400" data-content-id="loginStatusText">Demo Practice Active</span>
-        </div>
-        <div class="flex flex-wrap gap-x-4 gap-y-1.5 text-slate-500 text-[10px] font-bold">
-          <span class="text-slate-400"><i class="fa-solid fa-circle-check text-blue-400 mr-1"></i> <span data-content-id="loginBadge1">Free Practice Access</span></span>
-          <span class="text-slate-400"><i class="fa-solid fa-shield text-indigo-400 mr-1"></i> <span data-content-id="loginBadge2">Secure Login</span></span>
-        </div>
+      <!-- Bottom trust strip -->
+      <div style="border-top:1px solid rgba(255,255,255,0.08);padding-top:20px;display:flex;flex-wrap:wrap;gap:16px;">
+        <span style="font-size:0.72rem;color:#64748b;font-weight:700;display:flex;align-items:center;gap:6px;">
+          <i class="fa-solid fa-circle-check" style="color:#818cf8;"></i>
+          <span data-content-id="loginBadge1">100% Free to Practice</span>
+        </span>
+        <span style="font-size:0.72rem;color:#64748b;font-weight:700;display:flex;align-items:center;gap:6px;">
+          <i class="fa-solid fa-shield" style="color:#34d399;"></i>
+          <span data-content-id="loginBadge2">Secure & Private</span>
+        </span>
+        <span style="font-size:0.72rem;color:#64748b;font-weight:700;display:flex;align-items:center;gap:6px;">
+          <i class="fa-solid fa-bolt" style="color:#fbbf24;"></i>
+          <span>No payment for demo</span>
+        </span>
       </div>
     </div>
 
-    <!-- RIGHT SIDE: FORM CONTROL PANEL -->
-    <div class="lg:col-span-7 p-8 md:p-10 space-y-6 flex flex-col justify-between">
+    <!-- RIGHT PANEL: scrollable form area -->
+    <div style="flex:1;background:#f8fafc;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:48px 32px;min-height:100vh;box-sizing:border-box;">
       
-      <!-- Top Section -->
-      <div class="space-y-6">
-        <!-- Secure Header -->
-        <div class="flex justify-between items-center border-b border-slate-100 pb-4">
-          <h2 class="text-lg font-black text-slate-800 tracking-tight flex items-center gap-2">
-            <i class="fa-solid fa-shield-lock text-blue-600 text-sm"></i> <span data-content-id="formCardTitle">Login to Demo Workspace</span>
-          </h2>
-          <span class="text-[10px] font-extrabold text-slate-400 uppercase tracking-wider" data-content-id="formCardEncryption">Secure Access</span>
+      <!-- White centered card -->
+      <div class="bg-white rounded-3xl border border-slate-200/80 shadow-xl shadow-slate-200/30 p-8 md:p-10 w-full max-w-md space-y-6">
+        
+        <!-- Blue lock circle -->
+        <div class="w-14 h-14 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center mx-auto text-xl border border-blue-100/50">
+          <i class="fa-solid fa-lock"></i>
+        </div>
+
+        <!-- Headers -->
+        <div class="text-center">
+          <h2 id="authCardTitle" class="text-2xl font-black text-slate-800 tracking-tight">Welcome Back</h2>
+          <p id="authCardSub" class="text-xs text-slate-400 font-bold mt-1">Login to your WorkDen account</p>
         </div>
 
         <!-- Switcher Pills -->
         <div class="bg-slate-100 p-1.5 rounded-2xl flex gap-1 border border-slate-200/60 shadow-inner">
-          <button onclick="setAuthTab('login')" id="tabBtnLogin" class="flex-1 text-xs font-black py-2.5 rounded-xl transition-all duration-300 bg-white text-blue-600 shadow-sm border border-slate-200/40">
+          <button type="button" onclick="setAuthTab('login')" id="tabBtnLogin" class="flex-1 text-xs font-black py-2.5 rounded-xl transition-all duration-300 bg-white text-blue-600 shadow-sm border border-slate-200/40">
             <i class="fa-solid fa-right-to-bracket mr-1.5"></i>Login Portal
           </button>
-          <button onclick="setAuthTab('register')" id="tabBtnRegister" class="flex-1 text-xs font-black py-2.5 rounded-xl transition-all duration-300 text-slate-500 hover:text-slate-800">
+          <button type="button" onclick="setAuthTab('register')" id="tabBtnRegister" class="flex-1 text-xs font-black py-2.5 rounded-xl transition-all duration-300 text-slate-500 hover:text-slate-800">
             <i class="fa-solid fa-user-plus mr-1.5"></i>Create Account
           </button>
         </div>
@@ -997,86 +1102,97 @@ document.body.addEventListener('input', function(e){
         <!-- LOGIN FORM -->
         <form id="loginForm" onsubmit="handleDemoLogin(event)" class="space-y-4">
           <div class="space-y-1.5">
-            <label class="block text-[10px] font-extrabold text-slate-500 uppercase tracking-wider">User ID (Registered Gmail)</label>
+            <label class="block text-[11px] font-bold text-slate-700">User ID (Mobile / Email / User ID)</label>
             <div class="relative">
               <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
-                <i class="fa-regular fa-envelope"></i>
+                <i class="fa-regular fa-user"></i>
               </span>
-              <input type="email" id="loginEmail" required class="w-full bg-slate-50 border border-slate-200 rounded-xl pl-10 pr-4 py-3 text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 focus:bg-white transition-all duration-200 text-slate-800" placeholder="Enter your registered email address" />
+              <input type="email" id="loginEmail" required class="w-full bg-white border border-slate-200 rounded-xl pl-10 pr-4 py-3 text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all duration-200 text-slate-800" placeholder="Enter your User ID" />
             </div>
           </div>
           <div class="space-y-1.5">
-            <label class="block text-[10px] font-extrabold text-slate-500 uppercase tracking-wider">Password (10-Digit Mobile)</label>
+            <label class="block text-[11px] font-bold text-slate-700">Password</label>
             <div class="relative">
               <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
                 <i class="fa-solid fa-lock"></i>
               </span>
-              <input type="password" id="loginMobile" required class="w-full bg-slate-50 border border-slate-200 rounded-xl pl-10 pr-4 py-3 text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 focus:bg-white transition-all duration-200 text-slate-800" placeholder="Enter your password (mobile number)" />
+              <input type="password" id="loginMobile" required class="w-full bg-white border border-slate-200 rounded-xl pl-10 pr-10 py-3 text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all duration-200 text-slate-800" placeholder="Enter your password" />
+              <button type="button" onclick="togglePasswordVisibility('loginMobile', this)" class="absolute inset-y-0 right-0 pr-3.5 flex items-center text-slate-400 hover:text-slate-600 bg-transparent border-none cursor-pointer">
+                <i class="fa-regular fa-eye"></i>
+              </button>
             </div>
           </div>
-          <button type="submit" id="btnLoginSubmit" class="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-black text-xs py-3.5 rounded-xl transition-all shadow-lg shadow-blue-500/15 active:scale-[0.98] flex items-center justify-center gap-2 cursor-pointer mt-4">
-            <i class="fa-solid fa-shield-check"></i>
-            <span>Secure Sign In</span>
+          
+          <div class="flex justify-between items-center text-[11px] font-semibold text-slate-500">
+            <label class="flex items-center gap-1.5 cursor-pointer">
+              <input type="checkbox" class="rounded text-blue-600 focus:ring-blue-500/25 border-slate-300">
+              <span>Remember me</span>
+            </label>
+            <a href="#" onclick="showToast('Please contact support at support@workden.online for login issues.')" class="text-blue-600 hover:underline">Contact admin for help</a>
+          </div>
+
+          <button type="submit" id="btnLoginSubmit" class="w-full bg-[#818cf8] hover:bg-[#6366f1] text-white font-bold text-xs py-3.5 rounded-xl transition-all shadow-lg shadow-indigo-500/15 active:scale-[0.98] flex items-center justify-center gap-2 cursor-pointer mt-4 border-none">
+            <i class="fa-solid fa-right-to-bracket"></i>
+            <span>Login to Dashboard</span>
           </button>
         </form>
 
         <!-- REGISTER FORM -->
         <form id="registerForm" onsubmit="handleDemoRegister(event)" class="hidden space-y-4">
           <div class="space-y-1.5">
-            <label class="block text-[10px] font-extrabold text-slate-500 uppercase tracking-wider">Full Name</label>
+            <label class="block text-[11px] font-bold text-slate-700">Full Name</label>
             <div class="relative">
               <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
                 <i class="fa-regular fa-user"></i>
               </span>
-              <input type="text" id="regName" required class="w-full bg-slate-50 border border-slate-200 rounded-xl pl-10 pr-4 py-3 text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 focus:bg-white transition-all duration-200 text-slate-800" placeholder="Enter your full name" />
+              <input type="text" id="regName" required class="w-full bg-white border border-slate-200 rounded-xl pl-10 pr-4 py-3 text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all duration-200 text-slate-800" placeholder="Enter your full name" />
             </div>
           </div>
           
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div class="space-y-1.5">
-              <label class="block text-[10px] font-extrabold text-slate-500 uppercase tracking-wider">Mobile Number</label>
-              <div class="relative">
-                <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
-                  <i class="fa-solid fa-phone"></i>
-                </span>
-                <input type="tel" pattern="[0-9]{10}" id="regMobile" required class="w-full bg-slate-50 border border-slate-200 rounded-xl pl-10 pr-4 py-3 text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 focus:bg-white transition-all duration-200 text-slate-800" placeholder="Enter your 10-digit mobile number" />
-              </div>
-            </div>
-            <div class="space-y-1.5">
-              <label class="block text-[10px] font-extrabold text-slate-500 uppercase tracking-wider">Gmail Address</label>
-              <div class="relative">
-                <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
-                  <i class="fa-regular fa-envelope"></i>
-                </span>
-                <input type="email" id="regEmail" required class="w-full bg-slate-50 border border-slate-200 rounded-xl pl-10 pr-4 py-3 text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 focus:bg-white transition-all duration-200 text-slate-800" placeholder="Enter your Gmail address" />
-              </div>
+          <div class="space-y-1.5">
+            <label class="block text-[11px] font-bold text-slate-700">Mobile Number (Password)</label>
+            <div class="relative">
+              <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+                <i class="fa-solid fa-phone"></i>
+              </span>
+              <input type="tel" pattern="[0-9]{10}" id="regMobile" required class="w-full bg-white border border-slate-200 rounded-xl pl-10 pr-4 py-3 text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all duration-200 text-slate-800" placeholder="Enter 10-digit mobile number" />
             </div>
           </div>
 
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="space-y-1.5">
+            <label class="block text-[11px] font-bold text-slate-700">Gmail Address (User ID)</label>
+            <div class="relative">
+              <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+                <i class="fa-regular fa-envelope"></i>
+              </span>
+              <input type="email" id="regEmail" required class="w-full bg-white border border-slate-200 rounded-xl pl-10 pr-4 py-3 text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all duration-200 text-slate-800" placeholder="Enter Gmail address" />
+            </div>
+          </div>
+
+          <div class="grid grid-cols-2 gap-3">
             <div class="space-y-1.5">
-              <label class="block text-[10px] font-extrabold text-slate-500 uppercase tracking-wider">City</label>
+              <label class="block text-[11px] font-bold text-slate-700">City</label>
               <div class="relative">
-                <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+                <span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">
                   <i class="fa-solid fa-location-dot"></i>
                 </span>
-                <input type="text" id="regCity" required class="w-full bg-slate-50 border border-slate-200 rounded-xl pl-10 pr-4 py-3 text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 focus:bg-white transition-all duration-200 text-slate-800" placeholder="Enter your current city" />
+                <input type="text" id="regCity" required class="w-full bg-white border border-slate-200 rounded-xl pl-8 pr-3 py-3 text-[11px] font-semibold focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all duration-200 text-slate-800" placeholder="City" />
               </div>
             </div>
             <div class="space-y-1.5">
-              <label class="block text-[10px] font-extrabold text-slate-500 uppercase tracking-wider">Qualification</label>
+              <label class="block text-[11px] font-bold text-slate-700">Qualification</label>
               <div class="relative">
-                <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+                <span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">
                   <i class="fa-solid fa-graduation-cap"></i>
                 </span>
-                <input type="text" id="regQual" required class="w-full bg-slate-50 border border-slate-200 rounded-xl pl-10 pr-4 py-3 text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 focus:bg-white transition-all duration-200 text-slate-800" placeholder="Enter your highest qualification" />
+                <input type="text" id="regQual" required class="w-full bg-white border border-slate-200 rounded-xl pl-8 pr-3 py-3 text-[11px] font-semibold focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all duration-200 text-slate-800" placeholder="Qualification" />
               </div>
             </div>
           </div>
 
-          <button type="submit" id="btnRegisterSubmit" class="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-black text-xs py-3.5 rounded-xl transition-all shadow-lg shadow-blue-500/15 active:scale-[0.98] flex items-center justify-center gap-2 cursor-pointer mt-4">
-            <i class="fa-solid fa-id-card"></i>
-            <span>Create Practice Profile</span>
+          <button type="submit" id="btnRegisterSubmit" class="w-full bg-[#818cf8] hover:bg-[#6366f1] text-white font-bold text-xs py-3.5 rounded-xl transition-all shadow-lg shadow-indigo-500/15 active:scale-[0.98] flex items-center justify-center gap-2 cursor-pointer mt-4 border-none">
+            <i class="fa-solid fa-user-plus"></i>
+            <span>Create Profile</span>
           </button>
         </form>
 
@@ -1085,7 +1201,7 @@ document.body.addEventListener('input', function(e){
           <div class="bg-gradient-to-r from-emerald-50 to-teal-50 text-emerald-800 border border-emerald-100 rounded-2xl p-5 text-center space-y-1.5 shadow-sm">
             <div class="text-2xl animate-bounce">🎉</div>
             <h4 class="font-black text-sm text-emerald-900">Official Practice Profile Generated!</h4>
-            <p class="text-[11px] text-emerald-600 font-semibold">Your server-side account credentials have been provisioned successfully.</p>
+            <p class="text-[11px] text-emerald-600 font-semibold">Your credentials have been provisioned successfully.</p>
           </div>
 
           <div class="bg-slate-50 border border-slate-200/80 rounded-2xl p-5 space-y-3.5 shadow-inner font-semibold">
@@ -1103,36 +1219,53 @@ document.body.addEventListener('input', function(e){
             </div>
           </div>
 
-          <div class="bg-amber-50 text-amber-800 border border-amber-200/60 rounded-xl p-3.5 text-[10px] font-bold leading-relaxed flex gap-2">
-            <i class="fa-solid fa-circle-info mt-0.5 text-amber-600 animate-pulse"></i>
-            <span>Please write down or copy these credentials. You can use these exact credentials to login from any device to continue your practice history.</span>
-          </div>
-
-          <button onclick="autoLoginAfterRegister()" class="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-black text-xs py-3.5 rounded-xl transition-all shadow-lg shadow-blue-500/15 active:scale-[0.98] flex items-center justify-center gap-2 cursor-pointer">
-            <span>Proceed to Secure Workspace →</span>
+          <button onclick="autoLoginAfterRegister()" class="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-black text-xs py-3.5 rounded-xl transition-all shadow-lg shadow-blue-500/15 active:scale-[0.98] flex items-center justify-center gap-2 cursor-pointer border-none">
+            <span>Proceed to Workspace →</span>
           </button>
         </div>
-      </div>
 
-      <!-- Compliance Statement -->
-      <div class="text-[9px] text-slate-400 font-bold text-center border-t border-slate-100 pt-4 flex items-center justify-center gap-1.5">
-        <i class="fa-solid fa-lock text-[8px]"></i>
-        <span data-content-id="loginCompliance">Your demo practice data is saved securely to help you track accuracy, improve performance, and review your task</span>
+        <div class="relative flex py-2 items-center">
+            <div class="flex-grow border-t border-slate-200"></div>
+            <span class="flex-shrink mx-4 text-slate-400 text-[10px] font-bold uppercase tracking-wider">or</span>
+            <div class="flex-grow border-t border-slate-200"></div>
+        </div>
+
+        <button type="button" onclick="showToast('Connecting to live support team...')" class="w-full bg-white hover:bg-slate-50 border border-slate-200 text-slate-700 font-bold text-xs py-3.5 rounded-xl transition-all active:scale-[0.98] flex items-center justify-center gap-2 cursor-pointer">
+          <i class="fa-regular fa-comment-dots text-sm text-slate-500"></i>
+          <span>Need Help? Contact Support</span>
+        </button>
+
+        <!-- Compliance Statement -->
+        <div class="text-[10px] text-slate-400 font-bold text-center border-t border-slate-100 pt-4 flex items-center justify-center gap-1.5">
+          <i class="fa-solid fa-shield text-[9px]"></i>
+          <span>Your security is our priority</span>
+        </div>
       </div>
     </div>
   </div>
 </div>
 
-<div id="mainMenu" style="display: none;">
-  <div class="menu-header">
-    <div style="font-size:2rem;margin-bottom:8px;">💼</div>
-    <h1 data-content-id="pageHeroTitle">WorkDen Demo Tasks</h1>
-    <p data-content-id="pageHeroDesc">Choose your skill and try a demo task</p>
-    <div class="menu-badge" data-content-id="demoBadge">🔴 LIVE DEMO – Try All Tasks</div>
+<div id="mainMenu" style="display: none;" class="w-full">
+  <!-- Page Header with Profile Access -->
+  <div class="max-w-4xl mx-auto mt-10 px-6 w-full" style="display:flex;align-items:flex-start;justify-content:space-between;gap:16px;flex-wrap:wrap;">
+    <div>
+      <h1 class="text-3xl font-extrabold text-slate-900 tracking-tight" data-content-id="pageHeroTitle">Demo Tasks</h1>
+      <p class="text-sm text-slate-400 font-bold mt-1" data-content-id="pageHeroDesc">Select a task to start earning</p>
+    </div>
+    <!-- Profile & History Button -->
+    <button onclick="toggleProfileDrawer()" style="display:flex;align-items:center;gap:10px;background:#fff;border:1.5px solid #e2e8f0;border-radius:16px;padding:10px 18px;cursor:pointer;box-shadow:0 4px 14px rgba(15,23,42,0.05);transition:all 0.2s ease;" onmouseover="this.style.borderColor='#bfdbfe';this.style.boxShadow='0 6px 18px rgba(29,78,216,0.1)'" onmouseout="this.style.borderColor='#e2e8f0';this.style.boxShadow='0 4px 14px rgba(15,23,42,0.05)'">
+      <div style="width:34px;height:34px;border-radius:10px;background:#eff6ff;display:flex;align-items:center;justify-content:center;">
+        <i class="fa-solid fa-bars" style="color:#1d4ed8;font-size:0.85rem;"></i>
+      </div>
+      <div style="text-align:left;">
+        <div style="font-size:0.75rem;font-weight:800;color:#0f172a;line-height:1.2;">My Profile</div>
+        <div style="font-size:0.65rem;color:#94a3b8;font-weight:600;">History & Stats</div>
+      </div>
+    </button>
   </div>
 
   <!-- Amber Payment Disclaimer Banner -->
-  <div class="max-w-[1100px] mx-auto mt-6 px-5 w-full animate-fade-in">
+  <div class="max-w-4xl mx-auto mt-6 px-6 w-full animate-fade-in">
     <div class="bg-amber-50 border-2 border-amber-200/80 rounded-2xl p-4 flex gap-3.5 items-start shadow-sm">
       <div class="w-8 h-8 rounded-xl bg-amber-500/10 text-amber-600 flex items-center justify-center shrink-0 text-sm">
         <i class="fa-solid fa-circle-exclamation"></i>
@@ -1170,119 +1303,122 @@ document.body.addEventListener('input', function(e){
   }
   </style>
 
-  <!-- PERSISTENT PROFILE & PRACTICE HISTORY DRAWER (THREE-LINE MENU TYPE) -->
-  <div id="profileDrawerOverlay" onclick="toggleProfileDrawer()" style="display: none; position: fixed; inset: 0; z-index: 9999; background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(4px);">
-    <div id="profileDrawer" onclick="event.stopPropagation()" style="position: fixed; top: 0; right: -450px; bottom: 0; width: 90%; max-width: 450px; background: white; z-index: 10000; box-shadow: -10px 0 40px rgba(0,0,0,0.15); display: flex; flex-direction: column; transition: right 0.3s cubic-bezier(0.16, 1, 0.3, 1); box-sizing: border-box;">
-      
-      <!-- Drawer Header -->
-      <div style="padding: 24px; border-bottom: 1px solid #f1f5f9; display: flex; justify-content: space-between; align-items: center; background: linear-gradient(135deg, #0f172a, #1e1b4b); color: white;">
-        <div class="flex items-center gap-3">
-          <div class="w-10 h-10 rounded-xl bg-white/10 text-blue-400 flex items-center justify-center text-sm font-bold shrink-0">
-            <i class="fa-solid fa-user-tie"></i>
+  <!-- PROFILE DRAWER OVERLAY -->
+  <div id="profileDrawerOverlay" onclick="toggleProfileDrawer()" style="display:none;position:fixed;inset:0;z-index:9999;background:rgba(10,15,30,0.55);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);">
+    <div id="profileDrawer" onclick="event.stopPropagation()" style="position:fixed;top:0;right:-480px;bottom:0;width:92%;max-width:420px;background:#fff;z-index:10000;display:flex;flex-direction:column;box-shadow:-20px 0 60px rgba(0,0,0,0.12);transition:right 0.32s cubic-bezier(0.16,1,0.3,1);box-sizing:border-box;">
+
+      <!-- Drawer Top Bar -->
+      <div style="padding:20px 24px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #f1f5f9;background:#fff;flex-shrink:0;">
+        <div style="display:flex;align-items:center;gap:12px;">
+          <div style="width:40px;height:40px;border-radius:12px;background:linear-gradient(135deg,#1d4ed8,#4f46e5);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+            <i class="fa-solid fa-user" style="color:#fff;font-size:0.9rem;"></i>
           </div>
           <div>
-            <h3 class="text-sm font-black tracking-tight" id="drawerUserName" style="margin: 0; font-family: 'Sora', sans-serif;">Welcome, Guest</h3>
-            <p class="text-[10px] text-slate-300 font-bold" id="drawerUserEmail" style="margin: 2px 0 0; font-family: 'Nunito', sans-serif;">email@gmail.com</p>
+            <div id="drawerUserName" style="font-size:0.88rem;font-weight:800;color:#0f172a;line-height:1.2;font-family:'Sora',sans-serif;">Welcome, Guest</div>
+            <div id="drawerUserEmail" style="font-size:0.72rem;color:#94a3b8;font-weight:600;margin-top:2px;">email@gmail.com</div>
           </div>
         </div>
-        <button onclick="toggleProfileDrawer()" class="text-slate-300 hover:text-white text-base bg-white/10 w-8 h-8 rounded-full flex items-center justify-center transition-all border border-white/10 cursor-pointer">✕</button>
+        <button onclick="toggleProfileDrawer()" style="width:32px;height:32px;border-radius:8px;border:1.5px solid #e2e8f0;background:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;color:#64748b;font-size:0.9rem;transition:all 0.15s;" onmouseover="this.style.background='#f1f5f9'" onmouseout="this.style.background='#fff'">✕</button>
       </div>
 
       <!-- Drawer Body -->
-      <div style="padding: 24px; flex: 1; overflow-y: auto; box-sizing: border-box;" class="space-y-6">
-        
-        <!-- My Profile Section -->
-        <div class="space-y-3">
-          <h4 class="text-xs font-black text-slate-800 uppercase tracking-wider flex items-center gap-1.5"><i class="fa-solid fa-address-card text-blue-600"></i> My Profile</h4>
-          <div class="bg-white border border-slate-200/80 rounded-2xl p-4 shadow-sm space-y-3 font-semibold text-xs text-slate-700">
-            <div class="flex justify-between items-center pb-2 border-b border-slate-100">
-              <span class="text-slate-400">Full Name</span>
-              <span class="font-black text-slate-800" id="profileName">Guest</span>
+      <div style="flex:1;overflow-y:auto;padding:20px 24px;display:flex;flex-direction:column;gap:20px;">
+
+        <!-- Profile Info -->
+        <div>
+          <div style="font-size:0.68rem;font-weight:800;text-transform:uppercase;letter-spacing:0.08em;color:#94a3b8;margin-bottom:10px;">Account Details</div>
+          <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:14px;overflow:hidden;">
+            <div style="display:flex;justify-content:space-between;align-items:center;padding:11px 16px;border-bottom:1px solid #f1f5f9;">
+              <span style="font-size:0.78rem;color:#64748b;">Full Name</span>
+              <span style="font-size:0.78rem;font-weight:700;color:#0f172a;" id="profileName">—</span>
             </div>
-            <div class="flex justify-between items-center pb-2 border-b border-slate-100">
-              <span class="text-slate-400">Mobile Number</span>
-              <span class="font-black text-slate-800" id="profileMobile">-</span>
+            <div style="display:flex;justify-content:space-between;align-items:center;padding:11px 16px;border-bottom:1px solid #f1f5f9;">
+              <span style="font-size:0.78rem;color:#64748b;">Mobile</span>
+              <span style="font-size:0.78rem;font-weight:700;color:#0f172a;" id="profileMobile">—</span>
             </div>
-            <div class="flex justify-between items-center pb-2 border-b border-slate-100">
-              <span class="text-slate-400">Gmail Address</span>
-              <span class="font-black text-slate-800" id="profileEmail">-</span>
+            <div style="display:flex;justify-content:space-between;align-items:center;padding:11px 16px;border-bottom:1px solid #f1f5f9;">
+              <span style="font-size:0.78rem;color:#64748b;">Gmail</span>
+              <span style="font-size:0.78rem;font-weight:700;color:#0f172a;max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;" id="profileEmail">—</span>
             </div>
-            <div class="flex justify-between items-center pb-2 border-b border-slate-100">
-              <span class="text-slate-400">City</span>
-              <span class="font-black text-slate-800" id="profileCity">-</span>
+            <div style="display:flex;justify-content:space-between;align-items:center;padding:11px 16px;border-bottom:1px solid #f1f5f9;">
+              <span style="font-size:0.78rem;color:#64748b;">City</span>
+              <span style="font-size:0.78rem;font-weight:700;color:#0f172a;" id="profileCity">—</span>
             </div>
-            <div class="flex justify-between items-center">
-              <span class="text-slate-400">Qualification</span>
-              <span class="font-black text-slate-800" id="profileQual">-</span>
+            <div style="display:flex;justify-content:space-between;align-items:center;padding:11px 16px;">
+              <span style="font-size:0.78rem;color:#64748b;">Qualification</span>
+              <span style="font-size:0.78rem;font-weight:700;color:#0f172a;" id="profileQual">—</span>
             </div>
           </div>
         </div>
 
-        <!-- Login Credentials Section -->
-        <div class="space-y-3">
-          <h4 class="text-xs font-black text-slate-800 uppercase tracking-wider flex items-center gap-1.5"><i class="fa-solid fa-key text-blue-600"></i> Login Credentials</h4>
-          <div class="bg-gradient-to-r from-slate-50 to-indigo-50/30 border border-slate-200/80 rounded-2xl p-4 shadow-sm space-y-2.5 font-semibold text-xs">
-            <div class="flex justify-between items-center">
-              <span class="text-slate-500">User ID (Gmail):</span>
-              <span class="font-mono font-black text-slate-800 select-all" id="credEmail">-</span>
+        <!-- Login Credentials -->
+        <div>
+          <div style="font-size:0.68rem;font-weight:800;text-transform:uppercase;letter-spacing:0.08em;color:#94a3b8;margin-bottom:10px;">Login Credentials</div>
+          <div style="background:#eff6ff;border:1px solid #bfdbfe;border-radius:14px;padding:14px 16px;display:flex;flex-direction:column;gap:10px;">
+            <div style="display:flex;justify-content:space-between;align-items:center;">
+              <span style="font-size:0.75rem;color:#3b82f6;font-weight:600;">User ID (Gmail)</span>
+              <span style="font-size:0.75rem;font-weight:800;color:#1d4ed8;font-family:monospace;" id="credEmail">—</span>
             </div>
-            <div class="flex justify-between items-center">
-              <span class="text-slate-500">Password (Mobile):</span>
-              <span class="font-mono font-black text-slate-800 select-all" id="credPassword">-</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Stats Section -->
-        <div class="space-y-3">
-          <h4 class="text-xs font-black text-slate-800 uppercase tracking-wider flex items-center gap-1.5"><i class="fa-solid fa-chart-pie text-blue-600"></i> Practice Metrics</h4>
-          <div class="grid grid-cols-2 gap-3">
-            <div class="bg-slate-50 border border-slate-200/60 rounded-xl p-3 shadow-inner">
-              <span class="text-[9px] font-bold text-slate-400 uppercase block">Total Runs</span>
-              <strong class="text-base font-black text-slate-800" id="drawerStatsTotal">0</strong>
-            </div>
-            <div class="bg-slate-50 border border-slate-200/60 rounded-xl p-3 shadow-inner">
-              <span class="text-[9px] font-bold text-slate-400 uppercase block">Avg Accuracy</span>
-              <strong class="text-base font-black text-blue-600" id="drawerStatsAccuracy">0%</strong>
-            </div>
-            <div class="bg-slate-50 border border-slate-200/60 rounded-xl p-3 shadow-inner">
-              <span class="text-[9px] font-bold text-slate-400 uppercase block">Approved</span>
-              <strong class="text-base font-black text-emerald-600" id="drawerStatsApproved">0</strong>
-            </div>
-            <div class="bg-slate-50 border border-slate-200/60 rounded-xl p-3 shadow-inner">
-              <span class="text-[9px] font-bold text-slate-400 uppercase block">Rejected</span>
-              <strong class="text-base font-black text-red-500" id="drawerStatsRejected">0</strong>
+            <div style="height:1px;background:#bfdbfe;"></div>
+            <div style="display:flex;justify-content:space-between;align-items:center;">
+              <span style="font-size:0.75rem;color:#3b82f6;font-weight:600;">Password (Mobile)</span>
+              <span style="font-size:0.75rem;font-weight:800;color:#1d4ed8;font-family:monospace;" id="credPassword">—</span>
             </div>
           </div>
         </div>
 
-        <!-- Attempts List Section -->
-        <div class="space-y-3">
-          <div class="flex justify-between items-center">
-            <h4 class="text-xs font-black text-slate-800 uppercase tracking-wider flex items-center gap-1.5"><i class="fa-solid fa-clock-rotate-left text-blue-600"></i> Attempts Log</h4>
-            <button onclick="refreshHistoryFromServer()" class="text-blue-600 hover:text-blue-700 text-[10px] font-extrabold flex items-center gap-1 bg-none border-none p-0 cursor-pointer">
-              <i class="fa-solid fa-arrows-rotate"></i> Sync History
+        <!-- Practice Stats -->
+        <div>
+          <div style="font-size:0.68rem;font-weight:800;text-transform:uppercase;letter-spacing:0.08em;color:#94a3b8;margin-bottom:10px;">Practice Stats</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+            <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:14px;">
+              <div style="font-size:0.65rem;font-weight:700;text-transform:uppercase;color:#94a3b8;letter-spacing:0.06em;margin-bottom:4px;">Total Runs</div>
+              <div style="font-size:1.4rem;font-weight:900;color:#0f172a;line-height:1;" id="drawerStatsTotal">0</div>
+            </div>
+            <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:14px;">
+              <div style="font-size:0.65rem;font-weight:700;text-transform:uppercase;color:#94a3b8;letter-spacing:0.06em;margin-bottom:4px;">Avg Accuracy</div>
+              <div style="font-size:1.4rem;font-weight:900;color:#1d4ed8;line-height:1;" id="drawerStatsAccuracy">0%</div>
+            </div>
+            <div style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:12px;padding:14px;">
+              <div style="font-size:0.65rem;font-weight:700;text-transform:uppercase;color:#86efac;letter-spacing:0.06em;margin-bottom:4px;">Approved</div>
+              <div style="font-size:1.4rem;font-weight:900;color:#16a34a;line-height:1;" id="drawerStatsApproved">0</div>
+            </div>
+            <div style="background:#fff1f2;border:1px solid #fecdd3;border-radius:12px;padding:14px;">
+              <div style="font-size:0.65rem;font-weight:700;text-transform:uppercase;color:#fca5a5;letter-spacing:0.06em;margin-bottom:4px;">Rejected</div>
+              <div style="font-size:1.4rem;font-weight:900;color:#dc2626;line-height:1;" id="drawerStatsRejected">0</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Attempts Log -->
+        <div>
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
+            <div style="font-size:0.68rem;font-weight:800;text-transform:uppercase;letter-spacing:0.08em;color:#94a3b8;">Attempts Log</div>
+            <button onclick="refreshHistoryFromServer()" style="font-size:0.7rem;font-weight:700;color:#1d4ed8;background:none;border:none;cursor:pointer;display:flex;align-items:center;gap:4px;padding:0;">
+              <i class="fa-solid fa-rotate" style="font-size:0.7rem;"></i> Refresh
             </button>
           </div>
-          
-          <div id="drawerAttemptsList" class="space-y-3 pr-1">
-            <div class="text-xs text-slate-400 italic text-center py-8">
-              <i class="fa-solid fa-folder-open text-slate-300 text-lg block mb-1.5"></i>
-              No practice attempts recorded yet.
+          <div id="drawerAttemptsList" style="display:flex;flex-direction:column;gap:8px;">
+            <div style="text-align:center;padding:28px 0;color:#cbd5e1;font-size:0.8rem;">
+              <i class="fa-regular fa-folder-open" style="font-size:1.5rem;display:block;margin-bottom:8px;"></i>
+              No attempts yet. Start a task!
             </div>
           </div>
         </div>
+
       </div>
 
       <!-- Drawer Footer -->
-      <div style="padding: 20px 24px; border-t: 1px solid #f1f5f9; background: #fafafa; box-sizing: border-box;">
-        <button onclick="logoutDemoAccount()" class="w-full bg-red-600 hover:bg-red-500 text-white font-black text-xs py-3 rounded-xl transition-all shadow-md shadow-red-500/10 active:scale-[0.98] flex items-center justify-center gap-2 cursor-pointer border-none">
+      <div style="padding:16px 24px;border-top:1px solid #f1f5f9;background:#fff;flex-shrink:0;">
+        <button onclick="logoutDemoAccount()" style="width:100%;padding:12px;background:#fff;border:1.5px solid #fecdd3;border-radius:12px;color:#dc2626;font-size:0.82rem;font-weight:800;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;transition:all 0.2s;font-family:inherit;" onmouseover="this.style.background='#fff1f2'" onmouseout="this.style.background='#fff'">
           <i class="fa-solid fa-right-from-bracket"></i>
-          <span>Logout Practice Session</span>
+          End Practice Session
         </button>
       </div>
+
     </div>
   </div>
+</div>
 </div>
 
 <div id="taskArea">
@@ -1294,9 +1430,9 @@ document.body.addEventListener('input', function(e){
         <div id="taskSubtitle" style="font-size:0.75rem;color:var(--text-muted);"></div>
       </div>
     </div>
-    <div class="hidden sm:flex items-center gap-2 bg-amber-50 border border-amber-200 text-amber-800 px-3.5 py-1.5 rounded-xl text-[10px] font-black uppercase tracking-wider max-w-xs text-right shadow-sm">
-      <i class="fa-solid fa-circle-exclamation text-amber-500 shrink-0"></i>
-      <span data-content-id="taskDisclaimerDuringTask">This is a demo task. No payout is provided for demo tasks. It is only for practice.</span>
+    <div style="display:flex;align-items:center;gap:7px;background:#fffbeb;border:1px solid #fde68a;border-radius:10px;padding:6px 12px;white-space:nowrap;flex-shrink:0;">
+      <i class="fa-solid fa-circle-exclamation" style="color:#f59e0b;font-size:0.75rem;flex-shrink:0;"></i>
+      <span style="font-size:0.72rem;font-weight:700;color:#92400e;white-space:nowrap;" data-content-id="taskDisclaimerDuringTask">Demo task — No payout. Practice only.</span>
     </div>
   </div>
   <div style="padding:12px 16px 0;">
@@ -1332,15 +1468,25 @@ document.body.addEventListener('input', function(e){
   </div>
 </div>
 
+<!-- RESULT MODAL -->
 <div class="modal-overlay" id="resultModal">
-  <div class="modal">
-    <div class="modal-hero">
-      <div style="font-size:1.5rem;margin-bottom:6px;">🏆</div>
-      <h2>Demo Performance Report</h2>
-      <p>Your performance has been evaluated based on real task parameters.</p>
-      <div class="grade-circle" id="gradeCircle">A</div>
+  <!-- Fixed Floating Close Button (Viewport level, always visible, stays pinned when scrolling) -->
+  <button onclick="closeReport()" style="position:fixed;top:20px;right:20px;width:40px;height:40px;border-radius:50%;background:#ffffff;border:1.5px solid #e2e8f0;color:#0f172a;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1.2rem;box-shadow:0 10px 30px rgba(15,23,42,0.2);z-index:30005;transition:all 0.2s;font-family:inherit;" onmouseover="this.style.background='#f1f5f9';this.style.transform='scale(1.08)'" onmouseout="this.style.background='#ffffff';this.style.transform='scale(1)'" title="Close Report">
+    <i class="fa-solid fa-xmark"></i>
+  </button>
+
+  <div style="background:#fff;border-radius:24px;max-width:640px;width:100%;margin:20px auto 40px;box-shadow:0 24px 80px rgba(0,0,0,0.22);overflow:hidden;animation:popIn 0.3s cubic-bezier(0.34,1.56,0.64,1);position:relative;border:1px solid rgba(255,255,255,0.85);">
+
+    <!-- Modal Header -->
+    <div class="modal-hero" style="background:linear-gradient(135deg,#1e1b4b,#4f46e5);padding:32px 32px 28px;position:relative;text-align:center;">
+      <div style="font-size:1.8rem;margin-bottom:8px;">🏆</div>
+      <h2 style="color:#fff;font-size:1.35rem;font-weight:900;margin:0 0 6px;font-family:'Sora',sans-serif;letter-spacing:-0.2px;">Demo Performance Report</h2>
+      <p style="color:rgba(255,255,255,0.7);font-size:0.83rem;margin:0;line-height:1.4;">Your performance has been evaluated based on real task parameters.</p>
+      <div class="grade-circle" id="gradeCircle" style="margin:18px auto 0;">A</div>
     </div>
-    <div class="modal-body">
+
+    <!-- Modal Body -->
+    <div class="modal-body" style="padding:24px 28px;">
       <div class="sec-title">📊 Overall Performance</div>
       <div class="overall-stats" id="overallStats"></div>
       <div class="sec-title">📋 Task-wise Breakdown</div>
@@ -1355,11 +1501,14 @@ document.body.addEventListener('input', function(e){
       </table>
       <div id="statusBanner"></div>
       <div class="trust-line">"Your performance has been evaluated based on real task parameters."</div>
-      <div class="modal-actions">
-        <button class="btn-secondary" onclick="restartTask()">🔄 Retry Demo</button>
-        <button class="btn-primary" onclick="goHome()">🚀 Start Real Tasks</button>
+
+      <!-- Action Buttons -->
+      <div style="display:flex;gap:12px;flex-wrap:wrap;padding-top:8px;border-top:1px solid #f1f5f9;margin-top:16px;">
+        <button onclick="restartTask()" style="flex:1;background:#f8fafc;border:1.5px solid #e2e8f0;color:#0f172a;padding:13px 18px;border-radius:14px;font-weight:800;font-size:0.88rem;cursor:pointer;font-family:inherit;transition:all 0.15s;display:flex;align-items:center;justify-content:center;gap:8px;" onmouseover="this.style.borderColor='#cbd5e1';this.style.background='#f1f5f9'" onmouseout="this.style.borderColor='#e2e8f0';this.style.background='#f8fafc'">🔄 Retry Demo</button>
+        <button onclick="closeReport()" style="flex:1;background:linear-gradient(135deg,#4f46e5,#7c3aed);color:#fff;border:none;padding:13px 18px;border-radius:14px;font-weight:800;font-size:0.88rem;cursor:pointer;font-family:inherit;transition:all 0.15s;display:flex;align-items:center;justify-content:center;gap:8px;box-shadow:0 10px 25px rgba(79,70,229,0.25);" onmouseover="this.style.opacity='0.9';this.style.transform='translateY(-1px)'" onmouseout="this.style.opacity='1';this.style.transform='translateY(0)'">🚀 Close Report</button>
       </div>
     </div>
+
   </div>
 </div>
 
@@ -1615,10 +1764,10 @@ const GRAMMAR=[
 // ===== TASK DEFINITIONS =====
 // =====================================================
 let TDEFS=[
-  {id:"typing",  name:"PDF to Word Typing",  emoji:"⌨️",items:10,timeMin:60,desc:"Read the 8-10 line content shown on each page and type it exactly in the box below. Minimum 100 words per page required.",color:"#7C3AED",num:1,hcls:""},
-  {id:"form",    name:"Form Filling",        emoji:"🧾",items:10,timeMin:60,desc:"Complete 10 online forms with the provided reference data carefully and accurately.",color:"#059669",num:2,hcls:"green"},
-  {id:"data",    name:"Data Entry",          emoji:"📊",items:10,timeMin:60,desc:"Fill in 10 data entry forms accurately by typing the required information in each field.",color:"#EA580C",num:3,hcls:"orange"},
-  {id:"grammar", name:"Grammar Correction",  emoji:"✍️",items:10,timeMin:60,desc:"Read 10 paragraphs with grammatical errors and type the fully corrected versions.",color:"#7C3AED",num:4,hcls:""},
+  {id:"data",    name:"Data Entry",          emoji:"📊",items:10,timeMin:60,desc:"Type given data into fields accurately",color:"#EA580C",num:1,hcls:"orange"},
+  {id:"form",    name:"Form Filling",        emoji:"🧾",items:10,timeMin:60,desc:"Fill online forms with provided information",color:"#059669",num:2,hcls:"green"},
+  {id:"typing",  name:"PDF to Word Typing",  emoji:"⌨️",items:10,timeMin:60,desc:"Type PDF content into text format accurately",color:"#7C3AED",num:3,hcls:""},
+  {id:"grammar", name:"Grammar Correction",  emoji:"✍️",items:10,timeMin:60,desc:"Correct grammatical errors in given texts",color:"#7C3AED",num:4,hcls:""},
 ];
 
 let HOWTO={
@@ -1637,18 +1786,47 @@ let CT=null,TI=null,SL=3600,ST=null,SI={},TN=0,ID=[],ERR_LOG={};
 // ===== MENU =====
 // =====================================================
 function renderMenu(){
-  document.getElementById('taskCards').innerHTML=TDEFS.map(t=>`
-    <div class="task-card">
-      <div class="task-card-top" style="background:${t.color};"></div>
-      <div class="task-card-body">
-        <h3>${t.name}</h3>
-        <p>${t.desc}</p>
-        <div class="task-card-meta">
-          <div class="task-num" style="background:${t.color};">${t.num}</div>
-          <button class="start-btn" style="background:${t.color};" onclick="openTask('${t.id}')">▷ Start Task</button>
+  document.getElementById('taskCards').innerHTML=TDEFS.map(t=>{
+    let iconHtml = '';
+    let iconBg = '';
+    let iconColor = '';
+    if(t.id==='data'){
+      iconHtml = '<i class="fa-solid fa-file-pen" style="font-size:1.35rem;"></i>';
+      iconBg = '#eff6ff'; // Light Blue
+      iconColor = '#3b82f6';
+    }else if(t.id==='form'){
+      iconHtml = '<i class="fa-solid fa-clipboard-list" style="font-size:1.35rem;"></i>';
+      iconBg = '#faf5ff'; // Light Purple/Lavender
+      iconColor = '#7c3aed';
+    }else if(t.id==='typing'){
+      iconHtml = '<i class="fa-solid fa-keyboard" style="font-size:1.35rem;"></i>';
+      iconBg = '#ecfdf5'; // Light Green
+      iconColor = '#10b981';
+    }else if(t.id==='grammar'){
+      iconHtml = '<i class="fa-solid fa-file-circle-check" style="font-size:1.35rem;"></i>';
+      iconBg = '#fff7ed'; // Light Orange
+      iconColor = '#f97316';
+    }else{
+      iconHtml = `<span style="font-size:1.35rem;">${t.emoji}</span>`;
+      iconBg = '#f1f5f9';
+      iconColor = '#64748b';
+    }
+    return `
+      <div class="task-card">
+        <div class="task-card-icon-wrap" style="background:${iconBg}; color:${iconColor}; display: flex; align-items: center; justify-content: center;">
+          ${iconHtml}
         </div>
-      </div>
-    </div>`).join('');
+        <div class="task-card-details">
+          <h3 class="task-card-title">${t.name}</h3>
+          <p class="task-card-desc">${t.desc}</p>
+        </div>
+        <div class="task-card-action">
+          <button class="task-card-btn" onclick="openTask('${t.id}')">
+            <i class="fa-solid fa-play text-[10px]"></i> Start
+          </button>
+        </div>
+      </div>`;
+  }).join('');
 }
 
 function openTask(id){
@@ -1666,6 +1844,7 @@ function openTask(id){
 
 function goBack(){if(confirm("Are you sure you want to leave this task?")){clearInterval(TI);goHome();}}
 function goHome(){document.getElementById('resultModal').classList.remove('show');document.getElementById('taskArea').style.display='none';document.getElementById('mainMenu').style.display='flex';clearInterval(TI);}
+function closeReport(){document.getElementById('resultModal').classList.remove('show');document.getElementById('taskArea').style.display='none';document.getElementById('mainMenu').style.display='flex';clearInterval(TI);}
 
 // =====================================================
 // ===== TIMER =====
@@ -2254,6 +2433,8 @@ function setAuthTab(tab) {
   const tabBtnLogin = document.getElementById('tabBtnLogin');
   const tabBtnRegister = document.getElementById('tabBtnRegister');
   const alertEl = document.getElementById('authAlert');
+  const cardTitle = document.getElementById('authCardTitle');
+  const cardSub = document.getElementById('authCardSub');
 
   if (alertEl) alertEl.classList.add('hidden');
 
@@ -2261,6 +2442,8 @@ function setAuthTab(tab) {
     if (loginForm) loginForm.classList.remove('hidden');
     if (registerForm) registerForm.classList.add('hidden');
     if (successView) successView.classList.add('hidden');
+    if (cardTitle) cardTitle.textContent = "Welcome Back";
+    if (cardSub) cardSub.textContent = "Login to your WorkDen account";
 
     tabBtnLogin.className = "flex-1 text-xs font-black py-2.5 rounded-xl transition-all duration-300 bg-white text-blue-600 shadow-sm border border-slate-200/40";
     tabBtnRegister.className = "flex-1 text-xs font-black py-2.5 rounded-xl transition-all duration-300 text-slate-500 hover:text-slate-800";
@@ -2268,9 +2451,30 @@ function setAuthTab(tab) {
     if (loginForm) loginForm.classList.add('hidden');
     if (registerForm) registerForm.classList.remove('hidden');
     if (successView) successView.classList.add('hidden');
+    if (cardTitle) cardTitle.textContent = "Create Account";
+    if (cardSub) cardSub.textContent = "Sign up for a free demo account";
 
     tabBtnRegister.className = "flex-1 text-xs font-black py-2.5 rounded-xl transition-all duration-300 bg-white text-blue-600 shadow-sm border border-slate-200/40";
     tabBtnLogin.className = "flex-1 text-xs font-black py-2.5 rounded-xl transition-all duration-300 text-slate-500 hover:text-slate-800";
+  }
+}
+
+function togglePasswordVisibility(inputId, btn) {
+  const input = document.getElementById(inputId);
+  if (!input) return;
+  const icon = btn.querySelector('i');
+  if (input.type === 'password') {
+    input.type = 'text';
+    if (icon) {
+      icon.classList.remove('fa-regular', 'fa-eye');
+      icon.classList.add('fa-regular', 'fa-eye-slash');
+    }
+  } else {
+    input.type = 'password';
+    if (icon) {
+      icon.classList.remove('fa-regular', 'fa-eye-slash');
+      icon.classList.add('fa-regular', 'fa-eye');
+    }
   }
 }
 
@@ -2583,7 +2787,7 @@ function logoutDemoAccount() {
   const overlay = document.getElementById('profileDrawerOverlay');
   const drawer = document.getElementById('profileDrawer');
   if (overlay && drawer) {
-    drawer.style.right = '-450px';
+    drawer.style.right = '-480px';
     overlay.style.display = 'none';
   }
 
@@ -2612,7 +2816,7 @@ function toggleProfileDrawer() {
       drawer.style.right = '0';
     }, 10);
   } else {
-    drawer.style.right = '-450px';
+    drawer.style.right = '-480px';
     setTimeout(() => {
       overlay.style.display = 'none';
     }, 300);
