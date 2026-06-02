@@ -27,37 +27,38 @@
 /* ========== HERO ========== */
 
 .hero {
-
   padding: 96px 0 72px;
-
   background: #f8fafc;
-
   border-bottom: 1px solid var(--border);
+  position: relative;
+  overflow: hidden;
+}
 
+#shader-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.38;
 }
 
 .hero-inner {
-
+  position: relative;
+  z-index: 1;
   max-width: 1200px; margin: 0 auto; padding: 0 28px;
-
   display: grid; grid-template-columns: 1fr 1fr;
-
   gap: 56px; align-items: center;
-
 }
 
 .hero-badge {
-
   display: inline-flex; align-items: center; gap: 8px;
-
   background: white; border: 1px solid var(--border);
-
   border-radius: 100px; padding: 5px 14px 5px 8px;
-
   font-size: 0.78rem; font-weight: 600; color: var(--mid);
-
   margin-bottom: 22px; box-shadow: var(--shadow-sm);
-
 }
 
 .hero-badge .dot {
@@ -79,25 +80,17 @@
 }
 
 .hero-title {
-
   font-size: clamp(2rem, 3.8vw, 3rem);
-
   font-weight: 900; color: var(--dark);
-
   line-height: 1.1; letter-spacing: -0.04em;
-
   margin-bottom: 18px;
-
 }
 
 .hero-title .hl { color: var(--brand); }
 
 .hero-desc {
-
   font-size: 1rem; color: var(--text);
-
   line-height: 1.75; margin-bottom: 30px; max-width: 460px;
-
 }
 
 .hero-ctas { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 32px; }
@@ -105,11 +98,8 @@
 .hero-trust { display: flex; flex-direction: column; gap: 8px; }
 
 .hero-trust-item {
-
   display: flex; align-items: center; gap: 8px;
-
   font-size: 0.8rem; color: var(--text); font-weight: 500;
-
 }
 
 .hero-trust-item i { color: var(--green); font-size: 0.78rem; flex-shrink: 0; }
@@ -127,29 +117,19 @@
 }
 
 .hstat {
-
   background: white; border: 1px solid var(--border);
-
   border-radius: var(--radius); padding: 18px 14px;
-
   text-align: center;
-
 }
 
 .hstat-num {
-
   font-size: 1.6rem; font-weight: 900; color: var(--brand);
-
   line-height: 1; letter-spacing: -0.03em;
-
 }
 
 .hstat-label {
-
   font-size: 0.68rem; color: var(--muted); margin-top: 5px;
-
   font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em;
-
 }
 
 
@@ -157,13 +137,9 @@
 /* Hero right — video */
 
 .hero-video {
-
   background: white; border-radius: 14px; overflow: hidden;
-
   box-shadow: 0 16px 48px rgba(0,0,0,0.11);
-
   border: 1px solid var(--border);
-
 }
 
 .video-topbar {
@@ -171,39 +147,27 @@
   display: flex; align-items: center; gap: 6px;
 
   padding: 10px 14px; background: #f1f5f9;
-
   border-bottom: 1px solid var(--border);
-
 }
 
 .vdot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
 
 .video-topbar span {
-
   font-size: 0.73rem; color: var(--muted);
-
   font-weight: 500; margin-left: 6px;
-
 }
 
 .hero-video iframe { width: 100%; height: 300px; display: block; border: none; }
 
 .hero-video-caption {
-
   padding: 13px 16px; display: flex; align-items: center; gap: 10px;
-
   border-top: 1px solid var(--border);
-
 }
 
 .hvc-icon {
-
   width: 34px; height: 34px; background: var(--green-pale);
-
   border-radius: 9px; display: flex; align-items: center;
-
   justify-content: center; color: var(--green); font-size: 0.85rem; flex-shrink: 0;
-
 }
 
 .hvc-label { font-size: 0.82rem; color: var(--mid); font-weight: 600; }
@@ -859,6 +823,12 @@ body{
 .feat-card,.proj-card,.testi-card{
   position:relative;
   overflow:hidden;
+  will-change:transform,opacity,translate;
+  transition:transform 0.3s cubic-bezier(0.25, 1, 0.5, 1), 
+             box-shadow 0.3s cubic-bezier(0.25, 1, 0.5, 1), 
+             border-color 0.3s cubic-bezier(0.25, 1, 0.5, 1), 
+             opacity 0.8s ease, 
+             translate 0.8s cubic-bezier(0.25, 1, 0.5, 1) !important;
 }
 .feat-card::before,.proj-card::before,.testi-card::before{
   content:"";position:absolute;inset:auto auto 0 0;width:100%;height:3px;
@@ -869,17 +839,41 @@ body{
 }
 .feat-card:hover::before,.proj-card:hover::before,.testi-card:hover::before{transform:scaleX(1);}
 .feat-card:hover,.testi-card:hover{
-  transform:translateY(-7px);
-  box-shadow:var(--premium-shadow-hover);
+  transform:translateY(-7px) !important;
+  border-color:#3b82f6 !important;
+  box-shadow:0 20px 40px rgba(37,99,235,0.12), 0 0 0 1px rgba(37,99,235,0.1) !important;
 }
 .projects-grid{
   overflow:visible;
 }
-.proj-card{
-  will-change:transform,opacity;
-}
 .proj-card:hover{
-  transform:translateY(-8px) scale(1.025)!important;
+  transform:translateY(-8px) scale(1.025) !important;
+  border-color:#3b82f6 !important;
+  box-shadow:0 20px 40px rgba(37,99,235,0.12), 0 0 0 1px rgba(37,99,235,0.1) !important;
+}
+.proj-card:nth-child(odd) {
+  opacity:0;
+  translate:-48px 0;
+}
+.proj-card:nth-child(even) {
+  opacity:0;
+  translate:48px 0;
+}
+.proj-card.proj-visible {
+  opacity:1;
+  translate:0 0;
+}
+.feat-card:nth-child(odd) {
+  opacity:0;
+  translate:-48px 0;
+}
+.feat-card:nth-child(even) {
+  opacity:0;
+  translate:48px 0;
+}
+.feat-card.revealed {
+  opacity:1;
+  translate:0 0 !important;
 }
 .step-item{
   background:#fff;
@@ -887,7 +881,12 @@ body{
   border-radius:18px;
   padding:18px;
   margin-bottom:12px;
-  transition:.25s ease;
+  will-change:transform,opacity,translate;
+  transition:opacity 0.8s ease, 
+             translate 0.8s cubic-bezier(0.25, 1, 0.5, 1), 
+             border-color 0.25s ease, 
+             box-shadow 0.25s ease, 
+             transform 0.25s ease !important;
 }
 .step-item:hover{
   border-color:#bfdbfe;
@@ -1044,6 +1043,24 @@ body{
 .reveal-up.revealed{
   opacity:1;
   transform:translateY(0);
+}
+.reveal-left{
+  opacity:0;
+  translate:-48px 0;
+  transition:opacity .8s ease, translate .8s cubic-bezier(0.25, 1, 0.5, 1);
+}
+.reveal-left.revealed{
+  opacity:1;
+  translate:0 0;
+}
+.reveal-right{
+  opacity:0;
+  translate:48px 0;
+  transition:opacity .8s ease, translate .8s cubic-bezier(0.25, 1, 0.5, 1);
+}
+.reveal-right.revealed{
+  opacity:1;
+  translate:0 0;
 }
 .float-whatsapp{
   position:fixed;
@@ -1459,24 +1476,44 @@ body{
 .video-topbar{padding:11px 14px!important;background:#f8fafc!important;}
 .hero-video-caption{padding:14px 16px!important;background:#ffffff!important;}
 
-/* Trust bar: readable on white theme */
-.trust-ticker{
-  margin-top:64px!important;
-  min-height:46px!important;
-  background:#ffffff!important;
-  border-top:1px solid #dbeafe!important;
-  border-bottom:1px solid #dbeafe!important;
-  box-shadow:0 8px 24px rgba(15,23,42,.055)!important;
+/* Trust bar: rich colorful gradient for a gorgeous white theme fit */
+.trust-ticker {
+  margin-top: 64px!important;
+  min-height: 48px!important;
+  background: linear-gradient(135deg, #1e3a8a 0%, #1d4ed8 50%, #2563eb 100%)!important;
+  border-top: 1px solid rgba(255,255,255,0.15)!important;
+  border-bottom: 1px solid rgba(255,255,255,0.15)!important;
+  box-shadow: 0 12px 36px rgba(29,78,216,0.22)!important;
 }
-.trust-ticker-track{display:inline-flex!important;align-items:center!important;gap:10px!important;}
-.trust-ticker-item{
-  color:#0f172a!important;
-  background:#f8fafc!important;
-  border:1px solid #dbeafe!important;
-  box-shadow:none!important;
-  padding:8px 14px!important;
+.trust-ticker::before {
+  background: linear-gradient(90deg, #1e3a8a, rgba(30,58,138,0))!important;
 }
-.trust-ticker-item i{color:#16a34a!important;}
+.trust-ticker::after {
+  background: linear-gradient(270deg, #2563eb, rgba(37,99,235,0))!important;
+}
+.trust-ticker-track {
+  display: inline-flex!important;
+  align-items: center!important;
+  gap: 12px!important;
+}
+.trust-ticker-item {
+  color: #ffffff!important;
+  background: rgba(255, 255, 255, 0.12)!important;
+  border: 1px solid rgba(255, 255, 255, 0.20)!important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12)!important;
+  padding: 8px 16px!important;
+  font-weight: 700!important;
+  border-radius: 999px!important;
+  transition: all 0.22s ease;
+}
+.trust-ticker-item:hover {
+  background: rgba(255, 255, 255, 0.22)!important;
+  transform: translateY(-1px) scale(1.025);
+}
+.trust-ticker-item i {
+  color: #f59e0b!important; /* Gorgeous contrast amber gold */
+  text-shadow: 0 0 8px rgba(245,158,11,0.5);
+}
 
 /* Simple real-website footer */
 .simple-footer{
@@ -1657,6 +1694,8 @@ body{
 <!-- HERO -->
 
 <section class="hero">
+
+  <canvas id="shader-canvas"></canvas>
 
   <div class="hero-inner">
 
@@ -2410,11 +2449,37 @@ function closeVersionModal(e) {
 <script>
 // Premium reveal animations
 (function(){
-  const selectors = '.section-header,.feat-card,.step-item,.trust-panel,.testi-card,.cta-inner';
-  document.querySelectorAll(selectors).forEach((el, idx)=>{
+  // Group 1: Bottom reveal (upward slide)
+  const upSelectors = '.section-header,.testi-card,.cta-inner';
+  document.querySelectorAll(upSelectors).forEach((el, idx)=>{
     el.classList.add('reveal-up');
     el.style.transitionDelay = Math.min((idx % 6) * 70, 350) + 'ms';
   });
+
+  // Group 2: Left reveal (slide from left)
+  const leftSelectors = '.step-item';
+  document.querySelectorAll(leftSelectors).forEach((el, idx)=>{
+    el.classList.add('reveal-left');
+    el.style.transitionDelay = Math.min((idx % 6) * 70, 350) + 'ms';
+  });
+
+  // Group 2b: Alternating feat-cards (Why Trust WorkDen)
+  document.querySelectorAll('.feat-card').forEach((el, idx)=>{
+    if (idx % 2 === 0) {
+      el.classList.add('reveal-left');
+    } else {
+      el.classList.add('reveal-right');
+    }
+    el.style.transitionDelay = Math.min((idx % 6) * 70, 350) + 'ms';
+  });
+
+  // Group 3: Right reveal (slide from right)
+  const rightSelectors = '.trust-panel';
+  document.querySelectorAll(rightSelectors).forEach((el, idx)=>{
+    el.classList.add('reveal-right');
+    el.style.transitionDelay = Math.min((idx % 6) * 70, 350) + 'ms';
+  });
+
   const observer = new IntersectionObserver((entries)=>{
     entries.forEach(entry=>{
       if(entry.isIntersecting){
@@ -2423,7 +2488,8 @@ function closeVersionModal(e) {
       }
     });
   }, {threshold:0.12});
-  document.querySelectorAll('.reveal-up').forEach(el=>observer.observe(el));
+
+  document.querySelectorAll('.reveal-up, .reveal-left, .reveal-right').forEach(el=>observer.observe(el));
 })();
 
 // Subtle 3D tilt for premium cards
@@ -2444,7 +2510,198 @@ function closeVersionModal(e) {
   });
 })();
 </script>
-<script src="content-sync.js?v=2.1"></script>
+
+<!-- WebGL Shader Background (exact user shader) -->
+<script>
+(function() {
+  const canvas = document.getElementById('shader-canvas');
+  if (!canvas) return;
+
+  const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+  if (!gl) { console.warn('WebGL not supported'); return; }
+
+  const vsSource = `
+    attribute vec4 aVertexPosition;
+    void main() {
+      gl_Position = aVertexPosition;
+    }
+  `;
+
+  const fsSource = `
+    precision highp float;
+    uniform vec2 iResolution;
+    uniform float iTime;
+
+    const float overallSpeed = 0.2;
+    const float gridSmoothWidth = 0.015;
+    const float axisWidth = 0.05;
+    const float majorLineWidth = 0.025;
+    const float minorLineWidth = 0.0125;
+    const float majorLineFrequency = 5.0;
+    const float minorLineFrequency = 1.0;
+    const vec4 gridColor = vec4(0.82, 0.85, 0.92, 1.0);
+    const float scale = 5.0;
+    const vec4 lineColor = vec4(0.22, 0.35, 0.85, 1.0);
+    const float minLineWidth = 0.01;
+    const float maxLineWidth = 0.2;
+    const float lineSpeed = 1.0 * overallSpeed;
+    const float lineAmplitude = 1.0;
+    const float lineFrequency = 0.2;
+    const float warpSpeed = 0.2 * overallSpeed;
+    const float warpFrequency = 0.5;
+    const float warpAmplitude = 1.0;
+    const float offsetFrequency = 0.5;
+    const float offsetSpeed = 1.33 * overallSpeed;
+    const float minOffsetSpread = 0.6;
+    const float maxOffsetSpread = 2.0;
+    const int linesPerGroup = 16;
+
+    #define drawCircle(pos, radius, coord) smoothstep(radius + gridSmoothWidth, radius, length(coord - (pos)))
+    #define drawSmoothLine(pos, halfWidth, t) smoothstep(halfWidth, 0.0, abs(pos - (t)))
+    #define drawCrispLine(pos, halfWidth, t) smoothstep(halfWidth + gridSmoothWidth, halfWidth, abs(pos - (t)))
+    #define drawPeriodicLine(freq, width, t) drawCrispLine(freq / 2.0, width, abs(mod(t, freq) - (freq) / 2.0))
+
+    float drawGridLines(float axis) {
+      return drawCrispLine(0.0, axisWidth, axis)
+            + drawPeriodicLine(majorLineFrequency, majorLineWidth, axis)
+            + drawPeriodicLine(minorLineFrequency, minorLineWidth, axis);
+    }
+
+    float drawGrid(vec2 space) {
+      return min(1.0, drawGridLines(space.x) + drawGridLines(space.y));
+    }
+
+    float random(float t) {
+      return (cos(t) + cos(t * 1.3 + 1.3) + cos(t * 1.4 + 1.4)) / 3.0;
+    }
+
+    float getPlasmaY(float x, float horizontalFade, float offset) {
+      return random(x * lineFrequency + iTime * lineSpeed) * horizontalFade * lineAmplitude + offset;
+    }
+
+    void main() {
+      vec2 fragCoord = gl_FragCoord.xy;
+      vec4 fragColor;
+      vec2 uv = fragCoord.xy / iResolution.xy;
+      vec2 space = (fragCoord - iResolution.xy / 2.0) / iResolution.x * 2.0 * scale;
+
+      float horizontalFade = 1.0 - (cos(uv.x * 6.28) * 0.5 + 0.5);
+      float verticalFade = 1.0 - (cos(uv.y * 6.28) * 0.5 + 0.5);
+
+      space.y += random(space.x * warpFrequency + iTime * warpSpeed) * warpAmplitude * (0.5 + horizontalFade);
+      space.x += random(space.y * warpFrequency + iTime * warpSpeed + 2.0) * warpAmplitude * horizontalFade;
+
+      vec4 lines = vec4(0.0);
+      vec4 bgColor1 = vec4(0.965, 0.975, 0.99, 1.0);
+      vec4 bgColor2 = vec4(0.94, 0.955, 0.99, 1.0);
+
+      for(int l = 0; l < linesPerGroup; l++) {
+        float normalizedLineIndex = float(l) / float(linesPerGroup);
+        float offsetTime = iTime * offsetSpeed;
+        float offsetPosition = float(l) + space.x * offsetFrequency;
+        float rand = random(offsetPosition + offsetTime) * 0.5 + 0.5;
+        float halfWidth = mix(minLineWidth, maxLineWidth, rand * horizontalFade) / 2.0;
+        float offset = random(offsetPosition + offsetTime * (1.0 + normalizedLineIndex)) * mix(minOffsetSpread, maxOffsetSpread, horizontalFade);
+        float linePosition = getPlasmaY(space.x, horizontalFade, offset);
+        float line = drawSmoothLine(linePosition, halfWidth, space.y) / 2.0 + drawCrispLine(linePosition, halfWidth * 0.15, space.y);
+
+        float circleX = mod(float(l) + iTime * lineSpeed, 25.0) - 12.0;
+        vec2 circlePosition = vec2(circleX, getPlasmaY(circleX, horizontalFade, offset));
+        float circle = drawCircle(circlePosition, 0.01, space) * 4.0;
+
+        line = line + circle;
+        lines += line * lineColor * rand;
+      }
+
+      fragColor = mix(bgColor1, bgColor2, uv.x);
+      float vFadeSoft = smoothstep(0.0, 0.35, verticalFade) * smoothstep(0.0, 0.35, 1.0 - verticalFade + 0.65);
+      fragColor = mix(vec4(0.97, 0.98, 1.0, 1.0), fragColor, vFadeSoft);
+      fragColor.a = 1.0;
+      fragColor += lines * 0.6;
+
+      gl_FragColor = fragColor;
+    }
+  `;
+
+  function loadShader(type, source) {
+    const shader = gl.createShader(type);
+    gl.shaderSource(shader, source);
+    gl.compileShader(shader);
+    if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
+      console.error('Shader compile error:', gl.getShaderInfoLog(shader));
+      gl.deleteShader(shader);
+      return null;
+    }
+    return shader;
+  }
+
+  const vertexShader = loadShader(gl.VERTEX_SHADER, vsSource);
+  const fragmentShader = loadShader(gl.FRAGMENT_SHADER, fsSource);
+  if (!vertexShader || !fragmentShader) return;
+
+  const shaderProgram = gl.createProgram();
+  gl.attachShader(shaderProgram, vertexShader);
+  gl.attachShader(shaderProgram, fragmentShader);
+  gl.linkProgram(shaderProgram);
+  if (!gl.getProgramParameter(shaderProgram, gl.LINK_STATUS)) {
+    console.error('Program link error:', gl.getProgramInfoLog(shaderProgram));
+    return;
+  }
+
+  const positionBuffer = gl.createBuffer();
+  gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
+  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 1,-1, -1,1, 1,1]), gl.STATIC_DRAW);
+
+  const programInfo = {
+    program: shaderProgram,
+    attribLocations: { vertexPosition: gl.getAttribLocation(shaderProgram, 'aVertexPosition') },
+    uniformLocations: {
+      resolution: gl.getUniformLocation(shaderProgram, 'iResolution'),
+      time: gl.getUniformLocation(shaderProgram, 'iTime')
+    }
+  };
+
+  function resizeCanvas() {
+    const hero = canvas.parentElement;
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    const w = hero.clientWidth;
+    const h = hero.clientHeight;
+    canvas.width = w * dpr;
+    canvas.height = h * dpr;
+    canvas.style.width = w + 'px';
+    canvas.style.height = h + 'px';
+    gl.viewport(0, 0, canvas.width, canvas.height);
+  }
+  window.addEventListener('resize', resizeCanvas);
+  resizeCanvas();
+
+  let isVisible = true;
+  const visObserver = new IntersectionObserver(function(entries) {
+    isVisible = entries[0].isIntersecting;
+  }, { threshold: 0.05 });
+  visObserver.observe(canvas.parentElement);
+
+  const startTime = Date.now();
+  function render() {
+    requestAnimationFrame(render);
+    if (!isVisible) return;
+    const currentTime = (Date.now() - startTime) / 1000;
+
+    gl.clearColor(0.0, 0.0, 0.0, 1.0);
+    gl.clear(gl.COLOR_BUFFER_BIT);
+    gl.useProgram(programInfo.program);
+    gl.uniform2f(programInfo.uniformLocations.resolution, canvas.width, canvas.height);
+    gl.uniform1f(programInfo.uniformLocations.time, currentTime);
+    gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
+    gl.vertexAttribPointer(programInfo.attribLocations.vertexPosition, 2, gl.FLOAT, false, 0, 0);
+    gl.enableVertexAttribArray(programInfo.attribLocations.vertexPosition);
+    gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+  }
+  requestAnimationFrame(render);
+})();
+</script>
+
+<script src="content-sync.js?v=3.5"></script>
 </body>
 
 </html>

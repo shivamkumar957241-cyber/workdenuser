@@ -4,26 +4,40 @@
  * This script runs on every page load and ONLY changes text content — never CSS or design.
  * Features: Advanced Cache-First Synchronous Load, Network Cache-Busting, and zero-flash FOUC prevention.
  */
+// Force clear old local storage cache once to ensure pristine migration to lh3 direct delivery format
+if (typeof window !== 'undefined' && typeof localStorage !== 'undefined') {
+  if (!localStorage.getItem('lh3_migration_v3.5')) {
+    localStorage.removeItem('website_content');
+    localStorage.setItem('lh3_migration_v3.5', 'true');
+    console.log('🔄 LocalStorage cache cleared for v3.5 direct delivery update!');
+  }
+}
 
 // ── Google Drive Link Converters (Global Scope) ──────────────────────────
+function getDriveFileId(url) {
+  if (!url) return null;
+  let match = url.match(/\/d\/([a-zA-Z0-9_-]+)/);
+  if (match) return match[1];
+  match = url.match(/[?&]id=([a-zA-Z0-9_-]+)/);
+  if (match) return match[1];
+  return null;
+}
+
 function convertDriveLink(url) {
-  if (!url) return "";
-  const match = url.match(/\/d\/([a-zA-Z0-9_-]+)/);
-  if (match) return `https://drive.google.com/thumbnail?id=${match[1]}&sz=w600`;
+  const id = getDriveFileId(url);
+  if (id) return `https://lh3.googleusercontent.com/d/${id}`;
   return url;
 }
 
 function convertDriveImageUrl(url) {
-  if (!url) return "";
-  const match = url.match(/\/d\/([a-zA-Z0-9_-]+)/);
-  if (match) return `https://drive.google.com/thumbnail?id=${match[1]}&sz=w1000`;
+  const id = getDriveFileId(url);
+  if (id) return `https://lh3.googleusercontent.com/d/${id}`;
   return url;
 }
 
 function convertDriveVideoUrl(url) {
-  if (!url) return "";
-  const match = url.match(/\/d\/([a-zA-Z0-9_-]+)/);
-  if (match) return `https://drive.google.com/file/d/${match[1]}/preview`;
+  const id = getDriveFileId(url);
+  if (id) return `https://drive.google.com/file/d/${id}/preview`;
   return url;
 }
 
@@ -152,6 +166,58 @@ function initProjCardObserver() {
   cards.forEach(c => io.observe(c));
 }
 
+function initFeatCardObserver() {
+  const cards = document.querySelectorAll('.feat-card');
+  if (!cards.length) return;
+  
+  cards.forEach((c, idx) => {
+    c.classList.remove('revealed');
+    c.classList.remove('reveal-left');
+    c.classList.remove('reveal-right');
+    
+    if (idx % 2 === 0) {
+      c.classList.add('reveal-left');
+    } else {
+      c.classList.add('reveal-right');
+    }
+    c.style.transitionDelay = Math.min((idx % 6) * 70, 350) + 'ms';
+  });
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('revealed');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  
+  cards.forEach(c => io.observe(c));
+}
+
+function initStepItemObserver() {
+  const items = document.querySelectorAll('.step-item');
+  if (!items.length) return;
+
+  items.forEach((c, idx) => {
+    c.classList.remove('revealed');
+    c.classList.remove('reveal-left');
+    c.classList.add('reveal-left');
+    c.style.transitionDelay = Math.min((idx % 6) * 70, 350) + 'ms';
+  });
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('revealed');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  items.forEach(c => io.observe(c));
+}
+
 // ── CORE SYNC ENGINE FUNCTION (EXPORTS/APPLIES FIREBASE CONTENT) ───────────
 function applyWebsiteContent(data) {
   if (!data || !data.website) return;
@@ -248,6 +314,8 @@ function applyWebsiteContent(data) {
     
     // Re-initialize intersection observer for category cards to make them visible and animate on scroll/load
     initProjCardObserver();
+    initFeatCardObserver();
+    initStepItemObserver();
   }
 
   else if (pageName === "plans") {

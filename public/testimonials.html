@@ -105,7 +105,32 @@ html{scroll-behavior:smooth;} body{background:radial-gradient(circle at 8% 6%,rg
 .navbar.scrolled{box-shadow:0 16px 45px rgba(15,23,42,.10);} .nav-inner{position:relative;} .nav-logo{padding:8px 10px;border-radius:16px;transition:transform .25s ease,background .25s ease;} .nav-logo:hover{transform:translateY(-2px);background:#f8fafc;} .nav-logo img{filter:drop-shadow(0 8px 18px rgba(29,78,216,.18));}
 .nav-links{background:#fff;border:1px solid var(--premium-line);border-radius:999px;padding:7px;box-shadow:0 10px 30px rgba(15,23,42,.05);} .nav-links a{border-radius:999px;padding:9px 14px!important;transition:all .22s ease;position:relative;overflow:hidden;} .nav-links a:hover,.nav-links a.active{background:#eff6ff;color:var(--premium-blue)!important;}
 .btn{border-radius:999px!important;transition:transform .22s ease,box-shadow .22s ease,background .22s ease!important;} .btn:hover{transform:translateY(-2px);} .btn-primary{background:linear-gradient(135deg,#1d4ed8,#2563eb)!important;box-shadow:0 12px 30px rgba(37,99,235,.24)!important;} .btn-primary:hover{box-shadow:0 18px 42px rgba(37,99,235,.32)!important;} .btn-ghost{background:#fff!important;border:1px solid var(--premium-line)!important;box-shadow:0 8px 22px rgba(15,23,42,.05);}
-.page-hero{position:relative;overflow:hidden;padding:108px 0 72px!important;background:linear-gradient(135deg,#ffffff 0%,#f8fafc 55%,#eff6ff 100%)!important;border-bottom:1px solid #dbeafe!important;} .page-hero::before{content:"";position:absolute;width:520px;height:520px;border-radius:50%;background:linear-gradient(135deg,rgba(29,78,216,.14),rgba(245,158,11,.10));right:-210px;top:-210px;filter:blur(3px);animation:floatOrb 7s ease-in-out infinite;} .page-hero::after{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(15,23,42,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(15,23,42,.035) 1px,transparent 1px);background-size:42px 42px;mask-image:linear-gradient(to bottom,rgba(0,0,0,.55),transparent 72%);pointer-events:none;}
+.page-hero{position:relative;overflow:hidden;padding:108px 0 72px!important;background:linear-gradient(135deg,#ffffff 0%,#f8fafc 55%,#eff6ff 100%)!important;border-bottom:1px solid #dbeafe!important;}
+/* Premium Floating Hero Bubbles */
+.hero-bubble {
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.98) 0%, rgba(59,130,246,0.18) 45%, rgba(29,78,216,0.08) 100%) !important;
+  border: 1.5px solid rgba(29, 78, 216, 0.22) !important;
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+  pointer-events: none;
+  z-index: 0;
+  box-shadow: 0 10px 30px rgba(29, 78, 216, 0.08), inset 0 2px 10px rgba(255,255,255,0.95) !important;
+  animation: floatBubble infinite alternate ease-in-out;
+}
+@keyframes floatBubble {
+  0% { transform: translateY(0) rotate(0deg) scale(1); }
+  100% { transform: translateY(-28px) rotate(180deg) scale(1.06); }
+}
+.bubble-1 { width: 80px; height: 80px; left: 5%; top: 12%; animation-duration: 8s; animation-delay: 0s; }
+.bubble-2 { width: 130px; height: 130px; right: 8%; bottom: 6%; animation-duration: 12s; animation-delay: -3s; background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.98) 0%, rgba(34,197,94,0.18) 50%, rgba(34,197,94,0.05) 100%) !important; border: 1.5px solid rgba(34,197,94,0.22) !important; box-shadow: 0 10px 30px rgba(34,197,94,0.08), inset 0 2px 10px rgba(255,255,255,0.95) !important; }
+.bubble-3 { width: 60px; height: 60px; left: 40%; top: 10%; animation-duration: 9s; animation-delay: -2s; }
+.bubble-4 { width: 100px; height: 100px; left: 14%; bottom: 8%; animation-duration: 10s; animation-delay: -5s; background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.98) 0%, rgba(245,158,11,0.18) 50%, rgba(245,158,11,0.06) 100%) !important; border: 1.5px solid rgba(245,158,11,0.24) !important; box-shadow: 0 10px 30px rgba(245,158,11,0.08), inset 0 2px 10px rgba(255,255,255,0.95) !important; }
+.bubble-5 { width: 50px; height: 50px; right: 24%; top: 15%; animation-duration: 7s; animation-delay: -1s; }
+.bubble-6 { width: 110px; height: 110px; right: 3%; top: 25%; animation-duration: 14s; animation-delay: -4s; }
+.bubble-7 { width: 75px; height: 75px; left: 28%; top: 40%; animation-duration: 11s; animation-delay: -6s; background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.98) 0%, rgba(124,58,237,0.18) 50%, rgba(124,58,237,0.06) 100%) !important; border: 1.5px solid rgba(124,58,237,0.24) !important; box-shadow: 0 10px 30px rgba(124,58,237,0.08), inset 0 2px 10px rgba(255,255,255,0.95) !important; }
+.bubble-8 { width: 45px; height: 45px; right: 45%; bottom: 12%; animation-duration: 8s; animation-delay: -7s; } .page-hero::before{content:"";position:absolute;width:520px;height:520px;border-radius:50%;background:linear-gradient(135deg,rgba(29,78,216,.14),rgba(245,158,11,.10));right:-210px;top:-210px;filter:blur(3px);animation:floatOrb 7s ease-in-out infinite;} .page-hero::after{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(15,23,42,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(15,23,42,.035) 1px,transparent 1px);background-size:42px 42px;mask-image:linear-gradient(to bottom,rgba(0,0,0,.55),transparent 72%);pointer-events:none;}
 @keyframes floatOrb{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(-18px,16px) scale(1.06)}} .page-hero-inner{position:relative;z-index:2;animation:heroPop .8s cubic-bezier(.16,1,.3,1) both;} @keyframes heroPop{from{opacity:0;transform:translateY(34px) scale(.96)}to{opacity:1;transform:translateY(0) scale(1)}} .page-hero h1{background:linear-gradient(135deg,#0f172a 0%,#172554 58%,#1d4ed8 100%);-webkit-background-clip:text;background-clip:text;color:transparent!important;text-wrap:balance;} .page-hero p{text-wrap:balance;}
 .section-header{text-align:center;max-width:760px;margin-left:auto;margin-right:auto;} .section-title{background:linear-gradient(135deg,#0f172a,#1e3a8a);-webkit-background-clip:text;background-clip:text;color:transparent!important;} .section-label{box-shadow:0 8px 24px rgba(29,78,216,.08);animation:labelPulse 2.8s ease-in-out infinite;} @keyframes labelPulse{0%,100%{transform:translateY(0)}50%{transform:translateY(-2px)}}
 .video-marquee-outer{position:relative;} .video-marquee-outer::before,.video-marquee-outer::after{content:"";position:absolute;top:0;width:100px;height:100%;z-index:2;pointer-events:none;} .video-marquee-outer::before{left:0;background:linear-gradient(90deg,#f8fafc,rgba(248,250,252,0));}.video-marquee-outer::after{right:0;background:linear-gradient(270deg,#f8fafc,rgba(248,250,252,0));}.video-marquee-track{animation:vScroll 34s linear infinite!important;} .vid-card{border-radius:24px!important;box-shadow:0 16px 45px rgba(15,23,42,.08)!important;transition:transform .28s ease, box-shadow .28s ease, border-color .28s ease;position:relative;overflow:hidden;} .vid-card::after{content:"";position:absolute;inset:0;background:linear-gradient(120deg,transparent 0%,rgba(255,255,255,.55) 48%,transparent 68%);transform:translateX(-120%);transition:transform .8s ease;pointer-events:none;} .vid-card:hover{transform:translateY(-8px) scale(1.02);box-shadow:0 26px 70px rgba(29,78,216,.16)!important;border-color:#93c5fd!important;} .vid-card:hover::after{transform:translateX(120%);} 
@@ -144,6 +169,14 @@ html{scroll-behavior:smooth;} body{background:radial-gradient(circle at 8% 6%,rg
 </div>
 
 <div class="page-hero">
+  <div class="hero-bubble bubble-1"></div>
+  <div class="hero-bubble bubble-2"></div>
+  <div class="hero-bubble bubble-3"></div>
+  <div class="hero-bubble bubble-4"></div>
+  <div class="hero-bubble bubble-5"></div>
+  <div class="hero-bubble bubble-6"></div>
+  <div class="hero-bubble bubble-7"></div>
+  <div class="hero-bubble bubble-8"></div>
   <div class="page-hero-inner">
     <span class="section-label"><i class="fas fa-star"></i> Testimonials</span>
     <h1 data-content-id="pageHeroTitle">Real People. Real Experiences.</h1>
@@ -187,37 +220,37 @@ html{scroll-behavior:smooth;} body{background:radial-gradient(circle at 8% 6%,rg
       <p class="section-sub">Verified screenshots shared by WorkDen users from across India.</p>
     </div>
     <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:18px;" class="img-testi-grid">
-      <div class="img-testi-card" onclick="openLightbox('https://drive.google.com/thumbnail?id=17FLZiJbzPWndzUbIo4NhRM3M-LghjCaP&sz=w1000','Aarav Sharma','Delhi, India')">
-        <div class="img-wrap"><img src="https://drive.google.com/thumbnail?id=17FLZiJbzPWndzUbIo4NhRM3M-LghjCaP&sz=w1000" alt="User Testimonial 1" loading="lazy"></div>
+      <div class="img-testi-card" onclick="openLightbox('https://lh3.googleusercontent.com/d/17FLZiJbzPWndzUbIo4NhRM3M-LghjCaP','Aarav Sharma','Delhi, India')">
+        <div class="img-wrap"><img src="https://lh3.googleusercontent.com/d/17FLZiJbzPWndzUbIo4NhRM3M-LghjCaP" alt="User Testimonial 1" loading="lazy"></div>
         <div class="img-testi-info"><div class="img-testi-name">Aarav Sharma</div><div class="img-testi-city">Delhi, India</div></div>
       </div>
-      <div class="img-testi-card" onclick="openLightbox('https://drive.google.com/thumbnail?id=1oRyTXN7nOWpuH_Re7clKMq0qjhZnKBHY&sz=w1000','Pooja Patel','Ahmedabad, Gujarat')">
-        <div class="img-wrap"><img src="https://drive.google.com/thumbnail?id=1oRyTXN7nOWpuH_Re7clKMq0qjhZnKBHY&sz=w1000" alt="User Testimonial 2" loading="lazy"></div>
+      <div class="img-testi-card" onclick="openLightbox('https://lh3.googleusercontent.com/d/1oRyTXN7nOWpuH_Re7clKMq0qjhZnKBHY','Pooja Patel','Ahmedabad, Gujarat')">
+        <div class="img-wrap"><img src="https://lh3.googleusercontent.com/d/1oRyTXN7nOWpuH_Re7clKMq0qjhZnKBHY" alt="User Testimonial 2" loading="lazy"></div>
         <div class="img-testi-info"><div class="img-testi-name">Pooja Patel</div><div class="img-testi-city">Ahmedabad, Gujarat</div></div>
       </div>
-      <div class="img-testi-card" onclick="openLightbox('https://drive.google.com/thumbnail?id=14w2itsxlNSi_-QwbbhLzD3oIOEWqGHas&sz=w1000','Ravi Kumar','Hyderabad, Telangana')">
-        <div class="img-wrap"><img src="https://drive.google.com/thumbnail?id=14w2itsxlNSi_-QwbbhLzD3oIOEWqGHas&sz=w1000" alt="User Testimonial 3" loading="lazy"></div>
+      <div class="img-testi-card" onclick="openLightbox('https://lh3.googleusercontent.com/d/14w2itsxlNSi_-QwbbhLzD3oIOEWqGHas','Ravi Kumar','Hyderabad, Telangana')">
+        <div class="img-wrap"><img src="https://lh3.googleusercontent.com/d/14w2itsxlNSi_-QwbbhLzD3oIOEWqGHas" alt="User Testimonial 3" loading="lazy"></div>
         <div class="img-testi-info"><div class="img-testi-name">Ravi Kumar</div><div class="img-testi-city">Hyderabad, Telangana</div></div>
       </div>
-      <div class="img-testi-card" onclick="openLightbox('https://drive.google.com/thumbnail?id=1L0mvZmBgJXzzDESnTCj9z-GDu9WY5Km8&sz=w1000','Sneha Joshi','Pune, Maharashtra')">
-        <div class="img-wrap"><img src="https://drive.google.com/thumbnail?id=1L0mvZmBgJXzzDESnTCj9z-GDu9WY5Km8&sz=w1000" alt="User Testimonial 4" loading="lazy"></div>
+      <div class="img-testi-card" onclick="openLightbox('https://lh3.googleusercontent.com/d/1L0mvZmBgJXzzDESnTCj9z-GDu9WY5Km8','Sneha Joshi','Pune, Maharashtra')">
+        <div class="img-wrap"><img src="https://lh3.googleusercontent.com/d/1L0mvZmBgJXzzDESnTCj9z-GDu9WY5Km8" alt="User Testimonial 4" loading="lazy"></div>
         <div class="img-testi-info"><div class="img-testi-name">Sneha Joshi</div><div class="img-testi-city">Pune, Maharashtra</div></div>
       </div>
-      <div class="img-testi-card" onclick="openLightbox('https://drive.google.com/thumbnail?id=1Dp7HowTJWav60reJoNy5aBVoehecO6oJ&sz=w1000','Mohit Yadav','Lucknow, UP')">
-        <div class="img-wrap"><img src="https://drive.google.com/thumbnail?id=1Dp7HowTJWav60reJoNy5aBVoehecO6oJ&sz=w1000" alt="User Testimonial 5" loading="lazy"></div>
+      <div class="img-testi-card" onclick="openLightbox('https://lh3.googleusercontent.com/d/1Dp7HowTJWav60reJoNy5aBVoehecO6oJ','Mohit Yadav','Lucknow, UP')">
+        <div class="img-wrap"><img src="https://lh3.googleusercontent.com/d/1Dp7HowTJWav60reJoNy5aBVoehecO6oJ" alt="User Testimonial 5" loading="lazy"></div>
         <div class="img-testi-info"><div class="img-testi-name">Mohit Yadav</div><div class="img-testi-city">Lucknow, UP</div></div>
       </div>
-      <div class="img-testi-card" onclick="openLightbox('https://drive.google.com/thumbnail?id=1AzNVMtUka9jUkleIxYWnQwqEOtT1bLNY&sz=w1000','Divya Mishra','Bhopal, MP')">
-        <div class="img-wrap"><img src="https://drive.google.com/thumbnail?id=1AzNVMtUka9jUkleIxYWnQwqEOtT1bLNY&sz=w1000" alt="User Testimonial 6" loading="lazy"></div>
+      <div class="img-testi-card" onclick="openLightbox('https://lh3.googleusercontent.com/d/1AzNVMtUka9jUkleIxYWnQwqEOtT1bLNY','Divya Mishra','Bhopal, MP')">
+        <div class="img-wrap"><img src="https://lh3.googleusercontent.com/d/1AzNVMtUka9jUkleIxYWnQwqEOtT1bLNY" alt="User Testimonial 6" loading="lazy"></div>
         <div class="img-testi-info"><div class="img-testi-name">Divya Mishra</div><div class="img-testi-city">Bhopal, MP</div></div>
       </div>
-      <div class="img-testi-card" onclick="openLightbox('https://drive.google.com/thumbnail?id=1blG5-vo0px8ke_xR9Zf_6-XW5lF6wbDp&sz=w1000','Suresh Reddy','Chennai, Tamil Nadu')">
-        <div class="img-wrap"><img src="https://drive.google.com/thumbnail?id=1blG5-vo0px8ke_xR9Zf_6-XW5lF6wbDp&sz=w1000" alt="User Testimonial 7" loading="lazy"></div>
+      <div class="img-testi-card" onclick="openLightbox('https://lh3.googleusercontent.com/d/1blG5-vo0px8ke_xR9Zf_6-XW5lF6wbDp','Suresh Reddy','Chennai, Tamil Nadu')">
+        <div class="img-wrap"><img src="https://lh3.googleusercontent.com/d/1blG5-vo0px8ke_xR9Zf_6-XW5lF6wbDp" alt="User Testimonial 7" loading="lazy"></div>
         <div class="img-testi-info"><div class="img-testi-name">Suresh Reddy</div><div class="img-testi-city">Chennai, Tamil Nadu</div></div>
       </div>
-      <div class="img-testi-card" onclick="openLightbox('https://drive.google.com/thumbnail?id=18Vx4eqOoi3Pc7FVFo5V9I4MhdYk-bIQL&sz=w1000','Rohan Verma','Lucknow, Uttar Pradesh')">
+      <div class="img-testi-card" onclick="openLightbox('https://lh3.googleusercontent.com/d/18Vx4eqOoi3Pc7FVFo5V9I4MhdYk-bIQL','Rohan Verma','Lucknow, Uttar Pradesh')">
   <div class="img-wrap">
-    <img src="https://drive.google.com/thumbnail?id=18Vx4eqOoi3Pc7FVFo5V9I4MhdYk-bIQL&sz=w1000" alt="User Testimonial 1" loading="lazy">
+    <img src="https://lh3.googleusercontent.com/d/18Vx4eqOoi3Pc7FVFo5V9I4MhdYk-bIQL" alt="User Testimonial 1" loading="lazy">
   </div>
   <div class="img-testi-info">
     <div class="img-testi-name">Rohan Verma</div>
@@ -225,9 +258,9 @@ html{scroll-behavior:smooth;} body{background:radial-gradient(circle at 8% 6%,rg
   </div>
 </div>
 
-<div class="img-testi-card" onclick="openLightbox('https://drive.google.com/thumbnail?id=1fnxNxaj6AQUURCzR-eGIC2VhsVInQGth&sz=w1000','Priya Sharma','Indore, Madhya Pradesh')">
+<div class="img-testi-card" onclick="openLightbox('https://lh3.googleusercontent.com/d/1fnxNxaj6AQUURCzR-eGIC2VhsVInQGth','Priya Sharma','Indore, Madhya Pradesh')">
   <div class="img-wrap">
-    <img src="https://drive.google.com/thumbnail?id=1fnxNxaj6AQUURCzR-eGIC2VhsVInQGth&sz=w1000" alt="User Testimonial 2" loading="lazy">
+    <img src="https://lh3.googleusercontent.com/d/1fnxNxaj6AQUURCzR-eGIC2VhsVInQGth" alt="User Testimonial 2" loading="lazy">
   </div>
   <div class="img-testi-info">
     <div class="img-testi-name">Priya Sharma</div>
@@ -235,11 +268,11 @@ html{scroll-behavior:smooth;} body{background:radial-gradient(circle at 8% 6%,rg
   </div>
 </div>
 
-<div class="img-testi-card" onclick="openLightbox('https://drive.google.com/thumbnail?id=1gaDk9evdh01Hsv2209gdjDMbsA1mTto0&sz=w1000','Kavya Singh','Jaipur, Rajasthan')"> <div class="img-wrap"><img src="https://drive.google.com/thumbnail?id=1gaDk9evdh01Hsv2209gdjDMbsA1mTto0&sz=w1000" alt="User Testimonial 8" loading="lazy"></div> <div class="img-testi-info"><div class="img-testi-name">Kavya Singh</div><div class="img-testi-city">Jaipur, Rajasthan</div></div> </div>
+<div class="img-testi-card" onclick="openLightbox('https://lh3.googleusercontent.com/d/1gaDk9evdh01Hsv2209gdjDMbsA1mTto0','Kavya Singh','Jaipur, Rajasthan')"> <div class="img-wrap"><img src="https://lh3.googleusercontent.com/d/1gaDk9evdh01Hsv2209gdjDMbsA1mTto0" alt="User Testimonial 8" loading="lazy"></div> <div class="img-testi-info"><div class="img-testi-name">Kavya Singh</div><div class="img-testi-city">Jaipur, Rajasthan</div></div> </div>
 
-<div class="img-testi-card" onclick="openLightbox('https://drive.google.com/thumbnail?id=1tMp-bXz73OOBJ9TRe05AXUUv5z7p5Wvs&sz=w1000','Aman Raj','Patna, Bihar')">
+<div class="img-testi-card" onclick="openLightbox('https://lh3.googleusercontent.com/d/1tMp-bXz73OOBJ9TRe05AXUUv5z7p5Wvs','Aman Raj','Patna, Bihar')">
   <div class="img-wrap">
-    <img src="https://drive.google.com/thumbnail?id=1tMp-bXz73OOBJ9TRe05AXUUv5z7p5Wvs&sz=w1000" alt="User Testimonial 3" loading="lazy">
+    <img src="https://lh3.googleusercontent.com/d/1tMp-bXz73OOBJ9TRe05AXUUv5z7p5Wvs" alt="User Testimonial 3" loading="lazy">
   </div>
   <div class="img-testi-info">
     <div class="img-testi-name">Aman Raj</div>
@@ -247,9 +280,9 @@ html{scroll-behavior:smooth;} body{background:radial-gradient(circle at 8% 6%,rg
   </div>
 </div>
 
-<div class="img-testi-card" onclick="openLightbox('https://drive.google.com/thumbnail?id=1YgAHUs42hl_OyOwB6_OwzrUjxVm6aVbM&sz=w1000','Sneha Kapoor','Chandigarh, Punjab')">
+<div class="img-testi-card" onclick="openLightbox('https://lh3.googleusercontent.com/d/1YgAHUs42hl_OyOwB6_OwzrUjxVm6aVbM','Sneha Kapoor','Chandigarh, Punjab')">
   <div class="img-wrap">
-    <img src="https://drive.google.com/thumbnail?id=1YgAHUs42hl_OyOwB6_OwzrUjxVm6aVbM&sz=w1000" alt="User Testimonial 4" loading="lazy">
+    <img src="https://lh3.googleusercontent.com/d/1YgAHUs42hl_OyOwB6_OwzrUjxVm6aVbM" alt="User Testimonial 4" loading="lazy">
   </div>
   <div class="img-testi-info">
     <div class="img-testi-name">Sneha Kapoor</div>
@@ -257,9 +290,9 @@ html{scroll-behavior:smooth;} body{background:radial-gradient(circle at 8% 6%,rg
   </div>
 </div>
 
-<div class="img-testi-card" onclick="openLightbox('https://drive.google.com/thumbnail?id=132aft4symoWWwKJHEfoE9hpHL87rsRic&sz=w1000','Rahul Meena','Kota, Rajasthan')">
+<div class="img-testi-card" onclick="openLightbox('https://lh3.googleusercontent.com/d/132aft4symoWWwKJHEfoE9hpHL87rsRic','Rahul Meena','Kota, Rajasthan')">
   <div class="img-wrap">
-    <img src="https://drive.google.com/thumbnail?id=132aft4symoWWwKJHEfoE9hpHL87rsRic&sz=w1000" alt="User Testimonial 5" loading="lazy">
+    <img src="https://lh3.googleusercontent.com/d/132aft4symoWWwKJHEfoE9hpHL87rsRic" alt="User Testimonial 5" loading="lazy">
   </div>
   <div class="img-testi-info">
     <div class="img-testi-name">Rahul Meena</div>
@@ -267,9 +300,9 @@ html{scroll-behavior:smooth;} body{background:radial-gradient(circle at 8% 6%,rg
   </div>
 </div>
 
-<div class="img-testi-card" onclick="openLightbox('https://drive.google.com/thumbnail?id=1LRHWjP5JLcKwCMSf-knbxTop-M4SaKee&sz=w1000','Neha Yadav','Bhopal, Madhya Pradesh')">
+<div class="img-testi-card" onclick="openLightbox('https://lh3.googleusercontent.com/d/1LRHWjP5JLcKwCMSf-knbxTop-M4SaKee','Neha Yadav','Bhopal, Madhya Pradesh')">
   <div class="img-wrap">
-    <img src="https://drive.google.com/thumbnail?id=1LRHWjP5JLcKwCMSf-knbxTop-M4SaKee&sz=w1000" alt="User Testimonial 6" loading="lazy">
+    <img src="https://lh3.googleusercontent.com/d/1LRHWjP5JLcKwCMSf-knbxTop-M4SaKee" alt="User Testimonial 6" loading="lazy">
   </div>
   <div class="img-testi-info">
     <div class="img-testi-name">Neha Yadav</div>
@@ -277,9 +310,9 @@ html{scroll-behavior:smooth;} body{background:radial-gradient(circle at 8% 6%,rg
   </div>
 </div>
 
-<div class="img-testi-card" onclick="openLightbox('https://drive.google.com/thumbnail?id=1zAJJn4FGKxWrIkluVo6ZiWHuS6d_PQ6Z&sz=w1000','Arjun Patel','Surat, Gujarat')">
+<div class="img-testi-card" onclick="openLightbox('https://lh3.googleusercontent.com/d/1zAJJn4FGKxWrIkluVo6ZiWHuS6d_PQ6Z','Arjun Patel','Surat, Gujarat')">
   <div class="img-wrap">
-    <img src="https://drive.google.com/thumbnail?id=1zAJJn4FGKxWrIkluVo6ZiWHuS6d_PQ6Z&sz=w1000" alt="User Testimonial 7" loading="lazy">
+    <img src="https://lh3.googleusercontent.com/d/1zAJJn4FGKxWrIkluVo6ZiWHuS6d_PQ6Z" alt="User Testimonial 7" loading="lazy">
   </div>
   <div class="img-testi-info">
     <div class="img-testi-name">Arjun Patel</div>
@@ -287,9 +320,9 @@ html{scroll-behavior:smooth;} body{background:radial-gradient(circle at 8% 6%,rg
   </div>
 </div>
 
-<div class="img-testi-card" onclick="openLightbox('https://drive.google.com/thumbnail?id=1Bzz9hU72or1_XVTL4rsVOqa6IK-jX8jK&sz=w1000','Pooja Malhotra','Delhi, India')">
+<div class="img-testi-card" onclick="openLightbox('https://lh3.googleusercontent.com/d/1Bzz9hU72or1_XVTL4rsVOqa6IK-jX8jK','Pooja Malhotra','Delhi, India')">
   <div class="img-wrap">
-    <img src="https://drive.google.com/thumbnail?id=1Bzz9hU72or1_XVTL4rsVOqa6IK-jX8jK&sz=w1000" alt="User Testimonial 8" loading="lazy">
+    <img src="https://lh3.googleusercontent.com/d/1Bzz9hU72or1_XVTL4rsVOqa6IK-jX8jK" alt="User Testimonial 8" loading="lazy">
   </div>
   <div class="img-testi-info">
     <div class="img-testi-name">Pooja Malhotra</div>
@@ -297,9 +330,9 @@ html{scroll-behavior:smooth;} body{background:radial-gradient(circle at 8% 6%,rg
   </div>
 </div>
 
-<div class="img-testi-card" onclick="openLightbox('https://drive.google.com/thumbnail?id=162_3CEIZlQPhPPKeRGqbbIeex1KGdc7V&sz=w1000','Sahanawaz','Kota, Rajasthan')">
+<div class="img-testi-card" onclick="openLightbox('https://lh3.googleusercontent.com/d/162_3CEIZlQPhPPKeRGqbbIeex1KGdc7V','Sahanawaz','Kota, Rajasthan')">
   <div class="img-wrap">
-    <img src="https://drive.google.com/thumbnail?id=162_3CEIZlQPhPPKeRGqbbIeex1KGdc7V&sz=w1000" alt="User Testimonial 9" loading="lazy">
+    <img src="https://lh3.googleusercontent.com/d/162_3CEIZlQPhPPKeRGqbbIeex1KGdc7V" alt="User Testimonial 9" loading="lazy">
   </div>
   <div class="img-testi-info">
     <div class="img-testi-name">Sahanawaz</div>
@@ -307,9 +340,9 @@ html{scroll-behavior:smooth;} body{background:radial-gradient(circle at 8% 6%,rg
   </div>
 </div>
 
-<div class="img-testi-card" onclick="openLightbox('https://drive.google.com/thumbnail?id=1WHhZP8vtl5LWeuPhvFAnZwzzPQzaLkQa&sz=w1000','Umesh Nagar','Kota, Rajasthan')">
+<div class="img-testi-card" onclick="openLightbox('https://lh3.googleusercontent.com/d/1WHhZP8vtl5LWeuPhvFAnZwzzPQzaLkQa','Umesh Nagar','Kota, Rajasthan')">
   <div class="img-wrap">
-    <img src="https://drive.google.com/thumbnail?id=1WHhZP8vtl5LWeuPhvFAnZwzzPQzaLkQa&sz=w1000" alt="User Testimonial 10" loading="lazy">
+    <img src="https://lh3.googleusercontent.com/d/1WHhZP8vtl5LWeuPhvFAnZwzzPQzaLkQa" alt="User Testimonial 10" loading="lazy">
   </div>
   <div class="img-testi-info">
     <div class="img-testi-name">Umesh Nagar</div>
@@ -511,6 +544,6 @@ document.addEventListener('keydown', function(e){ if(e.key==='Escape'){ document
 })();
 </script>
 
-<script src="content-sync.js?v=2.1"></script>
+<script src="content-sync.js?v=3.5"></script>
 </body>
 </html>
