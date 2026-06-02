@@ -29,63 +29,61 @@ export default function AdminLogin() {
         router.push("/admin");
         router.refresh();
       } else {
-        setError(data.message || "Login failed");
+        setError(data.message || "Invalid email or password.");
       }
     } catch (err) {
-      setError("An error occurred. Please try again.");
+      setError("Unable to connect to the server. Please try again.");
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-slate-50 p-4">
-      <div className="w-full max-w-md bg-white rounded-2xl shadow-xl overflow-hidden">
-        <div className="bg-blue-600 p-8 text-center">
-          <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4 backdrop-blur-sm">
-            <Lock className="w-8 h-8 text-white" />
-          </div>
-          <h1 className="text-2xl font-bold text-white mb-2">Admin Portal</h1>
-          <p className="text-blue-100 text-sm">Secure access for WorkDen management</p>
-        </div>
+    <div className="min-h-screen flex items-center justify-center bg-gray-100 p-4" style={{ fontFamily: 'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif' }}>
+      <div className="w-full max-w-md bg-white border border-gray-200 rounded-lg shadow-sm overflow-hidden">
         
-        <form onSubmit={handleLogin} className="p-8">
+        {/* Simple Header */}
+        <div className="border-b border-gray-200 p-6 text-center bg-gray-50">
+          <h1 className="text-xl font-bold text-gray-800">WorkDen Admin Login</h1>
+          <p className="text-gray-500 text-xs mt-1">Please enter your credentials to access the admin panel</p>
+        </div>
+
+        <form onSubmit={handleLogin} className="p-6 space-y-4">
           {error && (
-            <div className="mb-6 p-4 bg-red-50 text-red-600 rounded-xl text-sm font-medium border border-red-100 flex items-center gap-2">
-              <div className="w-2 h-2 rounded-full bg-red-500"></div>
+            <div className="p-3.5 bg-red-50 border border-red-200 text-xs font-semibold text-red-650 rounded-md">
               {error}
             </div>
           )}
-          
-          <div className="space-y-5">
+
+          <div className="space-y-3">
             <div>
-              <label className="block text-sm font-semibold text-slate-700 mb-2">Email Address</label>
+              <label className="block text-xs font-bold text-gray-600 uppercase tracking-wide mb-1.5">Email</label>
               <div className="relative">
-                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <Mail className="h-5 w-5 text-slate-400" />
+                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-400">
+                  <Mail className="h-4 w-4" />
                 </div>
                 <input
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="block w-full pl-10 pr-3 py-3 border border-slate-200 rounded-xl text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
-                  placeholder="admin@workden.com"
+                  className="block w-full pl-9 pr-3 py-2 bg-white border border-gray-300 rounded-md text-sm text-gray-800 focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500 transition-all"
+                  placeholder="admin@workden.online"
                   required
                 />
               </div>
             </div>
-            
+
             <div>
-              <label className="block text-sm font-semibold text-slate-700 mb-2">Password</label>
+              <label className="block text-xs font-bold text-gray-600 uppercase tracking-wide mb-1.5">Password</label>
               <div className="relative">
-                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <Lock className="h-5 w-5 text-slate-400" />
+                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-400">
+                  <Lock className="h-4 w-4" />
                 </div>
                 <input
                   type="password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="block w-full pl-10 pr-3 py-3 border border-slate-200 rounded-xl text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                  className="block w-full pl-9 pr-3 py-2 bg-white border border-gray-300 rounded-md text-sm text-gray-800 focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500 transition-all"
                   placeholder="••••••••"
                   required
                 />
@@ -96,12 +94,12 @@ export default function AdminLogin() {
           <button
             type="submit"
             disabled={loading}
-            className="mt-8 w-full flex justify-center items-center gap-2 py-3.5 px-4 border border-transparent rounded-xl shadow-sm text-sm font-bold text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-all disabled:opacity-70 disabled:cursor-not-allowed"
+            className="w-full flex justify-center items-center gap-2 py-2 px-4 rounded-md text-sm font-bold text-white bg-blue-600 hover:bg-blue-700 active:bg-blue-800 transition-colors disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
           >
             {loading ? (
-              <Loader2 className="w-5 h-5 animate-spin" />
+              <Loader2 className="w-4 h-4 animate-spin" />
             ) : (
-              "Sign In to Dashboard"
+              "Login to Dashboard"
             )}
           </button>
         </form>
